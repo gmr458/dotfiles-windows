@@ -2,6 +2,8 @@ call plug#begin('C:\Users\german\AppData\Local\nvim\plugged')
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', { 'branch': 'release'  }
 Plug 'alvan/vim-closetag'
 Plug 'mattn/emmet-vim'
@@ -9,6 +11,7 @@ Plug 'leafgarland/typescript-vim'
 Plug 'pangloss/vim-javascript'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'morhetz/gruvbox'
+Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -82,7 +85,7 @@ let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['webpack\.'] = 'ﰩ'
 " Easymotion
 let mapleader=" "
 nmap <Leader>s <Plug>(easymotion-s2)
-nmap <Leader>nt :NvimTreeOpen<CR>
+nmap <Leader>nt :NERDTreeFind<CR>
 nmap <Leader>wq :wq<CR>
 nmap <Leader>w :w<CR>
 nmap <Leader>q :q!<CR>
@@ -101,5 +104,4 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadBraces
 
 let g:airline_powerline_fonts = 0
-colorscheme gruvbox
-set background=dark
+colorscheme dracula
