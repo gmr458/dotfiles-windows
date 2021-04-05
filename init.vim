@@ -1,4 +1,4 @@
-call plug#begin('C:\Users\german\AppData\Local\nvim\plugged')
+call plug#begin('$USERPROFILE\AppData\Local\nvim\plugged')
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
