@@ -105,6 +105,6 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadBraces
 
 let g:airline_powerline_fonts = 0
-let g:gruvbox_italic = 0
+let g:dracula_italic = 0
 colorscheme dracula
 hi Normal guibg=NONE ctermbg=NONE
