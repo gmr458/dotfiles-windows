@@ -13,9 +13,6 @@ Plug 'pangloss/vim-javascript'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'morhetz/gruvbox'
 Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'preservim/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'easymotion/vim-easymotion'
 Plug 'jiangmiao/auto-pairs'
 Plug 'kien/rainbow_parentheses.vim'
@@ -25,7 +22,8 @@ Plug 'elzr/vim-json'
 Plug 'cespare/vim-toml'
 Plug 'jparise/vim-graphql'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'ryanoasis/vim-devicons'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'kyazdani42/nvim-tree.lua'"
 
 call plug#end()
 
@@ -54,46 +52,59 @@ set termguicolors
 
 language en_US
 
-" NERDTree
-let g:NERDTreeGitStatusUseNerdFonts=1
-let NERDTreeShowHidden = 1
-let NERDTreeMinimalUI = 1
-let NERDTreeIgnore = ['\.pyc$', '__pycache__', '.git$']
-let g:NERDTreeDirArrowExpandable = ' '
-let g:NERDTreeDirArrowCollapsible = ' '
+" NERDTree Lua
+let g:nvim_tree_side = 'left'
+let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache' ]
+let g:nvim_tree_gitignore = 1 "0 by default
+let g:nvim_tree_indent_markers = 1 "0 by default, this option shows indent markers when folders are open
+let g:nvim_tree_git_hl = 1 "0 by default, will enable file highlight for git attributes (can be used without the icons).
+let g:nvim_tree_group_empty = 1 " 0 by default, compact folders that only contain a single folder into one node in the file tree
+let g:nvim_tree_special_files = [ 'README.md', 'Makefile', 'MAKEFILE' ] " List of filenames that gets highlighted with NvimTreeSpecialFile
+highlight NvimTreeFolderIcon guibg=blue
 
-" vim-devicons
-let g:DevIconsEnableFoldersOpenClose = 1
+lua <<EOF
+	local tree_cb = require'nvim-tree.config'.nvim_tree_callback
+	vim.g.nvim_tree_bindings = {
+		["<CR>"] = ":YourVimFunction()<cr>",
+		["u"] = ":lua require'some_module'.some_function()<cr>",
 
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {}
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['html'] = ''
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['js'] = ''
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['ts'] = 'ﯤ'
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['json'] = ''
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['jsx'] = ''
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['tsx'] = ''
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['md'] = ''
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['vim'] = ''
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['yaml'] = ''
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['yml'] = ''
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['svg'] = 'ﰟ'
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['rs'] = ''
-let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['py'] = ''
-
-let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols = {}
-let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['.*vimrc.*'] = ''
-let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['.gitignore'] = ''
-let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['package.json'] = ''
-let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['package.lock.json'] = ''
-let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['node_modules'] = ''
-let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['webpack\.'] = 'ﰩ'
+		-- default mappings
+		["<CR>"]           = tree_cb("edit"),
+		["o"]              = tree_cb("edit"),
+		["<2-LeftMouse>"]  = tree_cb("edit"),
+		["<2-RightMouse>"] = tree_cb("cd"),
+		["<C-]>"]          = tree_cb("cd"),
+		["s"]          = tree_cb("vsplit"),
+		["<C-x>"]          = tree_cb("split"),
+		["<C-t>"]          = tree_cb("tabnew"),
+		["<"]              = tree_cb("prev_sibling"),
+		[">"]              = tree_cb("next_sibling"),
+		["<BS>"]           = tree_cb("close_node"),
+		["<S-CR>"]         = tree_cb("close_node"),
+		["<Tab>"]          = tree_cb("preview"),
+		["I"]              = tree_cb("toggle_ignored"),
+		["H"]              = tree_cb("toggle_dotfiles"),
+		["R"]              = tree_cb("refresh"),
+		["a"]              = tree_cb("create"),
+		["d"]              = tree_cb("remove"),
+		["r"]              = tree_cb("rename"),
+		["<C-r>"]          = tree_cb("full_rename"),
+		["x"]              = tree_cb("cut"),
+		["c"]              = tree_cb("copy"),
+		["p"]              = tree_cb("paste"),
+		["[c"]             = tree_cb("prev_git_item"),
+		["]c"]             = tree_cb("next_git_item"),
+		["-"]              = tree_cb("dir_up"),
+		["q"]              = tree_cb("close"),
+	}
+EOF
 
 " Easymotion
 let mapleader=" "
 nmap <Leader>s <Plug>(easymotion-s2)
-nmap <Leader>nto :NERDTree<CR>
-nmap <Leader>ntc :NERDTreeClose<CR>
-nmap <Leader>ntr :NERDTreeRefreshRoot<CR>
+nmap <Leader>nto :NvimTreeOpen<CR>
+nmap <Leader>ntc :NvimTreeClose<CR>
+nmap <Leader>ntr :NvimTreeRefresh<CR>
 nmap <Leader>wq :wq<CR>
 nmap <Leader>w :w<CR>
 nmap <Leader>q :q!<CR>
@@ -105,7 +116,7 @@ nmap <Leader>y :y$<CR>
 nmap <Leader>initdeno :CocCommand deno.initializeWorkspace<CR>
 
 " JSON
-let g:vim_json_warnings=0
+let g:vim_json_warnings = 0
 
 " Rainbow config
 au VimEnter * RainbowParenthesesToggle
