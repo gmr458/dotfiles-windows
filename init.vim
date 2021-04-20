@@ -4,7 +4,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'neoclide/coc.nvim', { 'branch': 'release'  }
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+Plug 'OmniSharp/omnisharp-vim'
 Plug 'alvan/vim-closetag'
 Plug 'mattn/emmet-vim'
 Plug 'leafgarland/typescript-vim'
@@ -19,7 +20,9 @@ Plug 'easymotion/vim-easymotion'
 Plug 'jiangmiao/auto-pairs'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'rust-lang/rust.vim'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'elzr/vim-json'
+Plug 'cespare/vim-toml'
 Plug 'jparise/vim-graphql'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'ryanoasis/vim-devicons'
@@ -29,6 +32,8 @@ call plug#end()
 syntax enable
 filetype plugin indent on
 
+set omnifunc=syntaxcomplete#Complete
+set completeopt-=preview
 set noerrorbells
 set tabstop=4 softtabstop=4
 set shiftwidth=4
@@ -86,7 +91,9 @@ let g:WebDevIconsUnicodeDecorateFileNodesPatternSymbols['webpack\.'] = 'ﰩ'
 " Easymotion
 let mapleader=" "
 nmap <Leader>s <Plug>(easymotion-s2)
-nmap <Leader>nt :NERDTreeFind<CR>
+nmap <Leader>nto :NERDTree<CR>
+nmap <Leader>ntc :NERDTreeClose<CR>
+nmap <Leader>ntr :NERDTreeRefreshRoot<CR>
 nmap <Leader>wq :wq<CR>
 nmap <Leader>w :w<CR>
 nmap <Leader>q :q!<CR>
@@ -95,6 +102,7 @@ nmap <Leader>ls :ls<CR>
 nmap <Leader>pli :PlugInstall<CR>
 nmap <Leader>plc :PlugClean<CR>
 nmap <Leader>y :y$<CR>
+nmap <Leader>initdeno :CocCommand deno.initializeWorkspace<CR>
 
 " JSON
 let g:vim_json_warnings=0
