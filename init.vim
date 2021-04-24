@@ -21,6 +21,7 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'elzr/vim-json'
 Plug 'cespare/vim-toml'
 Plug 'jparise/vim-graphql'
+Plug 'norcalli/nvim-colorizer.lua'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'"
