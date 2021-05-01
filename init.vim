@@ -10,6 +10,7 @@ Plug 'alvan/vim-closetag'
 Plug 'mattn/emmet-vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'morhetz/gruvbox'
 Plug 'dracula/vim', { 'as': 'dracula' }
@@ -21,6 +22,7 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'elzr/vim-json'
 Plug 'cespare/vim-toml'
 Plug 'jparise/vim-graphql'
+Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'kyazdani42/nvim-web-devicons'
@@ -50,12 +52,13 @@ set mouse=a
 set incsearch
 set noshowmode
 set termguicolors
+set guifont=CaskaydiaCove\ NF:h14
 
 language en_US
 
 " NERDTree Lua
 let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache', '.vscode' ]
-let g:nvim_tree_indent_markers = 1 "0 by default, this option shows indent markers when folders are open
+let g:nvim_tree_indent_markers = 1
 highlight NvimTreeFolderIcon guibg=blue
 
 lua <<EOF
@@ -230,4 +233,9 @@ au Syntax * RainbowParenthesesLoadBraces
 
 let g:airline_powerline_fonts = 0
 colorscheme gruvbox
-hi Normal guibg=NONE ctermbg=NONE
+"hi Normal guibg=NONE ctermbg=NONE
+
+" Neovide
+let g:neovide_refresh_rate=60
+let g:neovide_cursor_antialiasing=v:true
+let g:neovide_fullscreen=v:true
