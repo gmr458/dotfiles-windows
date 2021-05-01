@@ -1,7 +1,6 @@
 call plug#begin('$USERPROFILE\AppData\Local\nvim\plugged')
 
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
@@ -238,4 +237,3 @@ colorscheme gruvbox
 " Neovide
 let g:neovide_refresh_rate=60
 let g:neovide_cursor_antialiasing=v:true
-let g:neovide_fullscreen=v:true
