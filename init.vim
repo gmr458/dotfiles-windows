@@ -230,7 +230,6 @@ au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadBraces
 
-let g:airline_powerline_fonts = 0
 colorscheme gruvbox
 "hi Normal guibg=NONE ctermbg=NONE
 
