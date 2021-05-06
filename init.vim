@@ -1,5 +1,6 @@
 call plug#begin('$USERPROFILE\AppData\Local\nvim\plugged')
 
+Plug 'tpope/vim-fugitive', { 'on': [] }
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -13,7 +14,6 @@ Plug 'mxw/vim-jsx'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'morhetz/gruvbox'
 Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'easymotion/vim-easymotion'
 Plug 'jiangmiao/auto-pairs'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'rust-lang/rust.vim'
@@ -51,13 +51,13 @@ set mouse=a
 set incsearch
 set noshowmode
 set termguicolors
-set guifont=CaskaydiaCove\ NF:h14
 
 language en_US
 
 " NERDTree Lua
 let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache', '.vscode' ]
 let g:nvim_tree_indent_markers = 1
+let g:nvim_tree_root_folder_modifier = ':h'
 highlight NvimTreeFolderIcon guibg=blue
 
 lua <<EOF
@@ -128,7 +128,7 @@ lua <<EOF
 			md = {
 				
 				icon = "",
-				color = "#000000",
+				color = "#ffffff",
 				name = "Md"
 
 			},
@@ -136,7 +136,7 @@ lua <<EOF
 			yaml = {
 				
 				icon = "",
-				color = "#000000",
+				color = "#ffffff",
 				name = "Yaml"
 
 			},
@@ -144,7 +144,7 @@ lua <<EOF
 			yml = {
 				
 				icon = "",
-				color = "#000000",
+				color = "#ffffff",
 				name = "Yml"
 
 			},
@@ -230,9 +230,10 @@ au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadBraces
 
-colorscheme gruvbox
-"hi Normal guibg=NONE ctermbg=NONE
+let g:dracula_italic = 0
+colorscheme dracula
 
-" Neovide
-let g:neovide_refresh_rate=60
-let g:neovide_cursor_antialiasing=v:true
+let g:lightline = {
+    \ 'colorscheme': 'simpleblack'
+    \ }
+hi Normal guibg=NONE ctermbg=NONE
