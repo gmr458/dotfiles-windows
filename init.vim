@@ -21,10 +21,11 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'elzr/vim-json'
 Plug 'cespare/vim-toml'
 Plug 'jparise/vim-graphql'
-Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'kyazdani42/nvim-web-devicons'
+Plug 'akinsho/nvim-bufferline.lua'
 Plug 'kyazdani42/nvim-tree.lua'"
 
 call plug#end()
@@ -55,9 +56,39 @@ set termguicolors
 language en_US
 
 " NERDTree Lua
-let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache', '.vscode' ]
+let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache' ]
+let g:nvim_tree_gitignore = 1
 let g:nvim_tree_indent_markers = 1
-let g:nvim_tree_root_folder_modifier = ':h'
+let g:nvim_tree_git_hl = 1
+let g:nvim_tree_group_empty = 1
+let g:nvim_tree_special_files = [ 'README.md', 'Makefile', 'MAKEFILE' ]
+let g:nvim_tree_icons = {
+    \ 'default': '',
+    \ 'symlink': '',
+    \ 'git': {
+    \   'unstaged': "✗",
+    \   'staged': "✓",
+    \   'unmerged': "",
+    \   'renamed': "➜",
+    \   'untracked': "★",
+    \   'deleted': "",
+    \   'ignored': "◌"
+    \   },
+    \ 'folder': {
+    \   'default': "",
+    \   'open': "",
+    \   'empty': "",
+    \   'empty_open': "",
+    \   'symlink': "",
+    \   'symlink_open': "",
+    \   },
+    \   'lsp': {
+    \     'hint': "",
+    \     'info': "",
+    \     'warning': "",
+    \     'error': "",
+    \   }
+    \ }
 highlight NvimTreeFolderIcon guibg=blue
 
 lua <<EOF
@@ -96,7 +127,7 @@ lua <<EOF
 		["-"]              = tree_cb("dir_up"),
 		["q"]              = tree_cb("close"),
 	}
-
+	
 	require'nvim-web-devicons'.setup {
 
 		override = {
@@ -125,7 +156,7 @@ lua <<EOF
 
 			},
 
-			md = {
+			markdown = {
 				
 				icon = "",
 				color = "#ffffff",
@@ -190,6 +221,23 @@ lua <<EOF
 
 	}
 
+	require'bufferline'.setup{
+		options = {
+			view = "multiwindow",
+			numbers = "ordinal",
+			number_style = "",
+			mappings = true,
+			buffer_close_icon= '',
+			modified_icon = '●',
+			close_icon = '',
+			left_trunc_marker = '',
+			right_trunc_marker = '',
+			tab_size = 18,
+			diagnostics = false,
+			separator_style = "slant"
+		}
+	}
+
 EOF
 
 " Shorcuts
@@ -234,6 +282,6 @@ let g:dracula_italic = 0
 colorscheme dracula
 
 let g:lightline = {
-    \ 'colorscheme': 'simpleblack'
+    \ 'colorscheme': 'dracula'
     \ }
-hi Normal guibg=NONE ctermbg=NONE
+"hi Normal guibg=NONE ctermbg=NONE
