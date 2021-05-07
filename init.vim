@@ -234,7 +234,7 @@ lua <<EOF
 			right_trunc_marker = '',
 			tab_size = 18,
 			diagnostics = false,
-			separator_style = "slant"
+			separator_style = { '|', '' }
 		}
 	}
 
