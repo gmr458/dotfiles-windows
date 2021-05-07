@@ -1,7 +1,7 @@
 call plug#begin('$USERPROFILE\AppData\Local\nvim\plugged')
 
 Plug 'tpope/vim-fugitive', { 'on': [] }
-Plug 'itchyny/lightline.vim'
+Plug 'hoob3rt/lualine.nvim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
@@ -92,6 +92,16 @@ let g:nvim_tree_icons = {
 highlight NvimTreeFolderIcon guibg=blue
 
 lua <<EOF
+
+	require('lualine').setup{
+
+		options = {
+			theme = 'dracula',
+			section_separators = {'', ''},
+			component_separators = {'', ''}
+		}
+
+	}
 
 	local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 	vim.g.nvim_tree_bindings = {
@@ -281,7 +291,4 @@ au Syntax * RainbowParenthesesLoadBraces
 let g:dracula_italic = 0
 colorscheme dracula
 
-let g:lightline = {
-    \ 'colorscheme': 'dracula'
-    \ }
 "hi Normal guibg=NONE ctermbg=NONE
