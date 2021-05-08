@@ -25,7 +25,7 @@ Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'kyazdani42/nvim-web-devicons'
-Plug 'akinsho/nvim-bufferline.lua'
+Plug 'romgrk/barbar.nvim'
 Plug 'kyazdani42/nvim-tree.lua'"
 
 call plug#end()
@@ -230,26 +230,7 @@ lua <<EOF
 		};
 
 	}
-
-	require'bufferline'.setup{
-		options = {
-			view = "multiwindow",
-			numbers = "ordinal",
-			number_style = "",
-			mappings = true,
-			buffer_close_icon= '',
-			modified_icon = '●',
-			close_icon = '',
-			left_trunc_marker = '',
-			right_trunc_marker = '',
-			tab_size = 18,
-			enforce_regular_tabs = true,
-			diagnostics = false,
-			show_buffer_close_icons = true,
-			separator_style = "thin"
-		}
-	}
-
+	
 EOF
 
 " Shorcuts
