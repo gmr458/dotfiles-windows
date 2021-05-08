@@ -239,12 +239,14 @@ lua <<EOF
 			mappings = true,
 			buffer_close_icon= '',
 			modified_icon = '●',
-			close_icon = '',
+			close_icon = '',
 			left_trunc_marker = '',
 			right_trunc_marker = '',
 			tab_size = 18,
+			enforce_regular_tabs = true,
 			diagnostics = false,
-			separator_style = { '|', '' }
+			show_buffer_close_icons = true,
+			separator_style = "thin"
 		}
 	}
 
@@ -269,6 +271,9 @@ nnoremap <C-n> :NvimTreeToggle<CR>
 nnoremap <Leader>r :NvimTreeRefresh<CR>
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 nmap <Leader>rn <Plug>(coc-rename)
+
+nnoremap <silent> n :bprevious<CR>
+nnoremap <silent> m :bnext<CR>
 
 function! s:show_documentation()
 	if (index(['vim','help'], &filetype) >= 0)
