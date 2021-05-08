@@ -2,8 +2,9 @@ call plug#begin('$USERPROFILE\AppData\Local\nvim\plugged')
 
 Plug 'tpope/vim-fugitive', { 'on': [] }
 Plug 'hoob3rt/lualine.nvim'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'alvan/vim-closetag'
@@ -230,6 +231,8 @@ lua <<EOF
 		};
 
 	}
+
+	require('telescope').load_extension('media_files')
 	
 EOF
 
@@ -252,9 +255,7 @@ nnoremap <C-n> :NvimTreeToggle<CR>
 nnoremap <Leader>r :NvimTreeRefresh<CR>
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 nmap <Leader>rn <Plug>(coc-rename)
-
-nnoremap <silent> n :bprevious<CR>
-nnoremap <silent> m :bnext<CR>
+nnoremap <Leader>ff <cmd>lua require('telescope.builtin').file_browser()<CR>
 
 function! s:show_documentation()
 	if (index(['vim','help'], &filetype) >= 0)
