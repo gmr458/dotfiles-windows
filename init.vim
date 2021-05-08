@@ -231,10 +231,11 @@ lua <<EOF
 		};
 
 	}
-
-	require('telescope').load_extension('media_files')
 	
 EOF
+
+let bufferline = get(g:, 'bufferline', {})
+let bufferline.animation = v:false
 
 " Shorcuts
 let mapleader=" "
