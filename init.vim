@@ -26,7 +26,7 @@ Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'kyazdani42/nvim-web-devicons'
-Plug 'romgrk/barbar.nvim'
+Plug 'akinsho/nvim-bufferline.lua'
 Plug 'kyazdani42/nvim-tree.lua'"
 
 call plug#end()
@@ -93,6 +93,14 @@ let g:nvim_tree_icons = {
 highlight NvimTreeFolderIcon guibg=blue
 
 lua <<EOF
+
+	require'bufferline'.setup{
+		highlights = {
+			buffer_selected = {
+				gui = "NONE"
+			}
+		}
+	}
 
 	require('lualine').setup{
 
@@ -233,9 +241,6 @@ lua <<EOF
 	}
 	
 EOF
-
-let bufferline = get(g:, 'bufferline', {})
-let bufferline.animation = v:false
 
 " Shorcuts
 let mapleader=" "
