@@ -109,7 +109,7 @@ lua <<EOF
 		["u"] = ":lua require'some_module'.some_function()<cr>",
 
 		-- default mappings
-		["<CR>"]           = tree_cb("edit"),
+		["<CR>"]           = tree_cb("tabnew"),
 		["o"]              = tree_cb("edit"),
 		["<2-LeftMouse>"]  = tree_cb("edit"),
 		["<2-RightMouse>"] = tree_cb("cd"),
