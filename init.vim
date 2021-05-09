@@ -92,7 +92,20 @@ let g:nvim_tree_icons = {
     \ }
 highlight NvimTreeFolderIcon guibg=blue
 
+lua require('plugins')
+
 lua <<EOF
+	local cmd = vim.cmd
+	local g = vim.g
+	
+	g.indent_blankline_char = "▏"
+
+	cmd "hi IndentBlanklineChar guifg=#2a2e36"
+
+	g.indent_blankline_filetype_exclude = {"help", "terminal"}
+	g.indent_blankline_buftype_exclude = {"terminal"}
+
+	g.indent_blankline_show_trailing_blankline_indent = false
 
 	require'bufferline'.setup{
 		highlights = {
@@ -103,13 +116,11 @@ lua <<EOF
 	}
 
 	require('lualine').setup{
-
 		options = {
 			theme = 'dracula',
 			section_separators = {'', ''},
 			component_separators = {'', ''}
 		}
-
 	}
 
 	local tree_cb = require'nvim-tree.config'.nvim_tree_callback
@@ -148,98 +159,71 @@ lua <<EOF
 	}
 	
 	require'nvim-web-devicons'.setup {
-
 		override = {
-
 			js = {
-
 				icon = "",
 				color = "#f0dc4e",
 				name = "Js"
-
 			},
 
 			ts = {
-				
 				icon = "ﯤ",
 				color = "#3178c6",
 				name = "Ts"
-
 			},
 
 			html = {
-				
 				icon = "",
 				color = "#dd4b25",
 				name = "Html"
-
 			},
 
 			markdown = {
-				
 				icon = "",
 				color = "#ffffff",
 				name = "Md"
-
 			},
 
 			yaml = {
-				
 				icon = "",
 				color = "#ffffff",
 				name = "Yaml"
-
 			},
 
 			yml = {
-				
 				icon = "",
 				color = "#ffffff",
 				name = "Yml"
-
 			},
 
 			rs = {
-				
 				icon = "",
 				color = "#f04801",
 				name = "Rs"
-
 			},
 
 			[".gitignore"] = {
-				
 				icon = "",
 				color = "#e84e31",
 				name = "Gitignore"
-
 			},
 
 			["package.json"] = {
-				
 				icon = "",
 				color = "#019833"
-
 			},
 
 			["package-lock.json"] = {
-				
 				icon = "",
 				color = "#019833"
-
 			},
 
 			[".env"] = {
-				
 				icon = "",
 				color = "#019833"
-
 			}
-
 		};
-
 	}
-	
 EOF
 
 " Shorcuts
