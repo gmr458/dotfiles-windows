@@ -27,7 +27,7 @@ Plug 'norcalli/nvim-colorizer.lua'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'akinsho/nvim-bufferline.lua'
-Plug 'kyazdani42/nvim-tree.lua'"
+Plug 'kyazdani42/nvim-tree.lua'
 
 call plug#end()
 
