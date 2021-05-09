@@ -17,23 +17,23 @@ De manera que quede una estructura de tal forma:
 │  ├── 📂 packer
 │  │  ├── 📂 plugin_types
 │  │  │  ├── 🌑 git.lua
-│  │  │  ├── 🌑 local.lua
+│  │  │  └── 🌑 local.lua
 │  │  ├── 🌑 async.lua
-│  │  └── 🌑 clean.lua
+│  │  ├── 🌑 clean.lua
 │  │  ├── 🌑 compile.lua
-│  │  └── 🌑 display.lua
+│  │  ├── 🌑 display.lua
 │  │  ├── 🌑 handlers.lua
-│  │  └── 🌑 install.lua
+│  │  ├── 🌑 install.lua
 │  │  ├── 🌑 jobs.lua
-│  │  └── 🌑 load.lua
+│  │  ├── 🌑 load.lua
 │  │  ├── 🌑 log.lua
-│  │  └── 🌑 luarocks.lua
+│  │  ├── 🌑 luarocks.lua
 │  │  ├── 🌑 plugin_types.lua
-│  │  └── 🌑 plugin_utils.lua
+│  │  ├── 🌑 plugin_utils.lua
 │  │  ├── 🌑 result.lua
-│  │  └── 🌑 update.lua
-│  │  ├── 🌑 util.lua
+│  │  ├── 🌑 update.lua
+│  │  └── 🌑 util.lua
 │  └── 🌑 packer.lua
 ├── 📁 platforms
 ├── 📁 styles
-├── 📁 translations
+└── 📁 translations
