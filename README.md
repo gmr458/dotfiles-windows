@@ -37,3 +37,5 @@ De manera que quede una estructura de tal forma:
 ├── 📁 platforms
 ├── 📁 styles
 └── 📁 translations
+
+Otra opcion: `git clone https://github.com/wbthomason/packer.nvim.git C:\Users\german\AppData\Local\nvim-data\site\pack\packer\start\packer.nvim`
