@@ -15,6 +15,13 @@ return require("packer").startup(function()
     use "hrsh7th/nvim-compe"
     use "onsails/lspkind-nvim"
     use "nvim-treesitter/nvim-treesitter"
+    use "mattn/emmet-vim"
+    use "leafgarland/typescript-vim"
+    use "pangloss/vim-javascript"
+    use "mxw/vim-jsx"
+    use "windwp/nvim-autopairs"
+    use "alvan/vim-closetag"
+    use "karb94/neoscroll.nvim"
     use {
         "npxbr/gruvbox.nvim",
         requires = {"rktjmp/lush.nvim"}

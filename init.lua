@@ -11,6 +11,7 @@ require("lsp")
 require("autocompletion")
 require("lspicons")
 require("color")
+require("autopairs")
 
 -- Text editor settings
 vim.cmd([[set omnifunc=syntaxcomplete#Complete]])
