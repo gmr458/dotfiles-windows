@@ -1,6 +1,9 @@
+vim.o.termguicolors = true
+
 vim.g.nvim_tree_ignore = {".git", "node_modules", ".cache"}
 vim.g.nvim_tree_gitignore = 1
 vim.g.nvim_tree_indent_markers = 1
+vim.g.nvim_tree_git_hl = 1
 vim.g.nvim_tree_group_empty = 1
 vim.g.nvim_tree_special_files = {"README.md", "Makefile", "MAKEFILE"}
 vim.g.nvim_tree_show_icons = {
@@ -36,8 +39,6 @@ vim.g.nvim_tree_icons = {
     }
 }
 
-vim.cmd "highlight NvimTreeFolderIcon guibg=blue"
-
 local tree_cb = require"nvim-tree.config".nvim_tree_callback
 vim.g.nvim_tree_bindings = {
     ["<CR>"] = ":YourVimFunction()<cr>",
@@ -72,3 +73,9 @@ vim.g.nvim_tree_bindings = {
     ["-"] = tree_cb("dir_up"),
     ["q"] = tree_cb("close")
 }
+
+-- vim.cmd "hi NvimTreeFolderIcon guifg = #61afef"
+-- vim.cmd "hi NvimTreeFolderName guifg = #61afef"
+-- vim.cmd "hi NvimTreeIndentMarker guifg=#383c44"
+-- vim.cmd "hi NvimTreeNormal guibg=#1b1f27"
+-- vim.cmd "hi NvimTreeVertSplit guifg=#1e222a"

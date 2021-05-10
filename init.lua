@@ -99,6 +99,11 @@ vim.api.nvim_set_keymap("n", "<Leader>ff", [[<Cmd>lua require('telescope.builtin
     silent = false
 })
 
+-- Plugin nvim-compe mappings
+
 -- Colorscheme
-vim.o.background = "dark"
-vim.cmd([[colorscheme gruvbox]])
+-- vim.o.background = "dark"
+-- vim.cmd([[colorscheme gruvbox]])
+vim.cmd([[packadd! dracula]])
+vim.cmd([[syntax enable]])
+vim.cmd([[colorscheme dracula]])
