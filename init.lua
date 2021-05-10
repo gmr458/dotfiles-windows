@@ -5,6 +5,9 @@ require("tree")
 require("statusbar")
 require("buffers")
 require("indentline")
+require("lsp")
+require("autocompletion")
+require("lspicons")
 
 -- Text editor settings
 vim.cmd "set omnifunc=syntaxcomplete#Complete"

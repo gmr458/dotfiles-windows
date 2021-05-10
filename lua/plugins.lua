@@ -11,6 +11,9 @@ return require("packer").startup(function()
             require("Navigator").setup()
         end
     }
+    use "neovim/nvim-lspconfig"
+    use "hrsh7th/nvim-compe"
+    use "onsails/lspkind-nvim"
     use "nvim-treesitter/nvim-treesitter"
     use {
         "npxbr/gruvbox.nvim",
