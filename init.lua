@@ -1,3 +1,5 @@
+vim.cmd([[set termguicolors]])
+
 -- Load plugins and their settings
 require("plugins")
 require("fileicons")
@@ -8,28 +10,28 @@ require("indentline")
 require("lsp")
 require("autocompletion")
 require("lspicons")
+require("color")
 
 -- Text editor settings
-vim.cmd "set omnifunc=syntaxcomplete#Complete"
-vim.cmd "set completeopt-=preview"
-vim.cmd "set noerrorbells"
-vim.cmd "set tabstop=4 softtabstop=4"
-vim.cmd "set shiftwidth=4"
-vim.cmd "set smartindent"
-vim.cmd "set nu"
-vim.cmd "set relativenumber"
-vim.cmd "set nowrap"
-vim.cmd "set smartcase"
-vim.cmd "set noswapfile"
-vim.cmd "set nobackup"
-vim.cmd "set backspace=indent,eol,start"
-vim.cmd "set encoding=UTF-8"
-vim.cmd "set autoindent"
-vim.cmd "set mouse=a"
-vim.cmd "set incsearch"
-vim.cmd "set noshowmode"
-vim.cmd "set termguicolors"
-vim.cmd "language en_US"
+vim.cmd([[set omnifunc=syntaxcomplete#Complete]])
+vim.cmd([[set completeopt-=preview]])
+vim.cmd([[set noerrorbells]])
+vim.cmd([[set tabstop=4 softtabstop=4]])
+vim.cmd([[set shiftwidth=4]])
+vim.cmd([[set smartindent]])
+vim.cmd([[set nu]])
+vim.cmd([[set relativenumber]])
+vim.cmd([[set nowrap]])
+vim.cmd([[set smartcase]])
+vim.cmd([[set noswapfile]])
+vim.cmd([[set nobackup]])
+vim.cmd([[set backspace=indent,eol,start]])
+vim.cmd([[set encoding=UTF-8]])
+vim.cmd([[set autoindent]])
+vim.cmd([[set mouse=a]])
+vim.cmd([[set incsearch]])
+vim.cmd([[set noshowmode]])
+vim.cmd([[language en_US]])
 
 -- <Leader>
 vim.g.mapleader = " "
