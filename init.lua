@@ -1,6 +1,10 @@
 -- Text editor settings
 vim.cmd([[set omnifunc=syntaxcomplete#Complete]])
 vim.cmd([[set completeopt-=preview]])
+vim.cmd([[set guicursor=]])
+vim.cmd([[set ignorecase]])
+vim.cmd([[set scrolloff=8]])
+vim.cmd([[set hidden]])
 vim.cmd([[set noerrorbells]])
 vim.cmd([[set tabstop=4 softtabstop=4]])
 vim.cmd([[set shiftwidth=4]])
@@ -18,6 +22,7 @@ vim.cmd([[set mouse=a]])
 vim.cmd([[set incsearch]])
 vim.cmd([[set noshowmode]])
 vim.cmd([[set termguicolors]])
+vim.cmd([[set signcolumn=yes]])
 vim.cmd([[language en_US]])
 
 -- Load plugins and their settings
