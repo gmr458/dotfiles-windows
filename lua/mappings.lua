@@ -1,6 +1,16 @@
 -- <Leader>
 vim.g.mapleader = " "
 
+-- Plugin nvim-bufferline.lua
+vim.api.nvim_set_keymap("n", "m", ":bnext<CR>", {
+	noremap = true,
+	silent = true
+})
+vim.api.nvim_set_keymap("n", "n", ":bprevious<CR>", {
+	noremap = true,
+	silent = true
+})
+
 -- Plugin Navigator mappings
 vim.api.nvim_set_keymap("n", "<C-h>", "<CMD>lua require('Navigator').left()<CR>", { -- Navigate left
     noremap = true,
@@ -114,3 +124,4 @@ vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {
 vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {
     expr = true
 })
+
