@@ -11,18 +11,22 @@ return require("packer").startup(function()
             require("Navigator").setup()
         end
     }
+    use "bluz71/vim-moonfly-colors"
     use "neovim/nvim-lspconfig"
     use "hrsh7th/nvim-compe"
     use "onsails/lspkind-nvim"
+    use "hrsh7th/vim-vsnip"
+	use "hrsh7th/vim-vsnip-integ"
+	use "rafamadriz/friendly-snippets"
     use "nvim-treesitter/nvim-treesitter"
 	use "p00f/nvim-ts-rainbow"
     use "mattn/emmet-vim"
     use "leafgarland/typescript-vim"
     use "pangloss/vim-javascript"
     use "mxw/vim-jsx"
-	use "prettier/vim-prettier"
+    use "prettier/vim-prettier"
     use "windwp/nvim-autopairs"
-	use "windwp/nvim-ts-autotag"
+    use "windwp/nvim-ts-autotag"
     use "alvan/vim-closetag"
     use "norcalli/nvim-colorizer.lua"
     use {
