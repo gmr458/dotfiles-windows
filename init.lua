@@ -46,10 +46,10 @@ vim.g.moonflyItalics = 0
 vim.g.moonflyTransparent = 1
 vim.cmd([[colorscheme moonfly]])
 
-vim.loop.spawn = (function ()
-	local spawn = vim.loop.spawn
-	return function(path, options, on_exit)
-		local full_path = vim.fn.exepath(path)
-		return spawn(full_path, options, on_exit)
-	end
+vim.loop.spawn = (function()
+    local spawn = vim.loop.spawn
+    return function(path, options, on_exit)
+        local full_path = vim.fn.exepath(path)
+        return spawn(full_path, options, on_exit)
+    end
 end)()

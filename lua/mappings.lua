@@ -78,4 +78,3 @@ vim.api.nvim_set_keymap("n", "<Leader>ff", [[<Cmd>lua require('telescope.builtin
 vim.api.nvim_set_keymap("n", "<Leader>nh", ":nohlsearch<CR>", {
     noremap = true
 })
-

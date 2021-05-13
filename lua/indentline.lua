@@ -1,4 +1,4 @@
-vim.cmd "hi IndentBlanklineChar guifg=#2a2e36"
+vim.cmd([[hi IndentBlanklineChar guifg=#2a2e36]])
 
 vim.g.indent_blankline_char = "▏"
 vim.g.indent_blankline_filetype_exclude = {"help", "terminal"}
