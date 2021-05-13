@@ -1,6 +1,6 @@
-"# dotfiles-neovim-windows"
-
-`git clone https://github.com/gmr458/dotfiles-neovim-windows.git %USERPROFILE%\AppData\Local\nvim`
+```shell
+git clone https://github.com/gmr458/dotfiles-neovim-windows.git %USERPROFILE%\AppData\Local\nvim
+```
 
 ```shell
 git clone https://github.com/wbthomason/packer.nvim/
