@@ -1,6 +1,5 @@
 -- Text editor settings
 vim.cmd([[set omnifunc=syntaxcomplete#Complete]])
-vim.cmd([[set completeopt-=preview]])
 vim.cmd([[set guicursor=]])
 vim.cmd([[set ignorecase]])
 vim.cmd([[set scrolloff=8]])
@@ -34,13 +33,18 @@ require("statusbar")
 require("buffers")
 require("indentline")
 require("lsp")
-require("autocompletion")
 require("lspicons")
+require("autocompletion")
 require("color")
 require("autopairs")
 require("autotag")
 require("fuzzyfinder")
 require("mappings")
+
+-- Colorscheme
+vim.g.moonflyItalics = 0
+vim.g.moonflyTransparent = 1
+vim.cmd([[colorscheme moonfly]])
 
 vim.loop.spawn = (function ()
 	local spawn = vim.loop.spawn
@@ -49,10 +53,3 @@ vim.loop.spawn = (function ()
 		return spawn(full_path, options, on_exit)
 	end
 end)()
-
-
--- Colorscheme
-vim.cmd([[packadd! dracula]])
-vim.cmd([[syntax enable]])
-vim.cmd([[let g:dracula_italic = 0]])
-vim.cmd([[colorscheme dracula]])
