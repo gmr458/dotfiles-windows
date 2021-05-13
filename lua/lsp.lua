@@ -1,4 +1,3 @@
-local nvim_lsp = require("lspconfig")
 local on_attach = function(client, bufnr)
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
     local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
@@ -47,17 +46,36 @@ local on_attach = function(client, bufnr)
 	end
 end
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+	properties = {
+		'documentation',
+		'detail',
+		'additionalTextEdits',
+	}
+}
+
 -- LSP for Python
 require("lspconfig").pyright.setup {
-	on_attach = on_attach
+	on_attach = on_attach,
+	capabilities = capabilities
 }
 
 -- LSP for HTML
 --local capabilities = vim.lsp.protocol.make_client_capabilities()
 --capabilities.textDocument.completion.completionItem.snippetSupport = true
 require("lspconfig").html.setup {
+	cmd = { "html-languageserver.cmd", "--stdio" },
+	init_options = {
+		configurationSection = {"html", "css", "javascript"},
+		embeddedLanguages = {
+			css = true,
+			javascript = true
+		}
+	},
 	on_attach = on_attach,
-	cmd = { "html-languageserver.cmd", "--stdio" }
+	capabilities = capabilities
 }
 
 -- LSP for JSON
@@ -79,17 +97,20 @@ require("lspconfig").jsonls.setup {
 
 -- LSP for JavaScript/TypeScript
 require("lspconfig").tsserver.setup {
-	on_attach = on_attach
+	on_attach = on_attach,
+	capabilities = capabilities
 }
 
 -- LSP for Golang
 require("lspconfig").gopls.setup {
-	on_attach = on_attach
+	on_attach = on_attach,
+	capabilities = capabilities
 }
 
 -- LSP for Rust
 require("lspconfig").rust_analyzer.setup {
-	on_attach = on_attach
+	on_attach = on_attach,
+	capabilities = capabilities
 }
 
 -- LSP for Lua
@@ -135,5 +156,6 @@ require'lspconfig'.sumneko_lua.setup {
 			},
 		},
 	},
+	capabilities = capabilities
 }
 
