@@ -85,6 +85,11 @@ require("lspconfig").html.setup {
     capabilities = capabilities
 }
 
+-- LSP for CSS
+require("lspconfig").cssls.setup {
+	capabilities = capabilities
+}
+
 -- LSP for JSON
 require("lspconfig").jsonls.setup {
     on_attach = on_attach,
