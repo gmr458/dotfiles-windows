@@ -78,3 +78,10 @@ vim.api.nvim_set_keymap("n", "<Leader>ff", [[<Cmd>lua require('telescope.builtin
 vim.api.nvim_set_keymap("n", "<Leader>nh", ":nohlsearch<CR>", {
     noremap = true
 })
+
+-- Formar code with Prettier
+vim.api.nvim_set_keymap("n", "<Leader>fmt", ":Prettier<CR>", {
+	noremap = false,
+	silent = false,
+	expr = false
+})

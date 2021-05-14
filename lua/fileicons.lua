@@ -47,7 +47,7 @@ require("nvim-web-devicons").setup {
         },
 
         ["package.json"] = {
-            icon = "",
+            icon = " ",
             color = "#019833"
         },
 
