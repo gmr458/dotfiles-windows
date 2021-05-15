@@ -135,7 +135,6 @@ else
     print("Unsupported system for sumneko")
 end
 
--- set the path to the sumneko installation; if you previously installed via the now deprecated :LspInstall, use
 local sumneko_root_path = "C:\\language_servers\\lua-language-server"
 local sumneko_binary = sumneko_root_path .. "\\bin\\" .. system_name .. "\\lua-language-server.exe"
 
@@ -167,4 +166,14 @@ require("lspconfig").sumneko_lua.setup {
         }
     },
     capabilities = capabilities
+}
+
+-- LSP for C#
+local pid = vim.fn.getpid()
+local omnisharp_bin = "C:\\language_servers\\omnisharp\\OmniSharp.exe"
+
+require("lspconfig").omnisharp.setup {
+	cmd = {omnisharp_bin, "--languageserver", "--hostPID", tostring(pid)},
+	on_attach = on_attach,
+	capabilities = capabilities
 }
