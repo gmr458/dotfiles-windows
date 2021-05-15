@@ -1,4 +1,3 @@
--- This file is loaded by calling `require('plugins')` from init.lua
 return require("packer").startup(function()
     use "wbthomason/packer.nvim"
     use {
