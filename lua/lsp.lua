@@ -55,13 +55,10 @@ end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities.textDocument.completion.completionItem.resolveSupport = {
-    properties = {
-		"documentation",
-		"detail",
-		"additionalTextEdits"
-	}
-}
+capabilities.textDocument.completion.completionItem.resolveSupport =
+    {
+        properties = {"documentation", "detail", "additionalTextEdits"}
+    }
 
 -- LSP for Python
 require("lspconfig").pyright.setup {
@@ -87,7 +84,7 @@ require("lspconfig").html.setup {
 
 -- LSP for CSS
 require("lspconfig").cssls.setup {
-	capabilities = capabilities
+    capabilities = capabilities
 }
 
 -- LSP for JSON
@@ -173,7 +170,30 @@ local pid = vim.fn.getpid()
 local omnisharp_bin = "C:\\language_servers\\omnisharp\\OmniSharp.exe"
 
 require("lspconfig").omnisharp.setup {
-	cmd = {omnisharp_bin, "--languageserver", "--hostPID", tostring(pid)},
-	on_attach = on_attach,
-	capabilities = capabilities
+    cmd = {omnisharp_bin, "--languageserver", "--hostPID", tostring(pid)},
+    on_attach = on_attach,
+    capabilities = capabilities
+}
+
+-- LSP for Java
+require("lspconfig").jdtls.setup {
+    cmd = {
+        "C:\\Program Files\\Java\\jdk-15.0.1\\bin\\java.exe",
+        "-Declipse.application=org.eclipse.jdt.ls.core.id1",
+        "-Dosgi.bundles.defaultStartLevel=4",
+        "-Declipse.product=org.eclipse.jdt.ls.core.product",
+        "-Dlog.protocol=true",
+        "-Dlog.level=ALL",
+        "-Xms1g",
+        "-Xmx2G",
+        "-jar",
+        "vim.NIL",
+        "-configuration",
+        "vim.NIL",
+        "-data",
+        "vim.NIL",
+        "--add-modules=ALL-SYSTEM",
+        "--add-opens java.base/java.util=ALL-UNNAMED",
+        "--add-opens java.base/java.lang=ALL-UNNAMED"
+    }
 }
