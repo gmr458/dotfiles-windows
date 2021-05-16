@@ -74,3 +74,13 @@ vim.g.nvim_tree_bindings = {
     ["-"] = tree_cb("dir_up"),
     ["q"] = tree_cb("close")
 }
+
+vim.api.nvim_set_keymap("", "<C-n>", ":NvimTreeToggle<CR>", { -- Toggle nvim-tree.lua
+    noremap = true,
+    silent = false
+})
+vim.api.nvim_set_keymap("", "<Leader>r", ":NvimTreeRefresh<CR>", { -- Refresh nvim-tree.lua
+    noremap = true,
+    silent = false
+})
+

@@ -12,3 +12,13 @@ require("bufferline").setup {
         }}
     }
 }
+
+vim.api.nvim_set_keymap("n", "m", ":bnext<CR>", {
+    noremap = true,
+    silent = true
+})
+vim.api.nvim_set_keymap("n", "z", ":bprevious<CR>", {
+    noremap = true,
+    silent = true
+})
+
