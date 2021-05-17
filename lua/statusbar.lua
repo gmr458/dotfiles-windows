@@ -1,6 +1,6 @@
 require("lualine").setup {
     options = {
-        theme = "dracula",
+        theme = "gruvbox",
         section_separators = {"", ""},
         component_separators = {"", ""},
 		disabled_filetypes = {"NvimTree"}

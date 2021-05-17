@@ -42,10 +42,10 @@ require("color")
 require("mappings")
 
 -- Colorscheme
-vim.cmd([[packadd! dracula]])
-vim.cmd([[syntax enable]])
-vim.cmd([[let g:dracula_italic = 0]])
-vim.cmd([[colorscheme dracula]])
+vim.o.background = "dark"
+vim.g.gruvbox_italic = false
+vim.g.gruvbox_italicize_comments = false
+vim.cmd([[colorscheme gruvbox]])
 
 vim.loop.spawn = (function()
     local spawn = vim.loop.spawn
