@@ -4,7 +4,8 @@ git clone https://github.com/wbthomason/packer.nvim/ %USERPROFILE%\AppData\Local
 ```
 
 2. Clone `dotfiles-neovim-windows` in `%USERPROFILE%\AppData\Local\nvim`
-````shell
+```shell
 git clone https://github.com/gmr458/dotfiles-neovim-windows.git %USERPROFILE%\AppData\Local\nvim
 ```
+
 3. Open neovim and execute `:PackerInstall`
