@@ -3,6 +3,6 @@ require("lualine").setup {
         theme = "gruvbox",
         section_separators = {"", ""},
         component_separators = {"", ""},
-		disabled_filetypes = {"NvimTree"}
+		disabled_filetypes = {"NvimTree", "packer"}
     }
 }

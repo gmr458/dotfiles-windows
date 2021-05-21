@@ -20,7 +20,7 @@ return require("packer").startup(function()
     use "hrsh7th/vim-vsnip-integ"
     use "rafamadriz/friendly-snippets"
     use "nvim-treesitter/nvim-treesitter"
-    use "p00f/nvim-ts-rainbow"
+	use "p00f/nvim-ts-rainbow"
     use "prettier/vim-prettier"
     use "windwp/nvim-autopairs"
     use "windwp/nvim-ts-autotag"
