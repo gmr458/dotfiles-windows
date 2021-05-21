@@ -5,7 +5,7 @@ require("telescope").setup {
 	}
 }
 
-vim.api.nvim_set_keymap("n", "tff", [[<Cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({borderchars = {{ '─', '│', '─', '│', '┌', '┐', '┘', '└'},prompt = {"─", "│", " ", "│", '┌', '┐', "│", "│"},results = {"─", "│", "─", "│", "├", "┤", "┘", "└"},preview = { '─', '│', '─', '│', '┌', '┐', '┘', '└'},},previewer = false,prompt_title = false}))<CR>]], { -- Telescope file browser
+vim.api.nvim_set_keymap("", "tff", "<CMD>lua require('telescope.builtin').find_files()<CR>", {
 	noremap = false,
 	silent = true
 })

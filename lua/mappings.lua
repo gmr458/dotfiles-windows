@@ -47,6 +47,10 @@ vim.api.nvim_set_keymap("n", "<Leader>pc", ":PackerClean<CR>", { -- Clean plugin
     noremap = false,
     silent = false
 })
+vim.api.nvim_set_keymap("n", "<Leader>pu", ":PackerUpdate<CR>", { -- Clean plugins folder
+    noremap = false,
+    silent = false
+})
 
 -- nohlsearch
 vim.api.nvim_set_keymap("n", "<Leader>nh", ":nohlsearch<CR>", {
