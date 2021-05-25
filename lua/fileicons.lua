@@ -48,12 +48,14 @@ require("nvim-web-devicons").setup {
 
         ["package.json"] = {
             icon = " ",
-            color = "#019833"
+            color = "#019833",
+			name = "PackageJson"
         },
 
         ["package-lock.json"] = {
             icon = "",
-            color = "#019833"
+            color = "#019833",
+			name = "PackageLockJson"
         },
 
         [".env"] = {
