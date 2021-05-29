@@ -49,3 +49,7 @@ vim.api.nvim_set_keymap("", "<Leader>r", ":NvimTreeRefresh<CR>", { -- Refresh nv
     silent = false
 })
 
+local tree_cb = require("nvim-tree.config").nvim_tree_callback
+vim.g.nvim_tree_bindings = {
+	["s"] = tree_cb("vsplit")
+}
