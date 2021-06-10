@@ -1,3 +1,10 @@
+# dotfile-neovim
+
+Screenshot
+![screenshot](screenshot.png)
+
+## Installation
+
 1. Clone `packer.nvim` in `%USERPROFILE%\AppData\Local\nvim-data\site\pack\packer\start\packer.nvim`
 ```shell
 git clone https://github.com/wbthomason/packer.nvim/ %USERPROFILE%\AppData\Local\nvim-data\site\pack\packer\start\packer.nvim
