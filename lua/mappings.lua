@@ -16,24 +16,8 @@ vim.api.nvim_set_keymap("n", "<C-j>", "<CMD>lua require('Navigator').down()<CR>"
     silent = true
 })
 
--- Other mappings
---vim.api.nvim_set_keymap("n", "<Leader>wq", ":wq!<CR>", { -- Save and force exit
---    noremap = false,
---    silent = false
---})
---vim.api.nvim_set_keymap("n", "<Leader>w", ":w<CR>", { -- Save
---    noremap = false,
---    silent = false
---})
---vim.api.nvim_set_keymap("n", "<Leader>q", ":qa!<CR>", { -- Force exit
---    noremap = false,
---    silent = false
---})
+-- Buffers
 vim.api.nvim_set_keymap("n", "<Leader>bd", ":bd!<CR>", { -- Delete current buffer
-    noremap = false,
-    silent = false
-})
-vim.api.nvim_set_keymap("n", "<Leader>ls", ":ls<CR>", { -- List buffers
     noremap = false,
     silent = false
 })
@@ -57,9 +41,32 @@ vim.api.nvim_set_keymap("n", "<Leader>nh", ":nohlsearch<CR>", {
     noremap = true
 })
 
--- Formar code with Prettier
---vim.api.nvim_set_keymap("n", "<Leader>fmt", ":Prettier<CR>", {
---	noremap = false,
---	silent = false,
---	expr = false
---})
+-- Plugin Trouble
+vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>Trouble<cr>", {
+    silent = true,
+    noremap = true
+})
+vim.api.nvim_set_keymap("n", "<leader>xxc", "<cmd>TroubleClose<cr>", {
+    silent = true,
+    noremap = true
+})
+vim.api.nvim_set_keymap("n", "<leader>xw", "<cmd>Trouble lsp_workspace_diagnostics<cr>", {
+    silent = true,
+    noremap = true
+})
+vim.api.nvim_set_keymap("n", "<leader>xd", "<cmd>Trouble lsp_document_diagnostics<cr>", {
+    silent = true,
+    noremap = true
+})
+vim.api.nvim_set_keymap("n", "<leader>xl", "<cmd>Trouble loclist<cr>", {
+    silent = true,
+    noremap = true
+})
+vim.api.nvim_set_keymap("n", "<leader>xq", "<cmd>Trouble quickfix<cr>", {
+    silent = true,
+    noremap = true
+})
+vim.api.nvim_set_keymap("n", "gR", "<cmd>Trouble lsp_references<cr>", {
+    silent = true,
+    noremap = true
+})

@@ -1,35 +1,107 @@
 return require("packer").startup(function()
+    -- packer can manage itself
     use "wbthomason/packer.nvim"
-	use {"npxbr/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}}
+
+    -- color scheme gruvbox
+    use {
+        "npxbr/gruvbox.nvim",
+        requires = {"rktjmp/lush.nvim"}
+    }
+
+    -- color scheme tokyonight
+    use "folke/tokyonight.nvim"
+
+    -- color scheme github dark
+    use "wojciechkepka/vim-github-dark"
+
+    -- color scheme dracula
+    use "dracula/vim"
+
+    -- nvim-web-devicons: a lua fork of vim-devicons. this plugin provides the same icons as well as colors for each icon
+    use "kyazdani42/nvim-web-devicons"
+
+    -- telescope: is a highly extendable fuzzy finder over lists
     use {
         "nvim-telescope/telescope.nvim",
         requires = {{"nvim-lua/popup.nvim"}, {"nvim-lua/plenary.nvim"}}
     }
+
+    -- navigator: smoothly navigate between splits and panes
     use {
         "numToStr/Navigator.nvim",
         config = function()
             require("Navigator").setup()
         end
     }
+
+    -- LSP
     use "neovim/nvim-lspconfig"
-    use "hrsh7th/nvim-compe"
+    use "folke/lsp-colors.nvim"
     use "onsails/lspkind-nvim"
+    use "glepnir/lspsaga.nvim"
+    use {
+        "folke/trouble.nvim",
+        requires = "kyazdani42/nvim-web-devicons",
+        config = function()
+            require("trouble").setup {
+                use_lsp_diagnostic_signs = true -- enabling this will use the signs defined in your lsp client
+            }
+        end
+    }
+
+    -- autocompletion
+    use "hrsh7th/nvim-compe"
+
+    -- snippets
     use "hrsh7th/vim-vsnip"
     use "hrsh7th/vim-vsnip-integ"
     use "rafamadriz/friendly-snippets"
+
+    -- treesitter
     use "nvim-treesitter/nvim-treesitter"
-	use "p00f/nvim-ts-rainbow"
+
+    -- crystal language support
+    use "vim-crystal/vim-crystal"
+
+    -- rainbow parentheses for neovim using treesitter
+    use "p00f/nvim-ts-rainbow"
+
+    -- code formatter
     use "prettier/vim-prettier"
+
+    -- autopairs
     use "windwp/nvim-autopairs"
+
+    -- autotag
     use "windwp/nvim-ts-autotag"
-    use "alvan/vim-closetag"
+
+    -- color highlighter for Neovim
     use "norcalli/nvim-colorizer.lua"
+
+    -- indent line
     use {
         "lukas-reineke/indent-blankline.nvim",
         branch = "lua"
     }
-    use "kyazdani42/nvim-web-devicons"
+
+    -- a file explorer
     use "kyazdani42/nvim-tree.lua"
+
+    -- status bar
     use "hoob3rt/lualine.nvim"
+
+    -- buffers
     use "akinsho/nvim-bufferline.lua"
+
+    -- comments
+    use "b3nj5m1n/kommentary"
+
+    -- gitsigns
+    use "lewis6991/gitsigns.nvim"
+
+    -- git blame
+    use "f-person/git-blame.nvim"
+
+    -- start screen
+    use "mhinz/vim-startify"
 end)

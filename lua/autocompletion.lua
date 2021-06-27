@@ -8,6 +8,7 @@ require("compe").setup {
     preselect = "enable",
     throttle_time = 80,
     source_timeout = 200,
+    resolve_timeout = 800,
     incomplete_delay = 400,
     max_abbr_width = 100,
     max_kind_width = 100,
@@ -40,7 +41,7 @@ end
 
 -- Use (s-)tab to:
 --- move to prev/next item in completion menuone
---- jump to prev/next snippet's placeholder
+--- jump to prev/next snippet"s placeholder
 _G.tab_complete = function()
     if vim.fn.pumvisible() == 1 then
         return t "<C-n>"
@@ -58,6 +59,7 @@ _G.s_tab_complete = function()
     elseif vim.fn.call("vsnip#jumpable", {-1}) == 1 then
         return t "<Plug>(vsnip-jump-prev)"
     else
+        -- If <S-Tab> is not working in your terminal, change it to <C-h>
         return t "<S-Tab>"
     end
 end

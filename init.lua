@@ -29,17 +29,20 @@ require("plugins")
 require("fileicons")
 require("highlighting")
 require("lsp")
+require("autocompletion")
+require("lspcolors")
+require("lspicons")
 require("statusbar")
 require("fuzzyfinder")
-require("tree")
 require("autopairs")
 require("autotag")
 require("indentline")
 require("buffers")
-require("autocompletion")
-require("lspicons")
 require("color")
 require("mappings")
+require("comments")
+require("gitdecorations")
+require("tree")
 
 -- Colorscheme
 vim.o.background = "dark"
@@ -47,4 +50,3 @@ vim.g.gruvbox_italic = false
 vim.g.gruvbox_italicize_comments = false
 vim.g.gruvbox_contrast_dark = "hard"
 vim.cmd([[colorscheme gruvbox]])
-
