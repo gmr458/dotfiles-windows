@@ -1,4 +1,4 @@
-# dotfile-neovim
+# My Neovim config for Windows
 
 Screenshot 1
 ![screenshot1](screenshot1.png)
