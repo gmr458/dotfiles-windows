@@ -2,20 +2,8 @@ return require("packer").startup(function()
     -- packer can manage itself
     use "wbthomason/packer.nvim"
 
-    -- color scheme gruvbox
-    use {
-        "npxbr/gruvbox.nvim",
-        requires = {"rktjmp/lush.nvim"}
-    }
-
-    -- color scheme tokyonight
-    use "folke/tokyonight.nvim"
-
-    -- color scheme github dark
-    use "wojciechkepka/vim-github-dark"
-
-    -- color scheme dracula
-    use "dracula/vim"
+    -- colorscheme dracula
+    use "Mofiqul/dracula.nvim"
 
     -- nvim-web-devicons: a lua fork of vim-devicons. this plugin provides the same icons as well as colors for each icon
     use "kyazdani42/nvim-web-devicons"
@@ -29,9 +17,7 @@ return require("packer").startup(function()
     -- navigator: smoothly navigate between splits and panes
     use {
         "numToStr/Navigator.nvim",
-        config = function()
-            require("Navigator").setup()
-        end
+        config = function() require("Navigator").setup() end
     }
 
     -- LSP
@@ -41,10 +27,9 @@ return require("packer").startup(function()
     use "glepnir/lspsaga.nvim"
     use {
         "folke/trouble.nvim",
-        requires = "kyazdani42/nvim-web-devicons",
         config = function()
             require("trouble").setup {
-                use_lsp_diagnostic_signs = true -- enabling this will use the signs defined in your lsp client
+                use_lsp_diagnostic_signs = true
             }
         end
     }
@@ -58,13 +43,10 @@ return require("packer").startup(function()
     use "rafamadriz/friendly-snippets"
 
     -- treesitter
-    use "nvim-treesitter/nvim-treesitter"
-
-    -- crystal language support
-    use "vim-crystal/vim-crystal"
+    -- use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
 
     -- rainbow parentheses for neovim using treesitter
-    use "p00f/nvim-ts-rainbow"
+    -- use "p00f/nvim-ts-rainbow"
 
     -- code formatter
     use "prettier/vim-prettier"
@@ -73,16 +55,13 @@ return require("packer").startup(function()
     use "windwp/nvim-autopairs"
 
     -- autotag
-    use "windwp/nvim-ts-autotag"
+    -- use "windwp/nvim-ts-autotag"
 
     -- color highlighter for Neovim
-    use "norcalli/nvim-colorizer.lua"
+    -- use "norcalli/nvim-colorizer.lua"
 
     -- indent line
-    use {
-        "lukas-reineke/indent-blankline.nvim",
-        branch = "lua"
-    }
+    -- use "lukas-reineke/indent-blankline.nvim"
 
     -- a file explorer
     use "kyazdani42/nvim-tree.lua"
@@ -101,7 +80,4 @@ return require("packer").startup(function()
 
     -- git blame
     use "f-person/git-blame.nvim"
-
-    -- start screen
-    use "mhinz/vim-startify"
 end)

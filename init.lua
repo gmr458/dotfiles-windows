@@ -21,32 +21,29 @@ vim.cmd([[set mouse=a]])
 vim.cmd([[set incsearch]])
 vim.cmd([[set noshowmode]])
 vim.cmd([[set termguicolors]])
+vim.cmd([[set guifont=Ligconsolata\ Nerd\ Font:h16]])
 vim.cmd([[language en_US]])
 vim.g.mapleader = " "
 
 -- Load plugins and their settings
 require("plugins")
 require("fileicons")
-require("highlighting")
+-- require("highlighting")
 require("lsp")
+require("lspui")
 require("autocompletion")
 require("lspcolors")
 require("lspicons")
 require("statusbar")
 require("fuzzyfinder")
 require("autopairs")
-require("autotag")
-require("indentline")
+-- require("autotag")
+-- require("indentline")
 require("buffers")
-require("color")
+-- require("color")
 require("mappings")
 require("comments")
 require("gitdecorations")
 require("tree")
 
--- Colorscheme
-vim.o.background = "dark"
-vim.g.gruvbox_italic = false
-vim.g.gruvbox_italicize_comments = false
-vim.g.gruvbox_contrast_dark = "hard"
-vim.cmd([[colorscheme gruvbox]])
+vim.cmd([[colorscheme dracula-black]])

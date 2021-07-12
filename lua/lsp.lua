@@ -7,11 +7,7 @@ local signs = {
 
 for type, icon in pairs(signs) do
     local hl = "LspDiagnosticsSign" .. type
-    vim.fn.sign_define(hl, {
-        text = icon,
-        texthl = hl,
-        numhl = ""
-    })
+    vim.fn.sign_define(hl, {text = icon, texthl = hl, numhl = ""})
 end
 
 local on_attach = function(client, bufnr)
@@ -27,15 +23,12 @@ local on_attach = function(client, bufnr)
     buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 
     -- Mappings.
-    local opts = {
-        noremap = true,
-        silent = true
-    }
+    local opts = {noremap = true, silent = true}
 
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     buf_set_keymap("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
     buf_set_keymap("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
-    buf_set_keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
+    -- buf_set_keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
     buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
     buf_set_keymap("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
     buf_set_keymap("n", "<space>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
@@ -43,8 +36,8 @@ local on_attach = function(client, bufnr)
     buf_set_keymap("n", "<space>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
     buf_set_keymap("n", "<space>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
     buf_set_keymap("n", "<space>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-    buf_set_keymap("n", "<space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-    buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+    -- buf_set_keymap("n", "<space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+    -- buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
     buf_set_keymap("n", "<space>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
     buf_set_keymap("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
     buf_set_keymap("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
@@ -58,6 +51,12 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
     properties = {"documentation", "detail", "additionalTextEdits"}
 }
 
+-- LSP for JavaScript/TypeScript
+require("lspconfig").tsserver.setup {
+    on_attach = on_attach,
+    capabilities = capabilities
+}
+
 -- LSP for Python
 require("lspconfig").pyright.setup {
     on_attach = on_attach,
@@ -69,49 +68,32 @@ require("lspconfig").html.setup {
     cmd = {"html-languageserver.cmd", "--stdio"},
     init_options = {
         configurationSection = {"html", "css", "javascript"},
-        embeddedLanguages = {
-            css = true,
-            javascript = true
-        }
+        embeddedLanguages = {css = true, javascript = true}
     },
     on_attach = on_attach,
     capabilities = capabilities
 }
 
 -- LSP for CSS
-require("lspconfig").cssls.setup {
-    capabilities = capabilities
-}
+require("lspconfig").cssls.setup {capabilities = capabilities}
 
 -- LSP for JSON
 require("lspconfig").jsonls.setup {
     on_attach = on_attach,
     commands = {
-        Format = {function()
-            vim.lsp.buf.range_formatting({}, {0, 0}, {vim.fn.line("$"), 0})
-        end}
+        Format = {
+            function()
+                vim.lsp.buf.range_formatting({}, {0, 0}, {vim.fn.line("$"), 0})
+            end
+        }
     },
     cmd = {"vscode-json-languageserver.cmd", "--stdio"},
     filetypes = {"json"},
-    init_options = {
-        provideFormatter = true
-    }
-}
-
--- LSP for JavaScript/TypeScript
-require("lspconfig").tsserver.setup {
-    on_attach = on_attach,
-    capabilities = capabilities
+    init_options = {provideFormatter = true}
 }
 
 -- LSP for Golang
 require("lspconfig").gopls.setup {
-    on_attach = on_attach,
-    capabilities = capabilities
-}
-
--- LSP for Rust
-require("lspconfig").rust_analyzer.setup {
     on_attach = on_attach,
     capabilities = capabilities
 }
@@ -132,7 +114,7 @@ local sumneko_root_path = "C:\\language_servers\\lua-language-server"
 local sumneko_binary = sumneko_root_path .. "\\bin\\" .. system_name .. "\\lua-language-server.exe"
 
 require("lspconfig").sumneko_lua.setup {
-    cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
+    cmd = {sumneko_binary, "-E", sumneko_root_path .. "\\main.lua"},
     settings = {
         Lua = {
             runtime = {
@@ -153,11 +135,16 @@ require("lspconfig").sumneko_lua.setup {
                 }
             },
             -- Do not send telemetry data containing a randomized but unique identifier
-            telemetry = {
-                enable = false
-            }
+            telemetry = {enable = false}
         }
     },
+    on_attach = on_attach,
+    capabilities = capabilities
+}
+
+-- LSP for C/C++
+require("lspconfig").clangd.setup {
+    on_attach = on_attach,
     capabilities = capabilities
 }
 
@@ -172,4 +159,13 @@ require("lspconfig").omnisharp.setup {
 }
 
 -- LSP for Java
-require("lspconfig").jdtls.setup {}
+require("lspconfig").jdtls.setup {
+    on_attach = on_attach,
+    capabilities = capabilities
+}
+
+-- LSP for Rust
+require("lspconfig").rust_analyzer.setup {
+    on_attach = on_attach,
+    capabilities = capabilities
+}
