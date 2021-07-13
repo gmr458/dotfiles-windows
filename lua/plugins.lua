@@ -43,10 +43,10 @@ return require("packer").startup(function()
     use "rafamadriz/friendly-snippets"
 
     -- treesitter
-    -- use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
+    use "nvim-treesitter/nvim-treesitter"
 
     -- rainbow parentheses for neovim using treesitter
-    -- use "p00f/nvim-ts-rainbow"
+    use "p00f/nvim-ts-rainbow"
 
     -- code formatter
     use "prettier/vim-prettier"
@@ -55,13 +55,13 @@ return require("packer").startup(function()
     use "windwp/nvim-autopairs"
 
     -- autotag
-    -- use "windwp/nvim-ts-autotag"
+    use "windwp/nvim-ts-autotag"
 
     -- color highlighter for Neovim
-    -- use "norcalli/nvim-colorizer.lua"
+    use "norcalli/nvim-colorizer.lua"
 
     -- indent line
-    -- use "lukas-reineke/indent-blankline.nvim"
+    use "lukas-reineke/indent-blankline.nvim"
 
     -- a file explorer
     use "kyazdani42/nvim-tree.lua"
