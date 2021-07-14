@@ -51,8 +51,54 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
     properties = {"documentation", "detail", "additionalTextEdits"}
 }
 
--- LSP for JavaScript/TypeScript
-require("lspconfig").tsserver.setup {
+-- LSP for C/C++
+require("lspconfig").clangd.setup {
+    on_attach = on_attach,
+    capabilities = capabilities
+}
+
+-- LSP for CSS
+require("lspconfig").cssls.setup {
+	cmd = { "vscode-css-language-server.cmd", "--stdio" },
+	capabilities = capabilities
+}
+
+-- LSP for Golang
+require("lspconfig").gopls.setup {
+    on_attach = on_attach,
+    capabilities = capabilities
+}
+
+-- LSP for HTML
+require("lspconfig").html.setup {
+    cmd = {"vscode-html-language-server.cmd", "--stdio"},
+    capabilities = capabilities
+}
+
+-- LSP for Java
+require("lspconfig").jdtls.setup {
+    on_attach = on_attach,
+    capabilities = capabilities
+}
+
+-- LSP for JSON
+require("lspconfig").jsonls.setup {
+    cmd = {"vscode-json-language-server.cmd", "--stdio"},
+    commands = {
+        Format = {
+            function()
+                vim.lsp.buf.range_formatting({}, {0, 0}, {vim.fn.line("$"), 0})
+            end
+        }
+    },
+}
+
+-- LSP for C#
+local pid = vim.fn.getpid()
+local omnisharp_bin = "C:\\language_servers\\omnisharp\\OmniSharp.exe"
+
+require("lspconfig").omnisharp.setup {
+    cmd = {omnisharp_bin, "--languageserver", "--hostPID", tostring(pid)},
     on_attach = on_attach,
     capabilities = capabilities
 }
@@ -63,37 +109,14 @@ require("lspconfig").pyright.setup {
     capabilities = capabilities
 }
 
--- LSP for HTML
-require("lspconfig").html.setup {
-    cmd = {"html-languageserver.cmd", "--stdio"},
-    init_options = {
-        configurationSection = {"html", "css", "javascript"},
-        embeddedLanguages = {css = true, javascript = true}
-    },
+-- LSP for Rust
+require("lspconfig").rust_analyzer.setup({
     on_attach = on_attach,
     capabilities = capabilities
-}
+})
 
--- LSP for CSS
-require("lspconfig").cssls.setup {capabilities = capabilities}
-
--- LSP for JSON
-require("lspconfig").jsonls.setup {
-    on_attach = on_attach,
-    commands = {
-        Format = {
-            function()
-                vim.lsp.buf.range_formatting({}, {0, 0}, {vim.fn.line("$"), 0})
-            end
-        }
-    },
-    cmd = {"vscode-json-languageserver.cmd", "--stdio"},
-    filetypes = {"json"},
-    init_options = {provideFormatter = true}
-}
-
--- LSP for Golang
-require("lspconfig").gopls.setup {
+-- LSP for JavaScript/TypeScript
+require("lspconfig").tsserver.setup {
     on_attach = on_attach,
     capabilities = capabilities
 }
@@ -113,59 +136,33 @@ end
 local sumneko_root_path = "C:\\language_servers\\lua-language-server"
 local sumneko_binary = sumneko_root_path .. "\\bin\\" .. system_name .. "\\lua-language-server.exe"
 
+local runtime_path = vim.split(package.path, ";")
+table.insert(runtime_path, "lua/?.lua")
+table.insert(runtime_path, "lua/?/init.lua")
+
 require("lspconfig").sumneko_lua.setup {
     cmd = {sumneko_binary, "-E", sumneko_root_path .. "\\main.lua"},
     settings = {
-        Lua = {
-            runtime = {
-                -- Tell the language server which version of Lua you"re using (most likely LuaJIT in the case of Neovim)
-                version = "LuaJIT",
-                -- Setup your lua path
-                path = vim.split(package.path, ";")
-            },
-            diagnostics = {
-                -- Get the language server to recognize the `vim` global
-                globals = {"vim"}
-            },
-            workspace = {
-                -- Make the server aware of Neovim runtime files
-                library = {
-                    [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                    [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true
-                }
-            },
-            -- Do not send telemetry data containing a randomized but unique identifier
-            telemetry = {enable = false}
-        }
-    },
-    on_attach = on_attach,
-    capabilities = capabilities
+		Lua = {
+			runtime = {
+				version = "LuaJIT",
+				path = runtime_path,
+			},
+			diagnostics = {
+				globals = {"vim", "use"},
+			},
+			workspace = {
+				library = vim.api.nvim_get_runtime_file("", true),
+			},
+			telemetry = {
+				enable = false,
+			},
+		},
+	},
+	on_attach = on_attach,
+	capabilities = capabilities
 }
 
--- LSP for C/C++
-require("lspconfig").clangd.setup {
-    on_attach = on_attach,
-    capabilities = capabilities
-}
+-- LSP for YAML
+require("lspconfig").yamlls.setup {}
 
--- LSP for C#
-local pid = vim.fn.getpid()
-local omnisharp_bin = "C:\\language_servers\\omnisharp\\OmniSharp.exe"
-
-require("lspconfig").omnisharp.setup {
-    cmd = {omnisharp_bin, "--languageserver", "--hostPID", tostring(pid)},
-    on_attach = on_attach,
-    capabilities = capabilities
-}
-
--- LSP for Java
-require("lspconfig").jdtls.setup {
-    on_attach = on_attach,
-    capabilities = capabilities
-}
-
--- LSP for Rust
-require("lspconfig").rust_analyzer.setup {
-    on_attach = on_attach,
-    capabilities = capabilities
-}
