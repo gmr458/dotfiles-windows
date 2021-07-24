@@ -1,13 +1,13 @@
 vim.o.termguicolors = true
 
-vim.g.nvim_tree_ignore = {".git", "node_modules", ".cache"}
+vim.g.nvim_tree_ignore = {".git", "node_modules", ".cache", "plugged"}
 vim.g.nvim_tree_indent_markers = 1
 vim.g.nvim_tree_git_hl = 1
 vim.g.nvim_tree_root_folder_modifier = ":t"
 vim.g.nvim_tree_group_empty = 1
-vim.g.nvim_tree_lsp_diagnostics = 1
+vim.g.nvim_tree_lsp_diagnostics = 0
 vim.g.nvim_tree_show_icons = {
-    git = 1,
+    git = 0,
     folders = 1,
     files = 1,
     folder_arrows = 1
@@ -15,7 +15,7 @@ vim.g.nvim_tree_show_icons = {
 vim.g.nvim_tree_icons = {
     default = '',
     symlink = '',
-    git = {
+    --[[ git = {
         unstaged = "✗",
         staged = "✓",
         unmerged = "",
@@ -23,7 +23,7 @@ vim.g.nvim_tree_icons = {
         untracked = "★",
         deleted = "",
         ignored = "◌"
-    },
+    }, ]]
     folder = {
         arrow_open = "",
         arrow_closed = "",
@@ -34,7 +34,7 @@ vim.g.nvim_tree_icons = {
         symlink = "",
         symlink_open = ""
     },
-    lsp = {hint = "", info = "", warning = "", error = ""}
+    -- lsp = {hint = "", info = "", warning = "", error = ""}
 }
 
 vim.api.nvim_set_keymap("", "<C-n>", ":NvimTreeToggle<CR>", { -- Toggle nvim-tree.lua
