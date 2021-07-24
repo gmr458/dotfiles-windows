@@ -2,6 +2,9 @@ return require("packer").startup(function()
     -- packer can manage itself
     use "wbthomason/packer.nvim"
 
+	-- colorscheme gruvbox
+	use {"npxbr/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}}
+
     -- colorscheme dracula
     use "Mofiqul/dracula.nvim"
 
@@ -24,7 +27,6 @@ return require("packer").startup(function()
     use "neovim/nvim-lspconfig"
     use "folke/lsp-colors.nvim"
     use "onsails/lspkind-nvim"
-    use "glepnir/lspsaga.nvim"
     use {
         "folke/trouble.nvim",
         config = function()
@@ -43,7 +45,10 @@ return require("packer").startup(function()
     use "rafamadriz/friendly-snippets"
 
     -- treesitter
-    use "nvim-treesitter/nvim-treesitter"
+    use {
+		"nvim-treesitter/nvim-treesitter",
+		run = ":TSUpdate"
+	}
 
     -- rainbow parentheses for neovim using treesitter
     use "p00f/nvim-ts-rainbow"
@@ -59,9 +64,6 @@ return require("packer").startup(function()
 
     -- color highlighter for Neovim
     use "norcalli/nvim-colorizer.lua"
-
-    -- indent line
-    use "lukas-reineke/indent-blankline.nvim"
 
     -- a file explorer
     use "kyazdani42/nvim-tree.lua"
@@ -80,4 +82,7 @@ return require("packer").startup(function()
 
     -- git blame
     use "f-person/git-blame.nvim"
+
+	-- formatter
+	use "mhartington/formatter.nvim"
 end)
