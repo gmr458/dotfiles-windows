@@ -12,7 +12,7 @@ require("lualine").setup {
         lualine_a = {"mode"},
         lualine_b = {"filename"},
         lualine_c = {
-            {
+            --[[ {
                 "branch",
                 icon = ""
             },
@@ -22,10 +22,10 @@ require("lualine").setup {
                 color_added = "#10B981",
                 color_modified = "#E0AF68",
                 color_removed = "#db4b4b"
-            }
+            } ]]
         },
         lualine_x = {
-            {
+            --[[ {
                 "diagnostics",
                 sources = {"nvim_lsp"},
                 sections = {"error", "warn", "info", "hint"},
@@ -33,7 +33,7 @@ require("lualine").setup {
                 color_warn = "#E0AF68",
                 color_info = "#0DB9D7",
                 color_hint = "#10B981"
-            },
+            }, ]]
             {"filetype"}
         },
         lualine_y = {"progress"},
