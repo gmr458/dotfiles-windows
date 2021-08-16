@@ -1,4 +1,5 @@
 -- Text editor settings
+vim.cmd([[autocmd BufRead,BufNewFile tsconfig.json set filetype=jsonc]])
 vim.cmd([[filetype plugin indent on]])
 vim.cmd([[set tabstop=4]])
 vim.cmd([[set shiftwidth=4]])
@@ -24,6 +25,8 @@ vim.cmd([[set noshowmode]])
 vim.cmd([[set termguicolors]])
 vim.cmd([[language en_US]])
 vim.g.mapleader = " "
+vim.g.vim_json_conceal = false
+vim.g.vim_json_warnings = false
 
 -- Load plugins and their settings
 require("plugins")
@@ -32,6 +35,8 @@ require("highlighting")
 require("lsp")
 require("autocompletion")
 require("lspcolors")
+require("lspicons")
+require("format")
 require("statusbar")
 require("fuzzyfinder")
 require("autopairs")
@@ -42,4 +47,5 @@ require("mappings")
 require("comments")
 require("tree")
 
-vim.cmd([[colorscheme dracula-black]])
+vim.g.nb_style = "twilight"
+require("nebulous").setup()

@@ -1,1 +1,1 @@
-require("lspkind").init({with_text = true})
+require("lspkind").init({ with_text = true })

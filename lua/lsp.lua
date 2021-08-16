@@ -1,3 +1,5 @@
+local USERPROFILE = os.getenv("USERPROFILE")
+
 --[[ local signs = {
     Error = " ",
     Warning = " ",
@@ -11,119 +13,123 @@ for type, icon in pairs(signs) do
 end ]]
 
 local on_attach = function(client, bufnr)
-	local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-	local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+	local function buf_set_keymap(...)
+		vim.api.nvim_buf_set_keymap(bufnr, ...)
+	end
+	local function buf_set_option(...)
+		vim.api.nvim_buf_set_option(bufnr, ...)
+	end
 
-	buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+	buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 
-	local opts = { noremap=true, silent=true }
+	local opts = { noremap = true, silent = true }
 
-	buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-	buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-	buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-	buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-	buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-	buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-	buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-	buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-	buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-	buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-	buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-	buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-	buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-	buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-	buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-	buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+	buf_set_keymap("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
+	buf_set_keymap("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
+	buf_set_keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
+	buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+	buf_set_keymap("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
+	buf_set_keymap("n", "<space>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
+	buf_set_keymap("n", "<space>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
+	buf_set_keymap("n", "<space>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
+	buf_set_keymap("n", "<space>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
+	buf_set_keymap("n", "<space>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+	buf_set_keymap("n", "<space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+	buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+	buf_set_keymap("n", "<space>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
+	buf_set_keymap("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
+	buf_set_keymap("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
+	buf_set_keymap("n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
 	buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.completion.completionItem.resolveSupport = {
-    properties = {"documentation", "detail", "additionalTextEdits"}
+	properties = { "documentation", "detail", "additionalTextEdits" },
 }
 
 -- LSP for C/C++
-require("lspconfig").clangd.setup {
-    on_attach = on_attach,
-    capabilities = capabilities
-}
+require("lspconfig").clangd.setup({
+	on_attach = on_attach,
+	capabilities = capabilities,
+})
 
 -- LSP for CSS
-require("lspconfig").cssls.setup {
+require("lspconfig").cssls.setup({
 	cmd = { "vscode-css-language-server.cmd", "--stdio" },
-	capabilities = capabilities
-}
+	capabilities = capabilities,
+})
 
 -- LSP for Golang
-require("lspconfig").gopls.setup {
-    on_attach = on_attach,
-    capabilities = capabilities
-}
+require("lspconfig").gopls.setup({
+	on_attach = on_attach,
+	capabilities = capabilities,
+})
 
 -- LSP for HTML
-require("lspconfig").html.setup {
-    cmd = {"vscode-html-language-server.cmd", "--stdio"},
-    capabilities = capabilities
-}
+require("lspconfig").html.setup({
+	cmd = { "vscode-html-language-server.cmd", "--stdio" },
+	capabilities = capabilities,
+})
 
 -- LSP for Java
-require("lspconfig").jdtls.setup {
-    on_attach = on_attach,
-    capabilities = capabilities
-}
+require("lspconfig").jdtls.setup({
+	on_attach = on_attach,
+	capabilities = capabilities,
+})
 
 -- LSP for JSON
-require("lspconfig").jsonls.setup {
-    cmd = {"vscode-json-language-server.cmd", "--stdio"},
-	filetypes = {"json", "jsonc"},
-    commands = {
-        Format = {
-            function()
-                vim.lsp.buf.range_formatting({}, {0, 0}, {vim.fn.line("$"), 0})
-            end
-        }
-    },
-}
+require("lspconfig").jsonls.setup({
+	cmd = { "vscode-json-language-server.cmd", "--stdio" },
+	filetypes = { "json", "jsonc" },
+	commands = {
+		Format = {
+			function()
+				vim.lsp.buf.range_formatting({}, { 0, 0 }, { vim.fn.line("$"), 0 })
+			end,
+		},
+	},
+})
 
 -- LSP for C#
 local pid = vim.fn.getpid()
-local omnisharp_bin = "C:\\language_servers\\omnisharp\\OmniSharp.exe"
+local omnisharp_bin = USERPROFILE .. "\\AppData\\Local\\omnisharp-vim\\omnisharp-roslyn\\OmniSharp.exe"
 
-require("lspconfig").omnisharp.setup {
-    cmd = {omnisharp_bin, "--languageserver", "--hostPID", tostring(pid)},
-    on_attach = on_attach,
-    capabilities = capabilities
-}
+require("lspconfig").omnisharp.setup({
+	cmd = { omnisharp_bin, "--languageserver", "--hostPID", tostring(pid) },
+	on_attach = on_attach,
+	capabilities = capabilities,
+})
 
 -- LSP for Python
-require("lspconfig").pyright.setup {
-    on_attach = on_attach,
-    capabilities = capabilities
-}
+require("lspconfig").pyright.setup({
+	on_attach = on_attach,
+	capabilities = capabilities,
+})
 
 -- LSP for Rust
 require("lspconfig").rust_analyzer.setup({
-    on_attach = on_attach,
-    capabilities = capabilities
+	on_attach = on_attach,
+	capabilities = capabilities,
 })
 
 -- LSP for JavaScript/TypeScript
-require("lspconfig").tsserver.setup {
-    on_attach = on_attach,
-    capabilities = capabilities
-}
+require("lspconfig").tsserver.setup({
+	on_attach = on_attach,
+	capabilities = capabilities,
+})
 
 -- LSP for Lua
 local system_name
 if vim.fn.has("mac") == 1 then
-    system_name = "macOS"
+	system_name = "macOS"
 elseif vim.fn.has("unix") == 1 then
-    system_name = "Linux"
+	system_name = "Linux"
 elseif vim.fn.has("win32") == 1 then
-    system_name = "Windows"
+	system_name = "Windows"
 else
-    print("Unsupported system for sumneko")
+	print("Unsupported system for sumneko")
 end
 
 local sumneko_root_path = "C:\\language_servers\\lua-language-server"
@@ -133,16 +139,16 @@ local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
-require("lspconfig").sumneko_lua.setup {
-    cmd = {sumneko_binary, "-E", sumneko_root_path .. "\\main.lua"},
-    settings = {
+require("lspconfig").sumneko_lua.setup({
+	cmd = { sumneko_binary, "-E", sumneko_root_path .. "\\main.lua" },
+	settings = {
 		Lua = {
 			runtime = {
 				version = "LuaJIT",
 				path = runtime_path,
 			},
 			diagnostics = {
-				globals = {"vim", "use"},
+				globals = { "vim", "use" },
 			},
 			workspace = {
 				library = vim.api.nvim_get_runtime_file("", true),
@@ -153,9 +159,8 @@ require("lspconfig").sumneko_lua.setup {
 		},
 	},
 	on_attach = on_attach,
-	capabilities = capabilities
-}
+	capabilities = capabilities,
+})
 
 -- LSP for YAML
-require("lspconfig").yamlls.setup {}
-
+require("lspconfig").yamlls.setup({})
