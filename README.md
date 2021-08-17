@@ -23,7 +23,7 @@ git clone https://github.com/gmr458/dotfiles-neovim-windows %USERPROFILE%\AppDat
 
 3. Open Neovim and execute `:PackerInstall`
 
-4. Install the language servers for Python, CSS, HTML, JavaScript/TypeScript with `npm`:
+4. Install the language servers for Python, CSS, HTML and JavaScript/TypeScript with `npm`:
 - [pyright](https://github.com/microsoft/pyright) for Python
 - [vscode-langservers-extracted](https://github.com/hrsh7th/vscode-langservers-extracted) for HTML, CSS and JSON
 - [typescript-language-server](https://github.com/typescript-language-server/typescript-language-server) for JavaScript/TypeScript
@@ -47,4 +47,4 @@ cd rust-analyzer
 cargo xtask install --server
 ```
 
-7. LSP for C/C ++ requires `clangd` to be installed, [Instructions to install here](https://clangd.llvm.org/installation.html).
+7. LSP for C/C++ requires `clangd` to be installed, [Instructions to install here](https://clangd.llvm.org/installation.html).
