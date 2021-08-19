@@ -1,16 +1,28 @@
-vim.o.termguicolors = true
-
+vim.g.nvim_tree_width = 32
 vim.g.nvim_tree_ignore = { ".git", "node_modules", ".cache", "dist", "build", "venv", "bin", "obj", "target" }
-vim.g.nvim_tree_indent_markers = 1
+vim.g.nvim_tree_auto_ignore_ft = { "startify", "dashboard" }
 vim.g.nvim_tree_git_hl = 1
+vim.g.nvim_tree_highlight_opened_files = 1
 vim.g.nvim_tree_root_folder_modifier = ":t"
+vim.g.nvim_tree_auto_resize = 1
 vim.g.nvim_tree_group_empty = 1
 vim.g.nvim_tree_lsp_diagnostics = 1
+vim.g.nvim_tree_symlink_arrow = " >> "
+vim.g.nvim_tree_window_picker_exclude = {
+	filetype = {
+		"packer",
+		"qf",
+	},
+	buftype = {
+		"terminal",
+	},
+}
+vim.g.nvim_tree_special_files = { "README.md", "Makefile", "MAKEFILE" }
 vim.g.nvim_tree_show_icons = {
 	git = 1,
 	folders = 1,
 	files = 1,
-	folder_arrows = 0,
+	folder_arrows = 1,
 }
 vim.g.nvim_tree_icons = {
 	default = "",
@@ -34,7 +46,12 @@ vim.g.nvim_tree_icons = {
 		symlink = "",
 		symlink_open = "",
 	},
-	lsp = { hint = "", info = "", warning = "", error = "" },
+	lsp = {
+		hint = "",
+		info = "",
+		warning = "",
+		error = "",
+	},
 }
 
 vim.api.nvim_set_keymap("", "<C-n>", ":NvimTreeToggle<CR>", { -- Toggle nvim-tree.lua

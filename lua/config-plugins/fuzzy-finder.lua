@@ -9,7 +9,7 @@ require("telescope").setup({
 				height = 0.5,
 			},
 		},
-		file_ignore_patterns = { ".git", "node_modules", "dist", "build", "venv", "bin", "obj", "target" },
+		file_ignore_patterns = { "node_modules", "dist", "build", "venv", "bin", "obj", "target" },
 		borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
 		color_devicons = true,
 		set_env = { ["COLORTERM"] = "truecolor" },

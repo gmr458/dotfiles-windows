@@ -1,4 +1,4 @@
-return require("packer").startup(function()
+require("packer").startup(function()
 	-- packer can manage itself
 	use("wbthomason/packer.nvim")
 
@@ -95,8 +95,21 @@ return require("packer").startup(function()
 	use("akinsho/nvim-bufferline.lua")
 
 	-- comments
-	use("b3nj5m1n/kommentary")
+	use({
+        "b3nj5m1n/kommentary",
+        config = function()
+            require()
+        end
+    })
 
 	-- formatter
 	use("mhartington/formatter.nvim")
+
+	-- gitsigns
+	use({
+		"lewis6991/gitsigns.nvim",
+		requires = {
+			"nvim-lua/plenary.nvim",
+		},
+	})
 end)
