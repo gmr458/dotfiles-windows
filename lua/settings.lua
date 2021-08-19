@@ -30,10 +30,5 @@ vim.g.mapleader = " "
 vim.g.vim_json_conceal = false
 vim.g.vim_json_warnings = false
 
-vim.g.nb_disable_background = false
-vim.g.nb_italic_comments  = true
-vim.g.nb_italic_keywords  = false
-vim.g.nb_italic_functions = false
-vim.g.nb_italic_variables = false
 vim.g.nb_style = "twilight"
 require("nebulous").setup()
