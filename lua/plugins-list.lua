@@ -95,12 +95,7 @@ require("packer").startup(function()
 	use("akinsho/nvim-bufferline.lua")
 
 	-- comments
-	use({
-        "b3nj5m1n/kommentary",
-        config = function()
-            require()
-        end
-    })
+	use("b3nj5m1n/kommentary")
 
 	-- formatter
 	use("mhartington/formatter.nvim")
