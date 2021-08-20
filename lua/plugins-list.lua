@@ -4,7 +4,7 @@ require("packer").startup(function()
 
 	-- colorscheme gruvbox
 	use({
-		"npxbr/gruvbox.nvim",
+		"ellisonleao/gruvbox.nvim",
 		requires = { "rktjmp/lush.nvim" },
 	})
 
