@@ -49,7 +49,37 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
 	buf_set_keymap("n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
 	buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+
+    -- LSP Saga
+
+    -- Async LSP Finder
+	buf_set_keymap("n", "gh", ":Lspsaga lsp_finder<CR>", opts)
+
+    -- Code Action
+	buf_set_keymap("n", "<space>ca", ":Lspsaga code_action<CR>", opts)
+
+    -- Hover Doc
+	buf_set_keymap("n", "<space>K", ":Lspsaga hover_doc<CR>", opts)
+
+    -- scroll down hover doc or scroll in definition preview
+	buf_set_keymap("n", "<silent><C-f>", "<cmd> require('lspsaga.action').smart_scroll_with_saga(1)<CR>", opts)
+    -- scroll up hover doc
+	buf_set_keymap("n", "<silent><C-b>", "<cmd> require('lspsaga.action').smart_scroll_with_saga(-1)<CR>", opts)
+
+    -- SignatureHelp
+	buf_set_keymap("n", "gs", ":Lspsaga signature_help<CR>", opts)
+
+    -- Rename
+	buf_set_keymap("n", "<space>gr", ":Lspsaga rename<CR>", opts)
+
+    -- Preview Definition
+	buf_set_keymap("n", "<space>gdp", ":Lspsaga preview_definition<CR>", opts)
+
 end
+
+-- Open and close float terminal
+vim.cmd([[nnoremap <silent> <A-d> :Lspsaga open_floaterm<CR>]])
+vim.cmd([[tnoremap <silent> <A-d> <C-\><C-n>:Lspsaga close_floaterm<CR>]])
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
