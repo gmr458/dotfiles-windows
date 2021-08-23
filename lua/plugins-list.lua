@@ -26,6 +26,9 @@ require("packer").startup(function()
 	-- nebulous
 	use("Yagua/nebulous.nvim")
 
+	-- github
+	use("projekt0n/github-nvim-theme")
+
 	-- nvim-web-devicons: a lua fork of vim-devicons. this plugin provides the same icons as well as colors for each icon
 	use("kyazdani42/nvim-web-devicons")
 
@@ -45,7 +48,7 @@ require("packer").startup(function()
 
 	-- LSP
 	use("neovim/nvim-lspconfig")
-    use("glepnir/lspsaga.nvim")
+	use("glepnir/lspsaga.nvim")
 	use("folke/lsp-colors.nvim")
 	use("onsails/lspkind-nvim")
 	use({

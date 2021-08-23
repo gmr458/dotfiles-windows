@@ -30,8 +30,10 @@ vim.g.mapleader = " "
 vim.g.vim_json_conceal = false
 vim.g.vim_json_warnings = false
 
-vim.o.background = "dark"
-vim.g.gruvbox_contrast_dark = "hard"
-vim.g.gruvbox_italic = true
-vim.g.gruvbox_italicize_strings = true
-vim.cmd([[colorscheme gruvbox]])
+require("github-theme").setup({
+	themeStyle = "dark",
+	commentStyle = "italic",
+	keywordStyle = "italic",
+	functionStyle = "italic",
+	transparent = true,
+})
