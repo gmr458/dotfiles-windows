@@ -31,9 +31,9 @@ vim.g.vim_json_conceal = false
 vim.g.vim_json_warnings = false
 
 require("github-theme").setup({
-	themeStyle = "dark",
-	commentStyle = "italic",
-	keywordStyle = "italic",
-	functionStyle = "italic",
-	transparent = true,
+    themeStyle = "dark",
+    commentStyle = "italic",
+    keywordStyle = "italic",
+    functionStyle = "italic",
+    transparent = true,
 })
