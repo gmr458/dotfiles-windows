@@ -45,6 +45,7 @@ require("packer").startup(function()
 
 	-- LSP
 	use("neovim/nvim-lspconfig")
+    use("glepnir/lspsaga.nvim")
 	use("folke/lsp-colors.nvim")
 	use("onsails/lspkind-nvim")
 	use({
