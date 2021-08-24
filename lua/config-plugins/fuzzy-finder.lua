@@ -2,11 +2,10 @@ require("telescope").setup({
     defaults = {
         prompt_prefix = "❯ ",
         selection_caret = "❯ ",
-        layout_strategy = "center",
+        layout_strategy = "horizontal",
         layout_config = {
-            center = {
-                width = 0.4,
-                height = 0.5,
+            horizontal = {
+                preview_width = 0.7,
             },
         },
         file_ignore_patterns = {
