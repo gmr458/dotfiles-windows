@@ -13,7 +13,7 @@ require("telescope").setup({
             "dist",
             "build",
             "venv",
-            "bin",
+            "/bin/",
             "obj",
             "target",
             ".png",

@@ -1,7 +1,6 @@
-vim.g.nvim_tree_width = 32
 vim.g.nvim_tree_ignore = { ".git", "node_modules", ".cache", "dist", "build", "venv", "bin", "obj", "target" }
 vim.g.nvim_tree_auto_ignore_ft = { "startify", "dashboard" }
-vim.g.nvim_tree_indent_markers = 1
+vim.g.nvim_tree_indent_markers = 0
 vim.g.nvim_tree_git_hl = 1
 vim.g.nvim_tree_highlight_opened_files = 1
 vim.g.nvim_tree_root_folder_modifier = ":t"
