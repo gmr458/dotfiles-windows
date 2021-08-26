@@ -2,9 +2,15 @@ require("packer").startup(function()
     -- packer can manage itself
     use("wbthomason/packer.nvim")
 
-    -- colorscheme gruvbox
-    use({
+    -- colorscheme gruvbox original
+    --[[ use({
         "ellisonleao/gruvbox.nvim",
+        requires = { "rktjmp/lush.nvim" },
+    }) ]]
+
+    -- gruvbox fork
+    use({
+        "gmr458/gruvbox.nvim",
         requires = { "rktjmp/lush.nvim" },
     })
 
@@ -104,11 +110,12 @@ require("packer").startup(function()
     -- formatter
     use("mhartington/formatter.nvim")
 
-    -- gitsigns
+    -- git
     use({
         "lewis6991/gitsigns.nvim",
         requires = {
             "nvim-lua/plenary.nvim",
         },
     })
+    use("sindrets/diffview.nvim")
 end)
