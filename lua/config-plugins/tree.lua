@@ -2,7 +2,7 @@ vim.g.nvim_tree_ignore = { ".git", "node_modules", ".cache", "dist", "build", "v
 vim.g.nvim_tree_auto_ignore_ft = { "startify", "dashboard" }
 vim.g.nvim_tree_indent_markers = 0
 vim.g.nvim_tree_git_hl = 1
-vim.g.nvim_tree_highlight_opened_files = 1
+vim.g.nvim_tree_highlight_opened_files = 0
 vim.g.nvim_tree_root_folder_modifier = ":t"
 vim.g.nvim_tree_auto_resize = 1
 vim.g.nvim_tree_group_empty = 1
@@ -17,7 +17,6 @@ vim.g.nvim_tree_window_picker_exclude = {
         "terminal",
     },
 }
-vim.g.nvim_tree_special_files = { "README.md", "Makefile", "MAKEFILE" }
 vim.g.nvim_tree_show_icons = {
     git = 1,
     folders = 1,
