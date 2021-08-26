@@ -1,6 +1,7 @@
 local set = vim.opt
 
 vim.cmd([[autocmd BufRead,BufNewFile tsconfig.json set filetype=jsonc]])
+vim.cmd([[autocmd BufRead,BufNewFile settings.json set filetype=jsonc]])
 vim.cmd([[filetype plugin indent on]])
 set.background = "dark"
 set.tabstop = 4
@@ -30,10 +31,5 @@ vim.g.mapleader = " "
 vim.g.vim_json_conceal = false
 vim.g.vim_json_warnings = false
 
-require("github-theme").setup({
-    themeStyle = "dark",
-    commentStyle = "italic",
-    keywordStyle = "italic",
-    functionStyle = "italic",
-    transparent = true,
-})
+vim.g.gruvbox_contrast_dark = "hard"
+vim.cmd([[colorscheme gruvbox]])
