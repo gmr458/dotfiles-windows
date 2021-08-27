@@ -6,8 +6,8 @@ require("formatter").setup({
             function()
                 return {
                     exe = "gofmt",
-                    args = { vim.api.nvim_buf_get_name(0) },
-                    stdin = true,
+                    args = { "-w", "." },
+                    stdin = false,
                 }
             end,
         },
