@@ -30,7 +30,7 @@ require("formatter").setup({
             function()
                 return {
                     exe = "stylua",
-                    args = { "--indent-type Spaces --indent-width 4 --quote-style ForceDouble --line-endings Windows" },
+                    args = { "--indent-type Spaces --indent-width 4 --line-endings Windows --quote-style ForceDouble" },
                     stdin = false,
                 }
             end,
