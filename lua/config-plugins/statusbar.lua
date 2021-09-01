@@ -1,7 +1,9 @@
+local colors = require("tokyonight.colors").setup({})
+
 require("lualine").setup({
     options = {
         icons_enabled = true,
-        theme = "gruvbox",
+        theme = "tokyonight",
         component_separators = { "", "" },
         section_separators = { "", "" },
         disabled_filetypes = { "NvimTree", "packer" },
@@ -14,9 +16,9 @@ require("lualine").setup({
             {
                 "diff",
                 symbols = { added = "+", modified = "~", removed = "-" },
-                color_added = "#79740e",
-                color_modified = "#b57614",
-                color_removed = "#9d0006",
+                color_added = colors.green,
+                color_modified = colors.yellow,
+                color_removed = colors.red,
             },
             {
                 function()
@@ -35,7 +37,7 @@ require("lualine").setup({
                     return msg
                 end,
                 icon = " LSP:",
-                color = { fg = "#ebdbb2", gui = "bold" },
+                color = { fg = colors.fg, gui = "bold" },
             },
         },
         lualine_x = {
@@ -43,10 +45,10 @@ require("lualine").setup({
                 "diagnostics",
                 sources = { "nvim_lsp" },
                 sections = { "error", "warn", "info", "hint" },
-                color_error = "#fb4934",
-                color_warn = "#fabd2f",
-                color_info = "#83a598",
-                color_hint = "#8ec07c",
+                color_error = colors.red,
+                color_warn = colors.yellow,
+                color_info = colors.blue,
+                color_hint = colors.green,
             },
             { "filetype" },
         },

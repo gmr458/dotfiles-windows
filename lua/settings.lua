@@ -31,5 +31,8 @@ vim.g.mapleader = " "
 vim.g.vim_json_conceal = false
 vim.g.vim_json_warnings = false
 
-vim.g.gruvbox_contrast_dark = "hard"
-vim.cmd([[colorscheme gruvbox]])
+vim.g.tokyonight_style = "night"
+vim.g.tokyonight_hide_inactive_statusline = false
+vim.g.tokyonight_dark_sidebar = false
+vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
+vim.cmd([[colorscheme tokyonight]])

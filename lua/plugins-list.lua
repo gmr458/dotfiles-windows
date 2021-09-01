@@ -26,6 +26,9 @@ require("packer").startup(function()
     -- tokyodark
     use("tiagovla/tokyodark.nvim")
 
+    -- tokyonight
+    use("folke/tokyonight.nvim")
+
     -- vscode
     use("Mofiqul/vscode.nvim")
 
