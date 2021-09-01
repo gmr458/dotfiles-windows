@@ -117,4 +117,7 @@ require("packer").startup(function()
         },
     })
     use("sindrets/diffview.nvim")
+
+    -- screenshots
+    use("segeljakt/vim-silicon")
 end)
