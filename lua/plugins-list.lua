@@ -85,9 +85,6 @@ require("packer").startup(function()
     -- rainbow parentheses for neovim using treesitter
     use("p00f/nvim-ts-rainbow")
 
-    -- code formatter
-    use("prettier/vim-prettier")
-
     -- autopairs
     use("windwp/nvim-autopairs")
 
