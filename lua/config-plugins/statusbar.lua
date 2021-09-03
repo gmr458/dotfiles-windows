@@ -50,6 +50,8 @@ require("lualine").setup({
                 color_info = colors.blue,
                 color_hint = colors.green,
             },
+            { "encoding" },
+            { "fileformat" },
             { "filetype" },
         },
         lualine_y = { "progress" },
