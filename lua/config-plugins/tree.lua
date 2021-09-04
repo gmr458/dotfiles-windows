@@ -17,6 +17,7 @@ vim.g.nvim_tree_window_picker_exclude = {
         "terminal",
     },
 }
+vim.g.nvim_tree_special_files = {}
 vim.g.nvim_tree_show_icons = {
     git = 1,
     folders = 1,
