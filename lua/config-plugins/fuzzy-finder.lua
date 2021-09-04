@@ -1,11 +1,23 @@
 require("telescope").setup({
     defaults = {
+        vimgrep_arguments = {
+            "rg",
+            "--color=never",
+            "--no-heading",
+            "--with-filename",
+            "--line-number",
+            "--column",
+            "--smart-case",
+        },
         prompt_prefix = "❯ ",
         selection_caret = "❯ ",
-        layout_strategy = "horizontal",
+        layout_strategy = "center",
+        previewer = false,
+        prompt_title = false,
         layout_config = {
-            horizontal = {
-                preview_width = 0.7,
+            center = {
+                width = 0.4,
+                height = 0.6,
             },
         },
         file_ignore_patterns = {
@@ -24,7 +36,9 @@ require("telescope").setup({
         borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
         color_devicons = true,
         set_env = { ["COLORTERM"] = "truecolor" },
+        path_display = { "shorten" },
     },
 })
 
-vim.api.nvim_set_keymap("", "tff", "<CMD>Telescope find_files<CR>", { noremap = false, silent = true })
+vim.cmd([[nnoremap tff <cmd>lua require('telescope.builtin').find_files()<cr>]])
+vim.cmd([[nnoremap tfg <cmd>lua require('telescope.builtin').live_grep()<cr>]])
