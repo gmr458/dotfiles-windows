@@ -3,7 +3,7 @@ local colors = require("tokyonight.colors").setup({})
 require("lualine").setup({
     options = {
         icons_enabled = true,
-        theme = "tokyonight",
+        theme = "gruvbox",
         component_separators = { "", "" },
         section_separators = { "", "" },
         disabled_filetypes = { "NvimTree", "packer" },
