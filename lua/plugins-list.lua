@@ -38,6 +38,9 @@ require("packer").startup(function()
     -- github
     use("projekt0n/github-nvim-theme")
 
+    -- uwu
+    use("mangeshrex/uwu.vim")
+
     -- nvim-web-devicons: a lua fork of vim-devicons. this plugin provides the same icons as well as colors for each icon
     use("kyazdani42/nvim-web-devicons")
 
