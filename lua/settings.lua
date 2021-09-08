@@ -31,7 +31,10 @@ vim.g.mapleader = " "
 vim.g.vim_json_conceal = false
 vim.g.vim_json_warnings = false
 
-vim.cmd([[set guifont=Consolas\ Nerd\ Font:h15]])
+vim.cmd([[set guifont=MesloLGS\ NF]])
+vim.cmd([[let g:neovide_refresh_rate=60]])
+-- vim.cmd([[let g:neovide_fullscreen=v:true]])
+vim.cmd([[let g:neovide_cursor_antialiasing=v:true]])
 
 vim.g.gruvbox_contrast_dark = "hard"
 vim.cmd([[colorscheme gruvbox]])
