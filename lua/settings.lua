@@ -2,6 +2,7 @@ local set = vim.opt
 
 vim.cmd([[autocmd BufRead,BufNewFile tsconfig.json set filetype=jsonc]])
 vim.cmd([[autocmd BufRead,BufNewFile settings.json set filetype=jsonc]])
+vim.cmd([[autocmd BufEnter,BufWinEnter,WinEnter,CmdwinEnter * if bufname('%') == "NvimTree" | set laststatus=0 | else | set laststatus=2 | endif]])
 vim.cmd([[filetype plugin indent on]])
 set.background = "dark"
 set.tabstop = 4
@@ -26,10 +27,13 @@ set.mouse = "a"
 set.incsearch = true
 set.showmode = false
 set.termguicolors = true
+set.ruler = false
 vim.cmd([[language en_US]])
 vim.g.mapleader = " "
 vim.g.vim_json_conceal = false
 vim.g.vim_json_warnings = false
+vim.g.better_escape_interval = 300
+vim.g.better_escape_shortcut = "jk"
 
 vim.cmd([[set guifont=MesloLGS\ NF]])
 vim.cmd([[let g:neovide_refresh_rate=60]])
