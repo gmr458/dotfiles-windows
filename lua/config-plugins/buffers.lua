@@ -16,6 +16,7 @@ require("bufferline").setup({
         pick = { gui = "bold" },
     },
     options = {
+        indicator_icon = "",
         offsets = {
             {
                 filetype = "NvimTree",
