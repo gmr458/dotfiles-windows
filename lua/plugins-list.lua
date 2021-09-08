@@ -123,4 +123,10 @@ require("packer").startup(function()
 
     -- screenshots
     use("segeljakt/vim-silicon")
+
+    -- better escape
+    use({
+        "jdhao/better-escape.vim",
+        -- event = "InsertEnter",
+    })
 end)
