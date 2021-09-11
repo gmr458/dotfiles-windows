@@ -16,14 +16,13 @@ require("bufferline").setup({
         pick = { gui = "bold" },
     },
     options = {
-        indicator_icon = "",
         offsets = {
             {
                 filetype = "NvimTree",
-                text = "File Explorer",
-                text_align = "center",
             },
         },
+        show_tab_indicators = true,
+        separator_style = { "", "" },
     },
 })
 
