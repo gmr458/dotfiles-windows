@@ -1,6 +1,6 @@
 require("bufferline").setup({
     highlights = {
-        buffer_selected = { gui = "bold" },
+        buffer_selected = { gui = "NONE" },
         diagnostic_selected = { gui = "bold" },
         info_selected = { gui = "bold" },
         info_diagnostic_selected = { gui = "bold" },
