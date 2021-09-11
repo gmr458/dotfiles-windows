@@ -104,8 +104,7 @@ require("packer").startup(function()
     use("hoob3rt/lualine.nvim")
 
     -- buffers
-    -- use("akinsho/nvim-bufferline.lua")
-    use("romgrk/barbar.nvim")
+    use("akinsho/nvim-bufferline.lua")
 
     -- comments
     use("b3nj5m1n/kommentary")
