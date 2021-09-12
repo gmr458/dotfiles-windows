@@ -129,4 +129,7 @@ require("packer").startup(function()
         "jdhao/better-escape.vim",
         -- event = "InsertEnter",
     })
+
+    -- solidity
+    use("tomlion/vim-solidity")
 end)
