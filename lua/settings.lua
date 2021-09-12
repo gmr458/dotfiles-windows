@@ -33,9 +33,16 @@ vim.g.vim_json_warnings = false
 vim.g.better_escape_interval = 300
 vim.g.better_escape_shortcut = "jk"
 
-vim.cmd([[set guifont=MesloLGS\ NF]])
+vim.cmd([[let neovide_remember_window_size = v:true]])
+vim.cmd([[let neovide_cursor_animation_length=0.1]])
+vim.cmd([[let neovide_cursor_trail_length=0.1]])
+vim.cmd([[set guifont=FiraCode\ NF:h10.5]])
 vim.cmd([[let g:neovide_refresh_rate=60]])
 vim.cmd([[let g:neovide_cursor_antialiasing=v:true]])
 
+vim.g.gruvbox_bold = false
+vim.g.gruvbox_italic = false
+vim.g.gruvbox_italicize_comments = false
+vim.g.gruvbox_italicize_strings = false
 vim.g.gruvbox_contrast_dark = "hard"
 vim.cmd([[colorscheme gruvbox]])
