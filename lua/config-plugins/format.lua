@@ -11,7 +11,49 @@ require("formatter").setup({
                 }
             end,
         },
+        html = {
+            -- prettier
+            function()
+                return {
+                    exe = "prettier",
+                    args = {
+                        "--stdin-filepath",
+                        vim.api.nvim_buf_get_name(0),
+                        "--tab-width 4",
+                    },
+                    stdin = true,
+                }
+            end,
+        },
         javascript = {
+            -- prettier
+            function()
+                return {
+                    exe = "prettier",
+                    args = {
+                        "--stdin-filepath",
+                        vim.api.nvim_buf_get_name(0),
+                        "--tab-width 4",
+                    },
+                    stdin = true,
+                }
+            end,
+        },
+        json = {
+            -- prettier
+            function()
+                return {
+                    exe = "prettier",
+                    args = {
+                        "--stdin-filepath",
+                        vim.api.nvim_buf_get_name(0),
+                        "--tab-width 4",
+                    },
+                    stdin = true,
+                }
+            end,
+        },
+        jsonc = {
             -- prettier
             function()
                 return {
