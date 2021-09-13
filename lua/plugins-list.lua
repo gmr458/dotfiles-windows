@@ -101,7 +101,8 @@ require("packer").startup(function()
     use("kyazdani42/nvim-tree.lua")
 
     -- status bar
-    use("hoob3rt/lualine.nvim")
+    -- use("hoob3rt/lualine.nvim")
+    use("gmr458/lualine.nvim")
 
     -- buffers
     use("akinsho/nvim-bufferline.lua")
