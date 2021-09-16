@@ -1,31 +1,31 @@
 # My Neovim config for Windows
 
 Screenshot 1
-![screenshot1](screenshot1.png)
+![screenshot1](./screenshots/screenshot1.png)
 
 Screenshot 2
-![screenshot2](screenshot2.png)
+![screenshot2](./screenshots/screenshot2.png)
 
 Screenshot 3
-![screenshot3](screenshot3.png)
+![screenshot3](./screenshots/screenshot3.png)
 
 Screenshot 4
-![screenshot1](screenshot4.png)
+![screenshot1](./screenshots/screenshot4.png)
 
 Screenshot 5
-![screenshot2](screenshot5.png)
+![screenshot2](./screenshots/screenshot5.png)
 
 Screenshot 6
-![screenshot3](screenshot6.png)
+![screenshot3](./screenshots/screenshot6.png)
 
 Screenshot 7
-![screenshot1](screenshot7.png)
+![screenshot1](./screenshots/screenshot7.png)
 
 Screenshot 8
-![screenshot2](screenshot8.png)
+![screenshot2](./screenshots/screenshot8.png)
 
 Screenshot 9
-![screenshot3](screenshot9.png)
+![screenshot3](./screenshots/screenshot9.png)
 
 ## Installation
 
