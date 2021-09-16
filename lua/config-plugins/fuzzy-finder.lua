@@ -34,7 +34,7 @@ require("telescope").setup({
             ".exe",
         },
         borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
-        color_devicons = false,
+        color_devicons = true,
         set_env = { ["COLORTERM"] = "truecolor" },
         path_display = { "shorten" },
     },
