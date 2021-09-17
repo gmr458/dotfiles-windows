@@ -1,5 +1,9 @@
 require("bufferline").setup({
     highlights = {
+        indicator_selected = {
+            guifg = "#1d2021",
+            guibg = "#1d2021",
+        },
         buffer_selected = { gui = "NONE" },
         diagnostic_selected = { gui = "bold" },
         info_selected = { gui = "bold" },
