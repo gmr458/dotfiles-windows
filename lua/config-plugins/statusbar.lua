@@ -1,5 +1,3 @@
-local colors = require("tokyonight.colors").setup({})
-
 require("lualine").setup({
     options = {
         icons_enabled = true,
@@ -16,9 +14,9 @@ require("lualine").setup({
             {
                 "diff",
                 symbols = { added = "+", modified = "~", removed = "-" },
-                color_added = colors.green,
+                --[[ color_added = colors.green,
                 color_modified = colors.yellow,
-                color_removed = colors.red,
+                color_removed = colors.red, ]]
             },
         },
         lualine_x = {
@@ -26,10 +24,10 @@ require("lualine").setup({
                 "diagnostics",
                 sources = { "nvim_lsp" },
                 sections = { "error", "warn", "info", "hint" },
-                color_error = colors.red,
+                --[[ color_error = colors.red,
                 color_warn = colors.yellow,
                 color_info = colors.blue,
-                color_hint = colors.green,
+                color_hint = colors.green, ]]
             },
         },
         lualine_y = { "location" },
