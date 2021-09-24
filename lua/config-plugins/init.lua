@@ -1,7 +1,6 @@
 require("config-plugins.file-icons")
 require("config-plugins.highlighting")
-require("config-plugins.lsp")
-require("config-plugins.autocompletion")
+require("config-plugins.lsp-cmp-saga")
 require("config-plugins.lsp-icons")
 require("config-plugins.format")
 require("config-plugins.statusbar")

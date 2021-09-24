@@ -72,7 +72,13 @@ require("packer").startup(function()
     })
 
     -- autocompletion
-    use("hrsh7th/nvim-compe")
+    use("hrsh7th/cmp-nvim-lsp")
+    use("hrsh7th/cmp-buffer")
+    use("hrsh7th/nvim-cmp")
+
+    -- for vsnip user
+    use("hrsh7th/cmp-vsnip")
+    use("hrsh7th/vim-vsnip")
 
     -- snippets
     use("hrsh7th/vim-vsnip")
