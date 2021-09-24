@@ -1,3 +1,28 @@
+local disabled_built_ins = {
+    "netrw",
+    "netrwPlugin",
+    "netrwSettings",
+    "netrwFileHandlers",
+    "gzip",
+    "zip",
+    "zipPlugin",
+    "tar",
+    "tarPlugin",
+    "getscript",
+    "getscriptPlugin",
+    "vimball",
+    "vimballPlugin",
+    "2html_plugin",
+    "logipat",
+    "rrhelper",
+    "spellfile_plugin",
+    "matchit",
+}
+
+for _, plugin in pairs(disabled_built_ins) do
+    vim.g["loaded_" .. plugin] = 1
+end
+
 local set = vim.opt
 
 vim.cmd([[autocmd BufRead,BufNewFile tsconfig.json set filetype=jsonc]])
@@ -26,7 +51,11 @@ set.incsearch = true
 set.showmode = false
 set.termguicolors = true
 set.ruler = false
-vim.cmd([[language en_US]])
+
+if vim.fn.has("win32") == 1 then
+    vim.cmd([[language en_US]])
+end
+
 vim.g.mapleader = " "
 vim.g.vim_json_conceal = false
 vim.g.vim_json_warnings = false
