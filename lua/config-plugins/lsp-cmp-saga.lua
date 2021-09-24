@@ -1,4 +1,10 @@
-local USERPROFILE = os.getenv("USERPROFILE")
+local HOME
+
+if vim.fn.has("unix") == 1 then
+    HOME = os.getenv("HOME")
+elseif vim.fn.has("win32") == 1 then
+    HOME = os.getenv("USERPROFILE")
+end
 
 local signs = {
     Error = "",
@@ -131,21 +137,136 @@ require("lspconfig").clangd.setup({
     capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
 })
 
--- LSP for CSS
-require("lspconfig").cssls.setup({
-    cmd = { "vscode-css-language-server.cmd", "--stdio" },
-    capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
-})
+if vim.fn.has("win32") == 1 then
+    -- LSP for CSS
+    require("lspconfig").cssls.setup({
+        cmd = { "vscode-css-language-server.cmd", "--stdio" },
+        capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+    })
+
+    -- LSP for HTML
+    require("lspconfig").html.setup({
+        cmd = { "vscode-html-language-server.cmd", "--stdio" },
+        capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+    })
+
+    -- LSP for JSON
+    require("lspconfig").jsonls.setup({
+        cmd = { "vscode-json-language-server.cmd", "--stdio" },
+        filetypes = { "json", "jsonc" },
+        commands = {
+            Format = {
+                function()
+                    vim.lsp.buf.range_formatting({}, { 0, 0 }, { vim.fn.line("$"), 0 })
+                end,
+            },
+        },
+    })
+
+    -- LSP for C#
+    local omnisharp_bin = HOME .. "\\AppData\\Local\\omnisharp-vim\\omnisharp-roslyn\\OmniSharp.exe"
+
+    local pid = vim.fn.getpid()
+
+    require("lspconfig").omnisharp.setup({
+        cmd = { omnisharp_bin, "--languageserver", "--hostPID", tostring(pid) },
+        on_attach = on_attach,
+        capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+    })
+
+    -- LSP for Lua
+    local sumneko_root_path = HOME .. "\\.language-servers\\lua-language-server"
+    local sumneko_binary = sumneko_root_path .. "\\bin\\Windows\\lua-language-server.exe"
+
+    local runtime_path = vim.split(package.path, ";")
+    table.insert(runtime_path, "lua/?.lua")
+    table.insert(runtime_path, "lua/?/init.lua")
+
+    require("lspconfig").sumneko_lua.setup({
+        cmd = { sumneko_binary, "-E", sumneko_root_path .. "\\main.lua" },
+        settings = {
+            Lua = {
+                runtime = {
+                    version = "LuaJIT",
+                    path = runtime_path,
+                },
+                diagnostics = {
+                    globals = { "vim", "use" },
+                },
+                workspace = {
+                    library = vim.api.nvim_get_runtime_file("", true),
+                },
+                telemetry = {
+                    enable = false,
+                },
+            },
+        },
+        on_attach = on_attach,
+        capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+    })
+elseif vim.fn.has("unix") == 1 then
+    -- LSP for CSS
+    require("lspconfig").cssls.setup({
+        capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+    })
+
+    -- LSP for HTML
+    require("lspconfig").html.setup({
+        capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+    })
+
+    -- LSP for JSON
+    require("lspconfig").jsonls.setup({
+        filetypes = { "json", "jsonc" },
+        commands = {
+            Format = {
+                function()
+                    vim.lsp.buf.range_formatting({}, { 0, 0 }, { vim.fn.line("$"), 0 })
+                end,
+            },
+        },
+    })
+
+    -- LSP for C#
+    local omnisharp_bin = HOME .. "/.cache/omnisharp-vim/omnisharp-roslyn/run"
+
+    local pid = vim.fn.getpid()
+
+    require("lspconfig").omnisharp.setup({
+        cmd = { omnisharp_bin, "--languageserver", "--hostPID", tostring(pid) },
+        on_attach = on_attach,
+        capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+    })
+
+    -- LSP for Lua
+    local sumneko_root_path = HOME .. "/.language-servers/lua-language-server"
+    local sumneko_binary = sumneko_root_path .. "/bin/Linux/lua-language-server"
+
+    local runtime_path = vim.split(package.path, ";")
+    table.insert(runtime_path, "lua/?.lua")
+    table.insert(runtime_path, "lua/?/init.lua")
+
+    require("lspconfig").sumneko_lua.setup({
+        cmd = { sumneko_binary, "-E", sumneko_root_path .. "/main.lua" },
+        settings = {
+            Lua = {
+                runtime = { version = "LuaJIT", path = runtime_path },
+                diagnostics = { globals = { "vim", "use" } },
+                workspace = {
+                    library = vim.api.nvim_get_runtime_file("", true),
+                    preloadFileSize = 200,
+                },
+                telemetry = { enable = false },
+            },
+        },
+        on_attach = on_attach,
+        capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+    })
+end
 
 -- LSP for Golang
 require("lspconfig").gopls.setup({
     on_attach = on_attach,
-    capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
-})
-
--- LSP for HTML
-require("lspconfig").html.setup({
-    cmd = { "vscode-html-language-server.cmd", "--stdio" },
     capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
 })
 
@@ -154,29 +275,6 @@ require("lspconfig").html.setup({
     on_attach = on_attach,
     capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
 }) ]]
-
--- LSP for JSON
-require("lspconfig").jsonls.setup({
-    cmd = { "vscode-json-language-server.cmd", "--stdio" },
-    filetypes = { "json", "jsonc" },
-    commands = {
-        Format = {
-            function()
-                vim.lsp.buf.range_formatting({}, { 0, 0 }, { vim.fn.line("$"), 0 })
-            end,
-        },
-    },
-})
-
--- LSP for C#
-local pid = vim.fn.getpid()
-local omnisharp_bin = USERPROFILE .. "\\AppData\\Local\\omnisharp-vim\\omnisharp-roslyn\\OmniSharp.exe"
-
-require("lspconfig").omnisharp.setup({
-    cmd = { omnisharp_bin, "--languageserver", "--hostPID", tostring(pid) },
-    on_attach = on_attach,
-    capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
-})
 
 -- LSP for Python
 require("lspconfig").pyright.setup({
@@ -192,48 +290,6 @@ require("lspconfig").rust_analyzer.setup({
 
 -- LSP for JavaScript/TypeScript
 require("lspconfig").tsserver.setup({
-    on_attach = on_attach,
-    capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
-})
-
--- LSP for Lua
-local system_name
-if vim.fn.has("mac") == 1 then
-    system_name = "macOS"
-elseif vim.fn.has("unix") == 1 then
-    system_name = "Linux"
-elseif vim.fn.has("win32") == 1 then
-    system_name = "Windows"
-else
-    print("Unsupported system for sumneko")
-end
-
-local sumneko_root_path = USERPROFILE .. "\\.language-servers\\lua-language-server"
-local sumneko_binary = sumneko_root_path .. "\\bin\\" .. system_name .. "\\lua-language-server.exe"
-
-local runtime_path = vim.split(package.path, ";")
-table.insert(runtime_path, "lua/?.lua")
-table.insert(runtime_path, "lua/?/init.lua")
-
-require("lspconfig").sumneko_lua.setup({
-    cmd = { sumneko_binary, "-E", sumneko_root_path .. "\\main.lua" },
-    settings = {
-        Lua = {
-            runtime = {
-                version = "LuaJIT",
-                path = runtime_path,
-            },
-            diagnostics = {
-                globals = { "vim", "use" },
-            },
-            workspace = {
-                library = vim.api.nvim_get_runtime_file("", true),
-            },
-            telemetry = {
-                enable = false,
-            },
-        },
-    },
     on_attach = on_attach,
     capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
 })
