@@ -1,4 +1,4 @@
-# My Neovim config for Windows
+# My Neovim config for Windows or Linux
 
 Screenshot 1
 ![screenshot1](./screenshots/screenshot1.png)
