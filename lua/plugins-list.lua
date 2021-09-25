@@ -99,7 +99,12 @@ require("packer").startup(function()
     use("norcalli/nvim-colorizer.lua")
 
     -- a file explorer
-    use("kyazdani42/nvim-tree.lua")
+    use({
+        "kyazdani42/nvim-tree.lua",
+        config = function()
+            require("nvim-tree").setup({})
+        end,
+    })
 
     -- status bar
     -- use("hoob3rt/lualine.nvim")

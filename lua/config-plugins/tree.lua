@@ -1,8 +1,6 @@
 vim.g.nvim_tree_ignore = { ".git", "node_modules", ".cache", "dist", "build", "venv", "bin", "obj", "target" }
-vim.g.nvim_tree_auto_ignore_ft = { "startify", "dashboard" }
 vim.g.nvim_tree_indent_markers = 1
 vim.g.nvim_tree_git_hl = 1
-vim.g.nvim_tree_highlight_opened_files = 0
 vim.g.nvim_tree_root_folder_modifier = ":t"
 vim.g.nvim_tree_auto_resize = 1
 vim.g.nvim_tree_group_empty = 1
@@ -10,6 +8,7 @@ vim.g.nvim_tree_lsp_diagnostics = 1
 vim.g.nvim_tree_symlink_arrow = " >> "
 vim.g.nvim_tree_window_picker_exclude = {
     filetype = {
+        "notify",
         "packer",
         "qf",
     },
@@ -54,16 +53,9 @@ vim.g.nvim_tree_icons = {
     },
 }
 
-vim.api.nvim_set_keymap("", "<C-n>", ":NvimTreeToggle<CR>", { -- Toggle nvim-tree.lua
-    noremap = true,
-    silent = false,
-})
-vim.api.nvim_set_keymap("", "<Leader>r", ":NvimTreeRefresh<CR>", { -- Refresh nvim-tree.lua
-    noremap = true,
-    silent = false,
-})
+vim.cmd([[nnoremap <C-n> :NvimTreeToggle<CR>]])
+vim.cmd([[nnoremap <leader>r :NvimTreeRefresh<CR>]])
+vim.cmd([[nnoremap <leader>n :NvimTreeFindFile<CR>]])
 
 local tree_cb = require("nvim-tree.config").nvim_tree_callback
 vim.g.nvim_tree_bindings = { { key = "s", cb = tree_cb("vsplit") } }
-
-vim.cmd([[highlight NvimTreeFolderIcon guibg=blue]])
