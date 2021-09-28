@@ -1,15 +1,3 @@
-require("nvim-tree").setup({
-    lsp_diagnostics = true,
-    view = {
-        auto_resize = true,
-        mappings = {
-            list = {
-                { key = "s", cb = require("nvim-tree.config").nvim_tree_callback("vsplit") },
-            },
-        },
-    },
-})
-
 vim.g.nvim_tree_ignore = { ".git", "node_modules", ".cache", "dist", "build", "venv", "bin", "obj", "target" }
 vim.g.nvim_tree_indent_markers = 1
 vim.g.nvim_tree_git_hl = 1
@@ -67,6 +55,18 @@ vim.g.nvim_tree_icons = {
         error = "",
     },
 }
+
+require("nvim-tree").setup({
+    lsp_diagnostics = true,
+    view = {
+        auto_resize = true,
+        mappings = {
+            list = {
+                { key = "s", cb = require("nvim-tree.config").nvim_tree_callback("vsplit") },
+            },
+        },
+    },
+})
 
 vim.cmd([[nnoremap <C-n> :NvimTreeToggle<CR>]])
 vim.cmd([[nnoremap <leader>r :NvimTreeRefresh<CR>]])
