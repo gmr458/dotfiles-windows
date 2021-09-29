@@ -65,7 +65,11 @@ vim.g.better_escape_shortcut = "jk"
 vim.cmd([[let neovide_remember_window_size = v:true]])
 vim.cmd([[let neovide_cursor_animation_length=0.1]])
 vim.cmd([[let neovide_cursor_trail_length=0.01]])
-vim.cmd([[set guifont=DroidSansMono\ Nerd\ Font:h10.5]])
+if vim.fn.has("unix") == 1 then
+    vim.cmd([[set guifont=MesloLGS\ NF:h10]])
+elseif vim.fn.has("win32") == 1 then
+    vim.cmd([[set guifont=DroidSansMono\ Nerd\ Font:h10.5]])
+end
 vim.cmd([[let g:neovide_refresh_rate=60]])
 vim.cmd([[let g:neovide_cursor_antialiasing=v:true]])
 
