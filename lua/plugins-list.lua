@@ -3,10 +3,7 @@ require("packer").startup(function()
     use("wbthomason/packer.nvim")
 
     -- colorscheme gruvbox original
-    --[[ use({
-        "ellisonleao/gruvbox.nvim",
-        requires = { "rktjmp/lush.nvim" },
-    }) ]]
+    -- use({ "ellisonleao/gruvbox.nvim", requires = { "rktjmp/lush.nvim" } })
 
     -- gruvbox fork
     use({
