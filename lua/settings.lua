@@ -59,8 +59,6 @@ end
 vim.g.mapleader = " "
 vim.g.vim_json_conceal = false
 vim.g.vim_json_warnings = false
-vim.g.better_escape_interval = 300
-vim.g.better_escape_shortcut = "jk"
 
 vim.cmd([[let neovide_remember_window_size = v:true]])
 vim.cmd([[let neovide_cursor_animation_length=0.1]])
