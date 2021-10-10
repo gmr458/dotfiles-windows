@@ -1,4 +1,4 @@
-require("packer").startup(function()
+return require("packer").startup(function()
     -- packer can manage itself
     use("wbthomason/packer.nvim")
 
@@ -125,8 +125,10 @@ require("packer").startup(function()
 
     -- better escape
     use({
-        "jdhao/better-escape.vim",
-        -- event = "InsertEnter",
+        "max397574/better-escape.nvim",
+        config = function()
+            require("better_escape").setup()
+        end,
     })
 
     -- solidity
