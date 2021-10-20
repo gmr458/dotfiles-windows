@@ -7,10 +7,10 @@ elseif vim.fn.has("win32") == 1 then
 end
 
 local signs = {
-    Error = "",
-    Warning = "",
-    Hint = "",
-    Information = "",
+    Error = " ",
+    Warning = " ",
+    Hint = " ",
+    Information = " ",
 }
 
 for type, icon in pairs(signs) do
