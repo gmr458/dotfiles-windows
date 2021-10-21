@@ -11,32 +11,8 @@ return require("packer").startup(function()
         requires = { "rktjmp/lush.nvim" },
     })
 
-    -- colorscheme dracula
-    -- use("Mofiqul/dracula.nvim")
-
-    -- colorscheme material
-    -- use("marko-cerovac/material.nvim")
-
-    -- calvera dark
-    -- use("yashguptaz/calvera-dark.nvim")
-
-    -- tokyodark
-    -- use("tiagovla/tokyodark.nvim")
-
-    -- tokyonight
-    -- use("folke/tokyonight.nvim")
-
-    -- vscode
-    -- use("Mofiqul/vscode.nvim")
-
-    -- nebulous
-    -- use("Yagua/nebulous.nvim")
-
     -- github
     -- use("projekt0n/github-nvim-theme")
-
-    -- uwu
-    -- use("mangeshrex/uwu.vim")
 
     -- nvim-web-devicons: a lua fork of vim-devicons. this plugin provides the same icons as well as colors for each icon
     use("kyazdani42/nvim-web-devicons")
