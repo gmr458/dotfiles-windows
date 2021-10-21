@@ -118,19 +118,4 @@ return require("packer").startup(function()
             "nvim-lua/plenary.nvim",
         },
     })
-    use("sindrets/diffview.nvim")
-
-    -- screenshots
-    use("segeljakt/vim-silicon")
-
-    -- better escape
-    use({
-        "max397574/better-escape.nvim",
-        config = function()
-            require("better_escape").setup()
-        end,
-    })
-
-    -- solidity
-    use("tomlion/vim-solidity")
 end)
