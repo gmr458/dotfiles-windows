@@ -1,4 +1,3 @@
-vim.g.nvim_tree_ignore = { ".git", "node_modules", ".cache", "dist", "build", "venv", "bin", "obj", "target", "__pycache__" }
 vim.g.nvim_tree_indent_markers = 1
 vim.g.nvim_tree_git_hl = 1
 vim.g.nvim_tree_root_folder_modifier = ":t"
@@ -14,12 +13,7 @@ vim.g.nvim_tree_window_picker_exclude = {
         "terminal",
     },
 }
-vim.g.nvim_tree_special_files = {
-    ["Cargo.toml"] = false,
-    Makefile = false,
-    ["README.md"] = false,
-    ["readme.md"] = false,
-}
+vim.g.nvim_tree_special_files = {}
 vim.g.nvim_tree_show_icons = {
     git = 1,
     folders = 1,
@@ -61,6 +55,7 @@ require("nvim-tree").setup({
         },
     },
     view = {
+        hide_root_folder = true,
         auto_resize = true,
         mappings = {
             list = {
