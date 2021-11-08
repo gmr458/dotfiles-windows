@@ -11,6 +11,9 @@ return require("packer").startup(function()
         requires = { "rktjmp/lush.nvim" },
     })
 
+    -- colorscheme enfocado
+    use("wuelnerdotexe/vim-enfocado")
+
     -- github
     -- use("projekt0n/github-nvim-theme")
 
