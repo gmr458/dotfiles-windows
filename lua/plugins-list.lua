@@ -25,6 +25,7 @@ return require("packer").startup(function()
         "nvim-telescope/telescope.nvim",
         requires = { { "nvim-lua/plenary.nvim" } },
     })
+    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
     -- navigator: smoothly navigate between splits and panes
     use({
