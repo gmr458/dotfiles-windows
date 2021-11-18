@@ -84,70 +84,98 @@ end
 
 vim.o.completeopt = "menu,menuone,noselect"
 
+local has_words_before = function()
+    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
+
+local luasnip = require("luasnip")
 local cmp = require("cmp")
-local lspkind = require("lspkind")
 
 cmp.setup({
-    formatting = {
-        format = function(entry, vim_item)
-            vim_item.kind = lspkind.presets.default[vim_item.kind]
-            return vim_item
-        end,
-    },
     snippet = {
+        -- REQUIRED - you must specify a snippet engine
         expand = function(args)
-            -- For `vsnip` user.
-            vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` user.
-
-            -- For `luasnip` user.
-            -- require('luasnip').lsp_expand(args.body)
-
-            -- For `ultisnips` user.
-            -- vim.fn["UltiSnips#Anon"](args.body)
+            -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+            require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
+            -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+            -- require'snippy'.expand_snippet(args.body) -- For `snippy` users.
         end,
     },
     mapping = {
-        ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-        ["<C-f>"] = cmp.mapping.scroll_docs(4),
-        ["<Tab>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "s" }),
-        ["<S-Tab>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "s" }),
-        ["<C-Space>"] = cmp.mapping.complete(),
-        ["<C-e>"] = cmp.mapping.close(),
+        ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
         ["<CR>"] = cmp.mapping.confirm({ select = true }),
+        ["<Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_next_item()
+            elseif luasnip.expand_or_jumpable() then
+                luasnip.expand_or_jump()
+            elseif has_words_before() then
+                cmp.complete()
+            else
+                fallback()
+            end
+        end, {
+            "i",
+            "s",
+        }),
+
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_prev_item()
+            elseif luasnip.jumpable(-1) then
+                luasnip.jump(-1)
+            else
+                fallback()
+            end
+        end, {
+            "i",
+            "s",
+        }),
     },
-    sources = {
+    sources = cmp.config.sources({
         { name = "nvim_lsp" },
-
-        -- For vsnip user.
-        { name = "vsnip" },
-
-        -- For luasnip user.
-        -- { name = 'luasnip' },
-
-        -- For ultisnips user.
-        -- { name = 'ultisnips' },
-
+        -- { name = "vsnip" }, -- For vsnip users.
+        { name = "luasnip" }, -- For luasnip users.
+        -- { name = "ultisnips" }, -- For ultisnips users.
+        -- { name = 'snippy' }, -- For snippy users.
+    }, {
         { name = "buffer" },
+    }),
+    formatting = {
+        format = require("lspkind").cmp_format({
+            with_text = true,
+            menu = {
+                buffer = "[Buffer]",
+                nvim_lsp = "[LSP]",
+                luasnip = "[LuaSnip]",
+                nvim_lua = "[Lua]",
+                latex_symbols = "[Latex]",
+            },
+        }),
     },
 })
+
+-- Setup lspconfig.
+local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 -- LSP for C/C++
 require("lspconfig").clangd.setup({
     on_attach = on_attach,
-    capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+    capabilities = capabilities,
 })
 
 if vim.fn.has("win32") == 1 then
     -- LSP for CSS
     require("lspconfig").cssls.setup({
         cmd = { "vscode-css-language-server.cmd", "--stdio" },
-        capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+        capabilities = capabilities,
     })
 
     -- LSP for HTML
     require("lspconfig").html.setup({
         cmd = { "vscode-html-language-server.cmd", "--stdio" },
-        capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+        capabilities = capabilities,
     })
 
     -- LSP for JSON
@@ -171,7 +199,7 @@ if vim.fn.has("win32") == 1 then
     require("lspconfig").omnisharp.setup({
         cmd = { omnisharp_bin, "--languageserver", "--hostPID", tostring(pid) },
         on_attach = on_attach,
-        capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+        capabilities = capabilities,
     })
 
     -- LSP for Lua
@@ -202,17 +230,17 @@ if vim.fn.has("win32") == 1 then
             },
         },
         on_attach = on_attach,
-        capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+        capabilities = capabilities,
     })
 elseif vim.fn.has("unix") == 1 then
     -- LSP for CSS
     require("lspconfig").cssls.setup({
-        capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+        capabilities = capabilities,
     })
 
     -- LSP for HTML
     require("lspconfig").html.setup({
-        capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+        capabilities = capabilities,
     })
 
     -- LSP for JSON
@@ -235,7 +263,7 @@ elseif vim.fn.has("unix") == 1 then
     require("lspconfig").omnisharp.setup({
         cmd = { omnisharp_bin, "--languageserver", "--hostPID", tostring(pid) },
         on_attach = on_attach,
-        capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+        capabilities = capabilities,
     })
 
     -- LSP for Lua
@@ -260,14 +288,14 @@ elseif vim.fn.has("unix") == 1 then
             },
         },
         on_attach = on_attach,
-        capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+        capabilities = capabilities,
     })
 end
 
 -- LSP for Golang
 require("lspconfig").gopls.setup({
     on_attach = on_attach,
-    capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+    capabilities = capabilities,
 })
 
 -- LSP for Java
@@ -279,7 +307,7 @@ require("lspconfig").gopls.setup({
 -- LSP for Python
 require("lspconfig").pyright.setup({
     on_attach = on_attach,
-    capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+    capabilities = capabilities,
 })
 
 -- LSP for Rust
@@ -299,13 +327,13 @@ require("lspconfig").rust_analyzer.setup({
             },
         },
     },
-    capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+    capabilities = capabilities,
 })
 
 -- LSP for JavaScript/TypeScript
 require("lspconfig").tsserver.setup({
     on_attach = on_attach,
-    capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+    capabilities = capabilities,
 })
 
 -- LSP for YAML

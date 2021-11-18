@@ -1,4 +1,3 @@
-require("config-plugins.file-icons")
 require("config-plugins.highlighting")
 require("config-plugins.lsp-cmp-saga")
 require("config-plugins.format")
