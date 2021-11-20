@@ -1,7 +1,6 @@
 require("nvim-treesitter.configs").setup({
     ensure_installed = "maintained",
     ignore_install = {
-        "bash",
         "beancount",
         "bibtex",
         "clojure",
@@ -34,12 +33,10 @@ require("nvim-treesitter.configs").setup({
         "nix",
         "ocaml",
         "ocaml_interface",
-        "php",
         "pioasm",
         "ql",
         "query",
         "r",
-        "regex",
         "rst",
         "ruby",
         "scala",
@@ -56,5 +53,4 @@ require("nvim-treesitter.configs").setup({
         "zig",
     },
     highlight = { enable = true },
-    rainbow = { enable = true, extended_mode = true, max_file_lines = 1000 },
 })

@@ -69,9 +69,6 @@ return require("packer").startup(function()
         run = ":TSUpdate",
     })
 
-    -- rainbow parentheses for neovim using treesitter
-    use("p00f/nvim-ts-rainbow")
-
     -- autopairs
     use("windwp/nvim-autopairs")
 
