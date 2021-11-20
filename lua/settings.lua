@@ -77,3 +77,6 @@ vim.g.gruvbox_italicize_comments = true
 vim.g.gruvbox_italicize_strings = true
 vim.g.gruvbox_contrast_dark = "hard" ]]
 vim.cmd([[colorscheme enfocado]])
+
+vim.cmd([[hi Normal ctermbg=NONE guibg=NONE]])
+vim.cmd([[hi TabLineSel ctermbg=NONE guibg=NONE]])
