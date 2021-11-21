@@ -339,6 +339,9 @@ require("lspconfig").tsserver.setup({
 -- LSP for YAML
 require("lspconfig").yamlls.setup({})
 
+-- LSP for SQL
+require("lspconfig").sqls.setup({})
+
 -- Open and close float terminal
 vim.cmd([[nnoremap <silent> <A-d> :Lspsaga open_floaterm<CR>]])
 vim.cmd([[tnoremap <silent> <A-d> <C-\><C-n>:Lspsaga close_floaterm<CR>]])
