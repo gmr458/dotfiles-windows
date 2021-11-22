@@ -71,12 +71,10 @@ end
 vim.cmd([[let g:neovide_refresh_rate=60]])
 vim.cmd([[let g:neovide_cursor_antialiasing=v:true]])
 
---[[ vim.g.gruvbox_bold = false
-vim.g.gruvbox_italic = false
+vim.g.gruvbox_bold = false
+vim.g.gruvbox_italic = true
 vim.g.gruvbox_italicize_comments = true
 vim.g.gruvbox_italicize_strings = true
-vim.g.gruvbox_contrast_dark = "hard" ]]
-vim.cmd([[colorscheme enfocado]])
+vim.g.gruvbox_contrast_dark = "hard"
 
-vim.cmd([[hi Normal ctermbg=NONE guibg=NONE]])
-vim.cmd([[hi TabLineSel ctermbg=NONE guibg=NONE]])
+vim.cmd([[colorscheme gruvbox]])
