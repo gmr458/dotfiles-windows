@@ -1,5 +1,5 @@
 column_width = 150
-line_endings = "Windows"
+line_endings = "Unix"
 indent_type = "Spaces"
 indent_width = 4
 quote_style = "ForceDouble"
