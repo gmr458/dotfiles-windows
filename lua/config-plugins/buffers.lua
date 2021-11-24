@@ -1,8 +1,13 @@
 require("bufferline").setup({
     highlights = {
         indicator_selected = {
-            guifg = "#1d2021",
-            guibg = "#1d2021",
+            -- for gruvbox dark hard
+            -- guifg = "#1d2021",
+            -- guibg = "#1d2021",
+
+            -- for enfocado
+            guifg = "#181818",
+            guibg = "#181818",
         },
         buffer_selected = { gui = "NONE" },
         diagnostic_selected = { gui = "bold" },

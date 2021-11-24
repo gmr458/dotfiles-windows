@@ -12,7 +12,7 @@ return require("packer").startup(function()
     })
 
     -- colorscheme enfocado
-    use("wuelnerdotexe/vim-enfocado")
+    use("gmr458/vim-enfocado")
 
     -- github
     -- use("projekt0n/github-nvim-theme")
