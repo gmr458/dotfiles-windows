@@ -71,6 +71,14 @@ end
 vim.cmd([[let g:neovide_refresh_rate=60]])
 vim.cmd([[let g:neovide_cursor_antialiasing=v:true]])
 
-vim.cmd([[autocmd VimEnter * ++nested colorscheme enfocado]])
-vim.cmd([[autocmd ColorScheme enfocado highlight Normal     ctermbg=NONE guibg=NONE]])
-vim.cmd([[autocmd ColorScheme enfocado highlight TabLineSel ctermbg=NONE guibg=NONE]])
+vim.g.gruvbox_bold = false
+vim.g.gruvbox_italic = false
+vim.g.gruvbox_transparent_bg = false
+vim.g.gruvbox_underline = false
+vim.g.gruvbox_undercurl = false
+vim.g.gruvbox_contrast_dark = "hard"
+vim.g.gruvbox_contrast_light = "hard"
+vim.g.gruvbox_italicize_comments = true
+vim.g.gruvbox_italicize_strings = false
+
+vim.cmd([[colorscheme gruvbox]])

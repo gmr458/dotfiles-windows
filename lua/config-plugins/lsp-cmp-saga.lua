@@ -6,23 +6,6 @@ elseif vim.fn.has("win32") == 1 then
     HOME = os.getenv("USERPROFILE")
 end
 
-local signs = {
-    Error = " ",
-    Warning = " ",
-    Hint = " ",
-    Information = " ",
-}
-
-for type, icon in pairs(signs) do
-    local hl = "LspDiagnosticsSign" .. type
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-end
-
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-    underline = true,
-    virtual_text = { prefix = "" },
-})
-
 local on_attach = function(client, bufnr)
     local function buf_set_keymap(...)
         vim.api.nvim_buf_set_keymap(bufnr, ...)
