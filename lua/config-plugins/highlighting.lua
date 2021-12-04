@@ -27,7 +27,6 @@ require("nvim-treesitter.configs").setup({
         "heex",
         "html",
         "julia",
-        "kotlin",
         "latex",
         "ledger",
         "nix",
