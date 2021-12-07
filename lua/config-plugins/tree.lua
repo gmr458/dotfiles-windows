@@ -45,17 +45,10 @@ vim.g.nvim_tree_icons = {
 }
 
 require("nvim-tree").setup({
-    diagnostics = {
-        enable = true,
-        icons = {
-            hint = "",
-            info = "",
-            warning = "",
-            error = "",
-        },
+    filters = {
+        custom = { ".git", "node_modules", "target" },
     },
     view = {
-        auto_resize = true,
         mappings = {
             list = {
                 { key = "s", cb = require("nvim-tree.config").nvim_tree_callback("vsplit") },
