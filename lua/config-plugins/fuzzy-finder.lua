@@ -36,9 +36,6 @@ require("telescope").setup({
             "/bin/",
             "obj",
             "target",
-            ".png",
-            ".jpg",
-            ".jpeg",
             ".exe",
             "__pycache__",
         },
@@ -51,6 +48,7 @@ require("telescope").setup({
 
 if vim.fn.has("unix") == 1 then
     require("telescope").load_extension("fzf")
+    require("telescope").load_extension("media_files")
 end
 
 vim.cmd([[nnoremap tff <cmd>lua require('telescope.builtin').find_files()<cr>]])
