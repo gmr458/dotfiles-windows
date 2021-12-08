@@ -1,1 +1,5 @@
-require("gitsigns").setup()
+require("gitsigns").setup({
+    diff_opts = {
+        internal = false
+    }
+})
