@@ -75,7 +75,7 @@ vim.cmd("let &fcs='eob: '")
 
 vim.g.gruvbox_bold = false
 vim.g.gruvbox_italic = false
-vim.g.gruvbox_transparent_bg = false
+vim.g.gruvbox_transparent_bg = true
 vim.g.gruvbox_underline = false
 vim.g.gruvbox_undercurl = false
 vim.g.gruvbox_contrast_dark = "hard"

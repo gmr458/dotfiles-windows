@@ -2,12 +2,16 @@ require("bufferline").setup({
     highlights = {
         indicator_selected = {
             -- for gruvbox dark hard
-            guifg = "#1d2021",
-            guibg = "#1d2021",
+            -- guifg = "#1d2021",
+            -- guibg = "#1d2021",
 
             -- for gruvbox light hard
             -- guifg = "#f9f5d7",
             -- guibg = "#f9f5d7",
+
+            -- for transparent background
+            guifg = "NONE",
+            guibg = "NONE",
 
             -- for enfocado
             -- guifg = "#181818",
