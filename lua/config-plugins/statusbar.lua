@@ -1,7 +1,7 @@
 require("lualine").setup({
     options = {
         icons_enabled = true,
-        theme = "gruvbox_custom",
+        theme = "gruvbox_dark_custom",
         component_separators = { "", "" },
         section_separators = { "", "" },
         disabled_filetypes = { "NvimTree", "packer" },

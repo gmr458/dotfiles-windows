@@ -5,6 +5,10 @@ require("bufferline").setup({
             guifg = "#1d2021",
             guibg = "#1d2021",
 
+            -- for gruvbox light hard
+            -- guifg = "#f9f5d7",
+            -- guibg = "#f9f5d7",
+
             -- for enfocado
             -- guifg = "#181818",
             -- guibg = "#181818",
