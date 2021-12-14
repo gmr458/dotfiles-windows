@@ -1,0 +1,6 @@
+vim.cmd([[autocmd BufRead,BufNewFile tsconfig.json set filetype=jsonc]])
+vim.cmd([[autocmd BufRead,BufNewFile settings.json set filetype=jsonc]])
+vim.cmd([[autocmd BufEnter,BufWinEnter,WinEnter,CmdwinEnter * if bufname('%') == "NvimTree" | set laststatus=0 | else | set laststatus=2 | endif]])
+vim.cmd([[filetype plugin indent on]])
+vim.cmd("let &fcs='eob: '")
+vim.cmd("hi SignColumn guibg=none")

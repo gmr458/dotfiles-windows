@@ -104,4 +104,7 @@ return require("packer").startup(function()
             "nvim-lua/plenary.nvim",
         },
     })
+
+    --
+    use("matze/vim-move")
 end)

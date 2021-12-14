@@ -25,10 +25,6 @@ end
 
 local set = vim.opt
 
-vim.cmd([[autocmd BufRead,BufNewFile tsconfig.json set filetype=jsonc]])
-vim.cmd([[autocmd BufRead,BufNewFile settings.json set filetype=jsonc]])
-vim.cmd([[autocmd BufEnter,BufWinEnter,WinEnter,CmdwinEnter * if bufname('%') == "NvimTree" | set laststatus=0 | else | set laststatus=2 | endif]])
-vim.cmd([[filetype plugin indent on]])
 set.background = "dark"
 set.tabstop = 4
 set.shiftwidth = 4
@@ -59,19 +55,6 @@ end
 vim.g.mapleader = " "
 vim.g.vim_json_conceal = false
 vim.g.vim_json_warnings = false
-
-vim.cmd([[let neovide_remember_window_size = v:true]])
-vim.cmd([[let neovide_cursor_animation_length=0.1]])
-vim.cmd([[let neovide_cursor_trail_length=0.01]])
-if vim.fn.has("unix") == 1 then
-    vim.cmd([[set guifont=MesloLGS\ NF:h10]])
-elseif vim.fn.has("win32") == 1 then
-    vim.cmd([[set guifont=DroidSansMono\ Nerd\ Font:h10.5]])
-end
-vim.cmd([[let g:neovide_refresh_rate=60]])
-vim.cmd([[let g:neovide_cursor_antialiasing=v:true]])
-
-vim.cmd("let &fcs='eob: '")
 
 vim.g.gruvbox_bold = false
 vim.g.gruvbox_italic = false

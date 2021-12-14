@@ -1,4 +1,4 @@
-local HOME = os.getenv("HOME")
+local HOME = os.getenv("USERPROFILE")
 
 vim.diagnostic.config({
     virtual_text = true,
@@ -152,16 +152,19 @@ require("lspconfig").clangd.setup({
 
 -- LSP for CSS
 require("lspconfig").cssls.setup({
+    cmd = { "vscode-css-language-server.cmd", "--stdio" },
     capabilities = capabilities,
 })
 
 -- LSP for HTML
 require("lspconfig").html.setup({
+    cmd = { "vscode-html-language-server.cmd", "--stdio" },
     capabilities = capabilities,
 })
 
 -- LSP for JSON
 require("lspconfig").jsonls.setup({
+    cmd = { "vscode-json-language-server.cmd", "--stdio" },
     filetypes = { "json", "jsonc" },
     commands = {
         Format = {
@@ -173,7 +176,7 @@ require("lspconfig").jsonls.setup({
 })
 
 -- LSP for C#
-local omnisharp_bin = HOME .. "/.cache/omnisharp-vim/omnisharp-roslyn/run"
+local omnisharp_bin = HOME .. "\\AppData\\Local\\omnisharp-vim\\omnisharp-roslyn\\OmniSharp.exe"
 
 local pid = vim.fn.getpid()
 
@@ -184,24 +187,30 @@ require("lspconfig").omnisharp.setup({
 })
 
 -- LSP for Lua
-local sumneko_root_path = HOME .. "/.language-servers/lua-language-server"
-local sumneko_binary = sumneko_root_path .. "/bin/Linux/lua-language-server"
+local sumneko_root_path = HOME .. "\\.language-servers\\lua-language-server"
+local sumneko_binary = sumneko_root_path .. "\\bin\\Windows\\lua-language-server.exe"
 
 local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
 require("lspconfig").sumneko_lua.setup({
-    cmd = { sumneko_binary, "-E", sumneko_root_path .. "/main.lua" },
+    cmd = { sumneko_binary, "-E", sumneko_root_path .. "\\main.lua" },
     settings = {
         Lua = {
-            runtime = { version = "LuaJIT", path = runtime_path },
-            diagnostics = { globals = { "vim", "use" } },
+            runtime = {
+                version = "LuaJIT",
+                path = runtime_path,
+            },
+            diagnostics = {
+                globals = { "vim", "use" },
+            },
             workspace = {
                 library = vim.api.nvim_get_runtime_file("", true),
-                preloadFileSize = 200,
             },
-            telemetry = { enable = false },
+            telemetry = {
+                enable = false,
+            },
         },
     },
     on_attach = on_attach,
