@@ -1,22 +1,5 @@
 require("bufferline").setup({
     highlights = {
-        indicator_selected = {
-            -- for gruvbox dark hard
-            -- guifg = "#1d2021",
-            -- guibg = "#1d2021",
-
-            -- for gruvbox light hard
-            -- guifg = "#f9f5d7",
-            -- guibg = "#f9f5d7",
-
-            -- for transparent background
-            guifg = "NONE",
-            guibg = "NONE",
-
-            -- for enfocado
-            -- guifg = "#181818",
-            -- guibg = "#181818",
-        },
         buffer_selected = { gui = "NONE" },
         diagnostic_selected = { gui = "bold" },
         info_selected = { gui = "bold" },
@@ -33,6 +16,7 @@ require("bufferline").setup({
         pick = { gui = "bold" },
     },
     options = {
+        indicator_icon = " ",
         offsets = {
             {
                 filetype = "NvimTree",
