@@ -45,7 +45,7 @@ return require("packer").startup(function()
         "folke/trouble.nvim",
         config = function()
             require("trouble").setup({
-                use_lsp_diagnostic_signs = true,
+                use_diagnostic_signs = true,
             })
         end,
     })
