@@ -144,32 +144,16 @@ cmp.setup({
 -- Setup lspconfig.
 local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
+-- LSP for Angular
+require("lspconfig").angularls.setup({})
+
+-- LSP for BASH
+require("lspconfig").bashls.setup({})
+
 -- LSP for C/C++
 require("lspconfig").clangd.setup({
     on_attach = on_attach,
     capabilities = capabilities,
-})
-
--- LSP for CSS
-require("lspconfig").cssls.setup({
-    capabilities = capabilities,
-})
-
--- LSP for HTML
-require("lspconfig").html.setup({
-    capabilities = capabilities,
-})
-
--- LSP for JSON
-require("lspconfig").jsonls.setup({
-    filetypes = { "json", "jsonc" },
-    commands = {
-        Format = {
-            function()
-                vim.lsp.buf.range_formatting({}, { 0, 0 }, { vim.fn.line("$"), 0 })
-            end,
-        },
-    },
 })
 
 -- LSP for C#
@@ -179,6 +163,49 @@ local pid = vim.fn.getpid()
 
 require("lspconfig").omnisharp.setup({
     cmd = { omnisharp_bin, "--languageserver", "--hostPID", tostring(pid) },
+    on_attach = on_attach,
+    capabilities = capabilities,
+})
+
+-- LSP for CSS
+require("lspconfig").cssls.setup({
+    capabilities = capabilities,
+})
+
+-- LSP for Deno
+require("lspconfig").denols.setup({})
+
+-- LSP for Golang
+require("lspconfig").gopls.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+})
+
+-- LSP for HTML
+require("lspconfig").html.setup({
+    capabilities = capabilities,
+})
+
+-- LSP for Java
+require("lspconfig").jdtls.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+})
+
+-- LSP for JavaScript/TypeScript
+require("lspconfig").tsserver.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+})
+
+-- LSP for JSON
+require("lspconfig").jsonls.setup({
+    filetypes = { "json", "jsonc" },
+    capabilities = capabilities,
+})
+
+-- LSP for Kotlin
+require("lspconfig").kotlin_language_server.setup({
     on_attach = on_attach,
     capabilities = capabilities,
 })
@@ -208,23 +235,8 @@ require("lspconfig").sumneko_lua.setup({
     capabilities = capabilities,
 })
 
--- LSP for Golang
-require("lspconfig").gopls.setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
-})
-
--- LSP for Java
---[[ require("lspconfig").jdtls.setup({
-    on_attach = on_attach,
-    capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
-}) ]]
-
--- LSP for Kotlin
-require("lspconfig").kotlin_language_server.setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
-})
+-- LSP for PHP
+require("lspconfig").intelephense.setup({})
 
 -- LSP for Python
 require("lspconfig").pyright.setup({
@@ -251,15 +263,6 @@ require("lspconfig").rust_analyzer.setup({
     },
     capabilities = capabilities,
 })
-
--- LSP for JavaScript/TypeScript
-require("lspconfig").tsserver.setup({
-    on_attach = on_attach,
-    capabilities = capabilities,
-})
-
--- LSP for YAML
-require("lspconfig").yamlls.setup({})
 
 -- LSP for SQL
 require("lspconfig").sqls.setup({})

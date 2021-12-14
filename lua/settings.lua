@@ -55,6 +55,9 @@ end
 vim.g.mapleader = " "
 vim.g.vim_json_conceal = false
 vim.g.vim_json_warnings = false
+vim.g.markdown_fenced_languages = {
+    "ts=typescript",
+}
 
 vim.g.gruvbox_bold = false
 vim.g.gruvbox_italic = false
