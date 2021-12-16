@@ -1,4 +1,4 @@
-return require("packer").startup(function()
+return require("packer").startup(function(use)
     -- packer can manage itself
     use("wbthomason/packer.nvim")
 

@@ -18,25 +18,47 @@ Screenshot 5
 Screenshot 6
 ![screenshot3](./screenshots/screenshot6.png)
 
-Screenshot 7
-![screenshot1](./screenshots/screenshot7.png)
-
-Screenshot 8
-![screenshot2](./screenshots/screenshot8.png)
-
-Screenshot 9
-![screenshot3](./screenshots/screenshot9.png)
-
 ## Installation
 
-1. Run this command in Windows Powershell to install the plugin manager [packer.nvim](https://github.com/wbthomason/packer.nvim):
+1. Install the plugin manager [packer.nvim](https://github.com/wbthomason/packer.nvim):
+
+> Windows Powershell Installation
+
 ```shell
 git clone https://github.com/wbthomason/packer.nvim "$env:LOCALAPPDATA\nvim-data\site\pack\packer\start\packer.nvim"
 ```
 
-2. Clone `dotfiles-neovim-windows` in `%USERPROFILE%\AppData\Local\nvim`:
+> Windows CMD Installation
+
 ```shell
-git clone https://github.com/gmr458/dotfiles-neovim-windows %USERPROFILE%\AppData\Local\nvim
+git clone https://github.com/wbthomason/packer.nvim %USERPROFILE%\Appdata\Local\nvim-data\site\pack\packer\start\packer.nvim
+```
+
+> Linux Installation
+
+```shell
+git clone --depth 1 https://github.com/wbthomason/packer.nvim\
+ ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+```
+
+2. Clone `dotfiles-neovim`:
+
+> Windows Powershell
+
+```shell
+git clone git@github.com:gmr458/dotfiles-neovim.git "$env:LOCALAPPDATA\nvim"
+```
+
+> Windows CMD
+
+```shell
+git clone git@github.com:gmr458/dotfiles-neovim.git %USERPROFILE%\AppData\Local\nvim
+```
+
+> Linux
+
+```shell
+git clone git@github.com:gmr458/dotfiles-neovim.git ~/.config/nvim
 ```
 
 3. Open Neovim and execute `:PackerInstall`

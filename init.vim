@@ -1,7 +1,7 @@
 lua << EOF
 
-require("settings")
 require("plugins-list")
+require("settings")
 require("config-plugins")
 require("mappings")
 require("cmds")
