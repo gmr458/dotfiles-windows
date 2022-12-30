@@ -1,12 +1,6 @@
 local M = {}
 
 M.to_setup = function()
-    local utils = require("config.utils")
-
-    if vim.loop.os_uname().sysname == "Windows_NT" or utils.running_wsl() or utils.running_android() then
-        return {}
-    end
-
     return {
         -- "angularls",
         "bashls",

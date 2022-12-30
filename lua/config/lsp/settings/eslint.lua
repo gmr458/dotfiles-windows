@@ -5,7 +5,7 @@ if not util_loaded then
     return
 end
 
-return {
+local config = {
     root_dir = util.root_pattern(
         ".eslintrc.js",
         ".eslintrc.cjs",
@@ -15,3 +15,11 @@ return {
         "package.json"
     ),
 }
+
+if vim.fn.has("win32") == 1 then
+    local bin_name = "vscode-eslint-language-server.cmd"
+    local cmd = { bin_name, "--stdio" }
+    config.cmd = cmd
+end
+
+return config

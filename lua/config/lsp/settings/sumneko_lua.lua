@@ -1,4 +1,4 @@
-return {
+local config = {
     settings = {
         Lua = {
             completion = {
@@ -12,3 +12,11 @@ return {
         },
     },
 }
+
+if vim.fn.has("win32") == 1 then
+    local bin_name = "lua-language-server.cmd"
+    local cmd = { bin_name }
+    config.cmd = cmd
+end
+
+return config

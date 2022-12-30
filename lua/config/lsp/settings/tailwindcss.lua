@@ -5,4 +5,12 @@ if not util_loaded then
     return
 end
 
-return { root_dir = util.root_pattern("tailwind.config.js") }
+local config = { root_dir = util.root_pattern("tailwind.config.js") }
+
+if vim.fn.has("win32") == 1 then
+    local bin_name = "tailwind-language-server.cmd"
+    local cmd = { bin_name, "--stdio" }
+    config.cmd = cmd
+end
+
+return config
