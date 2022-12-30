@@ -16,6 +16,3 @@ vim.cmd("au BufRead,BufNewFile tsconfig.json set filetype=jsonc")
 
 -- Remove symbol ~ in NvimTree
 vim.cmd("let &fcs='eob: '")
-
--- Borders :LspInstallInfo
-vim.cmd("autocmd FileType lsp-installer lua vim.api.nvim_win_set_config(0, { border = 'rounded' })")

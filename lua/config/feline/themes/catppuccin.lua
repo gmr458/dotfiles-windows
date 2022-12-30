@@ -32,7 +32,7 @@ M.components = function()
             right_sep = { " " },
         },
         {
-            provider = { name = "file_info", opts = { file_readonly_icon = " " } },
+            provider = { name = "file_info", opts = { file_readonly_icon = " ", file_modified_icon = "" } },
             hl = { fg = "fg", style = "NONE" },
             left_sep = { { str = "slant_right_thin", hl = { fg = "overlay2" } }, " " },
             right_sep = { " ", { str = "slant_right_thin", hl = { fg = "overlay2" } } },
