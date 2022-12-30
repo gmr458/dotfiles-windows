@@ -28,5 +28,5 @@ mason.setup({
 })
 
 vim.api.nvim_create_user_command("MasonInstallListPackages", function()
-    vim.cmd("MasonInstall " .. table.concat(require("config.lsp.mason.list-packages"), " "))
+    vim.cmd("MasonInstall " .. table.concat(require("config.lsp.mason.packages"), " "))
 end, {})
