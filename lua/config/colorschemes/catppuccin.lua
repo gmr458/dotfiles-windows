@@ -5,6 +5,8 @@ if not catppuccin_loaded then
     return
 end
 
+local transparent_background = true
+
 catppuccin.setup({
     flavour = "mocha", -- latte, frappe, macchiato, mocha
     background = {
@@ -12,7 +14,7 @@ catppuccin.setup({
         dark = "mocha",
     },
     compile_path = vim.fn.stdpath("cache") .. "/catppuccin",
-    transparent_background = false,
+    transparent_background = transparent_background,
     term_colors = false,
     dim_inactive = {
         enabled = false,
@@ -45,11 +47,11 @@ catppuccin.setup({
 
             NvimTreeRootFolder = { fg = colors.mantle },
 
-            CmpMenu = { bg = colors.base },
-            CmpMenuBorder = { bg = colors.base, fg = colors.surface2 },
+            CmpMenu = { bg = transparent_background and colors.none or colors.base, fg = colors.text },
+            CmpMenuBorder = { bg = transparent_background and colors.none or colors.base, fg = colors.surface2 },
             CmpMenuSel = { bg = colors.sky, fg = colors.base },
-            CmpDoc = { bg = colors.base },
-            CmpDocBorder = { bg = colors.base, fg = colors.surface2 },
+            CmpDoc = { bg = transparent_background and colors.none or colors.base, fg = colors.text },
+            CmpDocBorder = { bg = transparent_background and colors.none or colors.base, fg = colors.surface2 },
 
             -- Treesitter
             ["@constant.builtin"] = { style = { "italic" } },
