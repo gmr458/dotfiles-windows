@@ -43,6 +43,8 @@ catppuccin.setup({
 
             StatusLine = { bg = "NONE" },
 
+            Pmenu = { bg = colors.crust, fg = colors.overlay2 },
+
             WinBar = { fg = colors.text },
 
             NvimTreeRootFolder = { fg = colors.mantle },
