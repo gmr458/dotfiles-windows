@@ -4,6 +4,7 @@ M.to_setup = function()
     return {
         -- "angularls",
         "bashls",
+        "bufls",
         "clangd",
         "cssls",
         "denols",

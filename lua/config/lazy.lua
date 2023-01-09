@@ -211,6 +211,12 @@ require("lazy").setup({
                     { "saadparwaiz1/cmp_luasnip" },
                     { "hrsh7th/cmp-path" },
                     { "hrsh7th/cmp-buffer" },
+                    {
+                        "windwp/nvim-autopairs",
+                        config = function()
+                            require("config.autopairs")
+                        end,
+                    },
                 },
                 config = function()
                     require("config.cmp")
@@ -285,13 +291,6 @@ require("lazy").setup({
         cmd = "ToggleTerm",
         config = function()
             require("config.toggleterm")
-        end,
-    },
-    {
-        "windwp/nvim-autopairs",
-        event = "BufReadPost",
-        config = function()
-            require("config.autopairs")
         end,
     },
     {

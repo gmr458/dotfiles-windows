@@ -1,6 +1,8 @@
 return {
     "bash-language-server",
     "black",
+    "buf",
+    "buf-language-server",
     "clangd",
     "css-lsp",
     "deno",
