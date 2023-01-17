@@ -5,7 +5,7 @@ if not util_loaded then
     return
 end
 
-local config = { root_dir = util.root_pattern("package.json") }
+local config = { root_dir = util.root_pattern("package.json"), single_file_support = false }
 
 if vim.fn.has("win32") == 1 then
     local bin_name = "typescript-language-server.cmd"

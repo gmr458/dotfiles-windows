@@ -12,8 +12,9 @@ local config = {
         ".eslintrc.yaml",
         ".eslintrc.yml",
         ".eslintrc.json",
-        "package.json"
+        -- "package.json"
     ),
+    single_file_support = false,
 }
 
 if vim.fn.has("win32") == 1 then
