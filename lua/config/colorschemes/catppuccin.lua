@@ -65,7 +65,7 @@ catppuccin.setup({
         lightspeed = false,
         illuminate = false,
         lsp_saga = true,
-        lsp_trouble = true,
+        lsp_trouble = false,
         markdown = false,
         mason = true,
         neogit = false,
@@ -155,9 +155,6 @@ catppuccin.setup({
 
             -- LSP Saga
             LspFloatWinNormal = { bg = "NONE" },
-
-            -- Trouble
-            TroubleCount = { bg = colors.base },
 
             -- LSP Virtual Text
             DiagnosticVirtualTextError = { bg = "NONE" },
