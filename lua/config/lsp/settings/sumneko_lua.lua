@@ -1,3 +1,9 @@
+local library = {}
+
+if vim.fn.stdpath("config") == vim.loop.cwd() then
+    library = vim.api.nvim_get_runtime_file("", true)
+end
+
 local config = {
     settings = {
         Lua = {
@@ -8,7 +14,7 @@ local config = {
             diagnostics = { globals = { "vim" } },
             runtime = { version = "LuaJIT" },
             telemetry = { enable = false },
-            workspace = { library = vim.api.nvim_get_runtime_file("", true) },
+            workspace = { library = library },
         },
     },
 }

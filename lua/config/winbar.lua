@@ -29,7 +29,7 @@ M.winbar_filetype_exclude = {
 }
 
 M.get_filename = function()
-    local filename = vim.fn.expand("%:t")
+    local filename = vim.fn.expand("%:.")
     local extension = vim.fn.expand("%:e")
     local utils = require("config.utils")
 
@@ -68,8 +68,7 @@ local get_navic = function()
     end
 
     if not require("config.utils").is_nil_or_empty_string(navic_location) then
-        -- return "❭" .. " " .. navic_location
-        return require("config.navic").separator .. " " .. navic_location
+        return "" .. " " .. navic_location
     end
 
     return ""

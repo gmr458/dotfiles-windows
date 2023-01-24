@@ -5,79 +5,166 @@ if not lspsaga_loaded then
     return
 end
 
-local colors = {
-    fg = "#bbc2cf",
-    red = "#e95678",
-    orange = "#FF8700",
-    yellow = "#f7bb3b",
-    green = "#afd700",
-    cyan = "#36d0e0",
-    blue = "#61afef",
-    violet = "#CBA6F7",
-    teal = "#1abc9c",
-}
-
-lspsaga.init_lsp_saga({
-    code_action_icon = "",
-    -- same as nvim-lightbulb but async
-    code_action_lightbulb = {
+lspsaga.setup({
+    -- default options
+    preview = {
+        lines_above = 0,
+        lines_below = 10,
+    },
+    scroll_preview = {
+        scroll_down = "<C-f>",
+        scroll_up = "<C-b>",
+    },
+    request_timeout = 2000,
+    -- :Lspsaga lsp_finder options
+    finder = {
+        edit = { "o", "<CR>" },
+        vsplit = "s",
+        split = "i",
+        tabe = "t",
+        quit = { "q", "<ESC>" },
+    },
+    -- :Lspsaga peek_definition options
+    definition = {
+        edit = "<C-c>o",
+        vsplit = "<C-c>v",
+        split = "<C-c>i",
+        tabe = "<C-c>t",
+        quit = "q",
+        close = "<Esc>",
+    },
+    -- :Lspsaga code_action options
+    code_action = {
+        num_shortcut = true,
+        keys = {
+            -- string |table type
+            quit = "q",
+            exec = "<CR>",
+        },
+    },
+    -- :Lspsaga Lightbulb options
+    lightbulb = {
         enable = false,
         enable_in_insert = false,
-        cache_code_action = false,
         sign = false,
-        -- update_time = 150,
-        -- sign_priority = 20,
+        sign_priority = 40,
         virtual_text = false,
     },
-    -- finder icons
-    finder_icons = {
-        def = "",
-        imp = "",
-        ref = "",
+    -- :Lspsaga diagnostic_jump_next options
+    diagnostic = {
+        show_code_action = true,
+        show_source = true,
+        jump_num_shortcut = true,
+        keys = {
+            exec_action = "o",
+            quit = "q",
+            go_action = "g",
+        },
     },
-    show_outline = {
+    -- :Lspsaga rename options
+    rename = {
+        quit = "<C-c>",
+        exec = "<CR>",
+        mark = "x",
+        confirm = "<CR>",
+        in_select = true,
+        whole_project = true,
+    },
+    -- :Lspsaga outline options
+    outline = {
         win_position = "right",
         win_with = "",
         win_width = 30,
-        auto_enter = true,
+        show_detail = true,
         auto_preview = false,
-        virt_text = "┃",
-        jump_key = "o",
         auto_refresh = true,
+        auto_close = true,
+        custom_sort = nil,
+        keys = {
+            jump = "o",
+            expand_collapse = "u",
+            quit = "q",
+        },
     },
-    -- custom lsp kind
-    -- usage { Field = 'color code'} or {Field = {your icon, your color code}}
-    custom_kind = {
-        File = { "file ", colors.fg },
-        Module = { "module ", colors.blue },
-        Namespace = { "namespace ", colors.orange },
-        Package = { "package ", colors.violet },
-        Class = { "class ", colors.violet },
-        Method = { "method ", colors.violet },
-        Property = { "property ", colors.cyan },
-        Field = { "field ", colors.teal },
-        Constructor = { "constructor ", colors.blue },
-        Enum = { "enum ", colors.green },
-        Interface = { "interface ", colors.orange },
-        Function = { "function ", colors.violet },
-        Variable = { "variable ", colors.blue },
-        Constant = { "constant ", colors.cyan },
-        String = { "string ", colors.green },
-        Number = { "number ", colors.green },
-        Boolean = { "boolean ", colors.orange },
-        Array = { "array ", colors.blue },
-        Object = { "object ", colors.orange },
-        Key = { "key ", colors.red },
-        Null = { "null ", colors.red },
-        EnumMember = { "enum member ", colors.green },
-        Struct = { "struct ", colors.violet },
-        Event = { "event ", colors.violet },
-        Operator = { "operator ", colors.green },
-        TypeParameter = { "type parameter ", colors.green },
-        TypeAlias = { "type alias ", colors.green },
-        Parameter = { "parameter ", colors.blue },
-        StaticMethod = { "static method ", colors.orange },
-        Macro = { "macro ", colors.red },
+    -- :Lspsaga incoming_calls options
+    callhierarchy = {
+        show_detail = false,
+        keys = {
+            edit = "e",
+            vsplit = "s",
+            split = "i",
+            tabe = "t",
+            jump = "o",
+            quit = "q",
+            expand_collapse = "u",
+        },
+    },
+    -- :Lspsaga symbols in winbar options
+    symbol_in_winbar = {
+        enable = false,
+        separator = "  ",
+        hide_keyword = false,
+        show_file = true,
+        folder_level = 2,
+        respect_root = true,
+        color_mode = true,
+    },
+    -- :Lspsaga UI options
+    ui = {
+        -- currently only round theme
+        theme = "round",
+        -- this option only work in neovim 0.9
+        -- title = true,
+        -- border type can be single,double,rounded,solid,shadow.
+        border = "single",
+        winblend = 0,
+        expand = "",
+        collapse = "",
+        preview = "Preview ",
+        code_action = "Code Action ",
+        diagnostic = "Diagnostic",
+        incoming = "Incoming",
+        outgoing = "Outgoing",
+        colors = require("catppuccin.groups.integrations.lsp_saga").custom_colors(),
+        kind = {
+            File = "file ",
+            Module = "module ",
+            Namespace = "namespace ",
+            Package = "package ",
+            Class = "class ",
+            Method = "method ",
+            Property = "property ",
+            Field = "field ",
+            Constructor = "constructor ",
+            Enum = "enum ",
+            Interface = "interface ",
+            Function = "function ",
+            Variable = "variable ",
+            Constant = "constant ",
+            String = "string ",
+            Number = "number ",
+            Boolean = "boolean ",
+            Array = "array ",
+            Object = "object ",
+            Key = "key ",
+            Null = "null ",
+            EnumMember = "enum member ",
+            Struct = "struct ",
+            Event = "event ",
+            Operator = "operator ",
+            TypeParameter = "type parameter ",
+            -- ccls
+            TypeAlias = "type alias ",
+            Parameter = "parameter ",
+            StaticMethod = "static method ",
+            Macro = "macro ",
+            -- for completion sb microsoft!!!
+            Text = "text ",
+            Snippet = "snippet ",
+            Folder = " ",
+            Unit = "unit ",
+            Value = "value ",
+        },
     },
 })
 
