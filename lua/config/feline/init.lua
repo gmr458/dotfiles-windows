@@ -11,7 +11,13 @@ local themes = {
     kanagawa = "kanagawa",
 }
 
+local styles = {
+    complete = "complete",
+    float = "float",
+}
+
 local theme = themes.catppuccin
+local style = styles.float
 
 feline.setup({
     force_inactive = {
@@ -35,6 +41,6 @@ feline.setup({
         bufnames = {},
     },
     disable = { filetypes = { "^alpha$", "^dashboard$" } },
-    theme = require("config.feline.themes." .. theme).palette(),
-    components = require("config.feline.themes." .. theme).components(),
+    theme = require("config.feline.themes." .. theme .. "." .. style).palette(),
+    components = require("config.feline.themes." .. theme .. "." .. style).components(),
 })

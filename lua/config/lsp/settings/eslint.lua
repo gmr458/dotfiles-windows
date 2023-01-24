@@ -6,14 +6,7 @@ if not util_loaded then
 end
 
 local config = {
-    root_dir = util.root_pattern(
-        ".eslintrc.js",
-        ".eslintrc.cjs",
-        ".eslintrc.yaml",
-        ".eslintrc.yml",
-        ".eslintrc.json",
-        -- "package.json"
-    ),
+    root_dir = util.root_pattern(".eslintrc.js", ".eslintrc.cjs", ".eslintrc.yaml", ".eslintrc.yml", ".eslintrc.json"),
     single_file_support = false,
 }
 
