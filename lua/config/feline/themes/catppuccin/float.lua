@@ -61,7 +61,7 @@ M.components = function()
         },
         {
             provider = "git_branch",
-            icon = { str = " ", hl = { fg = "peach" } },
+            icon = { str = "שׂ ", hl = { fg = "peach" } },
             hl = { bg = "crust", fg = "fg", style = "NONE" },
             left_sep = { { str = " ", hl = { bg = "crust" } } },
             right_sep = {

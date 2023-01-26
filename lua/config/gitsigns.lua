@@ -9,13 +9,13 @@ gitsigns.setup({
     signs = {
         delete = {
             hl = "GitSignsDelete",
-            text = "契",
+            text = "",
             numhl = "GitSignsDeleteNr",
             linehl = "GitSignsDeleteLn",
         },
         topdelete = {
             hl = "GitSignsDelete",
-            text = "契",
+            text = "",
             numhl = "GitSignsDeleteNr",
             linehl = "GitSignsDeleteLn",
         },
@@ -23,4 +23,4 @@ gitsigns.setup({
     attach_to_untracked = false,
 })
 
--- require("scrollbar.handlers.gitsigns").setup()
+require("scrollbar.handlers.gitsigns").setup()
