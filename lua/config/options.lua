@@ -36,6 +36,7 @@ vim.opt.relativenumber = false -- show relative line number in front of each lin
 -- vim.opt.scroll = 10 -- lines to scroll with CTRL-U and CTRL-D
 vim.opt.scrolloff = 10 -- minimum nr. of lines above and below cursor
 vim.opt.shiftwidth = 4 -- number of spaces to use for (auto)indent step
+vim.opt.showcmd = false --
 vim.opt.showmode = false -- message on status line to show current mode
 -- vim.opt.showtabline = 0 -- tells when the tab pages line is displayed
 vim.opt.sidescroll = 5 -- minimum number of columns to scroll horizontal
