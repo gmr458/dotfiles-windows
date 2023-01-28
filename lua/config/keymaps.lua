@@ -79,6 +79,7 @@ keymap("n", "<Leader>nh", ":nohlsearch<CR>", opts)
 -- Toogle terminal
 vim.cmd([[nnoremap <silent> <A-d> :ToggleTerm<CR>]])
 vim.cmd([[tnoremap <silent> <A-d> <C-\><C-n>:ToggleTerm<CR>]])
+vim.cmd([[tnoremap <silent> jk <C-\><C-n>]])
 
 -- Trouble
 vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>Trouble<cr>", { silent = true, noremap = true })
