@@ -120,6 +120,7 @@ catppuccin.setup({
             WinBar = { fg = colors.text },
 
             NvimTreeRootFolder = { fg = colors.mantle },
+            NvimTreeFolderIcon = { fg = "#FEE082" },
 
             CmpMenu = { bg = transparent_background and colors.none or colors.base, fg = colors.text },
             CmpMenuBorder = { bg = transparent_background and colors.none or colors.base, fg = colors.surface2 },
