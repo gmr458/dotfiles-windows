@@ -276,7 +276,7 @@ require("lazy").setup({
     },
     {
         "nvim-tree/nvim-web-devicons",
-        config = { default = true },
+        opts = { default = true },
     },
     {
         "b3nj5m1n/kommentary",
