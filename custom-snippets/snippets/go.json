@@ -1,0 +1,7 @@
+{
+  "simple switch statement": {
+    "prefix": "sw",
+    "body": "switch {\ncase ${1:condition}:\n\t$2\ndefault:\n\t$0\n}",
+    "description": "Snippet for switch statement without expression"
+  }
+}

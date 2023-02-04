@@ -5,8 +5,15 @@ if not luasnip_loaded then
     return
 end
 
+local custom_snippets_path = vim.fn.stdpath("config") .. "/custom-snippets"
+local data_path = vim.fn.stdpath("data")
+
 require("luasnip.loaders.from_vscode").lazy_load({
-    path = "~/.local/share/nvim/site/pack/packer/start/vscode-es7-javascript-react-snippets",
+    paths = {
+        custom_snippets_path,
+        data_path .. "/lazy/friendly-snippets",
+        data_path .. "/lazy/vscode-react-javascript-snippets",
+    },
 })
 
 local cmp_loaded, cmp = pcall(require, "cmp")
