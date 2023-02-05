@@ -11,7 +11,7 @@ local sumiInkCustom = "#111116"
 
 kanagawa.setup({
     undercurl = true,
-    commentStyle = { italic = true, bold = false },
+    commentStyle = { italic = false, bold = false },
     functionStyle = { italic = false, bold = false },
     keywordStyle = { italic = false, bold = false },
     statementStyle = { italic = false, bold = false },

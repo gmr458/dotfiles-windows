@@ -102,35 +102,63 @@ require("lazy").setup({
             require("config.colorschemes.catppuccin")
         end,
     },
-    -- ({
-    --     "wuelnerdotexe/vim-enfocado",
-    --     -- config = "require('config.colorschemes.enfocado')",
-    -- })
-    -- ({
-    --     "projekt0n/github-nvim-theme",
-    --     -- config = "require('config.colorschemes.github')",
-    -- })
-    -- ({
-    --     "ellisonleao/gruvbox.nvim",
-    --     -- config = "require('config.colorschemes.gruvbox')",
-    -- })
-    -- ({
-    --     "rebelot/kanagawa.nvim",
-    --     -- config = "require('config.colorschemes.kanagawa')",
-    -- })
-    -- ({
-    --     "marko-cerovac/material.nvim",
-    --     -- config = "require('config.colorschemes.material')",
-    -- })
-    -- ({
-    --     "navarasu/onedark.nvim",
-    --     -- config = "require('config.colorschemes.onedark')",
-    -- })
-    -- ({
-    --     "rose-pine/neovim",
-    --     as = "rose-pine",
-    --     config = "require('config.colorschemes.rose-pine')",
-    -- })
+    -- {
+    --     -- "wuelnerdotexe/vim-enfocado",
+    --     -- lazy = false,
+    --     -- priority = 1000,
+    --     -- config = function()
+    --     --     config = "require('config.colorschemes.enfocado')"
+    --     -- end,
+    -- },
+    -- {
+    --     -- "projekt0n/github-nvim-theme",
+    --     -- lazy = false,
+    --     -- priority = 1000,
+    --     -- config = function()
+    --     --     config = "require('config.colorschemes.github')"
+    --     -- end,
+    -- },
+    -- {
+    --     -- "ellisonleao/gruvbox.nvim",
+    --     -- lazy = false,
+    --     -- priority = 1000,
+    --     -- config = function()
+    --     --     config = "require('config.colorschemes.gruvbox')"
+    --     -- end,
+    -- },
+    -- {
+    --     -- "rebelot/kanagawa.nvim",
+    --     -- lazy = false,
+    --     -- priority = 1000,
+    --     -- config = function()
+    --     --     require("config.colorschemes.kanagawa")
+    --     -- end,
+    -- },
+    -- {
+    --     -- "marko-cerovac/material.nvim",
+    --     -- lazy = false,
+    --     -- priority = 1000,
+    --     -- config = function()
+    --     --     config = "require('config.colorschemes.material')"
+    --     -- end,
+    -- },
+    -- {
+    --     -- "navarasu/onedark.nvim",
+    --     -- lazy = false,
+    --     -- priority = 1000,
+    --     -- config = function()
+    --     --     config = "require('config.colorschemes.onedark')"
+    --     -- end,
+    -- },
+    -- {
+    --     -- "rose-pine/neovim",
+    --     -- name = "rose-pine",
+    --     -- lazy = false,
+    --     -- priority = 1000,
+    --     -- config = function()
+    --     --     config = "require('config.colorschemes.rose-pine')"
+    --     -- end,
+    -- },
     -- Telescope
     {
         "nvim-telescope/telescope.nvim",

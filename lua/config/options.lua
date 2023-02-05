@@ -17,14 +17,25 @@ vim.g.loaded_netrwPlugin = 1
 vim.g.loaded_netrwSettings = 1
 vim.g.loaded_netrwFileHandlers = 1
 
+local font_names = {
+    caskaydia_cove = "CaskaydiaCove Nerd Font Mono",
+    comic_mono = "ComicMono Nerd Font Mono",
+    fira_code = "FiraCode Nerd Font Mono",
+    iosevka_fixed = "Iosevka Fixed",
+    roboto_mono = "RobotoMono Nerd Font Mono",
+}
+local font_name = font_names.caskaydia_cove
+local font_height = "h11.0"
+local guifont = font_name .. ":" .. font_height
+
 vim.opt.background = "dark" -- "dark" or "light", used for highlight colors
 -- vim.opt.clipboard = "unnamedplus" -- use the clipboard as the unnamed register
-vim.opt.cmdheight = 1 -- number of lines to use for the command-line
+vim.opt.cmdheight = 0 -- number of lines to use for the command-line
 vim.opt.completeopt = { "menu", "menuone", "noselect" } -- options for Insert mode completion
 vim.opt.confirm = true -- ask what to do about unsaved/read-only files
 vim.opt.cursorline = false -- highlight the screen line of the cursor
 vim.opt.expandtab = true -- use spaces when <Tab> is inserted
-vim.opt.guifont = "Iosevka Fixed" -- GUI: Name(s) of font(s) to be used
+vim.opt.guifont = guifont -- GUI: Name(s) of font(s) to be used
 vim.opt.ignorecase = true
 vim.opt.laststatus = 3 -- tells when last window has status lines
 vim.opt.mouse = "a" -- enable the use of mouse clicks
@@ -71,6 +82,3 @@ vim.g.neovide_profiler = false
 -- vim.g.neovide_cursor_animation_length = 0.1
 -- vim.g.neovide_cursor_trail_length = 0.01
 vim.g.neovide_cursor_antialiasing = true
-
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
