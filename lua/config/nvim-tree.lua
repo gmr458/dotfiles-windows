@@ -10,7 +10,7 @@ end
 nvim_tree.setup({
     disable_netrw = true,
     hijack_cursor = true,
-    view = { hide_root_folder = false },
+    view = { hide_root_folder = true },
     renderer = {
         group_empty = false,
         highlight_git = true,
