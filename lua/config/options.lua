@@ -23,9 +23,10 @@ local font_names = {
     fira_code = "FiraCode Nerd Font Mono",
     iosevka_fixed = "Iosevka Fixed",
     roboto_mono = "RobotoMono Nerd Font Mono",
+    consolas = "Consolas Nerd Font Mono",
 }
-local font_name = font_names.caskaydia_cove
-local font_height = "h11.0"
+local font_name = font_names.consolas
+local font_height = "h10"
 local guifont = font_name .. ":" .. font_height
 
 vim.opt.background = "dark" -- "dark" or "light", used for highlight colors
@@ -76,7 +77,7 @@ end
 
 -- Neovide options
 vim.g.neovide_refresh_rate = 60
-vim.g.neovide_fullscreen = true
+vim.g.neovide_fullscreen = false
 vim.g.neovide_input_use_logo = true
 vim.g.neovide_profiler = false
 -- vim.g.neovide_cursor_animation_length = 0.1
