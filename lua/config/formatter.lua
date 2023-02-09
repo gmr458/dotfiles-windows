@@ -47,7 +47,7 @@ formatter.setup({
         },
         rust = {
             function()
-                return { exe = "rustfmt", stdin = false }
+                return { exe = "rustfmt", stdin = false, args = { "--edition", "2021" } }
             end,
         },
         scss = { prettier_config },
