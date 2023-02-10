@@ -1,3 +1,5 @@
+; Highlight SQL code inside string
+
 ; Go code example with interpreted string literal
 ; rows, err := db.Query("SELECT * FROM tasks")
 (call_expression
