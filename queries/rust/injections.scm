@@ -19,3 +19,15 @@
         (raw_string_literal) @sql
     )
 )
+
+; Rust code example with string literal
+; sqlx::query!("SELECT * FROM tasks")
+(macro_invocation
+    macro: (scoped_identifier
+        path: (identifier) @_path (#eq? @_path "sqlx")
+        name: (identifier) @_name (#eq? @_name "query")
+    )
+    (token_tree
+        (string_literal) @sql
+    )
+)

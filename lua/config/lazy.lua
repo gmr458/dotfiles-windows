@@ -354,6 +354,10 @@ require("lazy").setup({
             "DiffviewToggleFiles",
         },
     },
+    {
+        "imsnif/kdl.vim",
+        ft = "kdl",
+    }
 }, {
     change_detection = { enabled = false, notify = false },
 })
