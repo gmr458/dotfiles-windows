@@ -18,6 +18,7 @@ indent_blankline.setup({
         "toggleterm",
         "diff",
         "dashboard",
+        "markdown",
     },
 })
 
