@@ -102,7 +102,7 @@ catppuccin.setup({
         telescope = false,
         treesitter = true,
         treesitter_context = true,
-        ts_rainbow = false,
+        ts_rainbow = true,
         vim_sneak = false,
         vimwiki = false,
         which_key = false,

@@ -56,6 +56,7 @@ require("lazy").setup({
                     require("config.treesitter.context")
                 end,
             },
+            { "mrjones2014/nvim-ts-rainbow" },
         },
     },
     {
@@ -262,7 +263,7 @@ require("lazy").setup({
     },
     {
         "petertriho/nvim-scrollbar",
-        cmd = "ScrollbarShow",
+        cmd = "ScrollbarToggle",
         config = function()
             require("config.scrollbar")
         end,
@@ -357,7 +358,7 @@ require("lazy").setup({
     {
         "imsnif/kdl.vim",
         ft = "kdl",
-    }
+    },
 }, {
     change_detection = { enabled = false, notify = false },
 })
