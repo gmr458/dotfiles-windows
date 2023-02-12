@@ -23,7 +23,7 @@ M.to_setup = function()
         "rust_analyzer",
         -- "solargraph",
         "sqls",
-        "sumneko_lua",
+        "lua_ls",
         "tailwindcss",
         "taplo",
         "tsserver",
