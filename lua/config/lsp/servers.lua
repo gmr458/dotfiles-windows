@@ -20,6 +20,7 @@ M.to_setup = function()
         "kotlin_language_server",
         "omnisharp",
         "pyright",
+        "ruff_lsp",
         "rust_analyzer",
         -- "solargraph",
         "sqls",
