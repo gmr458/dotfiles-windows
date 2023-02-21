@@ -47,7 +47,7 @@ nvim_tree.setup({
     },
     filters = {
         dotfiles = false,
-        custom = { "^\\.git", "node_modules" },
+        custom = { "^\\.git", "node_modules", ".pytest_cache", "__pycache__" },
         exclude = { ".gitignore" },
     },
     git = {

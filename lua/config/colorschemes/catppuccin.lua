@@ -110,8 +110,8 @@ catppuccin.setup({
     color_overrides = {},
     custom_highlights = function(colors)
         return {
-            NormalFloat = { bg = colors.mantle },
-            FloatBorder = { bg = colors.mantle, fg = colors.mantle },
+            -- NormalFloat = { bg = colors.mantle },
+            -- FloatBorder = { bg = colors.mantle, fg = colors.mantle },
 
             StatusLine = { bg = "NONE" },
 

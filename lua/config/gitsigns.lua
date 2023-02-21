@@ -23,4 +23,6 @@ gitsigns.setup({
     attach_to_untracked = false,
 })
 
-require("scrollbar.handlers.gitsigns").setup()
+vim.api.nvim_create_user_command("ScrollbarEnable", function()
+    require("scrollbar.handlers.gitsigns").setup()
+end, {})

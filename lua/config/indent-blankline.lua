@@ -19,6 +19,7 @@ indent_blankline.setup({
         "diff",
         "dashboard",
         "markdown",
+        "text",
     },
 })
 

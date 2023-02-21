@@ -2,6 +2,7 @@ local library = {}
 
 if vim.fn.stdpath("config") == vim.loop.cwd() then
     library = vim.api.nvim_get_runtime_file("", true)
+    runtime = { version = "LuaJIT" }
 end
 
 local config = {
@@ -12,7 +13,7 @@ local config = {
                 callSnippet = "Replace",
             },
             diagnostics = { globals = { "vim" } },
-            runtime = { version = "LuaJIT" },
+            runtime = runtime,
             telemetry = { enable = false },
             workspace = { library = library, checkThirdParty = false },
         },
