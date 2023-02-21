@@ -18,11 +18,17 @@ lspsaga.setup({
     request_timeout = 2000,
     -- :Lspsaga lsp_finder options
     finder = {
-        edit = { "o", "<CR>" },
-        vsplit = "s",
-        split = "i",
-        tabe = "t",
-        quit = { "q", "<ESC>" },
+        max_height = 0.5,
+        keys = {
+            jump_to = "p",
+            edit = { "o", "<CR>" },
+            vsplit = "s",
+            split = "i",
+            tabe = "t",
+            tabnew = "r",
+            quit = { "q", "<ESC>" },
+            close_in_preview = "<ESC>",
+        },
     },
     -- :Lspsaga peek_definition options
     definition = {
@@ -31,13 +37,14 @@ lspsaga.setup({
         split = "<C-c>i",
         tabe = "<C-c>t",
         quit = "q",
-        close = "<Esc>",
     },
     -- :Lspsaga code_action options
     code_action = {
         num_shortcut = true,
+        show_server_name = false,
+        extend_gitsigns = true,
         keys = {
-            -- string |table type
+            -- string | table type
             quit = "q",
             exec = "<CR>",
         },
@@ -52,9 +59,17 @@ lspsaga.setup({
     },
     -- :Lspsaga diagnostic_jump_next options
     diagnostic = {
+        on_insert = false,
+        on_insert_follow = false,
+        insert_winblend = 0,
         show_code_action = true,
         show_source = true,
         jump_num_shortcut = true,
+        max_width = 0.7,
+        custom_fix = nil,
+        custom_msg = nil,
+        text_hl_follow = false,
+        border_follow = true,
         keys = {
             exec_action = "o",
             quit = "q",
@@ -68,7 +83,6 @@ lspsaga.setup({
         mark = "x",
         confirm = "<CR>",
         in_select = true,
-        whole_project = true,
     },
     -- :Lspsaga outline options
     outline = {
@@ -103,68 +117,33 @@ lspsaga.setup({
     symbol_in_winbar = {
         enable = false,
         separator = "  ",
+        ignore_patterns = {},
         hide_keyword = false,
         show_file = true,
         folder_level = 2,
         respect_root = true,
         color_mode = true,
     },
+    -- :Lspsaga beacon options
+    beacon = {
+        enable = false,
+        frequency = 7,
+    },
     -- :Lspsaga UI options
     ui = {
-        -- currently only round theme
-        theme = "round",
-        -- this option only work in neovim 0.9
-        -- title = true,
-        -- border type can be single,double,rounded,solid,shadow.
+        -- This option only works in Neovim 0.9
+        title = false,
+        -- Border type can be single, double, rounded, solid, shadow.
         border = "single",
         winblend = 0,
         expand = "",
         collapse = "",
-        preview = "Preview ",
-        code_action = "Code Action ",
-        diagnostic = "Diagnostic",
+        code_action = "Code Action",
         incoming = "Incoming",
         outgoing = "Outgoing",
+        hover = "Hover",
         colors = require("catppuccin.groups.integrations.lsp_saga").custom_colors(),
-        kind = {
-            File = "file ",
-            Module = "module ",
-            Namespace = "namespace ",
-            Package = "package ",
-            Class = "class ",
-            Method = "method ",
-            Property = "property ",
-            Field = "field ",
-            Constructor = "constructor ",
-            Enum = "enum ",
-            Interface = "interface ",
-            Function = "function ",
-            Variable = "variable ",
-            Constant = "constant ",
-            String = "string ",
-            Number = "number ",
-            Boolean = "boolean ",
-            Array = "array ",
-            Object = "object ",
-            Key = "key ",
-            Null = "null ",
-            EnumMember = "enum member ",
-            Struct = "struct ",
-            Event = "event ",
-            Operator = "operator ",
-            TypeParameter = "type parameter ",
-            -- ccls
-            TypeAlias = "type alias ",
-            Parameter = "parameter ",
-            StaticMethod = "static method ",
-            Macro = "macro ",
-            -- for completion sb microsoft!!!
-            Text = "text ",
-            Snippet = "snippet ",
-            Folder = " ",
-            Unit = "unit ",
-            Value = "value ",
-        },
+        kind = {},
     },
 })
 
