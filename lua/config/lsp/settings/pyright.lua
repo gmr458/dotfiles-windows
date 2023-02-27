@@ -1,7 +1,17 @@
+local config = {
+    settings = {
+        python = {
+            analysis = {
+                typeCheckingMode = "strict",
+            },
+        },
+    },
+}
+
 if vim.fn.has("win32") == 1 then
     local bin_name = "pyright-langserver.cmd"
     local cmd = { bin_name, "--stdio" }
-    return { cmd = cmd }
+    config.cmd = cmd
 end
 
-return {}
+return config

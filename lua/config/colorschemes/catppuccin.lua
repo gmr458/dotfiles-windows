@@ -122,6 +122,8 @@ catppuccin.setup({
             NvimTreeRootFolder = { fg = colors.mantle },
             NvimTreeFolderIcon = { fg = "#FEE082" },
 
+            LazyNormal = { bg = colors.crust },
+
             CmpMenu = { bg = transparent_background and colors.none or colors.base, fg = colors.text },
             CmpMenuBorder = { bg = transparent_background and colors.none or colors.base, fg = colors.surface2 },
             CmpMenuSel = { bg = colors.sky, fg = colors.base },

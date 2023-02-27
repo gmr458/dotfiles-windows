@@ -27,10 +27,12 @@ local config = {
 
 vim.diagnostic.config(config)
 
-local function goto_definition(split_cmd)
+local function goto_definition()
     local util = vim.lsp.util
     local log = require("vim.lsp.log")
     local api = vim.api
+
+    local split_cmd = "vsplit"
 
     -- note, this handler style is for neovim 0.5.1/0.6, if on 0.5, call with function(_, method, result)
     local handler = function(_, result, ctx)
@@ -39,12 +41,27 @@ local function goto_definition(split_cmd)
             return nil
         end
 
-        if split_cmd then
+        local first_visible_line = vim.fn.line("w0")
+        local last_visible_line = vim.fn.line("w$")
+        print(first_visible_line .. "-" .. last_visible_line)
+
+        local definition = result[1]
+
+        local buf = vim.api.nvim_get_current_buf()
+        local filename = vim.api.nvim_buf_get_name(buf)
+
+        if "file://" .. filename ~= definition.uri then
             vim.cmd(split_cmd)
+        else
+            local line_definition = definition.range.start.line
+
+            if line_definition < first_visible_line or line_definition > last_visible_line then
+                vim.cmd(split_cmd)
+            end
         end
 
         if vim.tbl_islist(result) then
-            util.jump_to_location(result[1])
+            util.jump_to_location(result[1], "utf-8")
 
             if #result > 1 then
                 util.set_qflist(util.locations_to_items(result))
@@ -52,14 +69,14 @@ local function goto_definition(split_cmd)
                 api.nvim_command("wincmd p")
             end
         else
-            util.jump_to_location(result)
+            util.jump_to_location(result, "utf-8")
         end
     end
 
     return handler
 end
 
-vim.lsp.handlers["textDocument/definition"] = goto_definition("vsplit")
+vim.lsp.handlers["textDocument/definition"] = goto_definition()
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = borderchars })
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = borderchars })
 
