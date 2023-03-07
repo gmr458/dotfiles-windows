@@ -10,7 +10,15 @@ end
 nvim_tree.setup({
     disable_netrw = true,
     hijack_cursor = true,
-    view = { hide_root_folder = true },
+    view = {
+        hide_root_folder = true,
+        mappings = {
+            list = {
+                { key = "br", action = "rename_basename" },
+                { key = "e", action = "" },
+            },
+        },
+    },
     renderer = {
         group_empty = false,
         highlight_git = true,
