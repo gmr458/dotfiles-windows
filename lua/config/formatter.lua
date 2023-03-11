@@ -24,7 +24,7 @@ end
 formatter.setup({
     logging = false,
     filetype = {
-        css = { prettier_config_2_spaces },
+        css = { prettier_config_4_spaces },
         go = {
             function()
                 return { exe = "gofmt", args = { "-w" }, stdin = false }
@@ -58,7 +58,7 @@ formatter.setup({
                 return { exe = "rustfmt", stdin = false, args = { "--edition", "2021" } }
             end,
         },
-        scss = { prettier_config_2_spaces },
+        scss = { prettier_config_4_spaces },
         typescript = { prettier_config_4_spaces },
         typescriptreact = { prettier_config_2_spaces },
     },
