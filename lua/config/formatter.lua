@@ -21,16 +21,26 @@ local prettier_config_4_spaces = function()
     }
 end
 
+local prettier_config = function()
+    local spaces = vim.bo.tabstop
+
+    return {
+        exe = "prettier",
+        args = { "--tab-width", spaces, "--stdin-filepath", vim.fn.shellescape(vim.api.nvim_buf_get_name(0)) },
+        stdin = true,
+    }
+end
+
 formatter.setup({
     logging = false,
     filetype = {
-        css = { prettier_config_4_spaces },
+        css = { prettier_config },
         go = {
             function()
                 return { exe = "gofmt", args = { "-w" }, stdin = false }
             end,
         },
-        html = { prettier_config_2_spaces },
+        html = { prettier_config },
         htmldjango = {
             function()
                 return {
@@ -39,10 +49,10 @@ formatter.setup({
                 }
             end,
         },
-        javascript = { prettier_config_4_spaces },
-        javascriptreact = { prettier_config_2_spaces },
-        json = { prettier_config_2_spaces },
-        jsonc = { prettier_config_2_spaces },
+        javascript = { prettier_config },
+        javascriptreact = { prettier_config },
+        json = { prettier_config },
+        jsonc = { prettier_config },
         lua = {
             function()
                 return { exe = "stylua", stdin = false }
@@ -58,8 +68,8 @@ formatter.setup({
                 return { exe = "rustfmt", stdin = false, args = { "--edition", "2021" } }
             end,
         },
-        scss = { prettier_config_4_spaces },
-        typescript = { prettier_config_4_spaces },
-        typescriptreact = { prettier_config_2_spaces },
+        scss = { prettier_config },
+        typescript = { prettier_config },
+        typescriptreact = { prettier_config },
     },
 })

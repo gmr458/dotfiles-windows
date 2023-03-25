@@ -43,17 +43,19 @@ local function goto_definition()
 
         local first_visible_line = vim.fn.line("w0")
         local last_visible_line = vim.fn.line("w$")
-        print(first_visible_line .. "-" .. last_visible_line)
 
         local definition = result[1]
 
         local buf = vim.api.nvim_get_current_buf()
         local filename = vim.api.nvim_buf_get_name(buf)
 
-        if "file://" .. filename ~= definition.uri then
+        local uri = definition.uri or definition.targetUri
+
+        if "file://" .. filename ~= uri then
             vim.cmd(split_cmd)
         else
-            local line_definition = definition.range.start.line
+            local range = definition.range or definition.targetSelectionRange
+            local line_definition = range.start.line
 
             if line_definition < first_visible_line or line_definition > last_visible_line then
                 vim.cmd(split_cmd)
@@ -93,6 +95,12 @@ vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
 
 local function attach_navic(client, bufnr)
     -- vim.g.navic_silence = true
+
+    local filetype = vim.bo.filetype
+
+    if client.name == "html" and (filetype == "javascriptreact" or filetype == "typescriptreact") then
+        return
+    end
 
     local navic_loaded, navic = pcall(require, "nvim-navic")
 

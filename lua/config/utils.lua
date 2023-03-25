@@ -1,5 +1,18 @@
 local M = {}
 
+M.write_file = function(filename, text)
+    local file = io.open(filename, "w+")
+    if file == nil or io.type(file) ~= "file" then
+        print("Failed to open output file", filename)
+        return
+    end
+    file:setvbuf("full")
+
+    file:write(text)
+    file:flush()
+    file:close()
+end
+
 M.running_wsl = function()
     if vim.loop.os_uname().sysname == "Linux" then
         local kernel_release = vim.fn.system({ "uname", "-r" })

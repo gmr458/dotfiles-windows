@@ -44,6 +44,46 @@ M.components = function()
                 { str = "slant_right_thin", hl = { bg = "crust", fg = "overlay2" } },
             },
         },
+        -- {
+        --     provider = "file_size",
+        --     hl = { bg = "crust", fg = "fg", style = "NONE" },
+        --     left_sep = { { str = " ", hl = { bg = "crust" } } },
+        --     right_sep = {
+        --         { str = " ", hl = { bg = "crust" } },
+        --         { str = "slant_right_thin", hl = { bg = "crust", fg = "overlay2" } },
+        --     },
+        -- },
+        {
+            provider = { name = "file_type", opts = { case = "lowercase" } },
+            hl = { bg = "crust", fg = "fg", style = "NONE" },
+            left_sep = { { str = " ", hl = { bg = "crust" } } },
+            right_sep = {
+                { str = " ", hl = { bg = "crust" } },
+                { str = "slant_right_thin", hl = { bg = "crust", fg = "overlay2" } },
+            },
+        },
+        {
+            provider = function()
+                return ((vim.bo.fenc ~= "" and vim.bo.fenc) or vim.o.enc)
+            end,
+            hl = { bg = "crust", fg = "fg", style = "NONE" },
+            left_sep = { { str = " ", hl = { bg = "crust" } } },
+            right_sep = {
+                { str = " ", hl = { bg = "crust" } },
+                { str = "slant_right_thin", hl = { bg = "crust", fg = "overlay2" } },
+            },
+        },
+        {
+            provider = function()
+                return ((vim.bo.fileformat ~= "" and vim.bo.fileformat) or vim.o.fileformat)
+            end,
+            hl = { bg = "crust", fg = "fg", style = "NONE" },
+            left_sep = { { str = " ", hl = { bg = "crust" } } },
+            right_sep = {
+                { str = " ", hl = { bg = "crust" } },
+                { str = "slant_right_thin", hl = { bg = "crust", fg = "overlay2" } },
+            },
+        },
         {
             provider = "git_diff_added",
             icon = " +",
@@ -61,7 +101,25 @@ M.components = function()
         },
         {
             provider = "git_branch",
-            icon = { str = "שׂ ", hl = { fg = "peach" } },
+            icon = { str = " ", hl = { fg = "peach" } },
+            hl = { bg = "crust", fg = "fg", style = "NONE" },
+            left_sep = { { str = " ", hl = { bg = "crust" } } },
+            right_sep = {
+                { str = " ", hl = { bg = "crust" } },
+                { str = "slant_right_thin", hl = { bg = "crust", fg = "overlay2" } },
+            },
+        },
+        {
+            provider = function()
+                local total_lines = vim.fn.line("$")
+                local total_visible_lines = vim.fn.line("w$")
+
+                if total_lines <= total_visible_lines then
+                    return ""
+                end
+
+                return total_lines .. " lines"
+            end,
             hl = { bg = "crust", fg = "fg", style = "NONE" },
             left_sep = { { str = " ", hl = { bg = "crust" } } },
             right_sep = {
@@ -84,17 +142,13 @@ M.components = function()
 
     components.active[2] = {
         {
-            provider = "file_type",
-            hl = { bg = "crust", style = "NONE" },
-            left_sep = {
-                { str = "slant_left", hl = { bg = "NONE", fg = "crust" } },
-                { str = " ", hl = { bg = "crust" } },
-            },
-        },
-        {
             provider = "lsp_client_names",
             hl = { bg = "crust", fg = "fg", style = "NONE" },
+            -- left_sep = {
+            --     { str = " ", hl = { bg = "crust" } },
+            -- },
             left_sep = {
+                { str = "slant_left", hl = { bg = "NONE", fg = "crust" } },
                 { str = " ", hl = { bg = "crust" } },
             },
         },
