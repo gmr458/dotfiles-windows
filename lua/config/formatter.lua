@@ -5,28 +5,41 @@ if not formatter_loaded then
     return
 end
 
-local prettier_config_2_spaces = function()
+local prettier_config = function()
+    local prettier_config_files = {
+        ".prettierrc",
+        "prettier.config.js",
+        "prettier.config.cjs",
+    }
+
+    local config_file_exists = false
+
+    for _, config_file in pairs(prettier_config_files) do
+        local file = io.open(config_file, "r")
+        if file == nil or io.type(file) ~= "file" then
+            config_file_exists = false
+        else
+            file:close()
+            config_file_exists = true
+        end
+    end
+
+    if not config_file_exists then
+        return {
+            exe = "prettier",
+            args = {
+                "--tab-width",
+                vim.bo.tabstop,
+                "--stdin-filepath",
+                vim.fn.shellescape(vim.api.nvim_buf_get_name(0)),
+            },
+            stdin = true,
+        }
+    end
+
     return {
         exe = "prettier",
         args = { "--stdin-filepath", vim.fn.shellescape(vim.api.nvim_buf_get_name(0)) },
-        stdin = true,
-    }
-end
-
-local prettier_config_4_spaces = function()
-    return {
-        exe = "prettier",
-        args = { "--tab-width", "4", "--stdin-filepath", vim.fn.shellescape(vim.api.nvim_buf_get_name(0)) },
-        stdin = true,
-    }
-end
-
-local prettier_config = function()
-    local spaces = vim.bo.tabstop
-
-    return {
-        exe = "prettier",
-        args = { "--tab-width", spaces, "--stdin-filepath", vim.fn.shellescape(vim.api.nvim_buf_get_name(0)) },
         stdin = true,
     }
 end
