@@ -21,6 +21,7 @@ local prettier_config = function()
         else
             file:close()
             config_file_exists = true
+            break
         end
     end
 

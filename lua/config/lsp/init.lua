@@ -149,11 +149,15 @@ local on_attach = function(client, bufnr)
     end, bufopts)
 
     if client.server_capabilities.documentHighlightProvider then
-        vim.cmd([[
-            hi! LspReferenceRead cterm=bold ctermbg=red guibg=Grey35
-            hi! LspReferenceText cterm=bold ctermbg=red guibg=Grey35
-            hi! LspReferenceWrite cterm=bold ctermbg=red guibg=Grey35
-        ]])
+        local guibg = "Grey35"
+
+        if vim.o.background == "light" then
+            guibg = "#D5D5D5"
+        end
+
+        vim.cmd("hi! LspReferenceRead cterm=bold ctermbg=red guibg=" .. guibg)
+        vim.cmd("hi! LspReferenceText cterm=bold ctermbg=red guibg=" .. guibg)
+        vim.cmd("hi! LspReferenceWrite cterm=bold ctermbg=red guibg=" .. guibg)
 
         vim.api.nvim_create_augroup("lsp_document_highlight", {
             clear = false,

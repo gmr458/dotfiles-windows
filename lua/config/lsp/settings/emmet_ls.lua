@@ -7,12 +7,12 @@ local config = {
         "hbs",
         "html",
         "htmldjango",
-        "javascriptreact",
+        -- "javascriptreact",
         "less",
         "pug",
         "sass",
         "scss",
-        "typescriptreact",
+        -- "typescriptreact",
     },
     -- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
     init_options = {
