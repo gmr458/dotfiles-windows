@@ -281,14 +281,14 @@ require("lazy").setup({
             require("config.feline")
         end,
     },
-    {
-        "phaazon/hop.nvim",
-        branch = "v1",
-        cmd = { "HopChar2", "HopPattern" },
-        config = function()
-            require("config.hop")
-        end,
-    },
+    -- {
+    --     "phaazon/hop.nvim",
+    --     branch = "v1",
+    --     cmd = { "HopChar2", "HopPattern" },
+    --     config = function()
+    --         require("config.hop")
+    --     end,
+    -- },
     {
         "NMAC427/guess-indent.nvim",
         config = function()
