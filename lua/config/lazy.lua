@@ -38,7 +38,13 @@ if vim.fn.has("win32") == 1 then
     }
 end
 
-require("lazy").setup({
+local ok, lazy = pcall(require, "lazy")
+if not ok then
+    vim.notify("lazy could not be loaded")
+    return
+end
+
+lazy.setup({
     -- Treesitter
     {
         "nvim-treesitter/nvim-treesitter",
@@ -55,6 +61,9 @@ require("lazy").setup({
                 config = function()
                     require("config.treesitter.context")
                 end,
+            },
+            {
+                "nvim-treesitter/nvim-treesitter-textobjects",
             },
             { "mrjones2014/nvim-ts-rainbow" },
         },
@@ -93,73 +102,24 @@ require("lazy").setup({
             require("config.colorizer")
         end,
     },
-    -- Colorschemes
+    -- Colorscheme
     {
-        "catppuccin/nvim",
-        name = "catppuccin",
+        "gmr458/vscode_dark_plus.nvim",
         lazy = false,
         priority = 1000,
         config = function()
-            require("config.colorschemes.catppuccin")
+            require("config.colorschemes.vscode_dark_plus")
+            vim.cmd.colorscheme("vscode_dark_plus")
         end,
     },
-    -- {
-    --     -- "wuelnerdotexe/vim-enfocado",
-    --     -- lazy = false,
-    --     -- priority = 1000,
-    --     -- config = function()
-    --     --     config = "require('config.colorschemes.enfocado')"
-    --     -- end,
-    -- },
-    -- {
-    --     -- "projekt0n/github-nvim-theme",
-    --     -- lazy = false,
-    --     -- priority = 1000,
-    --     -- config = function()
-    --     --     config = "require('config.colorschemes.github')"
-    --     -- end,
-    -- },
-    -- {
-    --     -- "ellisonleao/gruvbox.nvim",
-    --     -- lazy = false,
-    --     -- priority = 1000,
-    --     -- config = function()
-    --     --     config = "require('config.colorschemes.gruvbox')"
-    --     -- end,
-    -- },
-    -- {
-    --     -- "rebelot/kanagawa.nvim",
-    --     -- lazy = false,
-    --     -- priority = 1000,
-    --     -- config = function()
-    --     --     require("config.colorschemes.kanagawa")
-    --     -- end,
-    -- },
-    -- {
-    --     -- "marko-cerovac/material.nvim",
-    --     -- lazy = false,
-    --     -- priority = 1000,
-    --     -- config = function()
-    --     --     config = "require('config.colorschemes.material')"
-    --     -- end,
-    -- },
-    -- {
-    --     -- "navarasu/onedark.nvim",
-    --     -- lazy = false,
-    --     -- priority = 1000,
-    --     -- config = function()
-    --     --     config = "require('config.colorschemes.onedark')"
-    --     -- end,
-    -- },
-    -- {
-    --     -- "rose-pine/neovim",
-    --     -- name = "rose-pine",
-    --     -- lazy = false,
-    --     -- priority = 1000,
-    --     -- config = function()
-    --     --     config = "require('config.colorschemes.rose-pine')"
-    --     -- end,
-    -- },
+    -- FZF
+    {
+        "ibhagwan/fzf-lua",
+        cmd = "FzfLua",
+        config = function()
+            require("config.fzf")
+        end,
+    },
     -- Telescope
     {
         "nvim-telescope/telescope.nvim",
@@ -203,13 +163,6 @@ require("lazy").setup({
                         end,
                     },
                 },
-            },
-            {
-                "glepnir/lspsaga.nvim",
-                branch = "main",
-                config = function()
-                    require("config.lsp.lspsaga")
-                end,
             },
             {
                 "folke/trouble.nvim",
@@ -281,14 +234,6 @@ require("lazy").setup({
             require("config.feline")
         end,
     },
-    -- {
-    --     "phaazon/hop.nvim",
-    --     branch = "v1",
-    --     cmd = { "HopChar2", "HopPattern" },
-    --     config = function()
-    --         require("config.hop")
-    --     end,
-    -- },
     {
         "NMAC427/guess-indent.nvim",
         config = function()
@@ -346,7 +291,7 @@ require("lazy").setup({
         "sindrets/diffview.nvim",
         dependencies = "nvim-lua/plenary.nvim",
         cmd = {
-            "DiffviewClose",
+            -- "DiffviewClose",
             "DiffviewFileHistory",
             "DiffviewFocusFiles",
             "DiffviewLog",

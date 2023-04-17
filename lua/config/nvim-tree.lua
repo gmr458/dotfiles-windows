@@ -1,7 +1,6 @@
-local nvim_tree_loaded, nvim_tree = pcall(require, "nvim-tree")
-
-if not nvim_tree_loaded then
-    print("nvim-tree not loaded")
+local ok, nvim_tree = pcall(require, "nvim-tree")
+if not ok then
+    vim.notify("nvim-tree could not be loaded")
     return
 end
 
@@ -11,7 +10,6 @@ nvim_tree.setup({
     disable_netrw = true,
     hijack_cursor = true,
     view = {
-        hide_root_folder = true,
         mappings = {
             list = {
                 { key = "br", action = "rename_basename" },
@@ -20,6 +18,7 @@ nvim_tree.setup({
         },
     },
     renderer = {
+        root_folder_label = false,
         group_empty = false,
         highlight_git = true,
         highlight_opened_files = "name",
@@ -41,7 +40,7 @@ nvim_tree.setup({
                     staged = "A",
                     unmerged = "U",
                     renamed = "R",
-                    untracked = "?",
+                    untracked = "U",
                     deleted = "D",
                     ignored = "◌",
                 },

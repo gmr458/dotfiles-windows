@@ -1,7 +1,6 @@
-local guess_indent_loaded, guess_indent = pcall(require, "guess-indent")
-
-if not guess_indent_loaded then
-    print("guess-indent not loaded")
+local ok, guess_indent = pcall(require, "guess-indent")
+if not ok then
+    vim.notify("guess-indent could not be loaded")
     return
 end
 

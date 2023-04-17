@@ -1,10 +1,8 @@
-local kommentary_config_loaded, kommentary_config = pcall(require, "kommentary.config")
-
-if not kommentary_config_loaded then
-    print("kommentary.config not loaded")
+local ok, config = pcall(require, "kommentary.config")
+if not ok then
+    vim.notify("kommentary.config could not be loaded")
     return
 end
 
-kommentary_config.configure_language("default", { prefer_single_line_comments = true })
-
-kommentary_config.use_extended_mappings()
+config.configure_language("default", { prefer_single_line_comments = true })
+config.use_extended_mappings()

@@ -83,3 +83,5 @@ vim.g.neovide_profiler = false
 -- vim.g.neovide_cursor_animation_length = 0.1
 -- vim.g.neovide_cursor_trail_length = 0.01
 vim.g.neovide_cursor_antialiasing = true
+
+-- vim.cmd.colorscheme("vscode_dark_plus")

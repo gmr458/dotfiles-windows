@@ -1,20 +1,25 @@
-local telescope_loaded, telescope = pcall(require, "telescope")
+local ok, telescope, actions_layout
 
-if not telescope_loaded then
-    print("telescope not loaded")
+ok, telescope = pcall(require, "telescope")
+if not ok then
+    vim.notify("telescope could not be loaded")
     return
 end
 
-local action_layout = require("telescope.actions.layout")
+ok, actions_layout = pcall(require, "telescope.actions.layout")
+if not ok then
+    vim.notify("telescope could not be loaded")
+    return
+end
 
 telescope.setup({
     defaults = {
         mappings = {
             n = {
-                ["<C-y>"] = action_layout.toggle_preview,
+                ["<C-y>"] = actions_layout.toggle_preview,
             },
             i = {
-                ["<C-y>"] = action_layout.toggle_preview,
+                ["<C-y>"] = actions_layout.toggle_preview,
             },
         },
         prompt_prefix = "   ",

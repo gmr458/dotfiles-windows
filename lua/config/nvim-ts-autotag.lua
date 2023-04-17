@@ -1,7 +1,6 @@
-local autotag_loaded, autotag = pcall(require, "nvim-ts-autotag")
-
-if not autotag_loaded then
-    print("nvim-ts-autotag not loaded")
+local ok, autotag = pcall(require, "nvim-ts-autotag")
+if not ok then
+    vim.notify("nvim-ts-autotag could not be loaded")
     return
 end
 

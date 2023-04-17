@@ -1,7 +1,6 @@
-local indent_blankline_loaded, indent_blankline = pcall(require, "indent_blankline")
-
-if not indent_blankline_loaded then
-    print("indent_blankline not loaded")
+local ok, indent_blankline = pcall(require, "indent_blankline")
+if not ok then
+    vim.notify("indent_blankline could not be loaded")
     return
 end
 

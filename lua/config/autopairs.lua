@@ -1,19 +1,22 @@
-local autopairs_loaded, autopairs = pcall(require, "nvim-autopairs")
+local ok, autopairs, autopairs_cmp, cmp
 
-if not autopairs_loaded then
-    print("nvim-autopairs not loaded")
+ok, autopairs = pcall(require, "nvim-autopairs")
+if not ok then
+    vim.notify("nvim-autopairs could not be loaded")
     return
 end
-
 autopairs.setup({})
 
-local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-
-local cmp_loaded, cmp = pcall(require, "cmp")
-
-if not cmp_loaded then
-    print("cmp not loaded")
+ok, autopairs_cmp = pcall(require, "nvim-autopairs.completion.cmp")
+if not ok then
+    vim.notify("nvim-autopairs.completion.cmp could not be loaded")
     return
 end
 
-cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))
+ok, cmp = pcall(require, "cmp")
+if not ok then
+    vim.notify("cmp could not be loaded")
+    return
+end
+
+cmp.event:on("confirm_done", autopairs_cmp.on_confirm_done({ map_char = { tex = "" } }))

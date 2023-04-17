@@ -1,7 +1,6 @@
-local lspconfig_loaded, lspconfig = pcall(require, "lspconfig")
-
-if not lspconfig_loaded then
-    print("lspconfig not loaded")
+local ok, lspconfig = pcall(require, "lspconfig")
+if not ok then
+    vim.notify("lspconfig could not be loaded")
     return
 end
 
@@ -102,10 +101,9 @@ local function attach_navic(client, bufnr)
         return
     end
 
-    local navic_loaded, navic = pcall(require, "nvim-navic")
-
-    if not navic_loaded then
-        print("nvim-navic not loaded")
+    local ok, navic = pcall(require, "nvim-navic")
+    if not ok then
+        vim.notify("nvim-navic could not be loaded")
         return
     end
 

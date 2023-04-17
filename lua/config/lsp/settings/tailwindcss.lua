@@ -1,7 +1,6 @@
-local util_loaded, util = pcall(require, "lspconfig.util")
-
-if not util_loaded then
-    print("lspconfig.util not loaded")
+local ok, util = pcall(require, "lspconfig.util")
+if not ok then
+    vim.notify("lspconfig.util could not be loaded")
     return
 end
 

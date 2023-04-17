@@ -1,22 +1,32 @@
-local alpha_loaded, alpha = pcall(require, "alpha")
+local ok, alpha, dashboard
 
-if not alpha_loaded then
-    print("alpha not loaded")
+ok, alpha = pcall(require, "alpha")
+if not ok then
+    vim.notify("alpha could not be loaded")
     return
 end
 
-local dashboard = require("alpha.themes.dashboard")
+ok, dashboard = pcall(require, "alpha.themes.dashboard")
+if not ok then
+    vim.notify("alpha.themes.dashboard could not be loaded")
+    return
+end
 
-dashboard.section.header.val = require("config.headers").Default2
-dashboard.section.header.opts = { position = "center", hl = "DashboardHeader" }
+dashboard.section.header.val = require("config.headers").Default
+dashboard.section.header.opts = { position = "center", hl = "AlphaHeader" }
 
 dashboard.section.buttons.val = {
-    dashboard.button("tff", "  Find file", "<CMD>silent Telescope find_files hidden=true no_ignore=true<CR>"),
+    dashboard.button("tff", "  Find file", "<CMD>silent FzfLua files<CR>"),
     dashboard.button("tfg", "  Live grep", "<CMD>silent Telescope live_grep preview=true<CR>"),
     dashboard.button("tfr", "  Recent File", "<CMD>silent Telescope oldfiles preview=false<CR>"),
     dashboard.button("cfg", "  Config", "<CMD>silent cd ~/.config/nvim | e init.lua<CR>"),
     dashboard.button("upd", "ﮮ  Update plugins", "<CMD>Lazy update<CR>"),
     dashboard.button("q", "  Quit NVIM", ":qa<CR>"),
 }
+
+for _, value in pairs(dashboard.section.buttons.val) do
+    value.opts.hl_shortcut = "AlphaShorcut"
+    value.opts.hl = "AlphaButton"
+end
 
 alpha.setup(dashboard.config)

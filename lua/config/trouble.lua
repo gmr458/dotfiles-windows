@@ -1,6 +1,6 @@
-local trouble_loaded, trouble = pcall(require, "trouble")
-
-if not trouble_loaded then
+local ok, trouble = pcall(require, "trouble")
+if not ok then
+    vim.notify("trouble could not be loaded")
     return
 end
 

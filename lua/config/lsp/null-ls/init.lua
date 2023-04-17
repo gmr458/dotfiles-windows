@@ -1,7 +1,6 @@
-local null_ls_loaded, null_ls = pcall(require, "null-ls")
-
-if not null_ls_loaded then
-    print("null-ls not loaded")
+local ok, null_ls = pcall(require, "null-ls")
+if not ok then
+    vim.notify("null-ls could not be loaded")
     return
 end
 

@@ -34,8 +34,13 @@ M.get_filename = function()
     local utils = require("config.utils")
 
     if not utils.is_nil_or_empty_string(filename) then
-        local file_icon, file_icon_color =
-            require("nvim-web-devicons").get_icon_color(filename, extension, { default = true })
+        local ok, web_devicons = pcall(require, "nvim-web-devicons")
+        if not ok then
+            vim.notify("nvim-web-devicons could not be loaded")
+            return
+        end
+
+        local file_icon, file_icon_color = web_devicons.get_icon_color(filename, extension, { default = true })
 
         local hl_group = "FileIconColor" .. extension
 
@@ -51,9 +56,8 @@ M.get_filename = function()
 end
 
 local get_navic = function()
-    local navic_loaded, navic = pcall(require, "nvim-navic")
-
-    if not navic_loaded then
+    local ok, navic = pcall(require, "nvim-navic")
+    if not ok then
         return ""
     end
 

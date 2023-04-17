@@ -1,7 +1,6 @@
-local scrollbar_loaded, scrollbar = pcall(require, "scrollbar")
-
-if not scrollbar_loaded then
-    print("scrollbar not loaded")
+local ok, scrollbar = pcall(require, "scrollbar")
+if not ok then
+    vim.notify("scrollbar could not be loaded")
     return
 end
 

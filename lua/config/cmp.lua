@@ -1,14 +1,20 @@
-local luasnip_loaded, luasnip = pcall(require, "luasnip")
+local ok, luasnip, from_vscode, cmp, types
 
-if not luasnip_loaded then
-    print("luasnip not loaded")
+ok, luasnip = pcall(require, "luasnip")
+if not ok then
+    vim.notify("luasnip could not be loaded")
     return
 end
 
 local custom_snippets_path = vim.fn.stdpath("config") .. "/custom-snippets"
 local data_path = vim.fn.stdpath("data")
 
-require("luasnip.loaders.from_vscode").lazy_load({
+ok, from_vscode = pcall(require, "luasnip.loaders.from_vscode")
+if not ok then
+    vim.notify("luasnip.loaders.from_vscode could not be loaded")
+    return
+end
+from_vscode.lazy_load({
     paths = {
         custom_snippets_path,
         data_path .. "/lazy/friendly-snippets",
@@ -16,15 +22,9 @@ require("luasnip.loaders.from_vscode").lazy_load({
     },
 })
 
-local cmp_loaded, cmp = pcall(require, "cmp")
-
-if not cmp_loaded then
-    print("cmp not loaded")
-    return
-end
-
-if cmp == nil then
-    print("cmp is nil")
+ok, cmp = pcall(require, "cmp")
+if not ok then
+    vim.notify("cmp could not be loaded")
     return
 end
 
@@ -41,7 +41,11 @@ local function border(hl_name)
     }
 end
 
-local types = require("cmp.types")
+ok, types = pcall(require, "cmp.types")
+if not ok then
+    vim.notify("cmp.types could not be loaded")
+    return
+end
 
 local has_words_before = function()
     unpack = unpack or table.unpack

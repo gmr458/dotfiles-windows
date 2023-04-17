@@ -1,7 +1,6 @@
-local navic_loaded, navic = pcall(require, "nvim-navic")
-
-if not navic_loaded then
-    print("nvim-navic not loaded")
+local ok, navic = pcall(require, "nvim-navic")
+if not ok then
+    vim.notify("nvim-navic could not be loaded")
     return
 end
 

@@ -1,4 +1,5 @@
 local library = {}
+local runtime = {}
 
 if vim.fn.stdpath("config") == vim.loop.cwd() then
     library = vim.api.nvim_get_runtime_file("", true)

@@ -1,7 +1,6 @@
-local toggleterm_loaded, toggleterm = pcall(require, "toggleterm")
-
-if not toggleterm_loaded then
-    print("toggleterm not loaded")
+local ok, toggleterm = pcall(require, "toggleterm")
+if not ok then
+    vim.notify("toggleterm could not be loaded")
     return
 end
 

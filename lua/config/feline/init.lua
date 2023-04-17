@@ -1,23 +1,16 @@
-local feline_loaded, feline = pcall(require, "feline")
+local ok, feline, vscode_dark_plus
 
-if not feline_loaded then
-    print("feline not loaded")
+ok, feline = pcall(require, "feline")
+if not ok then
+    vim.notify("feline could not be loaded")
     return
 end
 
-local themes = {
-    catppuccin = "catppuccin",
-    enfocado = "enfocado",
-    kanagawa = "kanagawa",
-}
-
-local styles = {
-    complete = "complete",
-    float = "float",
-}
-
-local theme = themes.catppuccin
-local style = styles.float
+ok, vscode_dark_plus = pcall(require, "vscode_dark_plus.integrations.feline")
+if not ok then
+    vim.notify("vscode_dark_plus.integrations.feline could not be loaded")
+    return
+end
 
 feline.setup({
     force_inactive = {
@@ -41,6 +34,6 @@ feline.setup({
         bufnames = {},
     },
     disable = { filetypes = { "^alpha$", "^dashboard$" } },
-    theme = require("config.feline.themes." .. theme .. "." .. style).palette(),
-    components = require("config.feline.themes." .. theme .. "." .. style).components(),
+    theme = vscode_dark_plus.palette(),
+    components = vscode_dark_plus.components(),
 })

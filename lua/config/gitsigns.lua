@@ -1,7 +1,8 @@
-local gitsigns_loaded, gitsigns = pcall(require, "gitsigns")
+local ok, gitsigns, scrollbar_gitsigns
 
-if not gitsigns_loaded then
-    print("gitsigns not loaded")
+ok, gitsigns = pcall(require, "gitsigns")
+if not ok then
+    vim.notify("gitsigns could not be loaded")
     return
 end
 
@@ -24,5 +25,11 @@ gitsigns.setup({
 })
 
 vim.api.nvim_create_user_command("ScrollbarEnable", function()
-    require("scrollbar.handlers.gitsigns").setup()
+    ok, scrollbar_gitsigns = pcall(require, "scrollbar.handlers.gitsigns")
+    if not ok then
+        vim.notify("scrollbar.handlers.gitsigns could not be loaded")
+        return
+    end
+
+    scrollbar_gitsigns.setup()
 end, {})

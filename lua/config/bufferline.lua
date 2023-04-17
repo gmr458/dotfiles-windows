@@ -1,7 +1,6 @@
-local bufferline_loaded, bufferline = pcall(require, "bufferline")
-
-if not bufferline_loaded then
-    print("bufferline not loaded")
+local ok, bufferline = pcall(require, "bufferline")
+if not ok then
+    vim.notify("bufferline could not be loaded")
     return
 end
 

@@ -1,4 +1,12 @@
-require("neoscroll").setup({
+local ok, neoscroll, config
+
+ok, neoscroll = pcall(require, "neoscroll")
+if not ok then
+    vim.notify("neoscroll could not be loadedlspconfig")
+    return
+end
+
+neoscroll.setup({
     -- All these keys will be mapped to their corresponding default scrolling animation
     mappings = { "<C-u>", "<C-d>", "<C-b>", "<C-f>", "<C-y>", "<C-e>", "zt", "zz", "zb" },
     hide_cursor = false, -- Hide cursor while scrolling
@@ -23,4 +31,10 @@ t["<C-d>"] = { "scroll", { "vim.wo.scroll", "true", "300" } }
 -- t["zz"] = { "zz", { "250" } }
 -- t["zb"] = { "zb", { "250" } }
 
-require("neoscroll.config").set_mappings(t)
+ok, config = pcall(require, "neoscroll.config")
+if not ok then
+    vim.notify("neoscroll.config could not be loadedlspconfig")
+    return
+end
+
+config.set_mappings(t)
