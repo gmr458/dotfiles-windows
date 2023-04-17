@@ -101,8 +101,8 @@ local function attach_navic(client, bufnr)
         return
     end
 
-    local ok, navic = pcall(require, "nvim-navic")
-    if not ok then
+    local ok_navic, navic = pcall(require, "nvim-navic")
+    if not ok_navic then
         vim.notify("nvim-navic could not be loaded")
         return
     end

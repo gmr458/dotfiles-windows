@@ -2,8 +2,6 @@
 
 ![screenshot-01](./screenshots/01.png)
 ![screenshot-02](./screenshots/02.png)
-![screenshot-03](./screenshots/03.png)
-![screenshot-04](./screenshots/04.png)
 
 ## Requirements
 
@@ -38,6 +36,6 @@ git clone https://github.com/gmr458/nvim.git ~/.config/nvim
 
 3. Open Neovim and use the command `MasonInstallListPackages` to install LSP servers, formatters and linters listed in `./lua/config/lsp/mason/list-packages.lua`.
 
-4. Use the command `LspStart` to start `nvim-lspconfig`, `nvim-navic`, `mason.nvim`, `null-ls.nvim` and `lspsaga.nvim`. Now you can get LSP completions, LSP diagnostics, formatting, linting and other utilities that `nvim-navic` and `lspsaga.nvim` provide.
+4. Use the command `LspStart` to start `nvim-lspconfig`, `nvim-navic`, `mason.nvim` and `null-ls.nvim`. Now you can get LSP completions, LSP diagnostics, formatting and linting.
 
 This config is highly influenced by [LunarVim/Neovim-from-scratch](https://github.com/LunarVim/Neovim-from-scratch)
