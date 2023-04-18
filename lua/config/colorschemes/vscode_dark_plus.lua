@@ -4,4 +4,4 @@ if not ok then
     return
 end
 
-vscode_dark_plus.setup({ v2 = true })
+vscode_dark_plus.setup({ v2 = true, cursorline = true })

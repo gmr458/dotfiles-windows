@@ -65,7 +65,7 @@ lazy.setup({
             {
                 "nvim-treesitter/nvim-treesitter-textobjects",
             },
-            { "mrjones2014/nvim-ts-rainbow" },
+            { "HiPhish/nvim-ts-rainbow2" },
         },
     },
     {
@@ -291,7 +291,6 @@ lazy.setup({
         "sindrets/diffview.nvim",
         dependencies = "nvim-lua/plenary.nvim",
         cmd = {
-            -- "DiffviewClose",
             "DiffviewFileHistory",
             "DiffviewFocusFiles",
             "DiffviewLog",

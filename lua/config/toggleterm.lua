@@ -7,10 +7,11 @@ end
 toggleterm.setup({
     direction = "float",
     start_in_insert = true,
+    persist_mode = true,
     highlights = {
-        Normal = { link = "ToggleTerm1NormalFloat" },
-        NormalFloat = { link = "ToggleTerm1NormalFloat" },
-        FloatBorder = { link = "ToggleTerm1FloatBorder" },
+        Normal = { link = "Normal" },
+        NormalFloat = { link = "NormalFloat" },
+        FloatBorder = { link = "FloatBorder" },
     },
 })
 
