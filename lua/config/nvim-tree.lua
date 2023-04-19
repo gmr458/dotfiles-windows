@@ -4,71 +4,39 @@ if not ok then
     return
 end
 
--- each of these are documented in `:help nvim-tree.OPTION_NAME`
--- nested options are documented by accessing them with `.` (eg: `:help nvim-tree.view.mappings.list`).
 nvim_tree.setup({
     disable_netrw = true,
     hijack_cursor = true,
     view = {
-        mappings = {
-            list = {
-                { key = "br", action = "rename_basename" },
-                { key = "e", action = "" },
-            },
-        },
+        centralize_selection = true,
+        preserve_window_proportions = true,
     },
     renderer = {
-        root_folder_label = false,
-        group_empty = false,
         highlight_git = true,
-        highlight_opened_files = "name",
-        root_folder_modifier = ":t",
+        root_folder_label = false,
         indent_markers = {
             enable = true,
             inline_arrows = false,
         },
         icons = {
-            show = {
-                file = true,
-                folder = true,
-                folder_arrow = false,
-                git = true,
-            },
+            show = { folder_arrow = false },
             glyphs = {
                 git = {
                     unstaged = "M",
                     staged = "A",
-                    unmerged = "U",
+                    unmerged = "UM",
                     renamed = "R",
                     untracked = "U",
                     deleted = "D",
-                    ignored = "◌",
+                    ignored = "I",
                 },
             },
         },
         special_files = {},
     },
-    update_focused_file = {
-        enable = true,
-        update_root = true,
-    },
     filters = {
-        dotfiles = false,
-        custom = {
-            "^.git$",
-            -- "^bin$",
-            -- "^obj$",
-            -- "^.pytest_cache$",
-            -- "^__pycache__$",
-            -- "^node_modules$",
-            -- "^target$",
-            -- "^vendor$",
-            -- "^venv$",
-        },
-        -- exclude = { ".gitignore" },
+        custom = { "^.git$" },
+        exclude = { ".gitignore" },
     },
-    git = {
-        enable = true,
-        ignore = false,
-    },
+    modified = { enable = true },
 })

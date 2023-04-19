@@ -23,7 +23,7 @@ M.to_setup = function()
         -- "ruff_lsp",
         "rust_analyzer",
         -- "solargraph",
-        "sqls",
+        "svelte",
         "lua_ls",
         "tailwindcss",
         "taplo",
