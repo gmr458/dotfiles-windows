@@ -62,9 +62,6 @@ lazy.setup({
                     require("config.treesitter.context")
                 end,
             },
-            {
-                "nvim-treesitter/nvim-treesitter-textobjects",
-            },
             { "HiPhish/nvim-ts-rainbow2" },
         },
     },
@@ -171,6 +168,12 @@ lazy.setup({
                 end,
             },
         },
+    },
+    -- LSP Java
+    {
+        "mfussenegger/nvim-jdtls",
+        ft = "java",
+        dependencies = { "williamboman/mason.nvim" },
     },
     -- Completion
     {

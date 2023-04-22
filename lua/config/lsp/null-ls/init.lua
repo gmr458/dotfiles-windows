@@ -11,6 +11,7 @@ null_ls.setup({
             extra_args = { "--preserve-leading-space", "--preserve-blank-lines", "--indent", "2" },
         }),
         null_ls.builtins.formatting.gofmt,
+        -- null_ls.builtins.formatting.isort,
         null_ls.builtins.formatting.prettier,
         null_ls.builtins.formatting.rubocop,
         null_ls.builtins.formatting.rustfmt,

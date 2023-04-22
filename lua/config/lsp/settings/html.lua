@@ -6,9 +6,7 @@ local config = {
         "hbs",
         "html",
         "htmldjango",
-        "javascriptreact",
         "pug",
-        "typescriptreact",
     },
 }
 

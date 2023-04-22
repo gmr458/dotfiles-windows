@@ -1,3 +1,5 @@
+local M = {}
+
 local ok, lspconfig = pcall(require, "lspconfig")
 if not ok then
     vim.notify("lspconfig could not be loaded")
@@ -114,7 +116,7 @@ end
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
+function M.on_attach(client, bufnr)
     -- Enable completion triggered by <c-x><c-o>
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
@@ -191,7 +193,7 @@ local servers = require("config.lsp.servers").to_setup()
 
 for _, server in pairs(servers) do
     local server_opts = {
-        on_attach = on_attach,
+        on_attach = M.on_attach,
         capabilities = capabilities,
     }
 
@@ -203,3 +205,5 @@ for _, server in pairs(servers) do
 
     lspconfig[server].setup(server_opts)
 end
+
+return M

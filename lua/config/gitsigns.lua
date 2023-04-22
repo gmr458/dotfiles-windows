@@ -22,6 +22,7 @@ gitsigns.setup({
         },
     },
     attach_to_untracked = false,
+    trouble = false,
 })
 
 vim.api.nvim_create_user_command("ScrollbarEnable", function()
