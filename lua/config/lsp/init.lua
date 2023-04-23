@@ -58,6 +58,10 @@ local function goto_definition()
             local range = definition.range or definition.targetSelectionRange
             local line_definition = range.start.line
 
+            if line_definition == 0 then
+                line_definition = 1
+            end
+
             if line_definition < first_visible_line or line_definition > last_visible_line then
                 vim.cmd(split_cmd)
             end
@@ -182,6 +186,18 @@ function M.on_attach(client, bufnr)
             callback = vim.lsp.buf.clear_references,
         })
     end
+
+    -- if client.name == "gopls" and not client.server_capabilities.semanticTokensProvider then
+    --     local semantic = client.config.capabilities.textDocument.semanticTokens
+    --     client.server_capabilities.semanticTokensProvider = {
+    --         full = true,
+    --         legend = {
+    --             tokenModifiers = semantic.tokenModifiers,
+    --             tokenTypes = semantic.tokenTypes,
+    --         },
+    --         range = true,
+    --     }
+    -- end
 
     attach_navic(client, bufnr)
 end
