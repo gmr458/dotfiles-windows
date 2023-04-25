@@ -1,11 +1,13 @@
 local ok, jdtls = pcall(require, "jdtls")
 if not ok then
     vim.notify("jdtls could not be loaded")
+    return
 end
 
 local ok_mason, mason_registry = pcall(require, "mason-registry")
 if not ok_mason then
     vim.notify("mason-registry could not be loaded")
+    return
 end
 
 local jdtls_install_location = mason_registry.get_package("jdtls"):get_install_path()
