@@ -6,6 +6,12 @@ if not ok then
     return
 end
 
+require("luasnip.config").setup({
+    history = true,
+    region_check_events = "InsertEnter",
+    delete_check_events = "TextChanged,InsertLeave",
+})
+
 local custom_snippets_path = vim.fn.stdpath("config") .. "/custom-snippets"
 local data_path = vim.fn.stdpath("data")
 
