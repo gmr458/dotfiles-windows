@@ -89,15 +89,6 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 
 require("lspconfig.ui.windows").default_options.border = "single"
 
--- Mappings.
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
-local opts = { noremap = true, silent = true }
-
-vim.keymap.set("n", "<space>e", vim.diagnostic.open_float, opts)
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
--- vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, opts)
-
 local function attach_navic(client, bufnr)
     -- vim.g.navic_silence = true
 
@@ -152,6 +143,13 @@ function M.on_attach(client, bufnr)
         vim.lsp.buf.format({ async = true })
     end, bufopts)
 
+    -- Mappings.
+    -- See `:help vim.diagnostic.*` for documentation on any of the below functions
+    vim.keymap.set("n", "<space>e", vim.diagnostic.open_float, bufopts)
+    vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, bufopts)
+    vim.keymap.set("n", "]d", vim.diagnostic.goto_next, bufopts)
+    vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, bufopts)
+
     if client.server_capabilities.documentHighlightProvider then
         local guibg = "Grey35"
 
@@ -189,8 +187,9 @@ function M.on_attach(client, bufnr)
 
     -- if client.name == "gopls" and not client.server_capabilities.semanticTokensProvider then
     --     local semantic = client.config.capabilities.textDocument.semanticTokens
+
     --     client.server_capabilities.semanticTokensProvider = {
-    --         full = true,
+    --         full = { delta = true },
     --         legend = {
     --             tokenModifiers = semantic.tokenModifiers,
     --             tokenTypes = semantic.tokenTypes,

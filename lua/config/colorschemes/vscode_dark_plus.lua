@@ -7,5 +7,5 @@ end
 vscode_dark_plus.setup({
     v2 = true,
     cursorline = true,
-    transparent_background = true,
+    transparent_background = false,
 })

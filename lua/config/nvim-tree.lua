@@ -13,7 +13,10 @@ nvim_tree.setup({
     },
     renderer = {
         highlight_git = true,
-        root_folder_label = false,
+        root_folder_label = function(path)
+            local root_folder = vim.fn.fnamemodify(path, ":t")
+            return string.upper(root_folder)
+        end,
         indent_markers = {
             enable = true,
             inline_arrows = false,
