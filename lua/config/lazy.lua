@@ -62,7 +62,6 @@ lazy.setup({
                     require("config.treesitter.context")
                 end,
             },
-            { "HiPhish/nvim-ts-rainbow2" },
         },
     },
     {

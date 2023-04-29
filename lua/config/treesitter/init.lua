@@ -65,17 +65,6 @@ configs.setup({
             show_help = "?",
         },
     },
-    rainbow = {
-        enable = true,
-        disable = { "html" },
-        query = "rainbow-parens",
-        strategy = require("ts-rainbow").strategy.global,
-        hlgroups = {
-            "TSRainbowYellow",
-            "TSRainbowViolet",
-            "TSRainbowBlue",
-        },
-    },
 })
 
 vim.api.nvim_create_user_command("TSInstallParserList", function()

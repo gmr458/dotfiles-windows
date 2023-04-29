@@ -1,379 +1,85 @@
-; Highlight SQL code inside string
+; extends
 
-; Go code example with interpreted string literal
-; rows, err := db.Query("SELECT * FROM tasks")
-(call_expression
-    function: (selector_expression
-        field: (field_identifier) @_field (#eq? @_field "Query")
-    )
-    arguments: (argument_list
-        (interpreted_string_literal) @sql
-    )
-)
+; queries from https://github.com/ray-x/go.nvim
 
-; ----------------------------------------------------------------
+; inject sql in single line strings
+; e.g. db.GetContext(ctx, "SELECT * FROM users WHERE name = 'John'")
 
-; Go code example with raw string literal
-; rows, err := db.Query(`SELECT * FROM tasks`)
-; (call_expression
-;     function: (selector_expression
-;         field: (field_identifier) @_field (#eq? @_field "Query")
-;     )
-;     arguments: (argument_list
-;         (raw_string_literal) @sql
-;     )
-; )
-
-; ----------------------------------------------------------------
-
-; Go code example with interpreted string literal
-; rows, err := db.QueryContext(ctx, "SELECT * FROM tasks")
-(call_expression
-    function: (selector_expression
-        field: (field_identifier) @_field (#eq? @_field "QueryContext")
-    )
-    arguments: (argument_list
-        (interpreted_string_literal) @sql
-    )
-)
-
-; ----------------------------------------------------------------
-
-; Go code example with raw string literal
-; rows, err := db.QueryContext(ctx, `SELECT * FROM tasks`)
-; (call_expression
-;     function: (selector_expression
-;         field: (field_identifier) @_field (#eq? @_field "QueryContext")
-;     )
-;     arguments: (argument_list
-;         (raw_string_literal) @sql
-;     )
-; )
-
-; ----------------------------------------------------------------
-
-; Go code example with interpreted string literal
-; row := db.QueryRow("SELECT * FROM tasks WHERE id = ?", id)
-(call_expression
-    function: (selector_expression
-        field: (field_identifier) @_field (#eq? @_field "QueryRow")
-    )
-    arguments: (argument_list
-        (interpreted_string_literal) @sql
-    )
-)
-
-; ----------------------------------------------------------------
-
-; Go code example with raw string literal
-; row := db.QueryRow(`SELECT * FROM tasks WHERE id = ?`, id)
-; (call_expression
-;     function: (selector_expression
-;         field: (field_identifier) @_field (#eq? @_field "QueryRow")
-;     )
-;     arguments: (argument_list
-;         (raw_string_literal) @sql
-;     )
-; )
-
-; ----------------------------------------------------------------
-
-; Go code example with interpreted string literal
-; row := db.QueryRowContext(ctx, "SELECT * FROM tasks WHERE id = ?", id)
-(call_expression
-    function: (selector_expression
-        field: (field_identifier) @_field (#eq? @_field "QueryRowContext")
-    )
-    arguments: (argument_list
-        (interpreted_string_literal) @sql
-    )
-)
-
-; ----------------------------------------------------------------
-
-; Go code example with raw string literal
-; row := db.QueryRowContext(ctx, "SELECT * FROM tasks WHERE id = ?", id)
-; (call_expression
-;     function: (selector_expression
-;         field: (field_identifier) @_field (#eq? @_field "QueryRowContext")
-;     )
-;     arguments: (argument_list
-;         (raw_string_literal) @sql
-;     )
-; )
-
-; ----------------------------------------------------------------
-
-; Go code example with interpreted string literal
-; stmt, err = db.Prepare("SELECT * FROM tasks")
-(call_expression
-    function: (selector_expression
-        field: (field_identifier) @_field (#eq? @_field "Prepare")
-    )
-    arguments: (argument_list
-        (interpreted_string_literal) @sql
-    )
-)
-
-; ----------------------------------------------------------------
-
-; Go code example with raw string literal
-; stmt, err = db.Prepare(`SELECT * FROM tasks`)
-; (call_expression
-;     function: (selector_expression
-;         field: (field_identifier) @_field (#eq? @_field "Prepare")
-;     )
-;     arguments: (argument_list
-;         (raw_string_literal) @sql
-;     )
-; )
-
-; ----------------------------------------------------------------
-
-; Go code example with interpreted string literal
-; stmt, err = db.PrepareContext("SELECT * FROM tasks")
-(call_expression
-    function: (selector_expression
-        field: (field_identifier) @_field (#eq? @_field "PrepareContext")
-    )
-    arguments: (argument_list
-        (interpreted_string_literal) @sql
-    )
-)
-
-; ----------------------------------------------------------------
-
-; Go code example with raw string literal
-; stmt, err = db.PrepareContext(`SELECT * FROM tasks`)
-; (call_expression
-;     function: (selector_expression
-;         field: (field_identifier) @_field (#eq? @_field "PrepareContext")
-;     )
-;     arguments: (argument_list
-;         (raw_string_literal) @sql
-;     )
-; )
-
-; ----------------------------------------------------------------
-
-; Go code example with interpreted string literal
-; result, err = db.Exec("INSERT INTO tasks (title, description) VALUES (?, ?)", title, description)
-(call_expression
-    function: (selector_expression
-        field: (field_identifier) @_field (#eq? @_field "Exec")
-    )
-    arguments: (argument_list
-        (interpreted_string_literal) @sql
-    )
-)
-
-; ----------------------------------------------------------------
-
-; Go code example with raw string literal
-; result, err = db.Exec(`INSERT INTO tasks (title, description) VALUES (?, ?)`, title, description)
-; (call_expression
-;     function: (selector_expression
-;         field: (field_identifier) @_field (#eq? @_field "Exec")
-;     )
-;     arguments: (argument_list
-;         (raw_string_literal) @sql
-;     )
-; )
-
-; ----------------------------------------------------------------
-
-; Go code example with interpreted string literal
-; result, err = db.ExecContext(ctx, "INSERT INTO tasks (title, description) VALUES (?, ?)", title, description)
-(call_expression
-    function: (selector_expression
-        field: (field_identifier) @_field (#eq? @_field "ExecContext")
-    )
-    arguments: (argument_list
-        (interpreted_string_literal) @sql
-    )
-)
-
-; ----------------------------------------------------------------
-
-; Go code example with raw string literal
-; result, err = db.ExecContext(ctx, `INSERT INTO tasks (title, description) VALUES (?, ?)`, title, description)
-; (call_expression
-;     function: (selector_expression
-;         field: (field_identifier) @_field (#eq? @_field "ExecContext")
-;     )
-;     arguments: (argument_list
-;         (raw_string_literal) @sql
-;     )
-; )
-
-; ----------------------------------------------------------------
-
-; Go code example with interpreted string literal and type identifier
-; const query string = "SELECT * FROM tasks"
-
-; Go code example with interpreted string literal without type identifier
-; const query = "SELECT * FROM tasks"
-(const_declaration
-    (const_spec
-        name: (identifier) @name (#eq? @name "query")
-        (expression_list
+(
+    (call_expression
+        (selector_expression
+            field: (field_identifier) @_field
+        )
+        (argument_list
             (interpreted_string_literal) @sql
         )
     )
+    (#any-of? @_field "Exec" "GetContext" "ExecContext" "SelectContext" "In" "RebindNamed" "Rebind" "QueryRowxContext" "NamedExec" "MustExec" "Get" "Queryx")
+    (#offset! @sql 0 1 0 -1)
 )
 
 ; ----------------------------------------------------------------
+; a general query injection
 
-; Go code example with raw string literal and type identifier
-; const query string = `SELECT * FROM tasks`
-
-; Go code example with raw string literal without type identifier
-; const query = `SELECT * FROM tasks`
-; (const_declaration
-;     (const_spec
-;         name: (identifier) @name (#eq? @name "query")
-;         (expression_list
-;             (raw_string_literal) @sql
-;         )
-;     )
-; )
+(
+    [
+        (interpreted_string_literal)
+        (raw_string_literal)
+    ] @sql
+    (#match? @sql "(SELECT|select|INSERT|insert|UPDATE|update|DELETE|delete).+(FROM|from|INTO|into|VALUES|values|SET|set).*(WHERE|where|GROUP BY|group by)?")
+    (#offset! @sql 0 1 0 -1)
+)
 
 ; ----------------------------------------------------------------
+; fallback keyword and comment based injection
 
-; Go code example with interpreted string literal
-; query := fmt.Sprintf("UPDATE task SET %s = ? WHERE id = ?", field)
-(short_var_declaration
-    left: (expression_list) @_left (#eq? @_left "query")
-    right: (expression_list
-        (call_expression
-            function: (selector_expression
-                operand: (identifier) @_operand (#eq? @_operand "fmt")
-                field: (field_identifier) @_field (#eq? @_field "Sprintf")
-            )
-            arguments: (argument_list
-                (interpreted_string_literal) @sql
-            )
+(
+    [
+        (interpreted_string_literal)
+        (raw_string_literal)
+    ] @sql
+    (#contains? @sql
+        "-- sql" "--sql" 
+        "ADD CONSTRAINT" "ALTER TABLE" "ALTER COLUMN" "DATABASE" "FOREIGN KEY"
+        "GROUP BY" "HAVING" "CREATE INDEX" "INSERT INTO" "NOT NULL"
+        "PRIMARY KEY" "UPDATE SET" "TRUNCATE TABLE" "LEFT JOIN"
+        "add constraint" "alter table" "alter column" "database" "foreign key"
+        "group by" "having" "create index" "insert into" "not null"
+        "primary key" "update set" "truncate table" "left join"
+    )
+    (#offset! @sql 0 1 0 -1)
+)
+
+; should I use a more exhaustive list of keywords?
+;  "ADD" "ADD CONSTRAINT" "ALL" "ALTER" "AND" "ASC" "COLUMN" "CONSTRAINT" "CREATE" "DATABASE" "DELETE" "DESC" "DISTINCT" "DROP" "EXISTS" "FOREIGN KEY" "FROM" "JOIN" "GROUP BY" "HAVING" "IN" "INDEX" "INSERT INTO" "LIKE" "LIMIT" "NOT" "NOT NULL" "OR" "ORDER BY" "PRIMARY KEY" "SELECT" "SET" "TABLE" "TRUNCATE TABLE" "UNION" "UNIQUE" "UPDATE" "VALUES" "WHERE"
+
+; json
+
+(
+    (
+        const_spec
+        name: (identifier) @_const
+        value: (
+            expression_list 
+            (raw_string_literal) @json
         )
     )
+    (#lua-match? @_const ".*[J|j]son.*")
 )
 
-; ----------------------------------------------------------------
+; jsonStr := `{"foo": "bar"}`
 
-; Go code example with raw string literal
-; query := fmt.Sprintf(`UPDATE task SET %s = ? WHERE id = ?`, field)
-; (short_var_declaration
-;     left: (expression_list) @_left (#eq? @_left "query")
-;     right: (expression_list
-;         (call_expression
-;             function: (selector_expression
-;                 operand: (identifier) @_operand (#eq? @_operand "fmt")
-;                 field: (field_identifier) @_field (#eq? @_field "Sprintf")
-;             )
-;             arguments: (argument_list
-;                 (raw_string_literal) @sql
-;             )
-;         )
-;     )
-; )
-
-; ----------------------------------------------------------------
-
-; Go code example with interpreted string literal and type identifier
-; var query string = fmt.Sprintf("UPDATE task SET %s = ? WHERE id = ?", field)
-
-; Go code example with interpreted string literal and without type identifier
-; var query = fmt.Sprintf("UPDATE task SET %s = ? WHERE id = ?", field)
-(var_declaration
-    (var_spec
-        name: (identifier) @_name (#eq? @_name "query")
-        value: (expression_list
-            (call_expression
-                function: (selector_expression
-                    operand: (identifier) @_operand (#eq? @_operand "fmt")
-                    field: (field_identifier) @_field (#eq? @_field "Sprintf")
-                )
-                arguments: (argument_list
-                    (interpreted_string_literal) @sql
-                )
-            )
+(
+    (
+        short_var_declaration
+        left: (
+            expression_list
+            (identifier) @_var
         )
-    )
-)
-
-; ----------------------------------------------------------------
-
-; Go code example with raw string literal and type identifier
-; var query string = fmt.Sprintf(`UPDATE task SET %s = ? WHERE id = ?`, field)
-
-; Go code example with raw string literal and without type identifier
-; var query = fmt.Sprintf(`UPDATE task SET %s = ? WHERE id = ?`, field)
-; (var_declaration
-;     (var_spec
-;         name: (identifier) @_name (#eq? @_name "query")
-;         value: (expression_list
-;             (call_expression
-;                 function: (selector_expression
-;                     operand: (identifier) @_operand (#eq? @_operand "fmt")
-;                     field: (field_identifier) @_field (#eq? @_field "Sprintf")
-;                 )
-;                 arguments: (argument_list
-;                     (raw_string_literal) @sql
-;                 )
-;             )
-;         )
-;     )
-; )
-
-; ----------------------------------------------------------------
-
-; Go code example with interpreted string literal and type identifier:
-; var query string = "SELECT * FROM tasks"
-
-; Go code example with interpreted string literal and without type identifier:
-; var query = "SELECT * FROM tasks"
-(var_declaration
-    (var_spec
-        name: (identifier) @_name (#eq? @_name "query")
-        value: (expression_list
-            (interpreted_string_literal) @sql
+        right: (
+            expression_list
+            (raw_string_literal) @json)
         )
-    )
+    (#lua-match? @_var ".*[J|j]son.*")
+    (#offset! @json 0 1 0 -1)
 )
-
-; ----------------------------------------------------------------
-
-; Go code example with raw string literal and type identifier:
-; var query string = `SELECT * FROM tasks`
-
-; Go code example with raw string literal and without type identifier:
-; var query = `SELECT * FROM tasks`
-; (var_declaration
-;     (var_spec
-;         name: (identifier) @_name (#eq? @_name "query")
-;         value: (expression_list
-;             (raw_string_literal) @sql
-;         )
-;     )
-; )
-
-; ----------------------------------------------------------------
-
-; Go code example with interpreted string literal
-; query := "SELECT * FROM tasks"
-(short_var_declaration
-    left: (expression_list) @_left (#eq? @_left "query")
-    right: (expression_list
-        (interpreted_string_literal) @sql
-    )
-)
-
-; ----------------------------------------------------------------
-
-; Go code example with raw string literal
-; query := `SELECT * FROM tasks`
-; (short_var_declaration
-;     left: (expression_list) @_left (#eq? @_left "query")
-;     right: (expression_list
-;         (raw_string_literal) @sql
-;     )
-; )
