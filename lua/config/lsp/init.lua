@@ -185,18 +185,10 @@ function M.on_attach(client, bufnr)
         })
     end
 
-    -- if client.name == "gopls" and not client.server_capabilities.semanticTokensProvider then
-    --     local semantic = client.config.capabilities.textDocument.semanticTokens
-
-    --     client.server_capabilities.semanticTokensProvider = {
-    --         full = { delta = true },
-    --         legend = {
-    --             tokenModifiers = semantic.tokenModifiers,
-    --             tokenTypes = semantic.tokenTypes,
-    --         },
-    --         range = true,
-    --     }
-    -- end
+    -- disable semantic tokens until https://github.com/OmniSharp/omnisharp-roslyn/issues/2483 is closed
+    if client.name == "omnisharp" then
+        client.server_capabilities.semanticTokensProvider = nil
+    end
 
     attach_navic(client, bufnr)
 end
