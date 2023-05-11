@@ -168,6 +168,22 @@ lazy.setup({
             },
         },
     },
+    -- DAP
+    {
+        "mfussenegger/nvim-dap-python",
+        ft = "python",
+        config = function()
+            require("config.dap.python")
+        end,
+        dependencies = { "mfussenegger/nvim-dap" },
+    },
+    {
+        "rcarriga/nvim-dap-ui",
+        config = function()
+            require("config.dap")
+        end,
+        dependencies = { "mfussenegger/nvim-dap" },
+    },
     -- LSP Java
     {
         "mfussenegger/nvim-jdtls",
