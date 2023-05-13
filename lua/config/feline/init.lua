@@ -1,4 +1,4 @@
-local ok, feline, vscode_dark_plus
+local ok, feline, vscode_dark_modern
 
 ok, feline = pcall(require, "feline")
 if not ok then
@@ -6,9 +6,9 @@ if not ok then
     return
 end
 
-ok, vscode_dark_plus = pcall(require, "vscode_dark_plus.integrations.feline")
+ok, vscode_dark_modern = pcall(require, "vscode_dark_modern.integrations.feline")
 if not ok then
-    vim.notify("vscode_dark_plus.integrations.feline could not be loaded")
+    vim.notify("vscode_dark_modern.integrations.feline could not be loaded")
     return
 end
 
@@ -34,6 +34,6 @@ feline.setup({
         bufnames = {},
     },
     disable = { filetypes = { "^alpha$", "^dashboard$" } },
-    theme = vscode_dark_plus.palette(),
-    components = vscode_dark_plus.components(),
+    theme = vscode_dark_modern.palette(),
+    components = vscode_dark_modern.components(),
 })

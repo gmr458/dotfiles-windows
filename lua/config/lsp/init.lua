@@ -71,7 +71,7 @@ local function goto_definition()
             util.jump_to_location(result[1], "utf-8")
 
             if #result > 1 then
-                util.set_qflist(util.locations_to_items(result))
+                util.set_qflist(util.locations_to_items(result, "utf-8"))
                 api.nvim_command("copen")
                 api.nvim_command("wincmd p")
             end

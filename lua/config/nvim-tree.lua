@@ -24,6 +24,8 @@ nvim_tree.setup({
         icons = {
             show = { folder_arrow = false },
             glyphs = {
+                bookmark = "󰆤",
+                modified = "",
                 git = {
                     unstaged = "M",
                     staged = "A",

@@ -117,7 +117,7 @@ M.list = {
     "scheme",
     "scss",
     -- "slint",
-    "solidity",
+    -- "solidity",
     -- "sparql",
     "sql",
     -- "supercollider",

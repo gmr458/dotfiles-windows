@@ -100,12 +100,12 @@ lazy.setup({
     },
     -- Colorscheme
     {
-        "gmr458/vscode_dark_plus.nvim",
+        "gmr458/vscode_dark_modern.nvim",
         lazy = false,
         priority = 1000,
         config = function()
-            require("config.colorschemes.vscode_dark_plus")
-            vim.cmd.colorscheme("vscode_dark_plus")
+            require("config.colorschemes.vscode_dark_modern")
+            vim.cmd.colorscheme("vscode_dark_modern")
         end,
     },
     -- FZF
@@ -140,6 +140,12 @@ lazy.setup({
             require("config.lsp.init")
         end,
         dependencies = {
+            {
+                "folke/neodev.nvim",
+                config = function()
+                    require("neodev").setup()
+                end,
+            },
             {
                 "SmiteshP/nvim-navic",
                 config = function()
