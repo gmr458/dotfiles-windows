@@ -68,9 +68,18 @@ telescope.setup({
     pickers = {
         buffers = {
             previewer = false,
+            layout_config = { width = 0.7 },
+        },
+        builtin = {
+            previewer = false,
+            layout_config = { width = 0.3 },
         },
         find_files = {
             previewer = false,
+            layout_config = { width = 0.7 },
+        },
+        live_grep = {
+            layout_config = { width = 0.9 },
         },
         oldfiles = {
             previewer = false,

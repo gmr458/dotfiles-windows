@@ -9,10 +9,4 @@ local config = {
     single_file_support = false,
 }
 
-if vim.fn.has("win32") == 1 then
-    local bin_name = "vscode-eslint-language-server.cmd"
-    local cmd = { bin_name, "--stdio" }
-    config.cmd = cmd
-end
-
 return config

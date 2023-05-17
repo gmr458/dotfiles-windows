@@ -23,9 +23,14 @@ nvim_tree.setup({
         },
         icons = {
             show = { folder_arrow = false },
+            symlink_arrow = " 󰁔 ",
             glyphs = {
                 bookmark = "󰆤",
                 modified = "",
+                folder = {
+                    symlink = "",
+                    symlink_open = "",
+                },
                 git = {
                     unstaged = "M",
                     staged = "A",

@@ -30,10 +30,4 @@ local config = {
     },
 }
 
-if vim.fn.has("win32") == 1 then
-    local bin_name = "emmet-ls.cmd"
-    local cmd = { bin_name, "--stdio" }
-    config.cmd = cmd
-end
-
 return config

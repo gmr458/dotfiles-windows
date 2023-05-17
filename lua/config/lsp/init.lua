@@ -150,6 +150,14 @@ function M.on_attach(client, bufnr)
     vim.keymap.set("n", "]d", vim.diagnostic.goto_next, bufopts)
     vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, bufopts)
 
+    local _, _ = pcall(vim.lsp.codelens.refresh)
+    vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+        pattern = { "*" },
+        callback = function()
+            local _, _ = pcall(vim.lsp.codelens.refresh)
+        end,
+    })
+
     if client.server_capabilities.documentHighlightProvider then
         local guibg = "Grey35"
 
@@ -193,15 +201,26 @@ function M.on_attach(client, bufnr)
     attach_navic(client, bufnr)
 end
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
+function M.get_capabilities()
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities.textDocument.completion.completionItem.snippetSupport = true
+    capabilities.textDocument.completion.completionItem.resolveSupport = {
+        properties = {
+            "documentation",
+            "detail",
+            "additionalTextEdits",
+        },
+    }
+
+    return capabilities
+end
 
 local servers = require("config.lsp.servers").to_setup()
 
 for _, server in pairs(servers) do
     local server_opts = {
         on_attach = M.on_attach,
-        capabilities = capabilities,
+        capabilities = M.get_capabilities(),
     }
 
     local has_custom_opts, server_custom_opts = pcall(require, "config.lsp.settings." .. server)

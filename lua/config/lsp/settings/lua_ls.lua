@@ -1,4 +1,4 @@
-return {
+local config = {
     settings = {
         Lua = {
             completion = {
@@ -10,3 +10,5 @@ return {
         },
     },
 }
+
+return config

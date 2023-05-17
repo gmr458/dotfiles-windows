@@ -24,6 +24,18 @@ end
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 local workspace_dir = vim.loop.os_homedir() .. "/.cache/jdtls/workspace/" .. project_name
 
+-- local capabilities = vim.lsp.protocol.make_client_capabilities()
+-- capabilities.textDocument.completion.completionItem.snippetSupport = true
+-- capabilities.textDocument.completion.completionItem.resolveSupport = {
+--     properties = {
+--         "documentation",
+--         "detail",
+--         "additionalTextEdits",
+--     },
+-- }
+local extendedClientCapabilities = jdtls.extendedClientCapabilities
+extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
+
 -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
 local config = {
     -- The command that starts the language server
@@ -45,6 +57,7 @@ local config = {
         "java.base/java.util=ALL-UNNAMED",
         "--add-opens",
         "java.base/java.lang=ALL-UNNAMED",
+        "-javaagent:" .. jdtls_install_location .. "/lombok.jar",
 
         -- 💀
         "-jar",
@@ -67,6 +80,7 @@ local config = {
     },
 
     on_attach = require("config.lsp").on_attach,
+    capabilities = require("config.lsp").get_capabilities(),
 
     -- 💀
     -- This is the default if not provided, you can remove it. Or adjust as needed.
@@ -77,7 +91,43 @@ local config = {
     -- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
     -- for a list of options
     settings = {
-        java = {},
+        java = {
+            eclipse = {
+                downloadSources = true,
+            },
+            configuration = {
+                updateBuildConfiguration = "interactive",
+                -- runtimes = {
+                --     {
+                --         name = "JavaSE-11",
+                --         path = "~/.sdkman/candidates/java/11.0.17-tem",
+                --     },
+                --     {
+                --         name = "JavaSE-18",
+                --         path = "~/.sdkman/candidates/java/18.0.2-sem",
+                --     },
+                -- },
+            },
+            maven = {
+                downloadSources = true,
+            },
+            referencesCodeLens = {
+                enabled = true,
+            },
+            references = {
+                includeDecompiledSources = true,
+            },
+            inlayHints = {
+                parameterNames = {
+                    enabled = "all", -- literals, all, none
+                },
+            },
+            format = {
+                enabled = true,
+            },
+        },
+        signatureHelp = { enabled = true },
+        extendedClientCapabilities = extendedClientCapabilities,
     },
 
     -- Language server `initializationOptions`
@@ -89,9 +139,17 @@ local config = {
     -- If you don't plan on using the debugger or other eclipse.jdt.ls plugins you can remove this
     init_options = {
         -- workspace = workspace_dir,
+        -- bundles = bundles,
         bundles = {},
     },
 }
 -- This starts a new client & server,
 -- or attaches to an existing client & server depending on the `root_dir`.
 jdtls.start_or_attach(config)
+
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+    pattern = { "*.java" },
+    callback = function()
+        local _, _ = pcall(vim.lsp.codelens.refresh)
+    end,
+})
