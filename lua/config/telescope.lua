@@ -26,14 +26,8 @@ telescope.setup({
         selection_caret = "  ",
         multi_icon = "",
         sorting_strategy = "ascending",
-        layout_strategy = "horizontal",
-        layout_config = {
-            prompt_position = "top",
-            scroll_speed = 4,
-            height = 0.9,
-            width = 0.9,
-            preview_width = 0.7,
-        },
+        layout_strategy = nil,
+        layout_config = nil,
         borderchars = {
             "─",
             "│",
@@ -68,21 +62,49 @@ telescope.setup({
     pickers = {
         buffers = {
             previewer = false,
-            layout_config = { width = 0.7 },
+            layout_config = {
+                width = 0.7,
+                prompt_position = "top",
+            },
         },
         builtin = {
             previewer = false,
-            layout_config = { width = 0.3 },
+            layout_config = {
+                width = 0.3,
+                prompt_position = "top",
+            },
         },
         find_files = {
             previewer = false,
-            layout_config = { width = 0.7 },
+            layout_config = {
+                width = 0.7,
+                prompt_position = "top",
+            },
+        },
+        help_tags = {
+            layout_config = {
+                prompt_position = "top",
+                scroll_speed = 4,
+                height = 0.9,
+                width = 0.9,
+                preview_width = 0.55,
+            },
         },
         live_grep = {
-            layout_config = { width = 0.9 },
+            layout_strategy = "vertical",
+            layout_config = {
+                width = 0.9,
+                height = 0.9,
+                preview_cutoff = 1,
+                mirror = true,
+            },
         },
         oldfiles = {
             previewer = false,
+            layout_config = {
+                width = 0.9,
+                prompt_position = "top",
+            },
         },
     },
 })
