@@ -10,7 +10,7 @@ if not ok_mason then
     return
 end
 
-local jdtls_install_location = mason_registry.get_package("jdtls"):get_install_path()
+local jdtls_path = mason_registry.get_package("jdtls"):get_install_path()
 
 local operative_system
 if vim.fn.has("linux") then
@@ -26,6 +26,15 @@ local workspace_dir = vim.loop.os_homedir() .. "/.cache/jdtls/workspace/" .. pro
 
 local extendedClientCapabilities = jdtls.extendedClientCapabilities
 extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
+
+local java_test_path = mason_registry.get_package("java-test"):get_install_path()
+local java_debug_adapter_path = mason_registry.get_package("java-debug-adapter"):get_install_path()
+local bundles = {}
+vim.list_extend(bundles, vim.split(vim.fn.glob(java_test_path .. "/extension/server/*.jar"), "\n"))
+vim.list_extend(
+    bundles,
+    vim.split(vim.fn.glob(java_debug_adapter_path .. "/extension/server/com.microsoft.java.debug.plugin-*.jar"), "\n")
+)
 
 -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
 local config = {
@@ -48,18 +57,18 @@ local config = {
         "java.base/java.util=ALL-UNNAMED",
         "--add-opens",
         "java.base/java.lang=ALL-UNNAMED",
-        "-javaagent:" .. jdtls_install_location .. "/lombok.jar",
+        "-javaagent:" .. jdtls_path .. "/lombok.jar",
 
         -- 💀
         "-jar",
-        vim.fn.glob(jdtls_install_location .. "/plugins/org.eclipse.equinox.launcher_*.jar"),
+        vim.fn.glob(jdtls_path .. "/plugins/org.eclipse.equinox.launcher_*.jar"),
         -- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                                           ^^^^^^^^^^^^^^
         -- Must point to the                                                         Change this to
         -- eclipse.jdt.ls installation                                               the actual version, with vim.fn.glob() is not necessary
 
         -- 💀
         "-configuration",
-        jdtls_install_location .. "/config_" .. operative_system,
+        jdtls_path .. "/config_" .. operative_system,
         -- ^^^^^^^^^^^^^^^^^^^                  ^^^^^^
         -- Must point to the                    Change to one of `linux`, `win` or `mac`
         -- eclipse.jdt.ls installation          Depending on your system.
@@ -130,14 +139,14 @@ local config = {
     -- If you don't plan on using the debugger or other eclipse.jdt.ls plugins you can remove this
     init_options = {
         -- workspace = workspace_dir,
-        -- bundles = bundles,
-        bundles = {},
+        bundles = bundles,
     },
 }
 -- This starts a new client & server,
 -- or attaches to an existing client & server depending on the `root_dir`.
 jdtls.start_or_attach(config)
 
+local _, _ = pcall(vim.lsp.codelens.refresh)
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
     pattern = { "*.java" },
     callback = function()

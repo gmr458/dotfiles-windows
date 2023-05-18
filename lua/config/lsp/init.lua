@@ -150,14 +150,6 @@ function M.on_attach(client, bufnr)
     vim.keymap.set("n", "]d", vim.diagnostic.goto_next, bufopts)
     vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, bufopts)
 
-    local _, _ = pcall(vim.lsp.codelens.refresh)
-    vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-        pattern = { "*" },
-        callback = function()
-            local _, _ = pcall(vim.lsp.codelens.refresh)
-        end,
-    })
-
     if client.server_capabilities.documentHighlightProvider then
         local guibg = "Grey35"
 
@@ -196,6 +188,10 @@ function M.on_attach(client, bufnr)
     -- disable semantic tokens until https://github.com/OmniSharp/omnisharp-roslyn/issues/2483 is closed
     if client.name == "omnisharp" then
         client.server_capabilities.semanticTokensProvider = nil
+    end
+
+    if client.name == "jdtls" then
+        require("jdtls").setup_dap({ hotcodereplace = "auto" })
     end
 
     attach_navic(client, bufnr)

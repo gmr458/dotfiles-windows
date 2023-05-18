@@ -4,4 +4,4 @@ if not ok then
     return
 end
 
-dap_python.setup("~/.virtualenvs/debugpy/bin/python")
+dap_python.setup("~/.local/share/nvim/mason/packages/debugpy/venv/bin/python")
