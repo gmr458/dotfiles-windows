@@ -6,5 +6,5 @@ end
 
 vscode_dark_modern.setup({
     cursorline = true,
-    transparent_background = false,
+    transparent_background = true,
 })

@@ -192,6 +192,8 @@ function M.on_attach(client, bufnr)
 
     if client.name == "jdtls" then
         require("jdtls").setup_dap({ hotcodereplace = "auto" })
+        require("jdtls.dap").setup_dap_main_class_configs()
+        vim.lsp.codelens.refresh()
     end
 
     attach_navic(client, bufnr)

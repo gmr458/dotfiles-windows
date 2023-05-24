@@ -41,7 +41,6 @@ local config = {
     -- The command that starts the language server
     -- See: https://github.com/eclipse/eclipse.jdt.ls#running-from-the-command-line
     cmd = {
-
         -- 💀
         "java", -- or '/path/to/java17_or_newer/bin/java'
         -- depends on if `java` is in your $PATH env variable and if it points to the right version.
@@ -146,7 +145,6 @@ local config = {
 -- or attaches to an existing client & server depending on the `root_dir`.
 jdtls.start_or_attach(config)
 
-local _, _ = pcall(vim.lsp.codelens.refresh)
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
     pattern = { "*.java" },
     callback = function()
