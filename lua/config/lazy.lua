@@ -189,11 +189,6 @@ lazy.setup({
     },
     {
         "rcarriga/nvim-dap-ui",
-        cmd = {
-            "DapContinue",
-            "DapToggleBrakpoint",
-            "DapToggleRepl",
-        },
         config = function()
             require("config.dap")
         end,
