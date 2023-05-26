@@ -104,8 +104,12 @@ lazy.setup({
         lazy = false,
         priority = 1000,
         config = function()
-            require("config.colorschemes.vscode_dark_modern")
-            vim.cmd.colorscheme("vscode_dark_modern")
+            require("vscode_dark_modern").setup({
+                cursorline = true,
+                transparent_background = false,
+            })
+            -- vim.cmd.colorscheme("vscode_dark_modern")
+            vim.cmd("colorscheme vscode_dark_modern")
         end,
     },
     -- FZF
@@ -185,6 +189,11 @@ lazy.setup({
     },
     {
         "rcarriga/nvim-dap-ui",
+        cmd = {
+            "DapContinue",
+            "DapToggleBrakpoint",
+            "DapToggleRepl",
+        },
         config = function()
             require("config.dap")
         end,
@@ -275,7 +284,8 @@ lazy.setup({
     },
     {
         "nvim-tree/nvim-web-devicons",
-        opts = { default = true },
+        -- opts = { default = true },
+        lazy = true,
     },
     {
         "b3nj5m1n/kommentary",
