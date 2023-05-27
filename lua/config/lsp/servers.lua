@@ -16,6 +16,7 @@ M.to_setup = function()
         "intelephense",
         "jsonls",
         "kotlin_language_server",
+        "nim_langserver",
         "omnisharp",
         "pyright",
         "rust_analyzer",

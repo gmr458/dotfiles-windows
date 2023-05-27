@@ -71,7 +71,7 @@ local function goto_definition()
             util.jump_to_location(result[1], "utf-8")
 
             if #result > 1 then
-                util.set_qflist(util.locations_to_items(result, "utf-8"))
+                vim.fn.setqflist(util.locations_to_items(result, "utf-8"))
                 api.nvim_command("copen")
                 api.nvim_command("wincmd p")
             end
@@ -193,7 +193,9 @@ function M.on_attach(client, bufnr)
     if client.name == "jdtls" then
         require("jdtls").setup_dap({ hotcodereplace = "auto" })
         require("jdtls.dap").setup_dap_main_class_configs()
+        require("jdtls.setup").add_commands()
         vim.lsp.codelens.refresh()
+        vim.cmd([[autocmd BufEnter,CursorHold,InsertLeave *.java lua vim.lsp.codelens.refresh()]])
     end
 
     attach_navic(client, bufnr)
