@@ -177,11 +177,27 @@ function M.on_attach(client, bufnr)
   end
 
   if client.name == "jdtls" then
+    -- jdtls dap
     require("jdtls").setup_dap({ hotcodereplace = "auto" })
     require("jdtls.dap").setup_dap_main_class_configs()
+
+    -- jdtls commands
     require("jdtls.setup").add_commands()
+    vim.api.nvim_create_user_command("JdtTestClass", function()
+      require("jdtls").test_class()
+    end, {})
+    vim.api.nvim_create_user_command("JdtTestNearestMethod", function()
+      require("jdtls").test_nearest_method()
+    end, {})
+
+    -- jdtls codelens
     vim.lsp.codelens.refresh()
-    vim.cmd([[autocmd BufEnter,CursorHold,InsertLeave *.java lua vim.lsp.codelens.refresh()]])
+    vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+      pattern = { "*.java" },
+      callback = function()
+        vim.lsp.codelens.refresh()
+      end,
+    })
   end
 
   attach_navic(client, bufnr)
