@@ -4,7 +4,7 @@ local omnisharp = require("mason-registry").get_package("omnisharp"):get_install
 local dll = util.path.join(omnisharp, "OmniSharp.dll")
 
 local config = {
-    cmd = { "dotnet", dll },
+  cmd = { "dotnet", dll },
 }
 
 return config

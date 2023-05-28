@@ -18,12 +18,12 @@ vim.g.loaded_netrwSettings = 1
 vim.g.loaded_netrwFileHandlers = 1
 
 local font_names = {
-    caskaydia_cove = "CaskaydiaCove Nerd Font Mono",
-    comic_mono = "ComicMono Nerd Font Mono",
-    fira_code = "FiraCode Nerd Font Mono",
-    iosevka_fixed = "Iosevka Fixed",
-    roboto_mono = "RobotoMono Nerd Font Mono",
-    consolas = "Consolas Nerd Font Mono",
+  caskaydia_cove = "CaskaydiaCove Nerd Font Mono",
+  comic_mono = "ComicMono Nerd Font Mono",
+  fira_code = "FiraCode Nerd Font Mono",
+  iosevka_fixed = "Iosevka Fixed",
+  roboto_mono = "RobotoMono Nerd Font Mono",
+  consolas = "Consolas Nerd Font Mono",
 }
 local font_name = font_names.consolas
 local font_height = "h10"
@@ -71,6 +71,6 @@ vim.opt.updatetime = 50
 -- vim.opt.winbar = "%f"
 vim.opt.wrap = false -- long lines wrap and continue on the next line
 
-if vim.loop.os_uname().sysname == "Windows_NT" then
-    vim.cmd([[language en_US]])
+if vim.fn.has("win32") == 1 then
+  vim.cmd([[language en_US]])
 end
