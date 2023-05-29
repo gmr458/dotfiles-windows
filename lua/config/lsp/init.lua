@@ -176,6 +176,10 @@ function M.on_attach(client, bufnr)
     })
   end
 
+  if client.name == "omnisharp" then
+    client.server_capabilities.semanticTokensProvider = nil
+  end
+
   if client.name == "jdtls" then
     -- jdtls dap
     require("jdtls").setup_dap({ hotcodereplace = "auto" })
