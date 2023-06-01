@@ -17,6 +17,7 @@ M.to_setup = function()
     "jsonls",
     -- "kotlin_language_server",
     "nim_langserver",
+    "ocamllsp",
     "omnisharp",
     "pyright",
     "rust_analyzer",

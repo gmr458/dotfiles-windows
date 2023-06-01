@@ -279,7 +279,6 @@ lazy.setup({
   },
   {
     "nvim-tree/nvim-web-devicons",
-    -- opts = { default = true },
     lazy = true,
   },
   {
