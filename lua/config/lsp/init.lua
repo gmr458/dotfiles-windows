@@ -204,6 +204,16 @@ function M.on_attach(client, bufnr)
     })
   end
 
+  if client.name == "rust_analyzer" then
+    vim.lsp.codelens.refresh()
+    vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+      pattern = { "*.rs" },
+      callback = function()
+        vim.lsp.codelens.refresh()
+      end,
+    })
+  end
+
   attach_navic(client, bufnr)
 end
 

@@ -5,7 +5,7 @@ local config = {
         debug = { enable = true },
         enable = true,
         forceCustomCommands = true,
-        implementations = { enable = false },
+        implementations = { enable = true },
         location = "above_name",
         references = {
           adt = { enable = true },

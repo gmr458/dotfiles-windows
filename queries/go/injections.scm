@@ -14,8 +14,7 @@
             (interpreted_string_literal) @sql
         )
     )
-    ; (#any-of? @_field "Exec" "GetContext" "ExecContext" "SelectContext" "In" "RebindNamed" "Rebind" "QueryRowxContext" "NamedExec" "MustExec" "Get" "Queryx")
-    (#any-of? @_field "Exec" "ExecContext" "Query" "QueryContext" "QueryRow" "QueryRowContext", "Prepare", "PrepareContext")
+    (#any-of? @_field "Exec" "ExecContext" "Query" "QueryContext" "QueryRow" "QueryRowContext" "Prepare" "PrepareContext")
     (#offset! @sql 0 1 0 -1)
 )
 
