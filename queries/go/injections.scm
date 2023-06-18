@@ -1,6 +1,6 @@
 ; extends
 
-; queries from https://github.com/ray-x/go.nvim
+; modified version from https://github.com/ray-x/go.nvim
 
 ; inject sql in single line strings
 ; e.g. db.GetContext(ctx, "SELECT * FROM users WHERE name = 'John'")
@@ -14,7 +14,8 @@
             (interpreted_string_literal) @sql
         )
     )
-    (#any-of? @_field "Exec" "GetContext" "ExecContext" "SelectContext" "In" "RebindNamed" "Rebind" "QueryRowxContext" "NamedExec" "MustExec" "Get" "Queryx")
+    ; (#any-of? @_field "Exec" "GetContext" "ExecContext" "SelectContext" "In" "RebindNamed" "Rebind" "QueryRowxContext" "NamedExec" "MustExec" "Get" "Queryx")
+    (#any-of? @_field "Exec" "ExecContext" "Query" "QueryContext" "QueryRow" "QueryRowContext", "Prepare", "PrepareContext")
     (#offset! @sql 0 1 0 -1)
 )
 
@@ -39,7 +40,6 @@
         (raw_string_literal)
     ] @sql
     (#contains? @sql
-        "-- sql" "--sql" 
         "ADD CONSTRAINT" "ALTER TABLE" "ALTER COLUMN" "DATABASE" "FOREIGN KEY"
         "GROUP BY" "HAVING" "CREATE INDEX" "INSERT INTO" "NOT NULL"
         "PRIMARY KEY" "UPDATE SET" "TRUNCATE TABLE" "LEFT JOIN"
