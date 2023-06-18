@@ -4,8 +4,8 @@ if not ok then
   return
 end
 
-navic.setup({
-  icons = {
+local icons = {
+  disable = {
     File = "file ",
     Module = "module ",
     Namespace = "namespace ",
@@ -33,6 +33,38 @@ navic.setup({
     Operator = "operator ",
     TypeParameter = "type parameter ",
   },
+  enable = {
+    File = " ",
+    Module = " ",
+    Namespace = " ",
+    Package = " ",
+    Class = " ",
+    Method = " ",
+    Property = " ",
+    Field = " ",
+    Constructor = " ",
+    Enum = " ",
+    Interface = " ",
+    Function = " ",
+    Variable = " ",
+    Constant = " ",
+    String = " ",
+    Number = " ",
+    Boolean = " ",
+    Array = " ",
+    Object = " ",
+    Key = " ",
+    Null = "null ",
+    EnumMember = " ",
+    Struct = " ",
+    Event = " ",
+    Operator = " ",
+    TypeParameter = " ",
+  },
+}
+
+navic.setup({
+  icons = icons.enable,
   highlight = true,
   separator = "  ",
   depth_limit = 0,
