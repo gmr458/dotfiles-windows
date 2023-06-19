@@ -204,6 +204,24 @@ lazy.setup({
       "rcarriga/nvim-dap-ui",
     },
   },
+  {
+    "nvim-neotest/neotest",
+    cmd = { "Neotest" },
+    config = function()
+      require("config.neotest")
+    end,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "antoinemadec/FixCursorHold.nvim",
+      "nvim-neotest/neotest-python",
+      "nvim-neotest/neotest-go",
+      "nvim-neotest/neotest-jest",
+      "marilari88/neotest-vitest",
+      { "rouge8/neotest-rust", ft = "rust" },
+      "Issafalcon/neotest-dotnet",
+    },
+  },
   -- Completion
   {
     "L3MON4D3/LuaSnip",

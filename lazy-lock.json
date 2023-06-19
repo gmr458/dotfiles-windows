@@ -1,4 +1,5 @@
 {
+  "FixCursorHold.nvim": { "branch": "master", "commit": "1900f89dc17c603eec29960f57c00bd9ae696495" },
   "LuaSnip": { "branch": "master", "commit": "500981ff6cefc7343e3959ef0f939bd0bfd49ba9" },
   "SchemaStore.nvim": { "branch": "main", "commit": "335569380e25ef49b4837195f295f144012e3c87" },
   "alpha-nvim": { "branch": "main", "commit": "9e33db324b8bb7a147bce9ea5496686ee859461d" },
@@ -21,6 +22,13 @@
   "mason.nvim": { "branch": "main", "commit": "f7f81ab41b153e2902ebded401a8a0a6abe28607" },
   "neodev.nvim": { "branch": "main", "commit": "b41da3926ce1c022a2f6a7ea8858889c3a8be4d7" },
   "neoscroll.nvim": { "branch": "master", "commit": "d7601c26c8a183fa8994ed339e70c2d841253e93" },
+  "neotest": { "branch": "master", "commit": "e46eae5739c470aa011ee43108ea8a730736174e" },
+  "neotest-dotnet": { "branch": "main", "commit": "2f3a5244fbbff24885dc4b09cdea538417867ca4" },
+  "neotest-go": { "branch": "main", "commit": "4e7a87967e45f2b357fd546b0b7877774191772e" },
+  "neotest-jest": { "branch": "main", "commit": "22b1050dda3ebd401780ec4b8e193cf52523a4da" },
+  "neotest-python": { "branch": "master", "commit": "6c06041cfb45f45e276068020baa06c06fe20d5c" },
+  "neotest-rust": { "branch": "main", "commit": "cc1821d580e8ee36bdd13d67b3291b8cd1792ec9" },
+  "neotest-vitest": { "branch": "main", "commit": "f9efe9524ccba1284d5f4e41d0dc6ff91951cfcc" },
   "null-ls.nvim": { "branch": "main", "commit": "bbaf5a96913aa92281f154b08732be2f57021c45" },
   "nvim-autopairs": { "branch": "master", "commit": "e8f7dd7a72de3e7b6626c050a802000e69d53ff0" },
   "nvim-cmp": { "branch": "main", "commit": "b8c2a62b3bd3827aa059b43be3dd4b5c45037d65" },
@@ -44,5 +52,5 @@
   "toggleterm.nvim": { "branch": "main", "commit": "95204ece0f2a54c89c4395295432f9aeedca7b5f" },
   "trouble.nvim": { "branch": "main", "commit": "2af0dd9767526410c88c628f1cbfcb6cf22dd683" },
   "vscode-react-javascript-snippets": { "branch": "master", "commit": "185bb91a0b692c54136663464e8225872c434637" },
-  "vscode_dark_modern.nvim": { "branch": "main", "commit": "878de030091e1a37fbed16d609dfaa13a6bd0b26" }
+  "vscode_dark_modern.nvim": { "branch": "main", "commit": "79f1cc718e52a7bc1e38e06c1ad6b0fea19bdf68" }
 }
