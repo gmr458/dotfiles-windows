@@ -108,8 +108,7 @@ lazy.setup({
         cursorline = true,
         transparent_background = false,
       })
-      -- vim.cmd.colorscheme("vscode_dark_modern")
-      vim.cmd("colorscheme vscode_dark_modern")
+      vim.cmd.colorscheme("vscode_dark_modern")
     end,
   },
   -- FZF
@@ -156,6 +155,7 @@ lazy.setup({
           require("config.navic")
         end,
       },
+      { "b0o/SchemaStore.nvim" },
       {
         "williamboman/mason.nvim",
         config = function()
@@ -180,25 +180,29 @@ lazy.setup({
   },
   -- DAP
   {
-    "mfussenegger/nvim-dap-python",
-    ft = "python",
-    config = function()
-      require("config.dap.python")
-    end,
-    dependencies = { "mfussenegger/nvim-dap" },
-  },
-  {
     "rcarriga/nvim-dap-ui",
+    cmd = { "DapContinue", "DapToggleBreakpoint" },
     config = function()
       require("config.dap")
     end,
-    dependencies = { "mfussenegger/nvim-dap" },
+    dependencies = {
+      { "mfussenegger/nvim-dap" },
+      {
+        "mfussenegger/nvim-dap-python",
+        config = function()
+          require("config.dap.python")
+        end,
+      },
+    },
   },
   -- LSP Java
   {
     "mfussenegger/nvim-jdtls",
     ft = "java",
-    dependencies = { "williamboman/mason.nvim" },
+    dependencies = {
+      "williamboman/mason.nvim",
+      "rcarriga/nvim-dap-ui",
+    },
   },
   -- Completion
   {
@@ -265,11 +269,11 @@ lazy.setup({
   },
   {
     "NMAC427/guess-indent.nvim",
+    event = "BufReadPost",
     config = function()
       require("config.guess-indent")
     end,
   },
-  { "b0o/SchemaStore.nvim" },
   {
     "nvim-tree/nvim-tree.lua",
     cmd = "NvimTreeFindFileToggle",

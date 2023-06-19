@@ -7,10 +7,7 @@ end
 nvim_tree.setup({
   disable_netrw = true,
   hijack_cursor = true,
-  view = {
-    centralize_selection = true,
-    preserve_window_proportions = true,
-  },
+  view = { side = "left", width = {} },
   renderer = {
     highlight_git = true,
     root_folder_label = function(path)
