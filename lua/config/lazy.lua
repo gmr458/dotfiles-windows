@@ -138,7 +138,7 @@ lazy.setup({
   -- LSP
   {
     "neovim/nvim-lspconfig",
-    cmd = { "LspStart", "MasonInstallListPackages" },
+    cmd = { "LspStart" },
     config = function()
       require("config.lsp.init")
     end,
