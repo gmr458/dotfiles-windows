@@ -218,7 +218,7 @@ lazy.setup({
       "nvim-neotest/neotest-go",
       "nvim-neotest/neotest-jest",
       "marilari88/neotest-vitest",
-      { "rouge8/neotest-rust", ft = "rust" },
+      "rouge8/neotest-rust",
       "Issafalcon/neotest-dotnet",
     },
   },
