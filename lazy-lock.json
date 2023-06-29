@@ -54,5 +54,5 @@
   "toggleterm.nvim": { "branch": "main", "commit": "95204ece0f2a54c89c4395295432f9aeedca7b5f" },
   "trouble.nvim": { "branch": "main", "commit": "d99e2abd10808ef91738ce98a5c767e6a51df449" },
   "vscode-react-javascript-snippets": { "branch": "master", "commit": "185bb91a0b692c54136663464e8225872c434637" },
-  "vscode_dark_modern.nvim": { "branch": "main", "commit": "15011dd2355f217530a24868733759b1845458e2" }
+  "vscode_dark_modern.nvim": { "branch": "main", "commit": "607c185fde8a03d16515d6531ac13b52fe612c41" }
 }

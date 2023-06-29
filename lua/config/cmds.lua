@@ -15,4 +15,4 @@ vim.cmd([[
 vim.cmd("au BufRead,BufNewFile tsconfig.json set filetype=jsonc")
 
 -- Remove symbol ~ in NvimTree
-vim.o.fillchars = [[eob: ]]
+-- vim.o.fillchars = [[eob: ]]
