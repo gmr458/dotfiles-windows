@@ -126,3 +126,5 @@ vim.keymap.set("n", "-", "<C-x>")
 vim.keymap.set("n", "<C-a>", "gg<S-v>G")
 
 vim.keymap.set("n", "<space>qa", "<cmd>qa<CR>")
+
+vim.keymap.set("n", "<space>fc", "<cmd>foldclose<CR>")

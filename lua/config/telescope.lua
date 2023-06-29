@@ -99,6 +99,15 @@ telescope.setup({
         mirror = true,
       },
     },
+    lsp_implementations = {
+      layout_strategy = "vertical",
+      layout_config = {
+        width = 0.9,
+        height = 0.9,
+        preview_cutoff = 1,
+        mirror = true,
+      },
+    },
     lsp_references = {
       layout_strategy = "vertical",
       layout_config = {
