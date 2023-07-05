@@ -1,12 +1,4 @@
-local opts = { noremap = true, silent = true }
-
--- Shorten function name
-local keymap = vim.api.nvim_set_keymap
-
---Remap space as leader key
-keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
-vim.g.maplocalleader = " "
 
 -- Modes
 --   normal_mode = "n",
@@ -16,115 +8,99 @@ vim.g.maplocalleader = " "
 --   term_mode = "t",
 --   command_mode = "c",
 
--- Normal --
+---------------------------------------------------------------
+-- Normal -----------------------------------------------------
+---------------------------------------------------------------
+
 -- Better window navigation
-keymap("n", "<C-h>", "<C-w>h", opts)
-keymap("n", "<C-j>", "<C-w>j", opts)
-keymap("n", "<C-k>", "<C-w>k", opts)
-keymap("n", "<C-l>", "<C-w>l", opts)
+vim.keymap.set("n", "<C-h>", "<C-w>h")
+vim.keymap.set("n", "<C-j>", "<C-w>j")
+vim.keymap.set("n", "<C-k>", "<C-w>k")
+vim.keymap.set("n", "<C-l>", "<C-w>l")
 
 -- Resize with arrows
-keymap("n", "<C-Up>", ":resize -2<CR>", opts)
-keymap("n", "<C-Down>", ":resize +2<CR>", opts)
-keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
-keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
+vim.keymap.set("n", "<C-Up>", ":resize -2<cr>", { silent = true })
+vim.keymap.set("n", "<C-Down>", ":resize +2<cr>", { silent = true })
+vim.keymap.set("n", "<C-Left>", ":vertical resize -2<cr>", { silent = true })
+vim.keymap.set("n", "<C-Right>", ":vertical resize +2<cr>", { silent = true })
 
--- Navigate buffers
--- keymap("n", "m", ":bnext<CR>", opts)
--- keymap("n", "z", ":bprevious<CR>", opts)
+-- Navigate buffers when using bufferline
+-- vim.keymap.set("n", "m", ":bnext<cr>", opts)
+-- vim.keymap.set("n", "z", ":bprevious<cr>", opts)
 
 -- Delete current buffer
-vim.cmd([[nnoremap <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>]])
-keymap("n", "<leader>bd", ":bd!<CR>", opts)
+vim.keymap.set("n", "<leader>bd", ":bd!<cr>", { silent = true })
 
--- Move text up and down
-keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
-keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
-
--- Insert --
--- Press jk fast to enter
-keymap("i", "jk", "<ESC>", opts)
-
--- Visual --
--- Stay in indent mode
-keymap("v", "<", "<gv", opts)
-keymap("v", ">", ">gv", opts)
-
--- Move text up and down
-keymap("v", "<A-j>", ":m .+1<CR>==", opts)
-keymap("v", "<A-k>", ":m .-2<CR>==", opts)
-keymap("v", "p", "\"_dP", opts)
-
--- Visual Block --
--- Move text up and down
-keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
-keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
-keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
-keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
-
--- Telescope
-keymap("n", "tff", ":Telescope find_files no_ignore=false<CR>", opts)
-keymap("n", "tfg", ":Telescope live_grep preview=true<CR>", opts)
-keymap("n", "tht", ":Telescope help_tags preview=true<CR>", opts)
-keymap("n", "tfr", ":Telescope oldfiles preview=false<CR>", opts)
-keymap("n", "tfb", ":Telescope buffers<CR>", opts)
+-- telescope
+vim.keymap.set("n", "tff", ":Telescope find_files no_ignore=false<cr>", { silent = true })
+vim.keymap.set("n", "tfg", ":Telescope live_grep preview=true<cr>", { silent = true })
+vim.keymap.set("n", "tht", ":Telescope help_tags preview=true<cr>", { silent = true })
+vim.keymap.set("n", "tfr", ":Telescope oldfiles preview=false<cr>", { silent = true })
+vim.keymap.set("n", "tfb", ":Telescope buffers<cr>", { silent = true })
 
 -- fzf.lua
--- keymap("n", "tff", ":FzfLua files<CR>", opts)
+-- keymap("n", "tff", ":FzfLua files<cr>", { silent = true })
 
--- Nvim Tree
-keymap("n", "<C-n>", ":NvimTreeFindFileToggle<CR>", opts)
-vim.cmd([[tnoremap <silent> <C-n> <C-\><C-n>:NvimTreeToggle<CR>]])
-keymap("n", "<leader>r", ":NvimTreeRefresh<CR>", opts)
+-- nvim tree
+vim.keymap.set("n", "<C-n>", ":NvimTreeFindFileToggle<cr>", { silent = true })
+vim.keymap.set("n", "<leader>r", ":NvimTreeRefresh<cr>", { silent = true })
 
 -- nohlsearch
-keymap("n", "<Leader>nh", ":nohlsearch<CR>", opts)
+vim.keymap.set("n", "<leader>nh", ":nohlsearch<cr>", { silent = true })
 
--- Toogle terminal
-vim.cmd([[nnoremap <silent> <A-d> :ToggleTerm<CR>]])
-vim.cmd([[tnoremap <silent> <A-d> <C-\><C-n>:ToggleTerm<CR>]])
-vim.cmd([[tnoremap <silent> jk <C-\><C-n>]])
+-- insert single quotes
+vim.keymap.set("n", "<leader>sq", "ciw'<C-r>\"'<esc>", { silent = true, noremap = true })
 
--- Trouble
-vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>Trouble<cr>", { silent = true, noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>xw", "<cmd>Trouble workspace_diagnostics<cr>", { silent = true, noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>xd", "<cmd>Trouble document_diagnostics<cr>", { silent = true, noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>xl", "<cmd>Trouble loclist<cr>", { silent = true, noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>xq", "<cmd>Trouble quickfix<cr>", { silent = true, noremap = true })
-vim.api.nvim_set_keymap("n", "gR", "<cmd>Trouble lsp_references<cr>", { silent = true, noremap = true })
+-- remove single quotes
+vim.keymap.set("n", "<leader>usq", "di'hPl2x", { silent = true, noremap = true })
 
--- Hop
--- vim.api.nvim_set_keymap("n", "<Space>s", "<cmd>HopChar2<cr>", { silent = true, noremap = true })
--- vim.api.nvim_set_keymap("n", "F", "<cmd>HopPattern<cr>", { silent = true, noremap = true })
+-- insert double quotes
+vim.keymap.set("n", "<leader>dq", "ciw\"<C-r>\"\"<esc>", { silent = true, noremap = true })
 
--- Insert single quotes
-vim.api.nvim_set_keymap("n", "<leader>sq", "ciw'<C-r>\"'<Esc>", { silent = true, noremap = true })
+-- remove double quotes
+vim.keymap.set("n", "<leader>udq", "di\"hPl2x", { silent = true, noremap = true })
 
--- Remove single quotes
-vim.api.nvim_set_keymap("n", "<leader>usq", "di'hPl2x", { silent = true, noremap = true })
+-- insert single quotes visual mode
+vim.keymap.set("v", "<leader>sq", "xi'<esc>pA'<esc>", { silent = true, noremap = true })
 
--- Insert double quotes
-vim.api.nvim_set_keymap("n", "<leader>dq", "ciw\"<C-r>\"\"<Esc>", { silent = true, noremap = true })
+-- insert double quotes visual mode
+vim.keymap.set("v", "<leader>dq", "xi\"<esc>pA\"<esc>", { silent = true, noremap = true })
 
--- Remove double quotes
-vim.api.nvim_set_keymap("n", "<leader>udq", "di\"hPl2x", { silent = true, noremap = true })
-
--- Insert single quotes visual mode
-vim.api.nvim_set_keymap("v", "<leader>sq", "xi'<Esc>pA'<Esc>", { silent = true, noremap = true })
-
--- Insert double quotes visual mode
-vim.api.nvim_set_keymap("v", "<leader>dq", "xi\"<Esc>pA\"<Esc>", { silent = true, noremap = true })
-
--- Dot not yank with x
+-- dot not yank with x
 vim.keymap.set("n", "x", "\"_x")
 
--- Increment/decrement
-vim.keymap.set("n", "+", "<C-a>")
-vim.keymap.set("n", "-", "<C-x>")
-
--- Select all
+-- select all
 vim.keymap.set("n", "<C-a>", "gg<S-v>G")
 
-vim.keymap.set("n", "<space>qa", "<cmd>qa<CR>")
+-- close folded code
+vim.keymap.set("n", "<leader>fc", "<cmd>foldclose<cr>")
 
-vim.keymap.set("n", "<space>fc", "<cmd>foldclose<CR>")
+-- yank to clipboard
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
+vim.keymap.set("n", "<leader>Y", [["+Y]])
+
+-- toogle terminal
+vim.keymap.set("n", "<A-d>", ":ToggleTerm<cr>", { silent = true })
+
+---------------------------------------------------------------
+-- Insert -----------------------------------------------------
+---------------------------------------------------------------
+
+vim.keymap.set("i", "jk", "<esc>")
+
+---------------------------------------------------------------
+-- Visual -----------------------------------------------------
+---------------------------------------------------------------
+
+-- Stay in indent mode
+vim.keymap.set("v", "<", "<gv")
+vim.keymap.set("v", ">", ">gv")
+
+---------------------------------------------------------------
+-- Terminal ---------------------------------------------------
+---------------------------------------------------------------
+
+-- toogle terminal
+vim.keymap.set("t", "<A-d>", "<C-\\><C-n>:ToggleTerm<cr>")
+
+vim.keymap.set("t", "jk", "<C-\\><C-n>")
