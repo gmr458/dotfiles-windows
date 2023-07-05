@@ -100,9 +100,6 @@ local config = {
   -- for a list of options
   settings = {
     java = {
-      eclipse = {
-        downloadSources = true,
-      },
       configuration = {
         updateBuildConfiguration = "interactive",
         -- runtimes = {
@@ -116,23 +113,30 @@ local config = {
         --     },
         -- },
       },
-      maven = {
+      eclipse = {
         downloadSources = true,
       },
-      referencesCodeLens = {
+      format = {
         enabled = true,
       },
-      references = {
-        includeDecompiledSources = true,
-      },
+      implementationsCodeLens = { enabled = true },
       inlayHints = {
         parameterNames = {
           enabled = "all", -- literals, all, none
         },
       },
-      format = {
+      maven = {
+        downloadSources = true,
+      },
+      references = {
+        includeDecompiledSources = true,
+      },
+      referencesCodeLens = {
         enabled = true,
       },
+    },
+    redhat = {
+      telemetry = { enabled = false },
     },
     signatureHelp = { enabled = true },
     extendedClientCapabilities = extendedClientCapabilities,

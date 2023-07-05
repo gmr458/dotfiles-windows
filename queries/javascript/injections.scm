@@ -1,19 +1,10 @@
-; Highlight SQL code inside string
+; extends
 
-(call_expression
-    (member_expression
-        property: (property_identifier) @_property (#eq? @_property "query")
-    )
-    (arguments
-        (string) @sql
-    )
+(
+  [
+    (string)
+    (template_string)
+  ] @sql
+  (#match? @sql "(SELECT|select|INSERT|insert|UPDATE|update|DELETE|delete).+(FROM|from|INTO|into|VALUES|values|SET|set).*(WHERE|where|GROUP BY|group by)?")
+  (#offset! @sql 0 1 0 -1)
 )
-
-; (call_expression
-;     (member_expression
-;         property: (property_identifier) @_property (#eq? @_property "query")
-;     )
-;     (arguments
-;         (template_string) @sql
-;     )
-; )

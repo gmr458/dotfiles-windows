@@ -15,6 +15,9 @@ local config = {
         },
         run = { enable = true },
       },
+      typing = {
+        autoClosingAngleBrackets = { enable = true },
+      },
     },
   },
 }

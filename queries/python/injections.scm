@@ -1,29 +1,9 @@
-; Highlight SQL code inside string
+; extends
 
-; Python code example
-; connection = get_mysql_connection()
-; with connection.cursor() as cursor:
-;     cursor.execute(
-;         """INSERT INTO post (title, body, author_id)
-;             VALUES (%s, %s, %s)""",
-;         (title, body, user_id),
-;     )
-; connection.commit()
-
-(call
-    (attribute
-        attribute: (identifier) @_attribute (#eq? @_attribute "execute")
-    )
-    (argument_list
-        (string) @sql
-    )
-)
-
-(call
-    (attribute
-        attribute: (identifier) @_attribute (#eq? @_attribute "execute")
-    )
-    (argument_list
-        (concatenated_string) @sql
-    )
+(
+  [
+    (string)
+  ] @sql
+  (#match? @sql "(SELECT|select|INSERT|insert|UPDATE|update|DELETE|delete).+(FROM|from|INTO|into|VALUES|values|SET|set).*(WHERE|where|GROUP BY|group by)?")
+  (#offset! @sql 0 1 0 -1)
 )

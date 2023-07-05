@@ -30,7 +30,7 @@ local font_height = "h10"
 local guifont = font_name .. ":" .. font_height
 
 vim.opt.background = "dark" -- "dark" or "light", used for highlight colors
-vim.opt.clipboard = "unnamedplus" -- use the clipboard as the unnamed register
+-- vim.opt.clipboard = "unnamedplus" -- use the clipboard as the unnamed register
 vim.opt.cmdheight = 1 -- number of lines to use for the command-line
 vim.opt.completeopt = { "menu", "menuone", "noselect" } -- options for Insert mode completion
 vim.opt.confirm = true -- ask what to do about unsaved/read-only files
