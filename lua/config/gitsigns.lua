@@ -1,6 +1,4 @@
-local ok, gitsigns, scrollbar_gitsigns
-
-ok, gitsigns = pcall(require, "gitsigns")
+local ok, gitsigns = pcall(require, "gitsigns")
 if not ok then
   vim.notify("gitsigns could not be loaded")
   return

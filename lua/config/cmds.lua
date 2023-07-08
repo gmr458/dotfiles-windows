@@ -11,8 +11,5 @@ vim.cmd([[
     augroup END
 ]])
 
--- Hide error messages in JSON with comments
-vim.cmd("au BufRead,BufNewFile tsconfig.json set filetype=jsonc")
-
--- Remove symbol ~ in NvimTree
+-- Remove symbol ~
 vim.o.fillchars = [[eob: ]]

@@ -33,7 +33,7 @@ feline.setup({
     },
     bufnames = {},
   },
-  disable = { filetypes = { "^alpha$", "^dashboard$", "^NvimTree$", "^TelescopePrompt$", "^toggleterm$" } },
+  disable = { filetypes = { "^alpha$", "^dashboard$" } },
   theme = vscode_dark_modern.palette(),
   components = vscode_dark_modern.components(),
 })

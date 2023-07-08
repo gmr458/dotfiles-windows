@@ -39,10 +39,10 @@
         (raw_string_literal)
     ] @sql
     (#contains? @sql
-        "ADD CONSTRAINT" "ALTER TABLE" "ALTER COLUMN" "DATABASE" "FOREIGN KEY"
+        "ADD CONSTRAINT" "ALTER TABLE" "ALTER COLUMN" "FOREIGN KEY"
         "GROUP BY" "HAVING" "CREATE INDEX" "INSERT INTO" "NOT NULL"
         "PRIMARY KEY" "UPDATE SET" "TRUNCATE TABLE" "LEFT JOIN"
-        "add constraint" "alter table" "alter column" "database" "foreign key"
+        "add constraint" "alter table" "alter column" "foreign key"
         "group by" "having" "create index" "insert into" "not null"
         "primary key" "update set" "truncate table" "left join"
     )
