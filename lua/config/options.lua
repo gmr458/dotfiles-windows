@@ -71,6 +71,12 @@ vim.opt.updatetime = 50
 -- vim.opt.winbar = "%f"
 vim.opt.wrap = false -- long lines wrap and continue on the next line
 
+vim.filetype.add({
+  filename = {
+    ["go.mod"] = "gomod",
+  },
+})
+
 if vim.fn.has("win32") == 1 then
   vim.cmd([[language en_US]])
 end

@@ -119,7 +119,7 @@ lazy.setup({
     config = function()
       require("vscode_dark_modern").setup({
         cursorline = true,
-        transparent_background = true,
+        transparent_background = false,
         nvim_tree_darker = true,
       })
       vim.cmd.colorscheme("vscode_dark_modern")
