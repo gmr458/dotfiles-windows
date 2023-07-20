@@ -96,7 +96,7 @@ telescope.setup({
         width = 0.9,
         height = 0.9,
         preview_cutoff = 1,
-        mirror = true,
+        mirror = false,
       },
     },
     lsp_implementations = {
@@ -105,7 +105,7 @@ telescope.setup({
         width = 0.9,
         height = 0.9,
         preview_cutoff = 1,
-        mirror = true,
+        mirror = false,
       },
     },
     lsp_references = {
@@ -114,7 +114,7 @@ telescope.setup({
         width = 0.9,
         height = 0.9,
         preview_cutoff = 1,
-        mirror = true,
+        mirror = false,
       },
     },
     oldfiles = {

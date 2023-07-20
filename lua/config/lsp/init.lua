@@ -214,19 +214,21 @@ function M.on_attach(client, bufnr)
     })
   end
 
-  if client.name == "gopls" then
-    if not client.server_capabilities.semanticTokensProvider then
-      local semantic = client.config.capabilities.textDocument.semanticTokens
-      client.server_capabilities.semanticTokensProvider = {
-        full = true,
-        legend = {
-          tokenTypes = semantic.tokenTypes,
-          tokenModifiers = semantic.tokenModifiers,
-        },
-        range = true,
-      }
-    end
-  end
+  -- if client.name == "gopls" then
+  --   vim.lsp.codelens.refresh()
+
+  --   if not client.server_capabilities.semanticTokensProvider then
+  --     local semantic = client.config.capabilities.textDocument.semanticTokens
+  --     client.server_capabilities.semanticTokensProvider = {
+  --       full = true,
+  --       legend = {
+  --         tokenTypes = semantic.tokenTypes,
+  --         tokenModifiers = semantic.tokenModifiers,
+  --       },
+  --       range = true,
+  --     }
+  --   end
+  -- end
 
   attach_navic(client, bufnr)
 end
