@@ -4,5 +4,10 @@ if not ok then
   return
 end
 
+config.configure_language("svelte", {
+  prefer_multi_line_comments = true,
+  multi_line_comment_strings = { "<!--", "-->" },
+})
+
 config.configure_language("default", { prefer_single_line_comments = true })
 config.use_extended_mappings()
