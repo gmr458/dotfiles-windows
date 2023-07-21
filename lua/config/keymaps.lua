@@ -96,6 +96,9 @@ vim.keymap.set("i", "jk", "<esc>")
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
+-- Remember copied elements when pasted in visual mode
+vim.keymap.set("v", "p", "\"_dP", { noremap = true, silent = true })
+
 ---------------------------------------------------------------
 -- Terminal ---------------------------------------------------
 ---------------------------------------------------------------
