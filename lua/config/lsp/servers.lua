@@ -13,7 +13,7 @@ M.to_setup = function()
     "eslint",
     "gopls",
     "html",
-    -- "intelephense",
+    "intelephense",
     "jsonls",
     -- "kotlin_language_server",
     "nim_langserver",
