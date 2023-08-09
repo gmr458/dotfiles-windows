@@ -26,7 +26,7 @@ local font_names = {
   consolas = "Consolas Nerd Font Mono",
 }
 local font_name = font_names.consolas
-local font_height = "h10"
+local font_height = "h11.5"
 local guifont = font_name .. ":" .. font_height
 
 vim.opt.background = "dark" -- "dark" or "light", used for highlight colors
