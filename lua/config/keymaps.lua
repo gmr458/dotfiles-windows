@@ -39,7 +39,7 @@ vim.keymap.set("n", "tfr", ":Telescope oldfiles preview=false<cr>", { silent = t
 vim.keymap.set("n", "tfb", ":Telescope buffers<cr>", { silent = true })
 
 -- fzf.lua
--- keymap("n", "tff", ":FzfLua files<cr>", { silent = true })
+-- vim.keymap.set("n", "tff", ":FzfLua files<cr>", { silent = true })
 
 -- nvim tree
 vim.keymap.set("n", "<C-n>", ":NvimTreeFindFileToggle<cr>", { silent = true })

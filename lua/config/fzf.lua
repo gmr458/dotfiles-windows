@@ -21,7 +21,10 @@ fzf.setup({
     col = 0.50,
     border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" },
     fullscreen = false,
-    preview = { scrollbar = false },
+    preview = {
+      wrap = "nowrap",
+      hidden = "hidden",
+    },
     on_create = function()
       vim.keymap.set("t", "<Tab>", "<Down>", { silent = true, buffer = true })
       vim.keymap.set("t", "<S-Tab>", "<Up>", { silent = true, buffer = true })
