@@ -365,6 +365,17 @@ lazy.setup({
       "DiffviewToggleFiles",
     },
   },
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("config.noice")
+    end,
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+    },
+  },
 }, {
   change_detection = { enabled = false, notify = false },
   ui = { border = "single" },
