@@ -6,7 +6,12 @@ end
 
 local config = {
   root_dir = util.root_pattern("package.json"),
-  single_file_support = false,
+  single_file_support = true,
+  settings = {
+    diagnostics = {
+      ignoredCodes = { 80001 },
+    },
+  },
 }
 
 return config
