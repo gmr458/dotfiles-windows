@@ -19,7 +19,7 @@
   "indent-blankline.nvim": { "branch": "master", "commit": "4541d690816cb99a7fc248f1486aa87f3abce91c" },
   "kommentary": { "branch": "main", "commit": "3a80117148c6798972bb69414423311ab151d368" },
   "lazy.nvim": { "branch": "main", "commit": "dac844ed617dda4f9ec85eb88e9629ad2add5e05" },
-  "mason.nvim": { "branch": "main", "commit": "68e6a153d7cd1251eb85ebb48d2e351e9ab940b8" },
+  "mason.nvim": { "branch": "main", "commit": "b5bb138312dbd3f7729197ca659cbe5221d36a03" },
   "neodev.nvim": { "branch": "main", "commit": "4681d489cce1604a75435494fe278514f9835a87" },
   "neoscroll.nvim": { "branch": "master", "commit": "4bc0212e9f2a7bc7fe7a6bceb15b33e39f0f41fb" },
   "neotest": { "branch": "master", "commit": "bec7be0f13ee19c85561943fc5f7b8daa4f4d465" },
