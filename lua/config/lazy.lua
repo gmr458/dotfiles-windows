@@ -119,7 +119,7 @@ lazy.setup({
     config = function()
       require("vscode_dark_modern").setup({
         cursorline = true,
-        transparent_background = false,
+        transparent_background = true,
         nvim_tree_darker = true,
       })
       vim.cmd.colorscheme("vscode_dark_modern")
@@ -241,7 +241,7 @@ lazy.setup({
     "L3MON4D3/LuaSnip",
     version = "2.*",
     build = "make install_jsregexp",
-    event = "InsertEnter",
+    -- event = "InsertEnter",
     dependencies = {
       {
         "dsznajder/vscode-react-javascript-snippets",

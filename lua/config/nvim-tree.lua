@@ -50,4 +50,5 @@ nvim_tree.setup({
     exclude = {},
   },
   modified = { enable = true },
+  git = { enable = false },
 })
