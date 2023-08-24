@@ -241,7 +241,7 @@ lazy.setup({
     "L3MON4D3/LuaSnip",
     version = "2.*",
     build = "make install_jsregexp",
-    -- event = "InsertEnter",
+    event = "InsertEnter",
     dependencies = {
       {
         "dsznajder/vscode-react-javascript-snippets",
@@ -371,10 +371,7 @@ lazy.setup({
     config = function()
       require("config.noice")
     end,
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "rcarriga/nvim-notify",
-    },
+    dependencies = { "MunifTanjim/nui.nvim" },
   },
 }, {
   change_detection = { enabled = false, notify = false },
