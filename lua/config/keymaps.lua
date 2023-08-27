@@ -32,11 +32,11 @@ vim.keymap.set("n", "<C-Right>", ":vertical resize +2<cr>", { silent = true })
 vim.keymap.set("n", "<leader>bd", ":bd!<cr>", { silent = true })
 
 -- telescope
-vim.keymap.set("n", "tff", ":Telescope find_files no_ignore=false<cr>", { silent = true })
-vim.keymap.set("n", "tfg", ":Telescope live_grep preview=true<cr>", { silent = true })
-vim.keymap.set("n", "tht", ":Telescope help_tags preview=true<cr>", { silent = true })
-vim.keymap.set("n", "tfr", ":Telescope oldfiles preview=false<cr>", { silent = true })
-vim.keymap.set("n", "tfb", ":Telescope buffers<cr>", { silent = true })
+vim.keymap.set("n", "<leader>tff", ":Telescope find_files no_ignore=false<cr>", { silent = true })
+vim.keymap.set("n", "<leader>tfg", ":Telescope live_grep preview=true<cr>", { silent = true })
+vim.keymap.set("n", "<leader>tht", ":Telescope help_tags preview=true<cr>", { silent = true })
+vim.keymap.set("n", "<leader>tfr", ":Telescope oldfiles preview=false<cr>", { silent = true })
+vim.keymap.set("n", "<leader>tfb", ":Telescope buffers<cr>", { silent = true })
 
 -- fzf.lua
 -- vim.keymap.set("n", "tff", ":FzfLua files<cr>", { silent = true })

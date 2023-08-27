@@ -74,3 +74,9 @@ vim.opt.wrap = false -- long lines wrap and continue on the next line
 if vim.fn.has("win32") == 1 then
   vim.cmd([[language en_US]])
 end
+
+vim.filetype.add({
+  pattern = {
+    ["req.*.txt"] = "requirements.txt",
+  },
+})

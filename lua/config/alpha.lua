@@ -12,7 +12,7 @@ if not ok then
   return
 end
 
-dashboard.section.header.val = require("config.headers").Default2
+dashboard.section.header.val = require("config.headers").Bloody
 dashboard.section.header.opts = { position = "center", hl = "AlphaHeader" }
 
 dashboard.section.buttons.val = {

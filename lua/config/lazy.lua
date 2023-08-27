@@ -62,19 +62,19 @@ lazy.setup({
           require("config.treesitter.context")
         end,
       },
-      {
-        "kevinhwang91/nvim-ufo",
-        dependencies = { "kevinhwang91/promise-async" },
-        config = function()
-          require("config.ufo")
-        end,
-        init = function()
-          vim.o.foldcolumn = "0"
-          vim.o.foldlevel = 99
-          vim.o.foldlevelstart = 99
-          vim.o.foldenable = true
-        end,
-      },
+      -- {
+      --   "kevinhwang91/nvim-ufo",
+      --   dependencies = { "kevinhwang91/promise-async" },
+      --   config = function()
+      --     require("config.ufo")
+      --   end,
+      --   init = function()
+      --     vim.o.foldcolumn = "0"
+      --     vim.o.foldlevel = 99
+      --     vim.o.foldlevelstart = 99
+      --     vim.o.foldenable = true
+      --   end,
+      -- },
     },
   },
   {
@@ -119,7 +119,7 @@ lazy.setup({
     config = function()
       require("dark_modern").setup({
         cursorline = true,
-        transparent_background = true,
+        transparent_background = false,
         nvim_tree_darker = true,
       })
       vim.cmd.colorscheme("dark_modern")
@@ -193,49 +193,49 @@ lazy.setup({
     },
   },
   -- DAP
-  {
-    "rcarriga/nvim-dap-ui",
-    cmd = { "DapContinue", "DapToggleBreakpoint" },
-    config = function()
-      require("config.dap")
-    end,
-    dependencies = {
-      { "mfussenegger/nvim-dap" },
-      {
-        "mfussenegger/nvim-dap-python",
-        config = function()
-          require("config.dap.python")
-        end,
-      },
-    },
-  },
+  -- {
+  --   "rcarriga/nvim-dap-ui",
+  --   cmd = { "DapContinue", "DapToggleBreakpoint" },
+  --   config = function()
+  --     require("config.dap")
+  --   end,
+  --   dependencies = {
+  --     { "mfussenegger/nvim-dap" },
+  --     {
+  --       "mfussenegger/nvim-dap-python",
+  --       config = function()
+  --         require("config.dap.python")
+  --       end,
+  --     },
+  --   },
+  -- },
   -- LSP Java
   {
     "mfussenegger/nvim-jdtls",
     ft = "java",
     dependencies = {
       "williamboman/mason.nvim",
-      "rcarriga/nvim-dap-ui",
+      -- "rcarriga/nvim-dap-ui",
     },
   },
-  {
-    "nvim-neotest/neotest",
-    cmd = { "Neotest" },
-    config = function()
-      require("config.neotest")
-    end,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-      "antoinemadec/FixCursorHold.nvim",
-      "nvim-neotest/neotest-python",
-      "nvim-neotest/neotest-go",
-      "nvim-neotest/neotest-jest",
-      "marilari88/neotest-vitest",
-      "rouge8/neotest-rust",
-      "Issafalcon/neotest-dotnet",
-    },
-  },
+  -- {
+  --   "nvim-neotest/neotest",
+  --   cmd = { "Neotest" },
+  --   config = function()
+  --     require("config.neotest")
+  --   end,
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",
+  --     "nvim-treesitter/nvim-treesitter",
+  --     "antoinemadec/FixCursorHold.nvim",
+  --     "nvim-neotest/neotest-python",
+  --     "nvim-neotest/neotest-go",
+  --     "nvim-neotest/neotest-jest",
+  --     "marilari88/neotest-vitest",
+  --     "rouge8/neotest-rust",
+  --     "Issafalcon/neotest-dotnet",
+  --   },
+  -- },
   -- Completion
   {
     "L3MON4D3/LuaSnip",
@@ -353,18 +353,18 @@ lazy.setup({
       require("config.formatter")
     end,
   },
-  {
-    "sindrets/diffview.nvim",
-    dependencies = "nvim-lua/plenary.nvim",
-    cmd = {
-      "DiffviewFileHistory",
-      "DiffviewFocusFiles",
-      "DiffviewLog",
-      "DiffviewOpen",
-      "DiffviewRefresh",
-      "DiffviewToggleFiles",
-    },
-  },
+  -- {
+  --   "sindrets/diffview.nvim",
+  --   dependencies = "nvim-lua/plenary.nvim",
+  --   cmd = {
+  --     "DiffviewFileHistory",
+  --     "DiffviewFocusFiles",
+  --     "DiffviewLog",
+  --     "DiffviewOpen",
+  --     "DiffviewRefresh",
+  --     "DiffviewToggleFiles",
+  --   },
+  -- },
   {
     "folke/noice.nvim",
     event = "VeryLazy",
