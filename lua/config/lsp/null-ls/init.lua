@@ -22,9 +22,9 @@ null_ls.setup({
     -- null_ls.builtins.formatting.isort,
     null_ls.builtins.formatting.prettier,
     null_ls.builtins.formatting.rubocop,
-    null_ls.builtins.formatting.rustfmt,
+    -- null_ls.builtins.formatting.rustfmt,
     null_ls.builtins.formatting.stylua,
-    null_ls.builtins.formatting.taplo,
+    -- null_ls.builtins.formatting.taplo,
     null_ls.builtins.diagnostics.buf,
     null_ls.builtins.diagnostics.djlint.with({
       diagnostic_config = {
