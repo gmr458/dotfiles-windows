@@ -48,10 +48,8 @@ lazy.setup({
   -- Treesitter
   {
     "nvim-treesitter/nvim-treesitter",
-    event = "BufReadPost",
-    build = function()
-      require("nvim-treesitter.install").update({ with_sync = true })
-    end,
+    event = { "BufReadPost", "BufNewFile" },
+    build = ":TSUpdate",
     config = function()
       require("config.treesitter")
     end,
@@ -121,9 +119,24 @@ lazy.setup({
         cursorline = true,
         transparent_background = false,
         nvim_tree_darker = true,
+        italic_keyword = false,
       })
       vim.cmd.colorscheme("dark_modern")
     end,
+  },
+  {
+    "gmr458/github_dark_default.nvim",
+    -- lazy = false,
+    -- priority = 1000,
+    -- config = function()
+    --   require("github_dark_default").setup({
+    --     cursorline = true,
+    --     transparent_background = false,
+    --     nvim_tree_darker = true,
+    --     italic_keyword = false,
+    --   })
+    --   vim.cmd.colorscheme("github_dark_default")
+    -- end,
   },
   -- FZF
   {
@@ -136,7 +149,7 @@ lazy.setup({
   -- Telescope
   {
     "nvim-telescope/telescope.nvim",
-    version = "0.1.2",
+    version = "0.1.3",
     dependencies = {
       { "nvim-lua/plenary.nvim" },
       {

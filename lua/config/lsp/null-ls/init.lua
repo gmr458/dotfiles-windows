@@ -14,7 +14,7 @@ null_ls.setup({
         "--preserve-leading-space",
         "--preserve-blank-lines",
         "--indent",
-        "2",
+        "4",
       },
     }),
     -- null_ls.builtins.formatting.gofmt,

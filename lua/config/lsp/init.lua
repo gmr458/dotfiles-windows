@@ -84,6 +84,8 @@ local function goto_definition()
 end
 
 vim.lsp.handlers["textDocument/definition"] = goto_definition()
+
+-- comment this if using noice.nvim
 -- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = borderchars })
 -- vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = borderchars })
 
@@ -182,17 +184,17 @@ function M.on_attach(client, bufnr)
 
   if client.name == "jdtls" then
     -- jdtls dap
-    require("jdtls").setup_dap({ hotcodereplace = "auto" })
-    require("jdtls.dap").setup_dap_main_class_configs()
+    -- require("jdtls").setup_dap({ hotcodereplace = "auto" })
+    -- require("jdtls.dap").setup_dap_main_class_configs()
 
     -- jdtls commands
-    require("jdtls.setup").add_commands()
-    vim.api.nvim_create_user_command("JdtTestClass", function()
-      require("jdtls").test_class()
-    end, {})
-    vim.api.nvim_create_user_command("JdtTestNearestMethod", function()
-      require("jdtls").test_nearest_method()
-    end, {})
+    -- require("jdtls.setup").add_commands()
+    -- vim.api.nvim_create_user_command("JdtTestClass", function()
+    --   require("jdtls").test_class()
+    -- end, {})
+    -- vim.api.nvim_create_user_command("JdtTestNearestMethod", function()
+    --   require("jdtls").test_nearest_method()
+    -- end, {})
 
     -- jdtls codelens
     vim.lsp.codelens.refresh()

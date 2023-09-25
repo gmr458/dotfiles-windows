@@ -27,16 +27,16 @@ local workspace_dir = vim.loop.os_homedir() .. "/.cache/jdtls/workspace/" .. pro
 local extendedClientCapabilities = jdtls.extendedClientCapabilities
 extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
 
-local jt_path = mason_registry.get_package("java-test"):get_install_path()
-local jda_path = mason_registry.get_package("java-debug-adapter"):get_install_path()
+-- local jt_path = mason_registry.get_package("java-test"):get_install_path()
+-- local jda_path = mason_registry.get_package("java-debug-adapter"):get_install_path()
 
-local bundles = {}
+-- local bundles = {}
 
-local jt_server_jars = vim.fn.glob(jt_path .. "/extension/server/*.jar")
-vim.list_extend(bundles, vim.split(jt_server_jars, "\n"))
+-- local jt_server_jars = vim.fn.glob(jt_path .. "/extension/server/*.jar")
+-- vim.list_extend(bundles, vim.split(jt_server_jars, "\n"))
 
-local jda_server_jar = vim.fn.glob(jda_path .. "/extension/server/com.microsoft.java.debug.plugin-*.jar")
-vim.list_extend(bundles, vim.split(jda_server_jar, "\n"))
+-- local jda_server_jar = vim.fn.glob(jda_path .. "/extension/server/com.microsoft.java.debug.plugin-*.jar")
+-- vim.list_extend(bundles, vim.split(jda_server_jar, "\n"))
 
 -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
 local config = {
@@ -149,10 +149,10 @@ local config = {
   -- See https://github.com/mfussenegger/nvim-jdtls#java-debug-installation
   --
   -- If you don't plan on using the debugger or other eclipse.jdt.ls plugins you can remove this
-  init_options = {
-    -- workspace = workspace_dir,
-    bundles = bundles,
-  },
+  -- init_options = {
+  --   -- workspace = workspace_dir,
+  --   bundles = bundles,
+  -- },
 }
 -- This starts a new client & server,
 -- or attaches to an existing client & server depending on the `root_dir`.

@@ -28,9 +28,9 @@ local font_names = {
   roboto_mono = "RobotoMono Nerd Font Mono",
   consolas = "Consolas Nerd Font Mono",
 }
-local font_name = font_names.consolas
-local font_height = "h11.5"
-local guifont = font_name .. ":" .. font_height
+local font_name = font_names.roboto_mono
+local font_height = "10.5"
+local guifont = font_name .. ":" .. "h" .. font_height
 
 vim.opt.background = "dark" -- "dark" or "light", used for highlight colors
 -- vim.opt.clipboard = "unnamedplus" -- use the clipboard as the unnamed register
