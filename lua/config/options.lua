@@ -17,6 +17,7 @@ vim.g.loaded_netrwPlugin = 1
 vim.g.loaded_netrwSettings = 1
 vim.g.loaded_netrwFileHandlers = 1
 vim.g.loaded_python3_provider = 0
+vim.g.loaded_ruby_provider = 0
 vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 
@@ -24,7 +25,7 @@ local font_names = {
   caskaydia_cove = "CaskaydiaCove Nerd Font Mono",
   comic_mono = "ComicMono Nerd Font Mono",
   fira_code = "FiraCode Nerd Font Mono",
-  iosevka_fixed = "Iosevka Fixed",
+  iosevka_raven = "IosevkaRaven Nerd Font Mono",
   roboto_mono = "RobotoMono Nerd Font Mono",
   consolas = "Consolas Nerd Font Mono",
 }

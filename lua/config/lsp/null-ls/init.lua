@@ -6,8 +6,8 @@ end
 
 null_ls.setup({
   sources = {
-    -- null_ls.builtins.code_actions.gomodifytags,
-    -- null_ls.builtins.code_actions.impl,
+    null_ls.builtins.code_actions.gomodifytags,
+    null_ls.builtins.code_actions.impl,
     null_ls.builtins.formatting.black,
     null_ls.builtins.formatting.djlint.with({
       extra_args = {

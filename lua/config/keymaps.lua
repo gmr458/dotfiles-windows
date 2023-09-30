@@ -1,12 +1,12 @@
 vim.g.mapleader = " "
 
 -- Modes
---   normal_mode = "n",
---   insert_mode = "i",
---   visual_mode = "v",
+--   normal_mode       = "n",
+--   insert_mode       = "i",
+--   visual_mode       = "v",
 --   visual_block_mode = "x",
---   term_mode = "t",
---   command_mode = "c",
+--   term_mode         = "t",
+--   command_mode      = "c",
 
 ---------------------------------------------------------------
 -- Normal -----------------------------------------------------
@@ -39,7 +39,7 @@ vim.keymap.set("n", "<leader>of", ":Telescope oldfiles preview=false<cr>", { sil
 vim.keymap.set("n", "<leader>bf", ":Telescope buffers<cr>", { silent = true })
 
 -- fzf.lua
--- vim.keymap.set("n", "tff", ":FzfLua files<cr>", { silent = true })
+-- vim.keymap.set("n", "<leader>ff", ":FzfLua files<cr>", { silent = true })
 
 -- nvim tree
 vim.keymap.set("n", "<C-n>", ":NvimTreeFindFileToggle<cr>", { silent = true })

@@ -117,7 +117,7 @@ lazy.setup({
     config = function()
       require("dark_modern").setup({
         cursorline = true,
-        transparent_background = false,
+        transparent_background = true,
         nvim_tree_darker = true,
         italic_keyword = false,
       })
@@ -155,6 +155,9 @@ lazy.setup({
       {
         "nvim-telescope/telescope-fzf-native.nvim",
         build = "make",
+        cond = function()
+          return vim.fn.executable("make") == 1
+        end,
       },
     },
     cmd = "Telescope",
@@ -202,6 +205,13 @@ lazy.setup({
         config = function()
           require("config.trouble")
         end,
+      },
+      {
+        "folke/noice.nvim",
+        config = function()
+          require("config.noice")
+        end,
+        dependencies = { "MunifTanjim/nui.nvim" },
       },
     },
   },
@@ -254,11 +264,17 @@ lazy.setup({
     "L3MON4D3/LuaSnip",
     version = "2.*",
     build = "make install_jsregexp",
+    cond = function()
+      return vim.fn.executable("make") == 1
+    end,
     event = "InsertEnter",
     dependencies = {
       {
         "dsznajder/vscode-react-javascript-snippets",
         build = table.concat(build_snippets, " "),
+        cond = function()
+          return vim.fn.executable("yarn") == 1
+        end,
       },
       {
         "rafamadriz/friendly-snippets",
@@ -315,6 +331,7 @@ lazy.setup({
   },
   {
     "NMAC427/guess-indent.nvim",
+
     event = "BufReadPost",
     config = function()
       require("config.guess-indent")
@@ -348,6 +365,7 @@ lazy.setup({
   },
   {
     "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
     event = "BufReadPre",
     config = function()
       require("config.indent-blankline")
@@ -378,14 +396,6 @@ lazy.setup({
   --     "DiffviewToggleFiles",
   --   },
   -- },
-  {
-    "folke/noice.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("config.noice")
-    end,
-    dependencies = { "MunifTanjim/nui.nvim" },
-  },
 }, {
   change_detection = { enabled = false, notify = false },
   ui = { border = "single" },
