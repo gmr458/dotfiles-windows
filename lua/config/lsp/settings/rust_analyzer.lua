@@ -2,7 +2,7 @@ local config = {
   settings = {
     ["rust-analyzer"] = {
       lens = {
-        debug = { enable = true },
+        debug = { enable = false },
         enable = true,
         forceCustomCommands = true,
         implementations = { enable = true },
@@ -13,7 +13,7 @@ local config = {
           method = { enable = true },
           trait = { enable = true },
         },
-        run = { enable = true },
+        run = { enable = false },
       },
       typing = {
         autoClosingAngleBrackets = { enable = true },

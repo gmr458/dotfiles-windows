@@ -206,6 +206,10 @@ function M.on_attach(client, bufnr)
     })
   end
 
+  if client.name == "ruff_lsp" then
+    client.server_capabilities.hoverProvider = false
+  end
+
   if client.name == "rust_analyzer" then
     vim.lsp.codelens.refresh()
     vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
@@ -242,9 +246,13 @@ for _, server in pairs(servers) do
   }
 
   local has_custom_opts, server_custom_opts = pcall(require, "config.lsp.settings." .. server)
-
   if has_custom_opts then
     server_opts = vim.tbl_deep_extend("force", server_opts, server_custom_opts)
+  end
+
+  local has_custom_commands, server_custom_commands = pcall(require, "config.lsp.commands." .. server)
+  if has_custom_commands then
+    server_opts.commands = server_custom_commands
   end
 
   lspconfig[server].setup(server_opts)

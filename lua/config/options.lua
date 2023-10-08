@@ -24,14 +24,14 @@ vim.g.loaded_perl_provider = 0
 local font_names = {
   caskaydia_cove = "CaskaydiaCove Nerd Font Mono",
   comic_mono = "ComicMono Nerd Font Mono",
-  fira_code = "FiraCode Nerd Font Mono",
+  fira_code = "FiraCodeCustom Nerd Font Mono",
   iosevka_raven = "IosevkaRaven Nerd Font Mono",
   roboto_mono = "RobotoMono Nerd Font Mono",
   consolas = "Consolas Nerd Font Mono",
 }
-local font_name = font_names.roboto_mono
+local font_name = font_names.fira_code
 local font_height = "10.5"
-local guifont = font_name .. ":" .. "h" .. font_height
+local guifont = font_name .. ":" .. "h" .. font_height .. ":" .. "#h-slight"
 
 vim.opt.background = "dark" -- "dark" or "light", used for highlight colors
 -- vim.opt.clipboard = "unnamedplus" -- use the clipboard as the unnamed register
@@ -54,7 +54,7 @@ vim.opt.scrolloff = 10 -- minimum nr. of lines above and below cursor
 vim.opt.shiftwidth = 4 -- number of spaces to use for (auto)indent step
 vim.opt.showcmd = true --
 vim.opt.showmode = false -- message on status line to show current mode
--- vim.opt.showtabline = 0 -- tells when the tab pages line is displayed
+vim.opt.showtabline = 1 -- tells when the tab pages line is displayed
 vim.opt.sidescroll = 5 -- minimum number of columns to scroll horizontal
 vim.opt.sidescrolloff = 5 -- min. nr. of columns to left and right of cursor
 vim.opt.signcolumn = "yes" -- when and how to display the sign column
@@ -84,3 +84,9 @@ vim.filetype.add({
     ["req.*.txt"] = "requirements.txt",
   },
 })
+
+vim.g.neovide_transparency = 0.9
+vim.g.neovide_hide_mouse_when_typing = true
+vim.g.neovide_refresh_rate = 60
+vim.g.neovide_cursor_animation_length = 0.1
+vim.g.neovide_cursor_trail_size = 0.4

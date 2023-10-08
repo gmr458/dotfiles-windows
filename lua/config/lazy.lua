@@ -301,7 +301,6 @@ lazy.setup({
       },
     },
   },
-  -- -- Other plugins
   {
     "lewis6991/gitsigns.nvim",
     event = "BufReadPre",
@@ -384,18 +383,6 @@ lazy.setup({
       require("config.formatter")
     end,
   },
-  -- {
-  --   "sindrets/diffview.nvim",
-  --   dependencies = "nvim-lua/plenary.nvim",
-  --   cmd = {
-  --     "DiffviewFileHistory",
-  --     "DiffviewFocusFiles",
-  --     "DiffviewLog",
-  --     "DiffviewOpen",
-  --     "DiffviewRefresh",
-  --     "DiffviewToggleFiles",
-  --   },
-  -- },
 }, {
   change_detection = { enabled = false, notify = false },
   ui = { border = "single" },
