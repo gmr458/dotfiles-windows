@@ -20,7 +20,7 @@ M.to_setup = function()
     "ocamllsp",
     "omnisharp",
     "pyright",
-    "ruff_lsp",
+    -- "ruff_lsp",
     "rust_analyzer",
     -- "solargraph",
     "svelte",

@@ -124,20 +124,6 @@ lazy.setup({
       vim.cmd.colorscheme("dark_modern")
     end,
   },
-  {
-    "gmr458/github_dark_default.nvim",
-    -- lazy = false,
-    -- priority = 1000,
-    -- config = function()
-    --   require("github_dark_default").setup({
-    --     cursorline = true,
-    --     transparent_background = false,
-    --     nvim_tree_darker = true,
-    --     italic_keyword = false,
-    --   })
-    --   vim.cmd.colorscheme("github_dark_default")
-    -- end,
-  },
   -- FZF
   {
     "ibhagwan/fzf-lua",
@@ -149,7 +135,7 @@ lazy.setup({
   -- Telescope
   {
     "nvim-telescope/telescope.nvim",
-    version = "0.1.3",
+    version = "0.1.4",
     dependencies = {
       { "nvim-lua/plenary.nvim" },
       {
