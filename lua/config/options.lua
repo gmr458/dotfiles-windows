@@ -21,72 +21,48 @@ vim.g.loaded_ruby_provider = 0
 vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 
-local font_names = {
-  caskaydia_cove = "CaskaydiaCove Nerd Font Mono",
-  comic_mono = "ComicMono Nerd Font Mono",
-  fira_code = "FiraCodeCustom Nerd Font Mono",
-  iosevka_raven = "IosevkaRaven Nerd Font Mono",
-  roboto_mono = "RobotoMono Nerd Font Mono",
-  consolas = "Consolas Nerd Font Mono",
-}
-local font_name = font_names.fira_code
-local font_height = "10.5"
-local guifont = font_name .. ":" .. "h" .. font_height .. ":" .. "#h-slight"
+local opt = vim.opt
 
-vim.opt.background = "dark" -- "dark" or "light", used for highlight colors
--- vim.opt.clipboard = "unnamedplus" -- use the clipboard as the unnamed register
-vim.opt.cmdheight = 1 -- number of lines to use for the command-line
-vim.opt.completeopt = { "menu", "menuone", "noselect" } -- options for Insert mode completion
-vim.opt.confirm = true -- ask what to do about unsaved/read-only files
-vim.opt.cursorline = true -- highlight the screen line of the cursor
-vim.opt.expandtab = true -- use spaces when <Tab> is inserted
-vim.opt.guifont = guifont -- GUI: Name(s) of font(s) to be used
-vim.opt.ignorecase = true
-vim.opt.laststatus = 3 -- tells when last window has status lines
-vim.opt.mouse = "a" -- enable the use of mouse clicks
-vim.opt.number = true -- print the line number in front of each line
-vim.opt.numberwidth = 1 -- number of columns used for the line number
--- vim.opt.omnifunc = "syntaxcomplete#Complete" -- function for filetype-specific completion -- temporal
-vim.opt.pumheight = 10 -- maximum height of the popup menu
-vim.opt.relativenumber = true -- show relative line number in front of each line
--- vim.opt.scroll = 10 -- lines to scroll with CTRL-U and CTRL-D
-vim.opt.scrolloff = 10 -- minimum nr. of lines above and below cursor
-vim.opt.shiftwidth = 4 -- number of spaces to use for (auto)indent step
-vim.opt.showcmd = true --
-vim.opt.showmode = false -- message on status line to show current mode
-vim.opt.showtabline = 1 -- tells when the tab pages line is displayed
-vim.opt.sidescroll = 5 -- minimum number of columns to scroll horizontal
-vim.opt.sidescrolloff = 5 -- min. nr. of columns to left and right of cursor
-vim.opt.signcolumn = "yes" -- when and how to display the sign column
-vim.opt.smartcase = false -- no ignore case when pattern has uppercase
-vim.opt.smartindent = true -- smart autoindenting for C programs
-vim.opt.spell = false -- enable spell checking
-vim.opt.spelllang = "en_us" -- language(s) to do spell checking for
-vim.opt.spelloptions = "camel" -- options for spell checking
-vim.opt.splitbelow = true -- new window from split is below the current one
-vim.opt.splitright = true -- new window is put right of the current one
-vim.opt.swapfile = false -- whether to use a swapfile for a buffer
--- vim.opt.tabline = "default" -- custom format for the console tab pages line
-vim.opt.tabstop = 4 -- number of spaces that <Tab> in file uses
-vim.opt.termguicolors = true -- enables 24-bit RGB color in the TUI
-vim.opt.updatetime = 50
--- vim.opt.verbose = 16 -- give informative messages -- for debug
--- vim.opt.verbosefile = "default" -- file to write messages in -- for debug
--- vim.opt.winbar = "%f"
-vim.opt.wrap = false -- long lines wrap and continue on the next line
-
-if vim.fn.has("win32") == 1 then
-  vim.cmd([[language en_US]])
-end
-
-vim.filetype.add({
-  pattern = {
-    ["req.*.txt"] = "requirements.txt",
-  },
-})
-
-vim.g.neovide_transparency = 0.9
-vim.g.neovide_hide_mouse_when_typing = true
-vim.g.neovide_refresh_rate = 60
-vim.g.neovide_cursor_animation_length = 0.1
-vim.g.neovide_cursor_trail_size = 0.4
+opt.background = "dark"
+opt.cmdheight = 1
+opt.completeopt = { "menu", "menuone", "noselect" }
+opt.conceallevel = 3
+opt.confirm = true
+opt.cursorline = true
+opt.expandtab = true
+opt.fillchars:append({ eob = " " })
+opt.grepprg = "rg --vimgrep"
+opt.guifont = require("config.guifont")
+opt.ignorecase = true
+opt.laststatus = 3
+opt.list = false
+opt.mouse = "a"
+opt.number = true
+opt.numberwidth = 1
+opt.pumheight = 10
+opt.relativenumber = true
+opt.scrolloff = 10
+opt.shiftwidth = 4
+opt.showcmd = true
+opt.showmode = false
+opt.showtabline = 1
+opt.sidescroll = 5
+opt.sidescrolloff = 5
+opt.signcolumn = "yes"
+opt.smartcase = false
+opt.smartindent = true
+opt.spell = false
+opt.spelllang = "en_us"
+opt.spelloptions = "camel"
+opt.splitbelow = true
+opt.splitkeep = "screen"
+opt.splitright = true
+opt.swapfile = false
+opt.tabstop = 4
+opt.termguicolors = true
+opt.timeoutlen = 300
+opt.undofile = true
+opt.undolevels = 10000
+opt.updatetime = 200
+opt.virtualedit = "block"
+opt.wrap = false

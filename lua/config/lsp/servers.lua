@@ -2,7 +2,8 @@ local M = {}
 
 M.to_setup = function()
   return {
-    -- "angularls",
+    "angularls",
+    "astro",
     "bashls",
     "bufls",
     "clangd",
@@ -20,7 +21,6 @@ M.to_setup = function()
     "ocamllsp",
     "omnisharp",
     "pyright",
-    -- "ruff_lsp",
     "rust_analyzer",
     -- "solargraph",
     "svelte",

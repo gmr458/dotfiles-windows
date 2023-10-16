@@ -6,8 +6,9 @@ end
 
 ibl.setup({
   scope = {
-    show_end = false,
+    enabled = true,
     show_start = false,
+    show_end = false,
     include = {
       node_type = {
         lua = {

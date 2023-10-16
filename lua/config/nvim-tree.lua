@@ -9,14 +9,14 @@ nvim_tree.setup({
   hijack_cursor = true,
   view = { width = {} },
   renderer = {
-    highlight_git = true,
+    highlight_git = false,
     root_folder_label = function(path)
       local root_folder = vim.fn.fnamemodify(path, ":t")
       return string.upper(root_folder)
     end,
     indent_markers = {
       enable = true,
-      inline_arrows = false,
+      inline_arrows = true,
     },
     icons = {
       show = { folder_arrow = false },
