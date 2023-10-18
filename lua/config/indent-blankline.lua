@@ -40,6 +40,9 @@ ibl.setup({
         },
       },
     },
+    exclude = {
+      language = { "toml", "yaml" },
+    },
   },
   indent = {
     char = "│",

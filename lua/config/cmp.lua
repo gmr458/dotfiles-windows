@@ -125,10 +125,10 @@ cmp.setup({
     { name = "nvim_lua" },
     { name = "nvim_lsp" },
     -- { name = "nvim_lsp_signature_help" },
-    { name = "luasnip" },
+    -- { name = "luasnip" },
     { name = "path" },
   }, {
-    { name = "buffer" },
+    -- { name = "buffer" },
   }),
   confirmation = { default_behavior = types.cmp.ConfirmBehavior.Replace },
   window = {

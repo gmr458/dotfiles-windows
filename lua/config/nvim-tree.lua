@@ -5,29 +5,58 @@ if not ok then
 end
 
 nvim_tree.setup({
-  disable_netrw = true,
   hijack_cursor = true,
-  view = { width = {} },
+  disable_netrw = true,
+  view = {
+    cursorline = true,
+    width = {},
+  },
   renderer = {
-    highlight_git = false,
     root_folder_label = function(path)
-      local root_folder = vim.fn.fnamemodify(path, ":t")
-      return string.upper(root_folder)
+      return vim.fn.fnamemodify(path, ":t")
     end,
+    indent_width = 3,
+    special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md" },
+    highlight_git = false,
+    highlight_diagnostics = false,
+    highlight_opened_files = "none",
+    highlight_modified = "none",
     indent_markers = {
       enable = true,
       inline_arrows = true,
+      icons = {
+        corner = "└",
+        edge = "│",
+        item = "│",
+        bottom = "─",
+        none = " ",
+      },
     },
     icons = {
-      show = { folder_arrow = false },
-      symlink_arrow = " 󰁔 ",
-      glyphs = {
-        bookmark = "󰆤",
-        modified = "",
-        folder = {
-          symlink = "",
-          symlink_open = "",
+      web_devicons = {
+        file = {
+          enable = true,
+          color = true,
         },
+        folder = {
+          enable = false,
+          color = true,
+        },
+      },
+      git_placement = "before",
+      modified_placement = "before",
+      padding = " ",
+      symlink_arrow = " 󰁔 ",
+      show = {
+        file = true,
+        folder = true,
+        folder_arrow = true,
+        git = true,
+        modified = true,
+        diagnostics = true,
+        bookmarks = true,
+      },
+      glyphs = {
         git = {
           unstaged = "M",
           staged = "A",
@@ -39,7 +68,13 @@ nvim_tree.setup({
         },
       },
     },
-    special_files = {},
+  },
+  git = {
+    enable = true,
+    timeout = 1000,
+  },
+  modified = {
+    enable = true,
   },
   filters = {
     git_ignored = false,
@@ -49,6 +84,4 @@ nvim_tree.setup({
     custom = { "^\\.git$" },
     exclude = {},
   },
-  modified = { enable = true },
-  git = { enable = true },
 })
