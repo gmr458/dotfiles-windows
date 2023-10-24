@@ -1,0 +1,254 @@
+{
+    "let statement": {
+        "prefix": "lets",
+        "body": "let ${1:name}: ${2:type};"
+    },
+    "let assignment": {
+        "prefix": "leta",
+        "body": "let ${1:name} = ${2:value};"
+    },
+    "let assignment awaited": {
+        "prefix": "letaa",
+        "body": "let ${1:name} = await ${2:value};"
+    },
+    "const assignment": {
+        "prefix": "con",
+        "body": "const ${1:name} = ${2:value};"
+    },
+    "const assignment awaited": {
+        "prefix": "cona",
+        "body": "const ${1:name} = await ${2:value};"
+    },
+    "const statement from destructuring": {
+        "prefix": "condo",
+        "body": "const { ${2:prop} } = ${1:value};"
+    },
+    "const destructuring assignment awaited": {
+        "prefix": "condoa",
+        "body": "const { ${1:name} } = await ${2:value};"
+    },
+    "const statement from array destructuring": {
+        "prefix": "conda",
+        "body": "const [ ${2:prop} ] = ${1:value};"
+    },
+    "const arrow function assignment": {
+        "prefix": "arrfun",
+        "body": "const ${1:name} = (${2:argument}: ${3:type}): ${4:type} => {\n\t${0}\n};"
+    },
+    "class": {
+        "prefix": "class",
+        "body": [
+            "class ${1:name} {",
+            "\tconstructor(${2:parameters}) {",
+            "\t\t$0",
+            "\t}",
+            "}"
+        ],
+        "description": "Class Definition"
+    },
+    "class extends": {
+        "prefix": "classex",
+        "body": "class ${1:name} extends ${2:base} {\n\tconstructor (${3:arguments}) {\n\t\tsuper(${3:arguments})\n\t\t${0}\n\t}\n}"
+    },
+    "constructor": {
+        "prefix": "constr",
+        "body": "constructor () {\n\t${0}\n}"
+    },
+    "interface definition": {
+        "prefix": "inter",
+        "body": ["interface ${1:name} {", "\t$0", "}"],
+        "description": "Interface Definition"
+    },
+    "public method definition": {
+        "prefix": "public method",
+        "body": ["public ${1:name}(): ${2:type} {", "\t$0", "}"],
+        "description": "Public Method Definition"
+    },
+    "private method definition": {
+        "prefix": "private method",
+        "body": ["private ${1:name}(): ${2:type} {", "\t$0", "}"],
+        "description": "Private Method Definition"
+    },
+    "import module": {
+        "prefix": "impfr",
+        "body": "import ${2:*} from \"${1:module}\""
+    },
+    "import module as": {
+        "prefix": "impfras",
+        "body": "import ${2:*} as ${3:name} from \"${1:module}\""
+    },
+    "import module destructured": {
+        "prefix": "impfrd",
+        "body": "import {$2} from \"${1:module}\""
+    },
+    "property getter": {
+        "prefix": "get",
+        "body": [
+            "",
+            "public get ${1:value}(): ${2:string} {",
+            "\t${3:return $0}",
+            "}",
+            ""
+        ],
+        "description": "Property getter"
+    },
+    "property setter": {
+        "prefix": "set",
+        "body": [
+            "",
+            "public set ${1:value}(value: ${2:string}) {",
+            "\tthis.$3 = value;",
+            "}",
+            ""
+        ],
+        "description": "Property setter"
+    },
+    "module export const": {
+        "prefix": "excon",
+        "body": "export const ${1:member} = ${2:value}"
+    },
+    "export named function": {
+        "prefix": "exfun",
+        "body": "export function ${1:member}(${2:argument}: ${3:type}) {\n\t${0}\n}"
+    },
+    "module default export": {
+        "prefix": "exde",
+        "body": "export default ${1:member}"
+    },
+    "module default export function": {
+        "prefix": "exdefun",
+        "body": "export default function ${1:name}(${2:argument}: ${3:type}) {\n\t${0}\n}"
+    },
+    "module default export async function": {
+        "prefix": "exdeafun",
+        "body": "export default async function ${1:name}(${2:argument}: ${3:type}) {\n\t${0}\n}"
+    },
+    "console.log": {
+        "prefix": "conl",
+        "body": "console.log(${0})"
+    },
+    "console.log a variable": {
+        "prefix": "conlkv",
+        "body": "console.log('${1}:', ${1})"
+    },
+    "console.error": {
+        "prefix": "cone",
+        "body": "console.error(${0})"
+    },
+    "console.warn": {
+        "prefix": "conw",
+        "body": "console.warn(${0})"
+    },
+    "console.dir": {
+        "prefix": "cond",
+        "body": "console.dir('${1}:', ${1})"
+    },
+    "for loop": {
+        "prefix": "for",
+        "body": [
+            "for (let ${1:i} = 0; ${1:i} < ${2:array}.length; ${1:i}++) {",
+            "\tconst ${3:element} = ${2:array}[${1:i}];",
+            "\t$0",
+            "}"
+        ],
+        "description": "For Loop"
+    },
+    "for each loop": {
+        "prefix": "foreach",
+        "body": ["${1:array}.forEach(${2:element} => {", "\t$0", "});"],
+        "description": "For-Each Loop"
+    },
+    "for in loop": {
+        "prefix": "forin",
+        "body": ["for (const ${1:key} in ${2:object}) {", "\t$0", "}"],
+        "description": "For-In Loop"
+    },
+    "for of loop": {
+        "prefix": "forof",
+        "body": ["for (const ${1:iterator} of ${2:object}) {", "\t$0", "}"],
+        "description": "For-Of Loop"
+    },
+    "for await of loop": {
+        "prefix": "forawaitof",
+        "body": [
+            "for await (const ${1:iterator} of ${2:object}) {",
+            "\t$0",
+            "}"
+        ],
+        "description": "For-Await-Of Loop"
+    },
+    "anonymous function": {
+        "prefix": "anfun",
+        "body": "function (${1:arguments}) {${0}}"
+    },
+    "named function": {
+        "prefix": "fun",
+        "body": "function ${1:name} (${2:argument}: ${3:type}) {\n\t${0}\n}"
+    },
+    "async function": {
+        "prefix": "afun",
+        "body": "async function (${1:argument}: ${3:type}) {\n\t${0}\n}"
+    },
+    "async arrow function": {
+        "prefix": "aarrfun",
+        "body": "async (${1:argument}: ${3:type}) => {\n\t${0}\n}"
+    },
+    "arrow function": {
+        "prefix": "anarrfun",
+        "body": "(${1:arguments}) => ${2:statement}"
+    },
+    "arrow function with body": {
+        "prefix": "anarrfunwb",
+        "body": "(${1:arguments}) => {\n\t${0}\n}"
+    },
+    "arrow function with return": {
+        "prefix": "anarrfunwr",
+        "body": "(${1:arguments}) => {\n\treturn ${0}\n}"
+    },
+    "if statement": {
+        "prefix": "if",
+        "body": ["if (${1:condition}) {", "\t$0", "}"],
+        "description": "If Statement"
+    },
+    "if else statement": {
+        "prefix": "ifelse",
+        "body": ["if (${1:condition}) {", "\t$0", "} else {", "\t", "}"],
+        "description": "If-Else Statement"
+    },
+    "try/catch": {
+        "prefix": "tryc",
+        "body": "try {\n\t${0}\n} catch (${1:err}) {\n\t\n}"
+    },
+    "try/finally": {
+        "prefix": "tryf",
+        "body": "try {\n\t${0}\n} finally {\n\t\n}"
+    },
+    "try/catch/finally": {
+        "prefix": "trycf",
+        "body": "try {\n\t${0}\n} catch (${1:err}) {\n\t\n} finally {\n\t\n}"
+    },
+    "switch statement": {
+        "prefix": "switch",
+        "body": [
+            "switch (${1:key}) {",
+            "\tcase ${2:value}:",
+            "\t\t$0",
+            "\t\tbreak;",
+            "",
+            "\tdefault:",
+            "\t\tbreak;",
+            "}"
+        ],
+        "description": "Switch Statement"
+    },
+    "while statement": {
+        "prefix": "while",
+        "body": ["while (${1:condition}) {", "\t$0", "}"],
+        "description": "While Statement"
+    },
+    "do while statement": {
+        "prefix": "dowhile",
+        "body": ["do {", "\t$0", "} while (${1:condition});"],
+        "description": "Do-While Statement"
+    }
+}

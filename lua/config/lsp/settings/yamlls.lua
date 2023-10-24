@@ -1,21 +1,21 @@
 local ok, schemastore = pcall(require, "schemastore")
 if not ok then
-  vim.notify("schemastore could not be loaded")
-  return
+    vim.notify("schemastore could not be loaded")
+    return
 end
 
 local config = {
-  settings = {
-    redhat = {
-      telemetry = {
-        enabled = false,
-      },
+    settings = {
+        redhat = {
+            telemetry = {
+                enabled = false,
+            },
+        },
+        yaml = {
+            schemas = schemastore.json.schemas(),
+            validate = { enable = true },
+        },
     },
-    yaml = {
-      schemas = schemastore.json.schemas(),
-      validate = { enable = true },
-    },
-  },
 }
 
 return config

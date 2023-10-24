@@ -33,6 +33,7 @@ vim.keymap.set("n", "<leader>bd", ":bd!<cr>", { silent = true })
 
 -- telescope
 vim.keymap.set("n", "<leader>ff", ":Telescope find_files no_ignore=false<cr>", { silent = true })
+vim.keymap.set("n", "<leader>gs", ":Telescope git_status preview=true<cr>", { silent = true })
 vim.keymap.set("n", "<leader>lg", ":Telescope live_grep preview=true<cr>", { silent = true })
 vim.keymap.set("n", "<leader>ht", ":Telescope help_tags preview=true<cr>", { silent = true })
 vim.keymap.set("n", "<leader>of", ":Telescope oldfiles preview=false<cr>", { silent = true })

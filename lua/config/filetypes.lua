@@ -1,5 +1,5 @@
 vim.filetype.add({
-  filename = {
-    ["requirements.txt"] = "requirements.txt",
-  },
+    filename = {
+        ["requirements.txt"] = "requirements.txt",
+    },
 })

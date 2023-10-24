@@ -1,0 +1,290 @@
+{
+    "require": {
+        "prefix": "req",
+        "body": "require(\"${1:module}\")"
+    },
+    "const module = require('module')": {
+        "prefix": "conreq",
+        "body": "const ${1:module} = require(\"${1:module}\")"
+    },
+    "module.exports": {
+        "prefix": "modexp",
+        "body": "module.exports = ${1:name}"
+    },
+    "var statement": {
+        "prefix": "vars",
+        "body": "var ${1:name}"
+    },
+    "var assignment": {
+        "prefix": "vara",
+        "body": "var ${1:name} = ${2:value}"
+    },
+    "let statement": {
+        "prefix": "lets",
+        "body": "let ${1:name}"
+    },
+    "let assignment": {
+        "prefix": "leta",
+        "body": "let ${1:name} = ${2:value}"
+    },
+    "let assignment awaited": {
+        "prefix": "letaa",
+        "body": "let ${1:name} = await ${2:value}"
+    },
+    "const statement": {
+        "prefix": "con",
+        "body": "const ${1:name}"
+    },
+    "const assignment": {
+        "prefix": "cona",
+        "body": "const ${1:name} = ${2:value}"
+    },
+    "const assignment awaited": {
+        "prefix": "conaa",
+        "body": "const ${1:name} = await ${2:value}"
+    },
+    "const statement from destructuring": {
+        "prefix": "condo",
+        "body": "const { ${2:prop} } = ${1:value}"
+    },
+    "const destructuring assignment awaited": {
+        "prefix": "condoa",
+        "body": "const { ${1:name} } = await ${2:value}"
+    },
+    "const statement from array destructuring": {
+        "prefix": "conda",
+        "body": "const [ ${2:prop} ] = ${1:value}"
+    },
+    "const arrow function assignment": {
+        "prefix": "arrfun",
+        "body": "const ${1:name} = (${2:arguments}) => {\n\treturn ${0}\n}"
+    },
+    "class": {
+        "prefix": "class",
+        "body": "class ${1:name} {\n\tconstructor (${2:arguments}) {\n\t\t${0}\n\t}\n}"
+    },
+    "class extends": {
+        "prefix": "classex",
+        "body": "class ${1:name} extends ${2:base} {\n\tconstructor (${3:arguments}) {\n\t\tsuper(${3:arguments})\n\t\t${0}\n\t}\n}"
+    },
+    "module export const": {
+        "prefix": "excon",
+        "body": "export const ${1:member} = ${2:value}"
+    },
+    "export named function": {
+        "prefix": "exfun",
+        "body": "export function ${1:member} (${2:arguments}) {\n\t${0}\n}"
+    },
+    "module default export": {
+        "prefix": "exde",
+        "body": "export default ${1:member}"
+    },
+    "module default export function": {
+        "prefix": "exdefun",
+        "body": "export default function ${1:name} (${2:arguments}) {\n\t${0}\n}"
+    },
+    "module default export async function": {
+        "prefix": "exdefun",
+        "body": "export default async function ${1:name} (${2:arguments}) {\n\t${0}\n}"
+    },
+    "import module": {
+        "prefix": "impfr",
+        "body": "import ${2:*} from \"${1:module}\""
+    },
+    "import module as": {
+        "prefix": "impfras",
+        "body": "import ${2:*} as ${3:name} from \"${1:module}\""
+    },
+    "import module destructured": {
+        "prefix": "impfrd",
+        "body": "import {$2} from \"${1:module}\""
+    },
+    "else statement": {
+        "prefix": "else",
+        "body": "else {\n\t${0}\n}"
+    },
+    "else if statement": {
+        "prefix": "elseif",
+        "body": "else if (${1:condition}) {\n\t${0}\n}"
+    },
+    "try/catch": {
+        "prefix": "tryc",
+        "body": "try {\n\t${0}\n} catch (${1:err}) {\n\t\n}"
+    },
+    "try/finally": {
+        "prefix": "tryf",
+        "body": "try {\n\t${0}\n} finally {\n\t\n}"
+    },
+    "try/catch/finally": {
+        "prefix": "trycf",
+        "body": "try {\n\t${0}\n} catch (${1:err}) {\n\t\n} finally {\n\t\n}"
+    },
+    "anonymous function": {
+        "prefix": "anfun",
+        "body": "function (${1:arguments}) {${0}}"
+    },
+    "named function": {
+        "prefix": "fun",
+        "body": "function ${1:name} (${2:arguments}) {\n\t${0}\n}"
+    },
+    "async function": {
+        "prefix": "afun",
+        "body": "async function (${1:arguments}) {\n\t${0}\n}"
+    },
+    "async arrow function": {
+        "prefix": "aarrfun",
+        "body": "async (${1:arguments}) => {\n\t${0}\n}"
+    },
+    "arrow function": {
+        "prefix": "anarrfun",
+        "body": "(${1:arguments}) => ${2:statement}"
+    },
+    "arrow function with body": {
+        "prefix": "arrfunwb",
+        "body": "(${1:arguments}) => {\n\t${0}\n}"
+    },
+    "arrow function with return": {
+        "prefix": "arrfunwr",
+        "body": "(${1:arguments}) => {\n\treturn ${0}\n}"
+    },
+    "console.log": {
+        "prefix": "conl",
+        "body": "console.log(${0})"
+    },
+    "console.log a variable": {
+        "prefix": "conlkv",
+        "body": "console.log('${1}:', ${1})"
+    },
+    "console.error": {
+        "prefix": "cone",
+        "body": "console.error(${0})"
+    },
+    "console.warn": {
+        "prefix": "conw",
+        "body": "console.warn(${0})"
+    },
+    "console.dir": {
+        "prefix": "cond",
+        "body": "console.dir('${1}:', ${1})"
+    },
+    "constructor": {
+        "prefix": "constr",
+        "body": "constructor () {\n\t${0}\n}"
+    },
+    "use client": {
+        "prefix": "usec",
+        "body": "\"use client\""
+    },
+    "use strict": {
+        "prefix": "uses",
+        "body": "\"use strict\""
+    },
+    "method": {
+        "prefix": "meth",
+        "body": "${1:method} (${2:arguments}) {\n\t${0}\n}"
+    },
+    "getter": {
+        "prefix": "get",
+        "body": "get ${1:property} () {\n\t${0}\n}"
+    },
+    "setter": {
+        "prefix": "set",
+        "body": "set ${1:property} (${2:value}) {\n\t${0}\n}"
+    },
+    "ternary": {
+        "prefix": "ter",
+        "body": "${1:cond} ? ${2:true} : ${3:false}"
+    },
+    "ternary assignment": {
+        "prefix": "tera",
+        "body": "const ${0} = ${1:cond} ? ${2:true} : ${3:false}"
+    },
+    "return": {
+        "prefix": "ret",
+        "body": "return ${0}"
+    },
+    "return arrow function": {
+        "prefix": "retarrfun",
+        "body": "return (${1:arguments}) => ${2:statement}"
+    },
+    "yield": {
+        "prefix": "yie",
+        "body": "yield ${0}"
+    },
+    "return new object": {
+        "prefix": "reto",
+        "body": "return {\n\t${0}\n}"
+    },
+    "return new array": {
+        "prefix": "reta",
+        "body": "return [\n\t${0}\n]"
+    },
+    "for loop": {
+        "prefix": "for",
+        "body": [
+            "for (let ${1:i} = 0; ${1:i} < ${2:array}.length; ${1:i}++) {",
+            "\tconst ${3:element} = ${2:array}[${1:i}];",
+            "\t$0",
+            "}"
+        ],
+        "description": "For Loop"
+    },
+    "for each loop": {
+        "prefix": "foreach",
+        "body": ["${1:array}.forEach(${2:element} => {", "\t$0", "});"],
+        "description": "For-Each Loop"
+    },
+    "for in loop": {
+        "prefix": "forin",
+        "body": ["for (const ${1:key} in ${2:object}) {", "\t$0", "}"],
+        "description": "For-In Loop"
+    },
+    "for of loop": {
+        "prefix": "forof",
+        "body": ["for (const ${1:iterator} of ${2:object}) {", "\t$0", "}"],
+        "description": "For-Of Loop"
+    },
+    "for await of loop": {
+        "prefix": "forawaitof",
+        "body": [
+            "for await (const ${1:iterator} of ${2:object}) {",
+            "\t$0",
+            "}"
+        ],
+        "description": "For-Await-Of Loop"
+    },
+    "if statement": {
+        "prefix": "if",
+        "body": ["if (${1:condition}) {", "\t$0", "}"],
+        "description": "If Statement"
+    },
+    "if else statement": {
+        "prefix": "ifelse",
+        "body": ["if (${1:condition}) {", "\t$0", "} else {", "\t", "}"],
+        "description": "If-Else Statement"
+    },
+    "switch statement": {
+        "prefix": "switch",
+        "body": [
+            "switch (${1:key}) {",
+            "\tcase ${2:value}:",
+            "\t\t$0",
+            "\t\tbreak;",
+            "",
+            "\tdefault:",
+            "\t\tbreak;",
+            "}"
+        ],
+        "description": "Switch Statement"
+    },
+    "while statement": {
+        "prefix": "while",
+        "body": ["while (${1:condition}) {", "\t$0", "}"],
+        "description": "While Statement"
+    },
+    "do while statement": {
+        "prefix": "dowhile",
+        "body": ["do {", "\t$0", "} while (${1:condition});"],
+        "description": "Do-While Statement"
+    }
+}
