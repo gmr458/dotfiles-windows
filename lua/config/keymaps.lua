@@ -83,6 +83,10 @@ vim.keymap.set("n", "<leader>Y", [["+Y]])
 -- toogle terminal
 vim.keymap.set("n", "<A-d>", ":ToggleTerm<cr>", { silent = true })
 
+vim.keymap.set("n", "<leader>f", function()
+    require("conform").format()
+end, { noremap = true, silent = true })
+
 ---------------------------------------------------------------
 -- Insert -----------------------------------------------------
 ---------------------------------------------------------------

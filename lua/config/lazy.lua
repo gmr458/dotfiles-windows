@@ -127,14 +127,6 @@ lazy.setup({
                 config = function()
                     require("config.lsp.mason")
                 end,
-                dependencies = {
-                    {
-                        "jose-elias-alvarez/null-ls.nvim",
-                        config = function()
-                            require("config.lsp.null-ls")
-                        end,
-                    },
-                },
             },
             {
                 "pmizio/typescript-tools.nvim",
@@ -310,10 +302,9 @@ lazy.setup({
         end,
     },
     {
-        "mhartington/formatter.nvim",
-        cmd = "Format",
+        "stevearc/conform.nvim",
         config = function()
-            require("config.formatter")
+            require("config.conform")
         end,
     },
 }, {
