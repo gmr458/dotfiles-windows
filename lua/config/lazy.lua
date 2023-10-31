@@ -123,15 +123,15 @@ lazy.setup({
         end,
         dependencies = {
             {
-                "williamboman/mason.nvim",
+                "mfussenegger/nvim-lint",
                 config = function()
-                    require("config.lsp.mason")
+                    require("config.lsp.lint")
                 end,
             },
             {
-                "pmizio/typescript-tools.nvim",
+                "williamboman/mason.nvim",
                 config = function()
-                    require("config.typescript-tools")
+                    require("config.lsp.mason")
                 end,
             },
             {
@@ -219,21 +219,27 @@ lazy.setup({
                 dependencies = {
                     { "hrsh7th/cmp-nvim-lua" },
                     { "hrsh7th/cmp-nvim-lsp" },
-                    { "saadparwaiz1/cmp_luasnip" },
                     { "hrsh7th/cmp-path" },
                     { "hrsh7th/cmp-buffer" },
-                    {
-                        "windwp/nvim-autopairs",
-                        config = function()
-                            require("config.autopairs")
-                        end,
-                    },
                 },
                 config = function()
                     require("config.cmp")
                 end,
             },
         },
+    },
+    {
+        "windwp/nvim-autopairs",
+        event = "InsertEnter",
+        config = function()
+            ok, autopairs = pcall(require, "nvim-autopairs")
+            if not ok then
+                vim.notify("nvim-autopairs could not be loaded")
+                return
+            end
+
+            autopairs.setup({ map_cr = true })
+        end,
     },
     {
         "lewis6991/gitsigns.nvim",
@@ -287,14 +293,14 @@ lazy.setup({
             require("config.kommentary")
         end,
     },
-    {
-        "lukas-reineke/indent-blankline.nvim",
-        main = "ibl",
-        event = "BufReadPre",
-        config = function()
-            require("config.indent-blankline")
-        end,
-    },
+    -- {
+    --     "lukas-reineke/indent-blankline.nvim",
+    --     main = "ibl",
+    --     event = "BufReadPre",
+    --     config = function()
+    --         require("config.indent-blankline")
+    --     end,
+    -- },
     {
         "goolord/alpha-nvim",
         config = function()
@@ -302,9 +308,10 @@ lazy.setup({
         end,
     },
     {
-        "stevearc/conform.nvim",
+        "mhartington/formatter.nvim",
+        cmd = "Format",
         config = function()
-            require("config.conform")
+            require("config.formatter")
         end,
     },
 }, {

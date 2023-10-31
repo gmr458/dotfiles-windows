@@ -25,9 +25,9 @@ M.to_setup = function()
         -- "solargraph",
         "svelte",
         "lua_ls",
-        "tailwindcss",
+        -- "tailwindcss",
         "taplo",
-        -- "tsserver",
+        "tsserver",
         "vimls",
         "yamlls",
     }

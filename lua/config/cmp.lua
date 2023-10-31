@@ -1,4 +1,4 @@
-local ok, luasnip, from_vscode, cmp, types
+local ok, luasnip, cmp, types
 
 ok, luasnip = pcall(require, "luasnip")
 if not ok then
@@ -11,15 +11,6 @@ require("luasnip.config").setup({
     region_check_events = "InsertEnter",
     delete_check_events = "TextChanged,InsertLeave",
 })
-
-local snippets_path = vim.fn.stdpath("config") .. "/customsnippets"
-
-ok, from_vscode = pcall(require, "luasnip.loaders.from_vscode")
-if not ok then
-    vim.notify("luasnip.loaders.from_vscode could not be loaded")
-    return
-end
-from_vscode.lazy_load({ paths = { snippets_path } })
 
 ok, cmp = pcall(require, "cmp")
 if not ok then
@@ -91,7 +82,7 @@ cmp.setup({
         ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
-            elseif luasnip.expand_or_jumpable() then
+            elseif luasnip.expand_or_locally_jumpable() then
                 luasnip.expand_or_jump()
             elseif has_words_before() then
                 cmp.complete()
@@ -117,7 +108,6 @@ cmp.setup({
     sources = cmp.config.sources({
         { name = "nvim_lua" },
         { name = "nvim_lsp" },
-        { name = "luasnip" },
         { name = "path" },
     }, {
         { name = "buffer" },
@@ -141,12 +131,3 @@ cmp.setup({
         end,
     },
 })
-
-luasnip.filetype_extend("django-html", { "html" })
-luasnip.filetype_extend("ejs", { "html" })
-luasnip.filetype_extend("handlebars", { "html" })
-luasnip.filetype_extend("hbs", { "html" })
-luasnip.filetype_extend("htmldjango", { "html" })
-luasnip.filetype_extend("javascriptreact", { "html" })
-luasnip.filetype_extend("pug", { "html" })
-luasnip.filetype_extend("typescriptreact", { "html" })

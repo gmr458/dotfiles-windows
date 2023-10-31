@@ -82,7 +82,7 @@ formatter.setup({
         },
         python = {
             function()
-                return { exe = "black", stdin = false }
+                return { exe = "ruff", args = { "format" }, stdin = false }
             end,
         },
         rust = {
