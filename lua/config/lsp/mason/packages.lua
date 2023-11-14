@@ -37,7 +37,7 @@ return {
     -- "omnisharp",
     "prettier",
     "prisma-language-server",
-    "pylint",
+    -- "pylint",
     "pyright",
     "rubocop",
     "rust-analyzer",

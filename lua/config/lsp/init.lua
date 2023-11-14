@@ -143,6 +143,13 @@ function M.on_attach(client, bufnr)
     vim.keymap.set("n", "]d", vim.diagnostic.goto_next, bufopts)
     vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, bufopts)
 
+    vim.keymap.set("n", "<leader>ds", function()
+        require("telescope.builtin").lsp_document_symbols()
+    end, bufopts)
+    vim.keymap.set("n", "<leader>ws", function()
+        require("telescope.builtin").lsp_dynamic_workspace_symbols()
+    end, bufopts)
+
     if client.server_capabilities.documentHighlightProvider then
         local guibg = "Grey35"
 

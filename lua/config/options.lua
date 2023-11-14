@@ -26,7 +26,7 @@ local opt = vim.opt
 opt.background = "dark"
 opt.cmdheight = 1
 opt.completeopt = { "menu", "menuone", "noselect" }
--- opt.conceallevel = 3
+opt.conceallevel = 3
 opt.confirm = true
 opt.cursorline = true
 opt.expandtab = true
@@ -35,7 +35,12 @@ opt.grepprg = "rg --vimgrep"
 opt.guifont = require("config.guifont")
 opt.ignorecase = true
 opt.laststatus = 3
-opt.list = false
+opt.list = true
+opt.listchars:append({
+    eol = "↲",
+    tab = "  ",
+    trail = " ",
+})
 opt.mouse = "a"
 opt.number = true
 opt.numberwidth = 1

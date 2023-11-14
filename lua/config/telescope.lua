@@ -108,6 +108,24 @@ telescope.setup({
                 mirror = false,
             },
         },
+        lsp_document_symbols = {
+            layout_strategy = "vertical",
+            layout_config = {
+                width = 0.9,
+                height = 0.9,
+                preview_cutoff = 1,
+                mirror = false,
+            },
+        },
+        lsp_dynamic_workspace_symbols = {
+            layout_strategy = "vertical",
+            layout_config = {
+                width = 0.9,
+                height = 0.9,
+                preview_cutoff = 1,
+                mirror = false,
+            },
+        },
         lsp_implementations = {
             layout_strategy = "vertical",
             layout_config = {

@@ -84,18 +84,27 @@ lazy.setup({
         end,
     },
     -- Colorscheme
+    -- {
+    --     "gmr458/dark_modern.nvim",
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function()
+    --         require("dark_modern").setup({
+    --             cursorline = true,
+    --             transparent_background = true,
+    --             nvim_tree_darker = true,
+    --             italic_keyword = false,
+    --         })
+    --         vim.cmd.colorscheme("dark_modern")
+    --     end,
+    -- },
     {
-        "gmr458/dark_modern.nvim",
+        "rebelot/kanagawa.nvim",
         lazy = false,
         priority = 1000,
         config = function()
-            require("dark_modern").setup({
-                cursorline = true,
-                transparent_background = false,
-                nvim_tree_darker = true,
-                italic_keyword = false,
-            })
-            vim.cmd.colorscheme("dark_modern")
+            require("config.colorschemes.kanagawa")
+            vim.cmd.colorscheme("kanagawa")
         end,
     },
     -- Telescope
@@ -220,7 +229,6 @@ lazy.setup({
                     { "hrsh7th/cmp-nvim-lua" },
                     { "hrsh7th/cmp-nvim-lsp" },
                     { "hrsh7th/cmp-path" },
-                    { "hrsh7th/cmp-buffer" },
                 },
                 config = function()
                     require("config.cmp")

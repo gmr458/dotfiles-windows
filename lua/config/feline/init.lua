@@ -1,4 +1,4 @@
-local ok, feline, dark_modern
+local ok, feline, kanagawa
 
 ok, feline = pcall(require, "feline")
 if not ok then
@@ -6,9 +6,9 @@ if not ok then
     return
 end
 
-ok, dark_modern = pcall(require, "dark_modern.integrations.feline")
+ok, kanagawa = pcall(require, "config.colorschemes.kanagawa.feline")
 if not ok then
-    vim.notify("dark_modern.integrations.feline could not be loaded")
+    vim.notify("config.colorschemes.kanagawa.feline could not be loaded")
     return
 end
 
@@ -34,6 +34,6 @@ feline.setup({
         bufnames = {},
     },
     disable = { filetypes = { "^alpha$", "^dashboard$" } },
-    theme = dark_modern.palette(),
-    components = dark_modern.components(),
+    theme = kanagawa.palette(),
+    components = kanagawa.components(),
 })

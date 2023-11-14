@@ -109,9 +109,7 @@ cmp.setup({
         { name = "nvim_lua" },
         { name = "nvim_lsp" },
         { name = "path" },
-    }, {
-        { name = "buffer" },
-    }),
+    }, {}),
     confirmation = { default_behavior = types.cmp.ConfirmBehavior.Replace },
     window = {
         completion = {

@@ -5,7 +5,6 @@ if not ok then
 end
 
 mason.setup({
-    PATH = "append",
     ui = {
         border = {
             "┌",
