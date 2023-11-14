@@ -240,8 +240,8 @@ lazy.setup({
         "windwp/nvim-autopairs",
         event = "InsertEnter",
         config = function()
-            ok, autopairs = pcall(require, "nvim-autopairs")
-            if not ok then
+            local ok_autopairs, autopairs = pcall(require, "nvim-autopairs")
+            if not ok_autopairs then
                 vim.notify("nvim-autopairs could not be loaded")
                 return
             end

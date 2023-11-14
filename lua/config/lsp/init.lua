@@ -17,26 +17,52 @@ local borderchars = {
     "│",
 }
 
-local config = {
-    virtual_text = { source = "always" },
+local diagnostics_icons = {
+    ERROR = "",
+    WARN = "",
+    HINT = "",
+    INFO = "",
+}
+
+vim.diagnostic.config({
+    virtual_text = {
+        prefix = "",
+        format = function(diagnostic)
+            local icon = diagnostics_icons[vim.diagnostic.severity[diagnostic.severity]]
+            local message = vim.split(diagnostic.message, "\n")[2]
+            return string.format("%s %s ", icon, message)
+        end,
+        source = "always",
+    },
     signs = false,
     underline = true,
     update_in_insert = false,
     severity_sort = true,
     float = { source = "always", border = borderchars },
-}
-
-vim.diagnostic.config(config)
+})
 
 local function goto_definition()
     local util = vim.lsp.util
     local log = require("vim.lsp.log")
     local api = vim.api
 
-    local split_cmd = "vsplit"
-
     -- note, this handler style is for neovim 0.5.1/0.6, if on 0.5, call with function(_, method, result)
     local handler = function(_, result, ctx)
+        local split_cmd = "vsplit"
+
+        if vim.loop.os_uname().sysname == "Linux" and os.getenv("DESKTOP_SESSION") == "hyprland" then
+            --- @class HyprlandWindow
+            --- @field size table
+            local json = vim.json.decode(vim.fn.system({ "hyprctl", "-j", "activewindow" }))
+
+            local size_x = json.size[1] --- @type number
+            local size_y = json.size[2] --- @type number
+
+            if size_y > size_x then
+                split_cmd = "split"
+            end
+        end
+
         if result == nil or vim.tbl_isempty(result) then
             local _ = log.info() and log.info(ctx.method, "No location found")
             return nil
@@ -231,17 +257,11 @@ function M.on_attach(client, bufnr)
 end
 
 function M.get_capabilities()
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities.textDocument.completion.completionItem.snippetSupport = true
-    capabilities.textDocument.completion.completionItem.resolveSupport = {
-        properties = {
-            "documentation",
-            "detail",
-            "additionalTextEdits",
-        },
-    }
-
-    return capabilities
+    return vim.tbl_deep_extend(
+        "force",
+        vim.lsp.protocol.make_client_capabilities(),
+        require("cmp_nvim_lsp").default_capabilities()
+    )
 end
 
 local servers = require("config.lsp.servers").to_setup()
