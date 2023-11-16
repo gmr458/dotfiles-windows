@@ -271,19 +271,6 @@ lazy.setup({
         end,
     },
     {
-        "famiu/feline.nvim",
-        config = function()
-            require("config.feline")
-        end,
-    },
-    {
-        "NMAC427/guess-indent.nvim",
-        event = "BufReadPost",
-        config = function()
-            require("config.guess-indent")
-        end,
-    },
-    {
         "nvim-tree/nvim-tree.lua",
         cmd = "NvimTreeFindFileToggle",
         config = function()
@@ -301,14 +288,22 @@ lazy.setup({
             require("config.kommentary")
         end,
     },
-    -- {
-    --     "lukas-reineke/indent-blankline.nvim",
-    --     main = "ibl",
-    --     event = "BufReadPre",
-    --     config = function()
-    --         require("config.indent-blankline")
-    --     end,
-    -- },
+    {
+        "NMAC427/guess-indent.nvim",
+        event = "BufReadPost",
+        config = function()
+            require("config.guess-indent")
+        end,
+    },
+    {
+        "lukas-reineke/indent-blankline.nvim",
+        main = "ibl",
+        version = "v2.20.8",
+        event = "BufReadPre",
+        config = function()
+            require("config.indent-blankline")
+        end,
+    },
     {
         "goolord/alpha-nvim",
         config = function()
@@ -321,6 +316,10 @@ lazy.setup({
         config = function()
             require("config.formatter")
         end,
+    },
+    {
+        "folke/zen-mode.nvim",
+        cmd = "ZenMode",
     },
 }, {
     change_detection = { enabled = false, notify = false },

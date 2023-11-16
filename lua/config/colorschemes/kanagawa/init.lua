@@ -6,6 +6,8 @@ if not ok then
     return
 end
 
+local transparent = false
+
 M.kanagawa_options = {
     compile = true, -- enable compiling the colorscheme
     undercurl = true, -- enable undercurls
@@ -14,7 +16,7 @@ M.kanagawa_options = {
     keywordStyle = {},
     statementStyle = {},
     typeStyle = {},
-    transparent = false, -- do not set background color
+    transparent = transparent, -- do not set background color
     dimInactive = false, -- dim inactive window `:h hl-NormalNC`
     terminalColors = true, -- define vim.g.terminal_color_{0,17}
     colors = { -- add/modify theme and palette colors
@@ -36,7 +38,17 @@ M.kanagawa_options = {
         return {
             NormalFloat = { bg = "none" },
             FloatBorder = { bg = "none" },
-            StatusLine = { bg = "none" },
+            StatusLine = { fg = theme.ui.fg_dim },
+            StatusLineMode = { bg = colors.palette.waveBlue2 },
+            StatusLineLspError = { bg = theme.ui.bg_m3, fg = theme.diag.error },
+            StatusLineLspWarn = { bg = theme.ui.bg_m3, fg = theme.diag.warning },
+            StatusLineLspHint = { bg = theme.ui.bg_m3, fg = theme.diag.hint },
+            StatusLineLspInfo = { bg = theme.ui.bg_m3, fg = theme.diag.info },
+            StatusLineLspMessages = { bg = theme.ui.bg_m3, fg = theme.diag.info },
+            StatusLineGitDiffAdded = { bg = theme.ui.bg_m3, fg = theme.vcs.added },
+            StatusLineGitDiffChanged = { bg = theme.ui.bg_m3, fg = theme.vcs.changed },
+            StatusLineGitDiffRemoved = { bg = theme.ui.bg_m3, fg = theme.vcs.removed },
+            StatusLineGitBranchIcon = { bg = theme.ui.bg_m3, fg = colors.palette.surimiOrange },
             CursorLine = { bg = theme.ui.bg_p1 },
             CursorLineNr = { bg = theme.ui.bg_p1 },
             TelescopeTitle = { fg = theme.ui.special, bold = true },

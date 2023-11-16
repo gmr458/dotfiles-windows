@@ -32,7 +32,7 @@ opt.cursorline = true
 opt.expandtab = true
 opt.fillchars:append({ eob = " " })
 opt.grepprg = "rg --vimgrep"
-opt.guifont = require("config.guifont")
+-- opt.guifont = require("config.guifont")
 opt.ignorecase = true
 opt.laststatus = 3
 opt.list = true
@@ -41,7 +41,7 @@ opt.listchars:append({
     tab = "  ",
     trail = " ",
 })
-opt.mouse = "a"
+opt.mouse = ""
 opt.number = true
 opt.numberwidth = 1
 opt.pumheight = 10
