@@ -1,6 +1,6 @@
 vim.g.mapleader = " "
 
--- Modes
+-- modes
 -- normal_mode       = "n",
 -- insert_mode       = "i",
 -- visual_mode       = "v",
@@ -9,26 +9,22 @@ vim.g.mapleader = " "
 -- command_mode      = "c",
 
 ---------------------------------------------------------------
--- Normal -----------------------------------------------------
+-- normal -----------------------------------------------------
 ---------------------------------------------------------------
 
--- Better window navigation
+-- better window navigation
 vim.keymap.set("n", "<C-h>", "<C-w>h")
 vim.keymap.set("n", "<C-j>", "<C-w>j")
 vim.keymap.set("n", "<C-k>", "<C-w>k")
 vim.keymap.set("n", "<C-l>", "<C-w>l")
 
--- Resize with arrows
+-- resize with arrows
 vim.keymap.set("n", "<C-Up>", ":resize -2<cr>", { silent = true })
 vim.keymap.set("n", "<C-Down>", ":resize +2<cr>", { silent = true })
 vim.keymap.set("n", "<C-Left>", ":vertical resize -2<cr>", { silent = true })
 vim.keymap.set("n", "<C-Right>", ":vertical resize +2<cr>", { silent = true })
 
--- Navigate buffers when using bufferline
--- vim.keymap.set("n", "m", ":bnext<cr>", opts)
--- vim.keymap.set("n", "z", ":bprevious<cr>", opts)
-
--- Delete current buffer
+-- delete current buffer
 vim.keymap.set("n", "<leader>bd", ":bd!<cr>", { silent = true })
 
 -- telescope
@@ -38,9 +34,6 @@ vim.keymap.set("n", "<leader>lg", ":Telescope live_grep preview=true<cr>", { sil
 vim.keymap.set("n", "<leader>ht", ":Telescope help_tags preview=true<cr>", { silent = true })
 vim.keymap.set("n", "<leader>of", ":Telescope oldfiles preview=false<cr>", { silent = true })
 vim.keymap.set("n", "<leader>bf", ":Telescope buffers<cr>", { silent = true })
-
--- fzf.lua
--- vim.keymap.set("n", "<leader>ff", ":FzfLua files<cr>", { silent = true })
 
 -- nvim tree
 vim.keymap.set("n", "<C-n>", ":NvimTreeFindFileToggle<cr>", { silent = true })
@@ -80,31 +73,29 @@ vim.keymap.set("n", "<leader>fc", "<cmd>foldclose<cr>")
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 
--- toogle terminal
--- vim.keymap.set("n", "<A-d>", ":ToggleTerm<cr>", { silent = true })
+-- switch background
+vim.keymap.set("n", "<leader>sb", function()
+    if vim.o.background == "dark" then
+        vim.opt.background = "light"
+    else
+        vim.opt.background = "dark"
+    end
+end)
 
 ---------------------------------------------------------------
--- Insert -----------------------------------------------------
+-- insert -----------------------------------------------------
 ---------------------------------------------------------------
 
+-- enter normal mode
 vim.keymap.set("i", "jk", "<esc>")
 
 ---------------------------------------------------------------
--- Visual -----------------------------------------------------
+-- visual -----------------------------------------------------
 ---------------------------------------------------------------
 
--- Stay in indent mode
+-- stay in indent mode
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
--- Remember copied elements when pasted in visual mode
+-- remember copied elements when pasted in visual mode
 vim.keymap.set("v", "p", "\"_dP", { noremap = true, silent = true })
-
----------------------------------------------------------------
--- Terminal ---------------------------------------------------
----------------------------------------------------------------
-
--- toogle terminal
-vim.keymap.set("t", "<A-d>", "<C-\\><C-n>:ToggleTerm<cr>")
-
-vim.keymap.set("t", "jk", "<C-\\><C-n>")
