@@ -1,5 +1,5 @@
 local config = {
-    cmd = { "omnisharp" },
+    cmd = { 'omnisharp' },
 }
 
 return config

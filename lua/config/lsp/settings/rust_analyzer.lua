@@ -1,12 +1,12 @@
 local config = {
     settings = {
-        ["rust-analyzer"] = {
+        ['rust-analyzer'] = {
             lens = {
                 debug = { enable = false },
                 enable = true,
                 forceCustomCommands = true,
                 implementations = { enable = true },
-                location = "above_name",
+                location = 'above_name',
                 references = {
                     adt = { enable = true },
                     enumVariant = { enable = true },

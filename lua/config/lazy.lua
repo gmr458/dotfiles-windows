@@ -1,38 +1,38 @@
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 
 if not vim.loop.fs_stat(lazypath) then
-    vim.fn.system({
-        "git",
-        "clone",
-        "--filter=blob:none",
-        "https://github.com/folke/lazy.nvim.git",
-        "--branch=stable",
+    vim.fn.system {
+        'git',
+        'clone',
+        '--filter=blob:none',
+        'https://github.com/folke/lazy.nvim.git',
+        '--branch=stable',
         lazypath,
-    })
+    }
 end
 
 vim.opt.rtp:prepend(lazypath)
 
-local ok, lazy = pcall(require, "lazy")
+local ok, lazy = pcall(require, 'lazy')
 if not ok then
-    vim.notify("lazy could not be loaded")
+    vim.notify 'lazy could not be loaded'
     return
 end
 
 lazy.setup({
     -- Treesitter
     {
-        "nvim-treesitter/nvim-treesitter",
-        event = { "BufReadPost", "BufNewFile" },
-        build = ":TSUpdate",
+        'nvim-treesitter/nvim-treesitter',
+        event = { 'BufReadPost', 'BufNewFile' },
+        build = ':TSUpdate',
         config = function()
-            require("config.treesitter")
+            require 'config.treesitter'
         end,
         dependencies = {
             {
-                "nvim-treesitter/nvim-treesitter-context",
+                'nvim-treesitter/nvim-treesitter-context',
                 config = function()
-                    require("config.treesitter.context")
+                    require 'config.treesitter.context'
                 end,
             },
             -- {
@@ -51,36 +51,36 @@ lazy.setup({
         },
     },
     {
-        "nvim-treesitter/playground",
-        cmd = { "TSHighlightCapturesUnderCursor", "TSPlaygroundToggle" },
+        'nvim-treesitter/playground',
+        cmd = { 'TSHighlightCapturesUnderCursor', 'TSPlaygroundToggle' },
     },
     {
-        "windwp/nvim-ts-autotag",
+        'windwp/nvim-ts-autotag',
         ft = {
-            "html",
-            "javascript",
-            "typescript",
-            "javascriptreact",
-            "typescriptreact",
-            "svelte",
-            "vue",
-            "tsx",
-            "jsx",
-            "rescript",
-            "xml",
-            "php",
-            "markdown",
-            "astro",
-            "glimmer",
-            "handlebars",
-            "hbs",
+            'html',
+            'javascript',
+            'typescript',
+            'javascriptreact',
+            'typescriptreact',
+            'svelte',
+            'vue',
+            'tsx',
+            'jsx',
+            'rescript',
+            'xml',
+            'php',
+            'markdown',
+            'astro',
+            'glimmer',
+            'handlebars',
+            'hbs',
         },
     },
     {
-        "NvChad/nvim-colorizer.lua",
-        cmd = "ColorizerToggle",
+        'NvChad/nvim-colorizer.lua',
+        cmd = 'ColorizerToggle',
         config = function()
-            require("config.colorizer")
+            require 'config.colorizer'
         end,
     },
     -- Colorscheme
@@ -99,84 +99,84 @@ lazy.setup({
     --     end,
     -- },
     {
-        "rebelot/kanagawa.nvim",
+        'rebelot/kanagawa.nvim',
         lazy = false,
         priority = 1000,
         config = function()
-            require("config.colorschemes.kanagawa")
-            vim.cmd.colorscheme("kanagawa")
+            require 'config.colorschemes.kanagawa'
+            vim.cmd.colorscheme 'kanagawa'
         end,
     },
     -- Telescope
     {
-        "nvim-telescope/telescope.nvim",
-        version = "0.1.4",
+        'nvim-telescope/telescope.nvim',
+        version = '0.1.4',
         dependencies = {
-            { "nvim-lua/plenary.nvim" },
+            { 'nvim-lua/plenary.nvim' },
             {
-                "nvim-telescope/telescope-fzf-native.nvim",
-                build = "make",
+                'nvim-telescope/telescope-fzf-native.nvim',
+                build = 'make',
             },
         },
-        cmd = "Telescope",
+        cmd = 'Telescope',
         config = function()
-            require("config.telescope")
+            require 'config.telescope'
         end,
     },
     -- LSP
     {
-        "neovim/nvim-lspconfig",
-        cmd = { "LspStart" },
+        'neovim/nvim-lspconfig',
+        cmd = { 'LspStart' },
         config = function()
-            require("config.lsp.init")
+            require 'config.lsp.init'
         end,
         dependencies = {
             {
-                "mfussenegger/nvim-lint",
+                'mfussenegger/nvim-lint',
                 config = function()
-                    require("config.lsp.lint")
+                    require 'config.lsp.lint'
                 end,
             },
             {
-                "williamboman/mason.nvim",
+                'williamboman/mason.nvim',
                 config = function()
-                    require("config.lsp.mason")
+                    require 'config.lsp.mason'
                 end,
             },
             {
-                "folke/neodev.nvim",
+                'folke/neodev.nvim',
                 config = function()
-                    require("neodev").setup()
+                    require('neodev').setup()
                 end,
             },
             {
-                "SmiteshP/nvim-navic",
+                'SmiteshP/nvim-navic',
                 config = function()
-                    require("config.navic")
+                    require 'config.navic'
                 end,
             },
             {
-                "folke/trouble.nvim",
+                'folke/trouble.nvim',
                 config = function()
-                    require("config.trouble")
+                    require 'config.trouble'
                 end,
             },
             {
-                "folke/noice.nvim",
+                'folke/noice.nvim',
                 config = function()
-                    require("config.noice")
+                    require 'config.noice'
                 end,
-                dependencies = { "MunifTanjim/nui.nvim" },
+                dependencies = { 'MunifTanjim/nui.nvim' },
             },
-            { "b0o/SchemaStore.nvim" },
+            { 'b0o/SchemaStore.nvim' },
         },
     },
     -- LSP Java
     {
-        "mfussenegger/nvim-jdtls",
-        ft = "java",
+        'mfussenegger/nvim-jdtls',
+        ft = 'java',
         dependencies = {
-            "williamboman/mason.nvim",
+            'williamboman/mason.nvim',
             -- "rcarriga/nvim-dap-ui",
         },
     },
@@ -218,81 +218,81 @@ lazy.setup({
     -- },
     -- Completion
     {
-        "L3MON4D3/LuaSnip",
-        version = "2.*",
-        build = "make install_jsregexp",
-        event = "InsertEnter",
+        'L3MON4D3/LuaSnip',
+        version = '2.*',
+        build = 'make install_jsregexp',
+        event = 'InsertEnter',
         dependencies = {
             {
-                "hrsh7th/nvim-cmp",
+                'hrsh7th/nvim-cmp',
                 dependencies = {
-                    { "hrsh7th/cmp-nvim-lua" },
-                    { "hrsh7th/cmp-nvim-lsp" },
-                    { "hrsh7th/cmp-path" },
+                    { 'hrsh7th/cmp-nvim-lua' },
+                    { 'hrsh7th/cmp-nvim-lsp' },
+                    { 'hrsh7th/cmp-path' },
                 },
                 config = function()
-                    require("config.cmp")
+                    require 'config.cmp'
                 end,
             },
         },
     },
     {
-        "windwp/nvim-autopairs",
-        event = "InsertEnter",
+        'windwp/nvim-autopairs',
+        event = 'InsertEnter',
         config = function()
-            local ok_autopairs, autopairs = pcall(require, "nvim-autopairs")
+            local ok_autopairs, autopairs = pcall(require, 'nvim-autopairs')
             if not ok_autopairs then
-                vim.notify("nvim-autopairs could not be loaded")
+                vim.notify 'nvim-autopairs could not be loaded'
                 return
             end
 
-            autopairs.setup({ map_cr = true })
+            autopairs.setup { map_cr = true }
         end,
     },
     {
-        "lewis6991/gitsigns.nvim",
-        event = "BufReadPre",
+        'lewis6991/gitsigns.nvim',
+        event = 'BufReadPost',
         config = function()
-            require("config.gitsigns")
+            require 'config.gitsigns'
         end,
     },
     {
-        "petertriho/nvim-scrollbar",
-        cmd = "ScrollbarToggle",
+        'petertriho/nvim-scrollbar',
+        cmd = 'ScrollbarToggle',
         config = function()
-            require("config.scrollbar")
+            require 'config.scrollbar'
         end,
     },
     {
-        "karb94/neoscroll.nvim",
-        keys = { "<C-u>", "<C-d>" },
+        'karb94/neoscroll.nvim',
+        keys = { '<C-u>', '<C-d>' },
         config = function()
-            require("config.neoscroll")
+            require 'config.neoscroll'
         end,
     },
     {
-        "nvim-tree/nvim-tree.lua",
-        cmd = "NvimTreeFindFileToggle",
+        'nvim-tree/nvim-tree.lua',
+        cmd = 'NvimTreeFindFileToggle',
         config = function()
-            require("config.nvim-tree")
+            require 'config.nvim-tree'
         end,
     },
     {
-        "nvim-tree/nvim-web-devicons",
+        'nvim-tree/nvim-web-devicons',
         lazy = true,
     },
     {
-        "b3nj5m1n/kommentary",
-        event = "BufReadPost",
+        'b3nj5m1n/kommentary',
+        event = 'BufReadPost',
         config = function()
-            require("config.kommentary")
+            require 'config.kommentary'
         end,
     },
     {
-        "NMAC427/guess-indent.nvim",
-        -- event = "BufReadPost",
+        'NMAC427/guess-indent.nvim',
+        event = 'BufReadPost',
         config = function()
-            require("config.guess-indent")
+            require 'config.guess-indent'
         end,
     },
     -- {
@@ -305,23 +305,23 @@ lazy.setup({
     --     end,
     -- },
     {
-        "goolord/alpha-nvim",
+        'goolord/alpha-nvim',
         config = function()
-            require("config.alpha")
+            require 'config.alpha'
         end,
     },
     {
-        "mhartington/formatter.nvim",
-        cmd = "Format",
+        'mhartington/formatter.nvim',
+        cmd = 'Format',
         config = function()
-            require("config.formatter")
+            require 'config.formatter'
         end,
     },
     {
-        "folke/zen-mode.nvim",
-        cmd = "ZenMode",
+        'folke/zen-mode.nvim',
+        cmd = 'ZenMode',
     },
 }, {
     change_detection = { enabled = false, notify = false },
-    ui = { border = "single" },
+    ui = { border = 'single' },
 })

@@ -1,10 +1,10 @@
 local config = {
     filetypes = {
-        "c",
-        "cpp",
-        "objc",
-        "objcpp",
-        "cuda",
+        'c',
+        'cpp',
+        'objc',
+        'objcpp',
+        'cuda',
     },
 }
 

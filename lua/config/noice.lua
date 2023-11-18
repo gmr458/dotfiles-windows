@@ -1,10 +1,10 @@
-local ok, noice = pcall(require, "noice")
+local ok, noice = pcall(require, 'noice')
 if not ok then
-    vim.notify("noice could not be loaded")
+    vim.notify 'noice could not be loaded'
     return
 end
 
-noice.setup({
+noice.setup {
     cmdline = {
         enabled = false,
     },
@@ -22,9 +22,9 @@ noice.setup({
             enabled = false,
         },
         override = {
-            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-            ["vim.lsp.util.stylize_markdown"] = true,
-            ["cmp.entry.get_documentation"] = true,
+            ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
+            ['vim.lsp.util.stylize_markdown'] = true,
+            ['cmp.entry.get_documentation'] = true,
         },
         hover = {
             enabled = true,
@@ -48,4 +48,4 @@ noice.setup({
         inc_rename = false,
         lsp_doc_border = true,
     },
-})
+}

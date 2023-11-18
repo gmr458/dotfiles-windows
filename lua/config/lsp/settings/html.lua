@@ -1,12 +1,12 @@
 local config = {
     filetypes = {
-        "django-html",
-        "ejs",
-        "handlebars",
-        "hbs",
-        "html",
-        "htmldjango",
-        "pug",
+        'django-html',
+        'ejs',
+        'handlebars',
+        'hbs',
+        'html',
+        'htmldjango',
+        'pug',
     },
 }
 

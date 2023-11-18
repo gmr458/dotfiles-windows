@@ -1,6 +1,6 @@
-local ok, schemastore = pcall(require, "schemastore")
+local ok, schemastore = pcall(require, 'schemastore')
 if not ok then
-    vim.notify("schemastore could not be loaded")
+    vim.notify 'schemastore could not be loaded'
     return
 end
 

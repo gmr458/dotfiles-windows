@@ -1,74 +1,84 @@
 local M = {}
 
 M.winbar_filetype_exclude = {
-    "help",
-    "startify",
-    "dashboard",
-    "packer",
-    "neogitstatus",
-    "NvimTree",
-    "Trouble",
-    "alpha",
-    "lir",
-    "Outline",
-    "spectre_panel",
-    "toggleterm",
-    "DressingSelect",
-    "Jaq",
-    "harpoon",
-    "lab",
-    "Markdown",
-    "",
+    'help',
+    'startify',
+    'dashboard',
+    'packer',
+    'neogitstatus',
+    'NvimTree',
+    'Trouble',
+    'alpha',
+    'lir',
+    'Outline',
+    'spectre_panel',
+    'toggleterm',
+    'DressingSelect',
+    'Jaq',
+    'harpoon',
+    'lab',
+    'Markdown',
+    '',
 }
 
 M.get_filename = function()
-    local filename = vim.fn.expand("%:.")
-    local extension = vim.fn.expand("%:e")
-    local utils = require("config.utils")
+    local filename = vim.fn.expand '%:.'
+    local extension = vim.fn.expand '%:e'
+    local utils = require 'config.utils'
 
     if not utils.is_nil_or_empty_string(filename) then
-        local ok, web_devicons = pcall(require, "nvim-web-devicons")
+        local ok, web_devicons = pcall(require, 'nvim-web-devicons')
         if not ok then
-            vim.notify("nvim-web-devicons could not be loaded")
+            vim.notify 'nvim-web-devicons could not be loaded'
             return
         end
 
-        local file_icon, file_icon_color = web_devicons.get_icon_color(filename, extension, { default = true })
+        local file_icon, file_icon_color =
+            web_devicons.get_icon_color(filename, extension, { default = true })
 
-        local hl_group = "FileIconColor" .. extension
+        local hl_group = 'FileIconColor' .. extension
 
         vim.api.nvim_set_hl(0, hl_group, { fg = file_icon_color })
 
         if utils.is_nil_or_empty_string(file_icon) then
-            file_icon = ""
-            file_icon_color = ""
+            file_icon = ''
+            file_icon_color = ''
         end
 
-        return " " .. "%#" .. hl_group .. "#" .. file_icon .. "%*" .. " " .. "%#Winbar#" .. filename .. "%*"
+        return ' '
+            .. '%#'
+            .. hl_group
+            .. '#'
+            .. file_icon
+            .. '%*'
+            .. ' '
+            .. '%#Winbar#'
+            .. filename
+            .. '%*'
     end
 end
 
 local get_navic = function()
-    local ok, navic = pcall(require, "nvim-navic")
+    local ok, navic = pcall(require, 'nvim-navic')
     if not ok then
-        return ""
+        return ''
     end
 
     local navic_location_loaded, navic_location = pcall(navic.get_location, {})
 
     if not navic_location_loaded then
-        return ""
+        return ''
     end
 
-    if not navic.is_available() or navic_location == "error" then
-        return ""
+    if not navic.is_available() or navic_location == 'error' then
+        return ''
     end
 
-    if not require("config.utils").is_nil_or_empty_string(navic_location) then
-        return "" .. " " .. navic_location
+    if not require('config.utils').is_nil_or_empty_string(navic_location) then
+        return '' .. ' ' .. navic_location
     end
 
-    return ""
+    return ''
 end
 
 local excludes = function()
@@ -85,13 +95,13 @@ M.get_winbar = function()
         return
     end
 
-    local utils = require("config.utils")
+    local utils = require 'config.utils'
     local value = M.get_filename()
     local navic_added = false
 
     if not utils.is_nil_or_empty_string(value) then
         local navic_value = get_navic()
-        value = value .. " " .. navic_value
+        value = value .. ' ' .. navic_value
 
         if not utils.is_nil_or_empty_string(navic_value) then
             navic_added = true
@@ -99,10 +109,10 @@ M.get_winbar = function()
     end
 
     if not utils.is_nil_or_empty_string(value) and utils.is_unsaved() then
-        local mod = "%#LspCodeLens#" .. "" .. "%*"
+        local mod = '%#LspCodeLens#' .. '' .. '%*'
 
         if navic_added then
-            value = value .. " " .. mod
+            value = value .. ' ' .. mod
         else
             value = value .. mod
         end
@@ -112,10 +122,15 @@ M.get_winbar = function()
 
     if num_tabs > 1 and not utils.is_nil_or_empty_string(value) then
         local tabpage_number = tostring(vim.api.nvim_tabpage_get_number(0))
-        value = value .. "%=" .. tabpage_number .. "/" .. tostring(num_tabs)
+        value = value .. '%=' .. tabpage_number .. '/' .. tostring(num_tabs)
     end
 
-    local status_ok, _ = pcall(vim.api.nvim_set_option_value, "winbar", value, { scope = "local" })
+    local status_ok, _ = pcall(
+        vim.api.nvim_set_option_value,
+        'winbar',
+        value,
+        { scope = 'local' }
+    )
 
     if not status_ok then
         return
@@ -123,23 +138,24 @@ M.get_winbar = function()
 end
 
 M.create_winbar = function()
-    vim.api.nvim_create_augroup("_winbar", {})
+    vim.api.nvim_create_augroup('_winbar', {})
 
-    if vim.fn.has("nvim-0.8") == 1 then
+    if vim.fn.has 'nvim-0.8' == 1 then
         vim.api.nvim_create_autocmd({
-            "CursorMoved",
-            "CursorHold",
-            "BufWinEnter",
-            "BufFilePost",
-            "InsertEnter",
-            "BufWritePost",
-            "TabClosed",
+            'CursorMoved',
+            'CursorHold',
+            'BufWinEnter',
+            'BufFilePost',
+            'InsertEnter',
+            'BufWritePost',
+            'TabClosed',
         }, {
-            group = "_winbar",
+            group = '_winbar',
             callback = function()
-                local status_ok, _ = pcall(vim.api.nvim_buf_get_var, 0, "lsp_floating_window")
+                local status_ok, _ =
+                    pcall(vim.api.nvim_buf_get_var, 0, 'lsp_floating_window')
                 if not status_ok then
-                    require("config.winbar").get_winbar()
+                    require('config.winbar').get_winbar()
                 end
             end,
         })

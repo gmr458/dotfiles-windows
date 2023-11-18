@@ -1,13 +1,16 @@
 local cmd = {
-    "ngserver",
-    "--stdio",
-    "--tsProbeLocations",
-    table.concat({ "/home/gdmr/.local/share/nvim/mason/packages/angular-language-server", vim.loop.cwd() }, ","),
-    "--ngProbeLocations",
+    'ngserver',
+    '--stdio',
+    '--tsProbeLocations',
     table.concat({
-        "/home/gdmr/.local/share/nvim/mason/packages/angular-language-server/node_modules/@angular/language-server",
+        '/home/gdmr/.local/share/nvim/mason/packages/angular-language-server',
         vim.loop.cwd(),
-    }, ","),
+    }, ','),
+    '--ngProbeLocations',
+    table.concat({
+        '/home/gdmr/.local/share/nvim/mason/packages/angular-language-server/node_modules/@angular/language-server',
+        vim.loop.cwd(),
+    }, ','),
 }
 
 local config = {
