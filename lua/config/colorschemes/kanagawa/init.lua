@@ -4,7 +4,7 @@ if not ok then
     return
 end
 
-local transparent = true
+local transparent = false
 
 kanagawa.setup({
     compile = true,

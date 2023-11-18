@@ -11,7 +11,7 @@ M.to_setup = function()
         "denols",
         "dockerls",
         "emmet_ls",
-        -- "eslint",
+        "eslint",
         "gopls",
         "html",
         "intelephense",

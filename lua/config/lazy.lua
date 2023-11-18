@@ -290,20 +290,20 @@ lazy.setup({
     },
     {
         "NMAC427/guess-indent.nvim",
-        event = "BufReadPost",
+        -- event = "BufReadPost",
         config = function()
             require("config.guess-indent")
         end,
     },
-    {
-        "lukas-reineke/indent-blankline.nvim",
-        main = "ibl",
-        version = "v2.20.8",
-        event = "BufReadPre",
-        config = function()
-            require("config.indent-blankline")
-        end,
-    },
+    -- {
+    --     "lukas-reineke/indent-blankline.nvim",
+    --     main = "ibl",
+    --     version = "v2.20.8",
+    --     event = "BufReadPre",
+    --     config = function()
+    --         require("config.indent-blankline")
+    --     end,
+    -- },
     {
         "goolord/alpha-nvim",
         config = function()

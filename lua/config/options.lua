@@ -35,24 +35,18 @@ opt.grepprg = "rg --vimgrep"
 -- opt.guifont = require("config.guifont")
 opt.ignorecase = true
 opt.laststatus = 3
-opt.list = true
-opt.listchars:append({
-    eol = "↲",
-    tab = "  ",
-    trail = " ",
-})
 opt.mouse = ""
 opt.number = true
 opt.numberwidth = 1
 opt.pumheight = 10
 opt.relativenumber = true
-opt.scrolloff = 10
+opt.scrolloff = 3
 opt.shiftwidth = 4
 opt.showcmd = true
 opt.showmode = false
 opt.showtabline = 1
-opt.sidescroll = 5
-opt.sidescrolloff = 5
+opt.sidescroll = 3
+opt.sidescrolloff = 3
 opt.signcolumn = "yes"
 opt.smartcase = false
 opt.smartindent = true
