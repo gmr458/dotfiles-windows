@@ -84,29 +84,24 @@ lazy.setup({
         end,
     },
     -- Colorscheme
-    -- {
-    --     "gmr458/dark_modern.nvim",
-    --     lazy = false,
-    --     priority = 1000,
-    --     config = function()
-    --         require("dark_modern").setup({
-    --             cursorline = true,
-    --             transparent_background = true,
-    --             nvim_tree_darker = true,
-    --             italic_keyword = false,
-    --         })
-    --         vim.cmd.colorscheme("dark_modern")
-    --     end,
-    -- },
     {
-        'rebelot/kanagawa.nvim',
+        'gmr458/dark_modern.nvim',
         lazy = false,
         priority = 1000,
         config = function()
-            require 'config.colorschemes.kanagawa'
-            vim.cmd.colorscheme 'kanagawa'
+            require 'config.colorschemes.dark_modern'
+            vim.cmd.colorscheme 'dark_modern'
         end,
     },
+    -- {
+    --     'rebelot/kanagawa.nvim',
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function()
+    --         require 'config.colorschemes.kanagawa'
+    --         vim.cmd.colorscheme 'kanagawa'
+    --     end,
+    -- },
     -- Telescope
     {
         'nvim-telescope/telescope.nvim',
@@ -218,23 +213,19 @@ lazy.setup({
     -- },
     -- Completion
     {
-        'L3MON4D3/LuaSnip',
-        version = '2.*',
-        build = 'make install_jsregexp',
+        'hrsh7th/nvim-cmp',
         event = 'InsertEnter',
         dependencies = {
+            { 'hrsh7th/cmp-nvim-lsp' },
+            { 'FelipeLema/cmp-async-path' },
             {
-                'hrsh7th/nvim-cmp',
-                dependencies = {
-                    { 'hrsh7th/cmp-nvim-lua' },
-                    { 'hrsh7th/cmp-nvim-lsp' },
-                    { 'hrsh7th/cmp-path' },
-                },
-                config = function()
-                    require 'config.cmp'
-                end,
+                'L3MON4D3/LuaSnip',
+                version = 'v2.*',
             },
         },
+        config = function()
+            require 'config.cmp'
+        end,
     },
     {
         'windwp/nvim-autopairs',
@@ -295,15 +286,6 @@ lazy.setup({
             require 'config.guess-indent'
         end,
     },
-    -- {
-    --     "lukas-reineke/indent-blankline.nvim",
-    --     main = "ibl",
-    --     version = "v2.20.8",
-    --     event = "BufReadPre",
-    --     config = function()
-    --         require("config.indent-blankline")
-    --     end,
-    -- },
     {
         'goolord/alpha-nvim',
         config = function()

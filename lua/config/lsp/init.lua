@@ -280,13 +280,11 @@ function M.on_attach(client, bufnr)
 end
 
 function M.get_capabilities()
-    return vim.lsp.protocol.make_client_capabilities()
-
-    -- return vim.tbl_deep_extend(
-    --     "force",
-    --     vim.lsp.protocol.make_client_capabilities(),
-    --     require("cmp_nvim_lsp").default_capabilities()
-    -- )
+    return vim.tbl_deep_extend(
+        'force',
+        vim.lsp.protocol.make_client_capabilities(),
+        require('cmp_nvim_lsp').default_capabilities()
+    )
 end
 
 local servers = require('config.lsp.servers').to_setup()

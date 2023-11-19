@@ -1,4 +1,4 @@
-local ok, luasnip, cmp, types
+local ok, luasnip, cmp
 
 ok, luasnip = pcall(require, 'luasnip')
 if not ok then
@@ -6,16 +6,21 @@ if not ok then
     return
 end
 
-require('luasnip.config').setup {
-    history = true,
-    region_check_events = 'InsertEnter',
-    delete_check_events = 'TextChanged,InsertLeave',
-}
-
 ok, cmp = pcall(require, 'cmp')
 if not ok then
     vim.notify 'cmp could not be loaded'
     return
+end
+
+local has_words_before = function()
+    unpack = unpack or table.unpack
+    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    return col ~= 0
+        and vim.api
+                .nvim_buf_get_lines(0, line - 1, line, true)[1]
+                :sub(col, col)
+                :match '%s'
+            == nil
 end
 
 local function border(hl_name)
@@ -29,23 +34,6 @@ local function border(hl_name)
         { '└', hl_name },
         { '│', hl_name },
     }
-end
-
-ok, types = pcall(require, 'cmp.types')
-if not ok then
-    vim.notify 'cmp.types could not be loaded'
-    return
-end
-
-local has_words_before = function()
-    unpack = unpack or table.unpack
-    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-    return col ~= 0
-        and vim.api
-                .nvim_buf_get_lines(0, line - 1, line, true)[1]
-                :sub(col, col)
-                :match '%s'
-            == nil
 end
 
 local cmp_kinds = {
@@ -77,17 +65,30 @@ local cmp_kinds = {
 }
 
 cmp.setup {
-    preselect = types.cmp.PreselectMode.None,
-    mapping = cmp.mapping.preset.insert {
-        ['<C-Space>'] = cmp.mapping.complete(),
-        ['<CR>'] = cmp.mapping.confirm {
-            behavior = types.cmp.ConfirmBehavior.Replace,
-            select = true,
+    snippet = {
+        expand = function(args)
+            luasnip.lsp_expand(args.body)
+        end,
+    },
+    window = {
+        completion = {
+            border = border 'CmpMenuBorder',
+            winhighlight = 'Normal:CmpMenu,CursorLine:CmpMenuSel,Search:None',
         },
+        documentation = {
+            border = border 'CmpDocBorder',
+            winhighlight = 'Normal:CmpDoc',
+        },
+    },
+    mapping = cmp.mapping.preset.insert {
+        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-e>'] = cmp.mapping.abort(),
+        ['<CR>'] = cmp.mapping.confirm { select = true },
         ['<Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
-            elseif luasnip.expand_or_locally_jumpable() then
+            elseif luasnip.expand_or_jumpable() then
                 luasnip.expand_or_jump()
             elseif has_words_before() then
                 cmp.complete()
@@ -105,27 +106,6 @@ cmp.setup {
             end
         end, { 'i', 's' }),
     },
-    snippet = {
-        expand = function(args)
-            luasnip.lsp_expand(args.body)
-        end,
-    },
-    sources = cmp.config.sources({
-        { name = 'nvim_lua' },
-        { name = 'nvim_lsp' },
-        { name = 'path' },
-    }, {}),
-    confirmation = { default_behavior = types.cmp.ConfirmBehavior.Replace },
-    window = {
-        completion = {
-            border = border 'CmpMenuBorder',
-            winhighlight = 'Normal:CmpMenu,CursorLine:CmpMenuSel,Search:None',
-        },
-        documentation = {
-            border = border 'CmpDocBorder',
-            winhighlight = 'Normal:CmpDoc',
-        },
-    },
     formatting = {
         fields = { 'kind', 'abbr' },
         format = function(_, vim_item)
@@ -133,4 +113,8 @@ cmp.setup {
             return vim_item
         end,
     },
+    sources = cmp.config.sources({
+        { name = 'nvim_lsp' },
+        { name = 'async_path' },
+    }, {}),
 }
