@@ -85,11 +85,11 @@ lazy.setup({
     },
     -- Colorscheme
     {
-        'gmr458/dark_modern.nvim',
+        'gmr458/vscode_modern_theme.nvim',
         lazy = false,
         priority = 1000,
         config = function()
-            require 'config.colorschemes.dark_modern'
+            require 'config.colorschemes.vscode_modern_theme'
             vim.cmd.colorscheme 'dark_modern'
         end,
     },
