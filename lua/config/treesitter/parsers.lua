@@ -63,7 +63,6 @@ local list = {
     'scheme',
     'scss',
     'sql',
-    'ssh_config',
     'svelte',
     'swift',
     'toml',
