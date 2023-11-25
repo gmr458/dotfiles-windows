@@ -1,13 +1,13 @@
-local ok, dark_modern = pcall(require, 'dark_modern')
+local ok, vscode_modern = pcall(require, 'vscode_modern')
 if not ok then
-    vim.notify 'dark_modern could not be loaded'
+    vim.notify 'vscode_modern could not be loaded'
     return
 end
 
-dark_modern.setup {
+vscode_modern.setup {
     cursorline = true,
     transparent_background = false,
     nvim_tree_darker = true,
     italic_keyword = false,
-    custom_background = '#000000',
+    custom_background = '#111111',
 }

@@ -90,7 +90,7 @@ lazy.setup({
         priority = 1000,
         config = function()
             require 'config.colorschemes.vscode_modern_theme'
-            vim.cmd.colorscheme 'dark_modern'
+            vim.cmd.colorscheme 'vscode_modern'
         end,
     },
     -- {

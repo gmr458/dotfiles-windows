@@ -5,6 +5,7 @@ M.to_setup = function()
         'angularls',
         'astro',
         'bashls',
+        'biome',
         'bufls',
         'clangd',
         'cssls',
