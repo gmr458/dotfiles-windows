@@ -22,7 +22,7 @@ nvim_tree.setup {
         highlight_opened_files = 'none',
         highlight_modified = 'none',
         indent_markers = {
-            enable = true,
+            enable = false,
             inline_arrows = true,
             icons = {
                 corner = '└',
@@ -70,7 +70,7 @@ nvim_tree.setup {
         },
     },
     git = {
-        enable = true,
+        enable = false,
         timeout = 1000,
     },
     modified = {

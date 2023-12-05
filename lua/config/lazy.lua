@@ -105,7 +105,7 @@ lazy.setup({
     -- Telescope
     {
         'nvim-telescope/telescope.nvim',
-        version = '0.1.4',
+        version = '0.1.5',
         dependencies = {
             { 'nvim-lua/plenary.nvim' },
             {
@@ -127,9 +127,9 @@ lazy.setup({
         end,
         dependencies = {
             {
-                'mfussenegger/nvim-lint',
+                'nvimtools/none-ls.nvim',
                 config = function()
-                    require 'config.lsp.lint'
+                    require 'config.lsp.null-ls'
                 end,
             },
             {
@@ -221,6 +221,7 @@ lazy.setup({
             {
                 'L3MON4D3/LuaSnip',
                 version = 'v2.*',
+                build = 'make install_jsregexp',
             },
         },
         config = function()

@@ -9,5 +9,5 @@ vscode_modern.setup {
     transparent_background = false,
     nvim_tree_darker = true,
     italic_keyword = false,
-    custom_background = '#111111',
+    custom_dark_background = '#111111',
 }

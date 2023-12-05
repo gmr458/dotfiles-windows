@@ -44,12 +44,55 @@ local function lsp_servers()
 
     local buf_client_names = {}
     for _, client in pairs(buf_clients) do
-        table.insert(buf_client_names, client.name)
+        if client.name ~= 'null-ls' then
+            table.insert(buf_client_names, client.name)
+        end
     end
 
     local unique_client_names = vim.fn.uniq(buf_client_names)
     local clients = table.concat(unique_client_names, ' ')
     return string.format(' %s', clients)
+end
+
+local function null_ls()
+    if not rawget(vim, 'lsp') then
+        return ''
+    end
+
+    local buf_clients = vim.lsp.get_active_clients()
+
+    if next(buf_clients) == nil then
+        return ''
+    end
+
+    local null_ls_running = false
+
+    for _, client in pairs(buf_clients) do
+        if client.name == 'null-ls' then
+            null_ls_running = true
+        end
+    end
+
+    if not null_ls_running then
+        return ''
+    end
+
+    local filetype = vim.bo.filetype
+
+    local ok, sources = pcall(require, 'null-ls.sources')
+    if not ok then
+        return ''
+    end
+
+    local available_sources = sources.get_available(filetype)
+
+    local sources_registered = {}
+    for _, source in ipairs(available_sources) do
+        table.insert(sources_registered, source.name)
+    end
+
+    local active_sources = table.concat(sources_registered, ' ')
+    return string.format(' %s', active_sources)
 end
 
 local function get_diagnostics_count(severity)
@@ -276,6 +319,7 @@ StatusLine.active = function()
         mode(),
         python_env(),
         lsp_servers(),
+        null_ls(),
         diagnostics_error(),
         diagnostics_warns(),
         diagnostics_hint(),
@@ -283,10 +327,10 @@ StatusLine.active = function()
         lsp_messages(),
         '%=',
         '%=',
-        git_diff_added(),
-        git_diff_changed(),
-        git_diff_removed(),
-        git_branch(),
+        -- git_diff_added(),
+        -- git_diff_changed(),
+        -- git_diff_removed(),
+        -- git_branch(),
         file_percentage(),
         total_lines(),
         filetype(),

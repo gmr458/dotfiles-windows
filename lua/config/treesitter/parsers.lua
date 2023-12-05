@@ -15,6 +15,7 @@ local list = {
     'dart',
     'diff',
     'dockerfile',
+    'elixir',
     'git_config',
     'git_rebase',
     'gitattributes',
