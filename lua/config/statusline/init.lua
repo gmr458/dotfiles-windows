@@ -1,8 +1,8 @@
 local function mode()
     local current_mode = vim.api.nvim_get_mode().mode
     local modes = require 'config.statusline.modes'
-    local mode = string.format(' %s ', modes[current_mode]):upper()
-    return '%#StatusLineMode#' .. mode .. '%*'
+    local mode_str = string.format(' %s ', modes[current_mode]):upper()
+    return '%#StatusLineMode#' .. mode_str .. '%*'
 end
 
 local function python_env()
@@ -11,7 +11,7 @@ local function python_env()
     end
 
     local buf = vim.api.nvim_get_current_buf()
-    local buf_clients = vim.lsp.get_active_clients { bufnr = buf }
+    local buf_clients = vim.lsp.get_clients { bufnr = buf }
     if next(buf_clients) == nil then
         return ''
     end
@@ -37,7 +37,7 @@ local function lsp_servers()
     end
 
     local buf = vim.api.nvim_get_current_buf()
-    local buf_clients = vim.lsp.get_active_clients { bufnr = buf }
+    local buf_clients = vim.lsp.get_clients { bufnr = buf }
     if next(buf_clients) == nil then
         return ''
     end
@@ -50,8 +50,12 @@ local function lsp_servers()
     end
 
     local unique_client_names = vim.fn.uniq(buf_client_names)
-    local clients = table.concat(unique_client_names, ' ')
-    return string.format(' %s', clients)
+    if type(unique_client_names) == 'table' then
+        local clients = table.concat(unique_client_names, ' ')
+        return string.format(' %s', clients)
+    end
+
+    return ''
 end
 
 local function null_ls()
@@ -59,7 +63,7 @@ local function null_ls()
         return ''
     end
 
-    local buf_clients = vim.lsp.get_active_clients()
+    local buf_clients = vim.lsp.get_clients()
 
     if next(buf_clients) == nil then
         return ''
@@ -158,61 +162,21 @@ local function diagnostics_info()
 end
 
 local function lsp_messages()
-    if not rawget(vim, 'lsp') or vim.lsp.status then
+    if not rawget(vim, 'lsp') then
         return ''
     end
 
-    local lsp = vim.lsp.util.get_progress_messages()[1]
-
-    if vim.o.columns < 120 or not lsp then
+    if vim.o.columns < 120 then
         return ''
     end
 
-    if lsp.done then
-        vim.defer_fn(function()
-            vim.cmd.redrawstatus()
-        end, 1000)
-    end
+    local trim = require('config.utils').trim
 
-    local msg = (
-        lsp.message ~= nil
-        and string.find(lsp.message, '%%') == nil
-        and lsp.message
-    ) or ''
-    local percentage = lsp.percentage or 0
-    local title = lsp.title or ''
-
-    local spinners = { '', '󰀚', '' }
-
-    local success_icon = { '', '', '' }
-
-    local ms = vim.loop.hrtime() / 1000000
-    local frame = math.floor(ms / 120) % #spinners
-
-    local message = ''
-
-    if percentage >= 70 then
-        message = string.format(
-            ' %%<%s %s %s (%s%%%%)',
-            success_icon[frame + 1],
-            title,
-            msg,
-            percentage
-        )
-    end
-
-    message = string.format(
-        ' %%<%s %s %s (%s%%%%)',
-        spinners[frame + 1],
-        title,
-        msg,
-        percentage
-    )
+    local status = vim.lsp.status()
+    local message = string.format(' %s', trim(vim.split(status, ',')[1]))
 
     return '%#StatusLineLspMessages#' .. message .. '%*'
 end
-
-----------------------------------------------
 
 local function git_diff(type)
     local gsd = vim.b.gitsigns_status_dict
@@ -259,7 +223,6 @@ local function git_branch()
         return ''
     end
 
-    -- return string.format("  %s", vim.b.gitsigns_head)
     return ' %#StatusLineGitBranchIcon#󰘬%* ' .. vim.b.gitsigns_head
 end
 
@@ -281,13 +244,13 @@ local function total_lines()
     return string.format('  %s', lines)
 end
 
-local function filetype()
-    local ft = vim.bo.filetype
+local function formatted_filetype()
+    local filetype = vim.bo.filetype
 
-    if ft == '' then
-        ft = vim.fn.expand '%:e'
+    if filetype == '' then
+        filetype = vim.fn.expand '%:e'
 
-        if ft == '' then
+        if filetype == '' then
             local buf = vim.api.nvim_get_current_buf()
             local bufname = vim.api.nvim_buf_get_name(buf)
 
@@ -299,10 +262,10 @@ local function filetype()
 
     local filetypes = require 'config.statusline.filetypes'
 
-    if filetypes[ft] == nil then
+    if filetypes[filetype] == nil then
         return string.format(' %s ', filetypes[''])
     end
-    return string.format(' %s ', filetypes[ft])
+    return string.format(' %s ', filetypes[filetype])
 end
 
 StatusLine = {}
@@ -311,6 +274,16 @@ StatusLine.active = function()
     if vim.o.filetype == 'alpha' then
         return table.concat {
             '%#Normal#',
+        }
+    end
+
+    local mode_str = vim.api.nvim_get_mode()['mode']
+    if mode_str == 't' or mode_str == 'nt' then
+        return table.concat {
+            '%#Statusline#',
+            mode(),
+            '%=',
+            '%=',
         }
     end
 
@@ -333,7 +306,7 @@ StatusLine.active = function()
         -- git_branch(),
         file_percentage(),
         total_lines(),
-        filetype(),
+        formatted_filetype(),
     }
 end
 
@@ -341,7 +314,7 @@ StatusLine.inactive = function()
     return table.concat {
         '%#Statusline#',
         '%#StatusLineMode#',
-        filetype():upper(),
+        formatted_filetype():upper(),
         '%*',
     }
 end

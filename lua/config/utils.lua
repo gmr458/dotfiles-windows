@@ -36,12 +36,13 @@ function M.is_nil_or_empty_string(s)
 end
 
 function M.is_unsaved()
-    local ok, is_unsaved = pcall(vim.api.nvim_buf_get_option, 0, 'mod')
-    if not ok then
-        return nil
-    end
+    return vim.api.nvim_get_option_value('mod', { buf = 0 })
+end
 
-    return is_unsaved
+function M.trim(str)
+    str = str:gsub('^%s+', '')
+    str = str:gsub('%s+$', '')
+    return str
 end
 
 return M

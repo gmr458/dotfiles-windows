@@ -25,21 +25,27 @@ local diagnostics_icons = {
 }
 
 vim.diagnostic.config {
+    underline = true,
     virtual_text = {
+        source = false,
+        spacing = 1,
         prefix = '',
+        suffix = '',
         format = function(diagnostic)
             local icon =
                 diagnostics_icons[vim.diagnostic.severity[diagnostic.severity]]
-            local message = vim.split(diagnostic.message, '\n')[2]
-            return string.format('%s %s ', icon, message)
+            return string.format(
+                '%s %s: %s ',
+                icon,
+                diagnostic.source,
+                diagnostic.message
+            )
         end,
-        source = 'always',
     },
     signs = false,
-    underline = true,
+    float = { source = 'always', border = borderchars },
     update_in_insert = false,
     severity_sort = true,
-    float = { source = 'always', border = borderchars },
 }
 
 local function goto_definition()
@@ -55,18 +61,33 @@ local function goto_definition()
             vim.loop.os_uname().sysname == 'Linux'
             and os.getenv 'DESKTOP_SESSION' == 'hyprland'
         then
-            --- @class HyprlandWindow
-            --- @field size table
-            local json = vim.json.decode(
+            local output_hyprctl =
                 vim.fn.system { 'hyprctl', '-j', 'activewindow' }
-            )
+            if output_hyprctl then
+                --- @class HyprlandWindow
+                --- @field size table
+                local json = vim.json.decode(output_hyprctl)
 
-            local size_x = json.size[1] --- @type number
-            local size_y = json.size[2] --- @type number
+                local size_x = json.size[1] --- @type number
+                local size_y = json.size[2] --- @type number
 
-            if size_y > size_x then
-                split_cmd = 'split'
+                if size_y > size_x then
+                    split_cmd = 'split'
+                end
             end
+
+            -- --- @class HyprlandWindow
+            -- --- @field size table
+            -- local json = vim.json.decode(
+            --     vim.fn.system { 'hyprctl', '-j', 'activewindow' }
+            -- )
+
+            -- local size_x = json.size[1] --- @type number
+            -- local size_y = json.size[2] --- @type number
+
+            -- if size_y > size_x then
+            --     split_cmd = 'split'
+            -- end
         end
 
         if result == nil or vim.tbl_isempty(result) then
@@ -121,8 +142,10 @@ end
 vim.lsp.handlers['textDocument/definition'] = goto_definition()
 
 -- comment this if using noice.nvim
--- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = borderchars })
--- vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = borderchars })
+vim.lsp.handlers['textDocument/hover'] =
+    vim.lsp.with(vim.lsp.handlers.hover, { border = borderchars })
+vim.lsp.handlers['textDocument/signatureHelp'] =
+    vim.lsp.with(vim.lsp.handlers.signature_help, { border = borderchars })
 
 require('lspconfig.ui.windows').default_options.border = 'single'
 

@@ -156,13 +156,13 @@ lazy.setup({
                     require 'config.trouble'
                 end,
             },
-            {
-                'folke/noice.nvim',
-                config = function()
-                    require 'config.noice'
-                end,
-                dependencies = { 'MunifTanjim/nui.nvim' },
-            },
+            -- {
+            --     'folke/noice.nvim',
+            --     config = function()
+            --         require 'config.noice'
+            --     end,
+            --     dependencies = { 'MunifTanjim/nui.nvim' },
+            -- },
             { 'b0o/SchemaStore.nvim' },
         },
     },

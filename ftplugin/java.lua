@@ -29,6 +29,8 @@ local workspace_dir = vim.loop.os_homedir()
 local extendedClientCapabilities = jdtls.extendedClientCapabilities
 extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
 
+local lsp = require 'config.lsp'
+
 -- local jt_path = mason_registry.get_package("java-test"):get_install_path()
 -- local jda_path = mason_registry.get_package("java-debug-adapter"):get_install_path()
 
@@ -86,8 +88,8 @@ local config = {
         workspace_dir,
     },
 
-    on_attach = require('config.lsp').on_attach,
-    capabilities = require('config.lsp').get_capabilities(),
+    on_attach = lsp.on_attach,
+    capabilities = lsp.get_capabilities(),
 
     -- 💀
     -- This is the default if not provided, you can remove it. Or adjust as needed.
