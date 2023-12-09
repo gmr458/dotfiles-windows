@@ -133,12 +133,6 @@ lazy.setup({
                 end,
             },
             {
-                'williamboman/mason.nvim',
-                config = function()
-                    require 'config.lsp.mason'
-                end,
-            },
-            {
                 'folke/neodev.nvim',
                 config = function()
                     require('neodev').setup()
@@ -165,6 +159,13 @@ lazy.setup({
             -- },
             { 'b0o/SchemaStore.nvim' },
         },
+    },
+    {
+        'williamboman/mason.nvim',
+        event = 'BufReadPost',
+        config = function()
+            require 'config.lsp.mason'
+        end,
     },
     -- LSP Java
     {
@@ -285,6 +286,14 @@ lazy.setup({
         event = 'BufReadPost',
         config = function()
             require 'config.guess-indent'
+        end,
+    },
+    {
+        'lukas-reineke/indent-blankline.nvim',
+        main = 'ibl',
+        event = 'BufReadPost',
+        config = function()
+            require 'config.ibl'
         end,
     },
     {

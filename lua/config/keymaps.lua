@@ -140,6 +140,10 @@ end)
 -- colorizer toggle
 vim.keymap.set('n', '<leader>ct', '<cmd>ColorizerToggle<cr>')
 
+-- open terminal
+vim.keymap.set('n', '<leader>vt', [[<cmd>vsplit | term<cr>A]])
+vim.keymap.set('n', '<leader>ht', [[<cmd>split | term<cr>A]])
+
 ---------------------------------------------------------------
 -- insert -----------------------------------------------------
 ---------------------------------------------------------------

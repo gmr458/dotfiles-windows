@@ -80,6 +80,18 @@ formatter.setup {
                 return { exe = 'stylua', stdin = false }
             end,
         },
+        ocaml = {
+            function()
+                return {
+                    exe = 'ocamlformat',
+                    args = {
+                        '--enable-outside-detected-project',
+                        vim.fn.shellescape(vim.api.nvim_buf_get_name(0)),
+                    },
+                    stdin = true,
+                }
+            end,
+        },
         python = {
             function()
                 return { exe = 'ruff', args = { 'format' }, stdin = false }
