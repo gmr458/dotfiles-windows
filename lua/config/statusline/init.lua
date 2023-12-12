@@ -1,8 +1,11 @@
+local statusline_augroup =
+    vim.api.nvim_create_augroup('StatusLine', { clear = true })
+
 local function mode()
     local current_mode = vim.api.nvim_get_mode().mode
     local modes = require 'config.statusline.modes'
-    local mode_str = string.format(' %s ', modes[current_mode]):upper()
-    return '%#StatusLineMode#' .. mode_str .. '%*'
+    local mode_str = string.format(' %s', modes[current_mode]):upper()
+    return mode_str
 end
 
 local function python_env()
@@ -31,72 +34,47 @@ local function python_env()
     return ''
 end
 
-local function lsp_servers()
+local function lsp_clients()
     if not rawget(vim, 'lsp') then
         return ''
     end
 
-    local buf = vim.api.nvim_get_current_buf()
-    local buf_clients = vim.lsp.get_clients { bufnr = buf }
-    if next(buf_clients) == nil then
-        return ''
-    end
-
-    local buf_client_names = {}
-    for _, client in pairs(buf_clients) do
-        if client.name ~= 'null-ls' then
-            table.insert(buf_client_names, client.name)
-        end
-    end
-
-    local unique_client_names = vim.fn.uniq(buf_client_names)
-    if type(unique_client_names) == 'table' then
-        local clients = table.concat(unique_client_names, ' ')
-        return string.format(' %s', clients)
-    end
-
-    return ''
-end
-
-local function null_ls()
-    if not rawget(vim, 'lsp') then
-        return ''
-    end
-
-    local buf_clients = vim.lsp.get_clients()
-
-    if next(buf_clients) == nil then
+    local current_buf = vim.api.nvim_get_current_buf()
+    local clients = vim.lsp.get_clients { bufnr = current_buf }
+    if next(clients) == nil then
         return ''
     end
 
     local null_ls_running = false
 
-    for _, client in pairs(buf_clients) do
-        if client.name == 'null-ls' then
+    local client_names = {}
+    for _, client in pairs(clients) do
+        if client.name ~= 'null-ls' then
+            table.insert(client_names, client.name)
+        else
             null_ls_running = true
         end
     end
 
-    if not null_ls_running then
-        return ''
+    if null_ls_running then
+        local ok, sources = pcall(require, 'null-ls.sources')
+        if not ok then
+            return ''
+        end
+
+        local available_sources = sources.get_available(vim.bo.filetype)
+
+        for _, source in ipairs(available_sources) do
+            table.insert(client_names, source.name)
+        end
     end
 
-    local filetype = vim.bo.filetype
-
-    local ok, sources = pcall(require, 'null-ls.sources')
-    if not ok then
-        return ''
+    local unique_client_names = vim.fn.uniq(client_names)
+    if type(unique_client_names) == 'table' then
+        return string.format(' %s', table.concat(unique_client_names, ' '))
     end
 
-    local available_sources = sources.get_available(filetype)
-
-    local sources_registered = {}
-    for _, source in ipairs(available_sources) do
-        table.insert(sources_registered, source.name)
-    end
-
-    local active_sources = table.concat(sources_registered, ' ')
-    return string.format(' %s', active_sources)
+    return ''
 end
 
 local function get_diagnostics_count(severity)
@@ -161,7 +139,49 @@ local function diagnostics_info()
     return ''
 end
 
-local function lsp_messages()
+--- @class LspProgress
+--- @field client lsp.Client?
+--- @field kind string?
+--- @field title string?
+--- @field percentage integer?
+--- @field message string?
+local lsp_progress = {
+    client = nil,
+    kind = nil,
+    title = nil,
+    percentage = nil,
+    message = nil,
+}
+
+vim.api.nvim_create_autocmd('LspProgress', {
+    group = statusline_augroup,
+    desc = 'Update LSP progress in statusline',
+    pattern = { 'begin', 'end' },
+    callback = function(args)
+        if not args.data then
+            return
+        end
+
+        lsp_progress = {
+            client = vim.lsp.get_client_by_id(args.data.client_id),
+            kind = args.data.result.value.kind,
+            message = args.data.result.value.message,
+            percentage = args.data.result.value.percentage,
+            title = args.data.result.value.title,
+        }
+
+        if lsp_progress.kind == 'end' then
+            lsp_progress.title = nil
+            vim.defer_fn(function()
+                vim.cmd.redrawstatus()
+            end, 500)
+        else
+            vim.cmd.redrawstatus()
+        end
+    end,
+})
+
+local function lsp_status()
     if not rawget(vim, 'lsp') then
         return ''
     end
@@ -170,12 +190,27 @@ local function lsp_messages()
         return ''
     end
 
-    local trim = require('config.utils').trim
+    if not lsp_progress.client or not lsp_progress.title then
+        return ''
+    end
 
-    local status = vim.lsp.status()
-    local message = string.format(' %s', trim(vim.split(status, ',')[1]))
+    local title = lsp_progress.title or ''
+    local percentage = (
+        lsp_progress.percentage and (lsp_progress.percentage .. '%%')
+    ) or ''
+    local message = lsp_progress.message or ''
 
-    return '%#StatusLineLspMessages#' .. message .. '%*'
+    local lsp_message = string.format(' %s', title)
+
+    if message ~= '' then
+        lsp_message = string.format('%s %s', lsp_message, message)
+    end
+
+    if percentage ~= '' then
+        lsp_message = string.format('%s %s', lsp_message, percentage)
+    end
+
+    return '%#StatusLineLspMessages#' .. lsp_message .. '%*'
 end
 
 local function git_diff(type)
@@ -245,18 +280,14 @@ local function total_lines()
 end
 
 local function formatted_filetype()
-    local filetype = vim.bo.filetype
+    local filetype = vim.bo.filetype or vim.fn.expand('%:e', false)
 
     if filetype == '' then
-        filetype = vim.fn.expand '%:e'
+        local buf = vim.api.nvim_get_current_buf()
+        local bufname = vim.api.nvim_buf_get_name(buf)
 
-        if filetype == '' then
-            local buf = vim.api.nvim_get_current_buf()
-            local bufname = vim.api.nvim_buf_get_name(buf)
-
-            if bufname == vim.loop.cwd() then
-                return ' Directory '
-            end
+        if bufname == vim.loop.cwd() then
+            return ' Directory '
         end
     end
 
@@ -291,19 +322,18 @@ StatusLine.active = function()
         '%#Statusline#',
         mode(),
         python_env(),
-        lsp_servers(),
-        null_ls(),
+        lsp_clients(),
         diagnostics_error(),
         diagnostics_warns(),
         diagnostics_hint(),
         diagnostics_info(),
-        lsp_messages(),
+        lsp_status(),
         '%=',
         '%=',
-        -- git_diff_added(),
-        -- git_diff_changed(),
-        -- git_diff_removed(),
-        -- git_branch(),
+        git_diff_added(),
+        git_diff_changed(),
+        git_diff_removed(),
+        git_branch(),
         file_percentage(),
         total_lines(),
         formatted_filetype(),
@@ -313,9 +343,9 @@ end
 StatusLine.inactive = function()
     return table.concat {
         '%#Statusline#',
-        '%#StatusLineMode#',
+        -- '%#StatusLineMode#',
         formatted_filetype():upper(),
-        '%*',
+        -- '%*',
     }
 end
 
@@ -324,9 +354,6 @@ StatusLine.empty = function()
         '%#Normal#',
     }
 end
-
-local statusline_augroup =
-    vim.api.nvim_create_augroup('StatusLine', { clear = true })
 
 vim.api.nvim_create_autocmd({ 'WinEnter', 'BufEnter' }, {
     group = statusline_augroup,

@@ -5,7 +5,7 @@ if not ok then
 end
 
 local config = {
-    root_dir = util.root_pattern 'tailwind.config.js',
+    root_dir = util.root_pattern('tailwind.config.js', 'tailwind.config.ts'),
 }
 
 return config

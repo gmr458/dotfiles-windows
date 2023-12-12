@@ -29,8 +29,6 @@ local workspace_dir = vim.loop.os_homedir()
 local extendedClientCapabilities = jdtls.extendedClientCapabilities
 extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
 
-local lsp = require 'config.lsp'
-
 -- local jt_path = mason_registry.get_package("java-test"):get_install_path()
 -- local jda_path = mason_registry.get_package("java-debug-adapter"):get_install_path()
 
@@ -68,11 +66,11 @@ local config = {
         '-jar',
         vim.fn.glob(
             jdtls_path .. '/plugins/org.eclipse.equinox.launcher_*.jar'
+            -- ^^^^^^^                                           ^
+            -- Must point to the                                 Change this to
+            -- eclipse.jdt.ls                                    the actual version,
+            -- installation                                      with vim.fn.glob() is not necessary
         ),
-        --          ^^^^^^^^^^                                           ^
-        --          Must point to the                                    Change this to
-        --          eclipse.jdt.ls                                       the actual version,
-        --          installation                                         with vim.fn.glob() is not necessary
 
         -- 💀
         '-configuration',
@@ -88,8 +86,8 @@ local config = {
         workspace_dir,
     },
 
-    on_attach = lsp.on_attach,
-    capabilities = lsp.get_capabilities(),
+    on_attach = require('config.lsp').on_attach,
+    capabilities = require('cmp_nvim_lsp').default_capabilities(),
 
     -- 💀
     -- This is the default if not provided, you can remove it. Or adjust as needed.

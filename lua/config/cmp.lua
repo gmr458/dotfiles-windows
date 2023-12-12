@@ -23,19 +23,6 @@ local has_words_before = function()
             == nil
 end
 
-local function border(hl_name)
-    return {
-        { '┌', hl_name },
-        { '─', hl_name },
-        { '┐', hl_name },
-        { '│', hl_name },
-        { '┘', hl_name },
-        { '─', hl_name },
-        { '└', hl_name },
-        { '│', hl_name },
-    }
-end
-
 local cmp_kinds = {
     Text = ' ',
     Method = ' ',
@@ -71,14 +58,8 @@ cmp.setup {
         end,
     },
     window = {
-        completion = {
-            border = border 'CmpMenuBorder',
-            winhighlight = 'Normal:CmpMenu,CursorLine:CmpMenuSel,Search:None',
-        },
-        documentation = {
-            border = border 'CmpDocBorder',
-            winhighlight = 'Normal:CmpDoc',
-        },
+        completion = cmp.config.window.bordered { border = 'single' },
+        documentation = cmp.config.window.bordered { border = 'single' },
     },
     mapping = cmp.mapping.preset.insert {
         ['<C-b>'] = cmp.mapping.scroll_docs(-4),

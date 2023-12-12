@@ -16,7 +16,6 @@ dashboard.section.header.val = require('config.headers').Bloody
 dashboard.section.header.opts = { position = 'center', hl = 'AlphaHeader' }
 
 dashboard.section.buttons.val = {
-    -- dashboard.button("ff", "  Find file", "<CMD>silent FzfLua files<CR>"),
     dashboard.button(
         'Space ff',
         '  Find file',
@@ -37,8 +36,6 @@ dashboard.section.buttons.val = {
         '?  Help',
         '<CMD>silent Telescope help_tags preview=true<CR>'
     ),
-    -- dashboard.button("Space cfg", "  Config", "<CMD>silent cd ~/.config/nvim | e init.lua<CR>"),
-    -- dashboard.button("Space upd", "  Update plugins", "<CMD>Lazy update<CR>"),
     dashboard.button('q', '  Quit NVIM', ':qa<CR>'),
 }
 

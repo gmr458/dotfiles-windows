@@ -5,18 +5,7 @@ if not ok then
 end
 
 mason.setup {
-    ui = {
-        border = {
-            '┌',
-            '─',
-            '┐',
-            '│',
-            '┘',
-            '─',
-            '└',
-            '│',
-        },
-    },
+    ui = { border = 'single', height = 0.8 },
 }
 
 vim.api.nvim_create_user_command('MasonInstallAll', function()

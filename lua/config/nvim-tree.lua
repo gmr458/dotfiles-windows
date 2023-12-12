@@ -16,7 +16,7 @@ nvim_tree.setup {
             return vim.fn.fnamemodify(path, ':t')
         end,
         indent_width = 3,
-        special_files = { 'Cargo.toml', 'Makefile', 'README.md', 'readme.md' },
+        special_files = {},
         highlight_git = false,
         highlight_diagnostics = false,
         highlight_opened_files = 'none',

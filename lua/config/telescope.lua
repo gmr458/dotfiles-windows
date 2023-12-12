@@ -76,9 +76,12 @@ telescope.setup {
         },
         find_files = {
             previewer = false,
+            layout_strategy = 'vertical',
             layout_config = {
-                width = 0.7,
-                prompt_position = 'top',
+                width = 0.9,
+                height = 0.9,
+                preview_cutoff = 1,
+                mirror = false,
             },
         },
         git_status = {

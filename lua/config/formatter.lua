@@ -66,7 +66,7 @@ formatter.setup {
                         '--preserve-leading-space',
                         '--preserve-blank-lines',
                         '--indent',
-                        '2',
+                        vim.bo.tabstop,
                     },
                 }
             end,

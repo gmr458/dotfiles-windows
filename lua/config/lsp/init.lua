@@ -6,23 +6,9 @@ if not ok then
     return
 end
 
-local borderchars = {
-    '┌',
-    '─',
-    '┐',
-    '│',
-    '┘',
-    '─',
-    '└',
-    '│',
-}
-
-local diagnostics_icons = {
-    ERROR = '',
-    WARN = '',
-    HINT = '',
-    INFO = '',
-}
+local methods = vim.lsp.protocol.Methods
+local chars = require 'config.lsp.chars'
+local handlers = require 'config.lsp.handlers'
 
 vim.diagnostic.config {
     underline = true,
@@ -32,8 +18,8 @@ vim.diagnostic.config {
         prefix = '',
         suffix = '',
         format = function(diagnostic)
-            local icon =
-                diagnostics_icons[vim.diagnostic.severity[diagnostic.severity]]
+            local severity = vim.diagnostic.severity[diagnostic.severity]
+            local icon = chars.diagnostics[severity]
             return string.format(
                 '%s %s: %s ',
                 icon,
@@ -43,279 +29,131 @@ vim.diagnostic.config {
         end,
     },
     signs = false,
-    float = { source = 'always', border = borderchars },
+    -- float = { source = 'always', border = chars.border },
+    float = { source = 'always', border = 'single' },
     update_in_insert = false,
     severity_sort = true,
 }
 
-local function goto_definition()
-    local util = vim.lsp.util
-    local log = require 'vim.lsp.log'
-    local api = vim.api
-
-    -- note, this handler style is for neovim 0.5.1/0.6, if on 0.5, call with function(_, method, result)
-    local handler = function(_, result, ctx)
-        local split_cmd = 'vsplit'
-
-        if
-            vim.loop.os_uname().sysname == 'Linux'
-            and os.getenv 'DESKTOP_SESSION' == 'hyprland'
-        then
-            local output_hyprctl =
-                vim.fn.system { 'hyprctl', '-j', 'activewindow' }
-            if output_hyprctl then
-                --- @class HyprlandWindow
-                --- @field size table
-                local json = vim.json.decode(output_hyprctl)
-
-                local size_x = json.size[1] --- @type number
-                local size_y = json.size[2] --- @type number
-
-                if size_y > size_x then
-                    split_cmd = 'split'
-                end
-            end
-
-            -- --- @class HyprlandWindow
-            -- --- @field size table
-            -- local json = vim.json.decode(
-            --     vim.fn.system { 'hyprctl', '-j', 'activewindow' }
-            -- )
-
-            -- local size_x = json.size[1] --- @type number
-            -- local size_y = json.size[2] --- @type number
-
-            -- if size_y > size_x then
-            --     split_cmd = 'split'
-            -- end
-        end
-
-        if result == nil or vim.tbl_isempty(result) then
-            local _ = log.info() and log.info(ctx.method, 'No location found')
-            return nil
-        end
-
-        local first_visible_line = vim.fn.line 'w0'
-        local last_visible_line = vim.fn.line 'w$'
-
-        local definition = result[1]
-
-        local buf = vim.api.nvim_get_current_buf()
-        local filename = vim.api.nvim_buf_get_name(buf)
-
-        local uri = definition.uri or definition.targetUri
-
-        if 'file://' .. filename ~= uri then
-            vim.cmd(split_cmd)
-        else
-            local range = definition.range or definition.targetSelectionRange
-            local line_definition = range.start.line
-
-            if line_definition == 0 then
-                line_definition = 1
-            end
-
-            if
-                line_definition < first_visible_line
-                or line_definition > last_visible_line
-            then
-                vim.cmd(split_cmd)
-            end
-        end
-
-        if vim.tbl_islist(result) then
-            util.jump_to_location(result[1], 'utf-8')
-
-            if #result > 1 then
-                vim.fn.setqflist(util.locations_to_items(result, 'utf-8'))
-                api.nvim_command 'copen'
-                api.nvim_command 'wincmd p'
-            end
-        else
-            util.jump_to_location(result, 'utf-8')
-        end
-    end
-
-    return handler
-end
-
-vim.lsp.handlers['textDocument/definition'] = goto_definition()
+vim.lsp.handlers[methods.textDocument_definition] = handlers.goto_definition()
 
 -- comment this if using noice.nvim
-vim.lsp.handlers['textDocument/hover'] =
-    vim.lsp.with(vim.lsp.handlers.hover, { border = borderchars })
-vim.lsp.handlers['textDocument/signatureHelp'] =
-    vim.lsp.with(vim.lsp.handlers.signature_help, { border = borderchars })
+-- vim.lsp.handlers[methods.textDocument_hover] =
+--     vim.lsp.with(vim.lsp.handlers.hover, { border = chars.border })
+
+vim.lsp.handlers[methods.textDocument_signatureHelp] =
+    vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'single' })
 
 require('lspconfig.ui.windows').default_options.border = 'single'
 
-local function attach_navic(client, bufnr)
-    local filetype = vim.bo.filetype
-
-    if
-        client.name == 'html'
-        and (filetype == 'javascriptreact' or filetype == 'typescriptreact')
-    then
-        return
-    end
-
-    local ok_navic, navic = pcall(require, 'nvim-navic')
-    if not ok_navic then
-        vim.notify 'nvim-navic could not be loaded'
-        return
-    end
-
-    if client.server_capabilities.documentSymbolProvider then
-        navic.attach(client, bufnr)
-    end
-end
-
+--- @param client lsp.Client
+--- @param bufnr integer
 function M.on_attach(client, bufnr)
-    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-    local bufopts = { noremap = true, silent = true, buffer = bufnr }
-
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-    vim.keymap.set('n', 'J', vim.lsp.buf.hover, bufopts)
-    -- vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
-    vim.keymap.set('n', 'gi', function()
-        require('telescope.builtin').lsp_implementations()
-    end, bufopts)
-    vim.keymap.set('n', 'K', vim.lsp.buf.signature_help, bufopts)
-    vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-    vim.keymap.set(
-        'n',
-        '<space>wr',
-        vim.lsp.buf.remove_workspace_folder,
-        bufopts
+    vim.api.nvim_set_option_value(
+        'omnifunc',
+        'v:lua.vim.lsp.omnifunc',
+        { buf = bufnr }
     )
-    vim.keymap.set('n', '<space>wl', function()
+
+    --- @param lhs string
+    --- @param rhs string|function
+    local function keymap(lhs, rhs)
+        vim.keymap.set(
+            'n',
+            lhs,
+            rhs,
+            { noremap = true, silent = true, buffer = bufnr }
+        )
+    end
+
+    keymap('<space>e', vim.diagnostic.open_float)
+    keymap('[d', vim.diagnostic.goto_prev)
+    keymap(']d', vim.diagnostic.goto_next)
+    keymap('<space>q', vim.diagnostic.setloclist)
+    keymap('gD', vim.lsp.buf.declaration)
+    keymap('gd', vim.lsp.buf.definition)
+    keymap('J', vim.lsp.buf.hover)
+    keymap('gi', function()
+        require('telescope.builtin').lsp_implementations()
+    end)
+    keymap('K', vim.lsp.buf.signature_help)
+    keymap('<space>wa', vim.lsp.buf.add_workspace_folder)
+    keymap('<space>wr', vim.lsp.buf.remove_workspace_folder)
+    keymap('<space>wl', function()
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, bufopts)
-    vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-    vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-    -- vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
-    vim.keymap.set('n', 'gr', function()
+    end)
+    keymap('<space>D', vim.lsp.buf.type_definition)
+    keymap('<space>rn', vim.lsp.buf.rename)
+    keymap('<space>ca', vim.lsp.buf.code_action)
+    keymap('gr', function()
         require('telescope.builtin').lsp_references()
-    end, bufopts)
-    vim.keymap.set('n', '<space>f', function()
-        vim.lsp.buf.format { async = true }
-    end, bufopts)
-
-    vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, bufopts)
-    vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, bufopts)
-    vim.keymap.set('n', ']d', vim.diagnostic.goto_next, bufopts)
-    vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, bufopts)
-
-    vim.keymap.set('n', '<leader>ds', function()
+    end)
+    -- keymap('<space>f', function()
+    --     vim.lsp.buf.format { async = true }
+    -- end)
+    keymap('<leader>ds', function()
         require('telescope.builtin').lsp_document_symbols()
-    end, bufopts)
-    vim.keymap.set('n', '<leader>ws', function()
+    end)
+    keymap('<leader>ws', function()
         require('telescope.builtin').lsp_dynamic_workspace_symbols()
-    end, bufopts)
+    end)
 
-    if client.server_capabilities.documentHighlightProvider then
-        local guibg = 'Grey35'
-
-        if vim.o.background == 'light' then
-            guibg = '#D5D5D5'
-        end
-
-        vim.cmd('hi! LspReferenceRead cterm=bold ctermbg=red guibg=' .. guibg)
-        vim.cmd('hi! LspReferenceText cterm=bold ctermbg=red guibg=' .. guibg)
-        vim.cmd('hi! LspReferenceWrite cterm=bold ctermbg=red guibg=' .. guibg)
-
-        vim.api.nvim_create_augroup('lsp_document_highlight', {
+    if client.supports_method(methods.textDocument_documentHighlight) then
+        local augroup = vim.api.nvim_create_augroup('LspDocumentHighlight', {
             clear = false,
         })
 
-        vim.opt.updatetime = 1000
-
-        vim.api.nvim_clear_autocmds {
-            buffer = bufnr,
-            group = 'lsp_document_highlight',
-        }
-
         vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-            group = 'lsp_document_highlight',
+            group = augroup,
+            desc = 'Highlight references under the cursor',
+
             buffer = bufnr,
             callback = vim.lsp.buf.document_highlight,
         })
 
         vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
-            group = 'lsp_document_highlight',
+            group = augroup,
+            desc = 'Clear highlight references after move cursor',
             buffer = bufnr,
             callback = vim.lsp.buf.clear_references,
         })
     end
 
-    if client.name == 'omnisharp' then
-        client.server_capabilities.semanticTokensProvider = nil
-    end
-
-    if client.name == 'jdtls' then
-        -- jdtls dap
-        -- require("jdtls").setup_dap({ hotcodereplace = "auto" })
-        -- require("jdtls.dap").setup_dap_main_class_configs()
-
-        -- jdtls commands
-        -- require("jdtls.setup").add_commands()
-        -- vim.api.nvim_create_user_command("JdtTestClass", function()
-        --   require("jdtls").test_class()
-        -- end, {})
-        -- vim.api.nvim_create_user_command("JdtTestNearestMethod", function()
-        --   require("jdtls").test_nearest_method()
-        -- end, {})
-
-        -- jdtls codelens
+    if client.supports_method(methods.textDocument_codeLens) then
         vim.lsp.codelens.refresh()
-        vim.api.nvim_create_autocmd(
-            { 'BufEnter', 'CursorHold', 'InsertLeave' },
-            {
-                pattern = { '*.java' },
-                callback = function()
-                    vim.lsp.codelens.refresh()
-                end,
-            }
-        )
+        vim.api.nvim_create_autocmd({ 'BufEnter', 'InsertLeave' }, {
+            buffer = vim.api.nvim_get_current_buf(),
+            callback = function()
+                vim.lsp.codelens.refresh()
+            end,
+        })
     end
 
-    if client.name == 'ruff_lsp' then
-        client.server_capabilities.hoverProvider = false
-    end
+    -- if client.name == 'jdtls' then
+    --     -- jdtls dap
+    --     -- require("jdtls").setup_dap({ hotcodereplace = "auto" })
+    --     -- require("jdtls.dap").setup_dap_main_class_configs()
 
-    if client.name == 'rust_analyzer' then
-        vim.lsp.codelens.refresh()
-        vim.api.nvim_create_autocmd(
-            { 'BufEnter', 'CursorHold', 'InsertLeave' },
-            {
-                pattern = { '*.rs' },
-                callback = function()
-                    vim.lsp.codelens.refresh()
-                end,
-            }
-        )
-    end
+    --     -- jdtls commands
+    --     -- require("jdtls.setup").add_commands()
+    --     -- vim.api.nvim_create_user_command("JdtTestClass", function()
+    --     --   require("jdtls").test_class()
+    --     -- end, {})
+    --     -- vim.api.nvim_create_user_command("JdtTestNearestMethod", function()
+    --     --   require("jdtls").test_nearest_method()
+    --     -- end, {})
 
-    attach_navic(client, bufnr)
+    -- end
+
+    require('config.lsp.navic').attach(client, bufnr)
 end
 
-function M.get_capabilities()
-    return vim.tbl_deep_extend(
-        'force',
-        vim.lsp.protocol.make_client_capabilities(),
-        require('cmp_nvim_lsp').default_capabilities()
-    )
-end
-
-local servers = require('config.lsp.servers').to_setup()
+local servers = require('config.lsp.servers').to_setup
 
 for _, server in pairs(servers) do
     local server_opts = {
         on_attach = M.on_attach,
-        capabilities = M.get_capabilities(),
+        capabilities = require('cmp_nvim_lsp').default_capabilities(),
     }
 
     local has_custom_opts, server_custom_opts =

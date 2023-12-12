@@ -5,20 +5,6 @@ if not ok then
 end
 
 gitsigns.setup {
-    signs = {
-        delete = {
-            hl = 'GitSignsDelete',
-            text = '',
-            numhl = 'GitSignsDeleteNr',
-            linehl = 'GitSignsDeleteLn',
-        },
-        topdelete = {
-            hl = 'GitSignsDelete',
-            text = '',
-            numhl = 'GitSignsDeleteNr',
-            linehl = 'GitSignsDeleteLn',
-        },
-    },
     attach_to_untracked = false,
     trouble = false,
 }
