@@ -37,6 +37,7 @@ return {
     ['fennel'] = 'Fennel',
     ['fortran'] = 'Fortran',
     ['fsharp'] = 'F#',
+    ['fzf'] = 'fzf',
     ['gdscript'] = 'GDScript',
     ['gdshader'] = 'ShaderLab',
     ['gitattributes'] = 'Git Attributes',

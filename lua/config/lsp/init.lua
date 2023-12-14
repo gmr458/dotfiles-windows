@@ -70,11 +70,12 @@ function M.on_attach(client, bufnr)
     keymap('[d', vim.diagnostic.goto_prev)
     keymap(']d', vim.diagnostic.goto_next)
     keymap('<space>q', vim.diagnostic.setloclist)
-    keymap('gD', vim.lsp.buf.declaration)
     keymap('gd', vim.lsp.buf.definition)
     keymap('J', vim.lsp.buf.hover)
     keymap('gi', function()
-        require('telescope.builtin').lsp_implementations()
+        require('fzf-lua').lsp_implementations {
+            prompt = '   LSP Implementations ❯ ',
+        }
     end)
     keymap('K', vim.lsp.buf.signature_help)
     keymap('<space>wa', vim.lsp.buf.add_workspace_folder)
@@ -84,19 +85,30 @@ function M.on_attach(client, bufnr)
     end)
     keymap('<space>D', vim.lsp.buf.type_definition)
     keymap('<space>rn', vim.lsp.buf.rename)
-    keymap('<space>ca', vim.lsp.buf.code_action)
+    -- keymap('<space>ca', vim.lsp.buf.code_action)
+    keymap('<space>ca', function()
+        require('fzf-lua').lsp_code_actions()
+    end)
     keymap('gr', function()
-        require('telescope.builtin').lsp_references()
+        require('fzf-lua').lsp_references { prompt = '   LSP References ❯ ' }
     end)
     -- keymap('<space>f', function()
     --     vim.lsp.buf.format { async = true }
     -- end)
     keymap('<leader>ds', function()
-        require('telescope.builtin').lsp_document_symbols()
+        require('fzf-lua').lsp_document_symbols {
+            prompt = '   LSP Documents Symbols ❯ ',
+        }
     end)
     keymap('<leader>ws', function()
-        require('telescope.builtin').lsp_dynamic_workspace_symbols()
+        require('fzf-lua').lsp_live_workspace_symbols {
+            prompt = '   LSP Live Workspace Symbols ❯ ',
+        }
     end)
+
+    if client.supports_method(methods.textDocument_declaration) then
+        keymap('gD', vim.lsp.buf.declaration)
+    end
 
     if client.supports_method(methods.textDocument_documentHighlight) then
         local augroup = vim.api.nvim_create_augroup('LspDocumentHighlight', {

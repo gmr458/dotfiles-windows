@@ -87,35 +87,42 @@ lazy.setup({
     {
         'gmr458/vscode_modern_theme.nvim',
         lazy = false,
-        priority = 1000,
+        -- priority = 1000,
         config = function()
             require 'config.colorschemes.vscode_modern_theme'
-            vim.cmd.colorscheme 'vscode_modern'
+            -- vim.cmd.colorscheme 'vscode_modern'
         end,
     },
+    {
+        'rebelot/kanagawa.nvim',
+        lazy = false,
+        priority = 1000,
+        config = function()
+            require 'config.colorschemes.kanagawa'
+            vim.cmd.colorscheme 'kanagawa'
+        end,
+    },
+    -- Telescope
     -- {
-    --     'rebelot/kanagawa.nvim',
-    --     lazy = false,
-    --     priority = 1000,
+    --     'nvim-telescope/telescope.nvim',
+    --     version = '0.1.5',
+    --     dependencies = {
+    --         { 'nvim-lua/plenary.nvim' },
+    --         {
+    --             'nvim-telescope/telescope-fzf-native.nvim',
+    --             build = 'make',
+    --         },
+    --     },
+    --     cmd = 'Telescope',
     --     config = function()
-    --         require 'config.colorschemes.kanagawa'
-    --         vim.cmd.colorscheme 'kanagawa'
+    --         require 'config.telescope'
     --     end,
     -- },
-    -- Telescope
     {
-        'nvim-telescope/telescope.nvim',
-        version = '0.1.5',
-        dependencies = {
-            { 'nvim-lua/plenary.nvim' },
-            {
-                'nvim-telescope/telescope-fzf-native.nvim',
-                build = 'make',
-            },
-        },
-        cmd = 'Telescope',
+        'ibhagwan/fzf-lua',
+        cmd = 'FzfLua',
         config = function()
-            require 'config.telescope'
+            require 'config.fzf'
         end,
     },
     -- LSP
@@ -128,6 +135,7 @@ lazy.setup({
         dependencies = {
             {
                 'nvimtools/none-ls.nvim',
+                dependencies = { 'nvim-lua/plenary.nvim' },
                 config = function()
                     require 'config.lsp.null-ls'
                 end,

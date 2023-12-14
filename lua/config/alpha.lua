@@ -19,23 +19,43 @@ dashboard.section.buttons.val = {
     dashboard.button(
         'Space ff',
         '  Find file',
-        '<CMD>silent Telescope find_files no_ignore=false<CR>'
+        '<cmd>lua require(\'fzf-lua\').files { winopts = { preview = { hidden = \'hidden\' } } }<cr>'
     ),
     dashboard.button(
         'Space lg',
         '󰈞  Live grep',
-        '<CMD>silent Telescope live_grep preview=true<CR>'
+        '<cmd>FzfLua live_grep<cr>'
     ),
     dashboard.button(
         'Space of',
         '󰈙  Recent File',
-        '<CMD>silent Telescope oldfiles preview=false<CR>'
+        '<cmd>FzfLua oldfiles<cr>'
     ),
     dashboard.button(
-        'Space ht',
+        'Space hh',
         '?  Help',
-        '<CMD>silent Telescope help_tags preview=true<CR>'
+        '<cmd>lua require(\'fzf-lua\').help_tags { winopts = { preview = { layout = \'horizontal\' } }, prompt = \'   Help ❯ \' }<cr>'
     ),
+    -- dashboard.button(
+    --     'Space ff',
+    --     '  Find file',
+    --     '<CMD>silent Telescope find_files no_ignore=false<CR>'
+    -- ),
+    -- dashboard.button(
+    --     'Space lg',
+    --     '󰈞  Live grep',
+    --     '<CMD>silent Telescope live_grep preview=true<CR>'
+    -- ),
+    -- dashboard.button(
+    --     'Space of',
+    --     '󰈙  Recent File',
+    --     '<CMD>silent Telescope oldfiles preview=false<CR>'
+    -- ),
+    -- dashboard.button(
+    --     'Space ht',
+    --     '?  Help',
+    --     '<CMD>silent Telescope help_tags preview=true<CR>'
+    -- ),
     dashboard.button('q', '  Quit NVIM', ':qa<CR>'),
 }
 

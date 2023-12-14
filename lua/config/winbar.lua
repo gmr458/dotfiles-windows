@@ -18,6 +18,7 @@ M.winbar_filetype_exclude = {
     'harpoon',
     'lab',
     'Markdown',
+    'fzf',
     '',
 }
 

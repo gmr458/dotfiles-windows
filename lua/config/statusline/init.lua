@@ -365,6 +365,7 @@ local inactive_filetypes = {
     'NvimTree_1',
     'qf',
     'TelescopePrompt',
+    'fzf',
     'lspinfo',
     'lazy',
 }
