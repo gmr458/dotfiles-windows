@@ -102,6 +102,10 @@ kanagawa.setup {
                 bg = transparent and 'none' or theme.ui.bg,
                 fg = transparent and 'none' or theme.ui.bg,
             },
+            DiagnosticFloatingError = { link = 'DiagnosticError' },
+            DiagnosticFloatingWarn = { link = 'DiagnosticWarn' },
+            DiagnosticFloatingInfo = { link = 'DiagnosticInfo' },
+            DiagnosticFloatingHint = { link = 'DiagnosticHint' },
         }
     end,
     theme = 'dragon',
