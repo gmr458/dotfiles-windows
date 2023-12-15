@@ -4,14 +4,14 @@ if not ok then
     return
 end
 
-local transparent = false
+local transparent = true
 
 kanagawa.setup {
     compile = true,
     undercurl = true,
     commentStyle = { bold = false, italic = true },
     functionStyle = { bold = false, italic = false },
-    keywordStyle = { bold = false, italic = true },
+    keywordStyle = { bold = false, italic = false },
     statementStyle = { bold = false, italic = false },
     typeStyle = { bold = false, italic = false },
     transparent = transparent,
