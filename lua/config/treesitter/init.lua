@@ -23,6 +23,7 @@ configs.setup {
     },
     indent = {
         enable = true,
+        disable = { 'ocaml' },
     },
     playground = {
         enable = true,

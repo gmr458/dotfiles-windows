@@ -131,16 +131,6 @@ function M.on_attach(client, bufnr)
         })
     end
 
-    if client.supports_method(methods.textDocument_codeLens) then
-        vim.lsp.codelens.refresh()
-        vim.api.nvim_create_autocmd({ 'BufEnter', 'InsertLeave' }, {
-            buffer = vim.api.nvim_get_current_buf(),
-            callback = function()
-                vim.lsp.codelens.refresh()
-            end,
-        })
-    end
-
     -- if client.name == 'jdtls' then
     --     -- jdtls dap
     --     -- require("jdtls").setup_dap({ hotcodereplace = "auto" })

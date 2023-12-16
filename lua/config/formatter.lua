@@ -86,6 +86,7 @@ formatter.setup {
                     exe = 'ocamlformat',
                     args = {
                         '--enable-outside-detected-project',
+                        '--break-cases=toplevel',
                         vim.fn.shellescape(vim.api.nvim_buf_get_name(0)),
                     },
                     stdin = true,
@@ -107,6 +108,11 @@ formatter.setup {
             end,
         },
         scss = { prettier_config },
+        toml = {
+            function()
+                return { exe = 'taplo', args = { 'fmt' } }
+            end,
+        },
         typescript = { prettier_config },
         typescriptreact = { prettier_config },
     },
