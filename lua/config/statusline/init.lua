@@ -286,7 +286,7 @@ local function formatted_filetype()
         local buf = vim.api.nvim_get_current_buf()
         local bufname = vim.api.nvim_buf_get_name(buf)
 
-        if bufname == vim.loop.cwd() then
+        if bufname == vim.uv.cwd() then
             return ' Directory '
         end
     end

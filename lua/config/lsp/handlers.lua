@@ -9,7 +9,7 @@ function M.goto_definition()
         local split_cmd = 'vsplit'
 
         if
-            vim.loop.os_uname().sysname == 'Linux'
+            vim.uv.os_uname().sysname == 'Linux'
             and os.getenv 'DESKTOP_SESSION' == 'hyprland'
         then
             local output_hyprctl = vim.fn.system {

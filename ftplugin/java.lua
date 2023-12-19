@@ -22,7 +22,7 @@ elseif vim.fn.has 'macunix' then
 end
 
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
-local workspace_dir = vim.loop.os_homedir()
+local workspace_dir = vim.uv.os_homedir()
     .. '/.cache/jdtls/workspace/'
     .. project_name
 

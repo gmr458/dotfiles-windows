@@ -4,6 +4,32 @@ if not ok then
     return
 end
 
+local function biome()
+    if not vim.uv.fs_stat 'biome.json' then
+        return {
+            exe = 'biome',
+            args = {
+                'format',
+                '--indent-width',
+                vim.bo.tabstop,
+                '--stdin-file-path',
+                vim.fn.shellescape(vim.api.nvim_buf_get_name(0)),
+            },
+            stdin = true,
+        }
+    end
+
+    return {
+        exe = 'biome',
+        args = {
+            'format',
+            '--stdin-file-path',
+            vim.fn.shellescape(vim.api.nvim_buf_get_name(0)),
+        },
+        stdin = true,
+    }
+end
+
 local prettier_config = function()
     local prettier_config_files = {
         '.prettierrc',
@@ -51,11 +77,7 @@ formatter.setup {
     logging = false,
     filetype = {
         css = { prettier_config },
-        go = {
-            function()
-                return { exe = 'gofmt', args = { '-w' }, stdin = false }
-            end,
-        },
+        go = { require('formatter.filetypes.go').gofumpt },
         html = { prettier_config },
         htmldjango = {
             function()
@@ -71,15 +93,11 @@ formatter.setup {
                 }
             end,
         },
-        javascript = { prettier_config },
-        javascriptreact = { prettier_config },
-        json = { prettier_config },
-        jsonc = { prettier_config },
-        lua = {
-            function()
-                return { exe = 'stylua', stdin = false }
-            end,
-        },
+        javascript = { biome },
+        javascriptreact = { biome },
+        json = { biome },
+        jsonc = { biome },
+        lua = require('formatter.filetypes.lua').stylua,
         ocaml = {
             function()
                 return {
@@ -93,27 +111,11 @@ formatter.setup {
                 }
             end,
         },
-        python = {
-            function()
-                return { exe = 'ruff', args = { 'format' }, stdin = false }
-            end,
-        },
-        rust = {
-            function()
-                return {
-                    exe = 'rustfmt',
-                    stdin = false,
-                    args = { '--edition', '2021' },
-                }
-            end,
-        },
+        python = require('formatter.filetypes.python').ruff,
+        rust = require('formatter.filetypes.rust').rustfmt,
         scss = { prettier_config },
-        toml = {
-            function()
-                return { exe = 'taplo', args = { 'fmt' } }
-            end,
-        },
-        typescript = { prettier_config },
-        typescriptreact = { prettier_config },
+        toml = require('formatter.filetypes.toml').taplo,
+        typescript = { biome },
+        typescriptreact = { biome },
     },
 }

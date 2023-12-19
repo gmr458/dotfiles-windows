@@ -27,6 +27,10 @@ vim.keymap.set('n', '<C-Right>', ':vertical resize +2<cr>', { silent = true })
 -- delete current buffer
 vim.keymap.set('n', '<leader>bd', ':bd!<cr>', { silent = true })
 
+-- center screen when looking for next coincidence in search
+vim.keymap.set('n', 'n', 'nzz')
+vim.keymap.set('n', 'n', 'Nzz')
+
 -- telescope
 -- vim.keymap.set(
 --     'n',
@@ -164,9 +168,6 @@ vim.keymap.set('n', '<leader>ct', '<cmd>ColorizerToggle<cr>')
 -- open terminal
 vim.keymap.set('n', '<leader>vt', [[<cmd>vsplit | term<cr>A]])
 vim.keymap.set('n', '<leader>ht', [[<cmd>split | term<cr>A]])
-
--- format
-vim.keymap.set('n', '<leader>f', ':Format<cr>')
 
 ---------------------------------------------------------------
 -- insert -----------------------------------------------------
