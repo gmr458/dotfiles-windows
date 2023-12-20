@@ -9,7 +9,7 @@ local transparent = true
 kanagawa.setup {
     compile = true,
     undercurl = true,
-    commentStyle = { bold = false, italic = true },
+    commentStyle = { bold = false, italic = false },
     functionStyle = { bold = false, italic = false },
     keywordStyle = { bold = false, italic = false },
     statementStyle = { bold = false, italic = false },

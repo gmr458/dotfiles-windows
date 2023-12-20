@@ -70,7 +70,7 @@ nvim_tree.setup {
         },
     },
     git = {
-        enable = false,
+        enable = true,
         timeout = 1000,
     },
     modified = {

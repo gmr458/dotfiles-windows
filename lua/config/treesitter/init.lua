@@ -7,7 +7,7 @@ end
 configs.setup {
     ensure_installed = require('config.treesitter.parsers').install_automatically(),
     sync_install = false,
-    auto_install = true,
+    auto_install = false,
     ignore_install = {},
     highlight = {
         enable = true,

@@ -24,7 +24,7 @@ vim.g.loaded_perl_provider = 0
 local opt = vim.opt
 
 opt.background = 'dark'
-opt.cmdheight = 1
+opt.cmdheight = 0
 opt.completeopt = { 'menu', 'menuone', 'noselect' }
 opt.conceallevel = 3
 opt.confirm = true
@@ -70,5 +70,5 @@ opt.undofile = true
 opt.undolevels = 10000
 opt.updatetime = 200
 opt.virtualedit = 'block'
-opt.wildoptions = ''
+-- opt.wildoptions = ''
 opt.wrap = false

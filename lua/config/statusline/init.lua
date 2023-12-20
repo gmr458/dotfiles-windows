@@ -34,48 +34,48 @@ local function python_env()
     return ''
 end
 
-local function lsp_clients()
-    if not rawget(vim, 'lsp') then
-        return ''
-    end
+-- local function lsp_clients()
+--     if not rawget(vim, 'lsp') then
+--         return ''
+--     end
 
-    local current_buf = vim.api.nvim_get_current_buf()
-    local clients = vim.lsp.get_clients { bufnr = current_buf }
-    if next(clients) == nil then
-        return ''
-    end
+--     local current_buf = vim.api.nvim_get_current_buf()
+--     local clients = vim.lsp.get_clients { bufnr = current_buf }
+--     if next(clients) == nil then
+--         return ''
+--     end
 
-    local null_ls_running = false
+--     local null_ls_running = false
 
-    local client_names = {}
-    for _, client in pairs(clients) do
-        if client.name ~= 'null-ls' then
-            table.insert(client_names, client.name)
-        else
-            null_ls_running = true
-        end
-    end
+--     local client_names = {}
+--     for _, client in pairs(clients) do
+--         if client.name ~= 'null-ls' then
+--             table.insert(client_names, client.name)
+--         else
+--             null_ls_running = true
+--         end
+--     end
 
-    if null_ls_running then
-        local ok, sources = pcall(require, 'null-ls.sources')
-        if not ok then
-            return ''
-        end
+--     if null_ls_running then
+--         local ok, sources = pcall(require, 'null-ls.sources')
+--         if not ok then
+--             return ''
+--         end
 
-        local available_sources = sources.get_available(vim.bo.filetype)
+--         local available_sources = sources.get_available(vim.bo.filetype)
 
-        for _, source in ipairs(available_sources) do
-            table.insert(client_names, source.name)
-        end
-    end
+--         for _, source in ipairs(available_sources) do
+--             table.insert(client_names, source.name)
+--         end
+--     end
 
-    local unique_client_names = vim.fn.uniq(client_names)
-    if type(unique_client_names) == 'table' then
-        return string.format(' %s', table.concat(unique_client_names, ' '))
-    end
+--     local unique_client_names = vim.fn.uniq(client_names)
+--     if type(unique_client_names) == 'table' then
+--         return string.format(' %s ', table.concat(unique_client_names, ' '))
+--     end
 
-    return ''
-end
+--     return ''
+-- end
 
 local function get_diagnostics_count(severity)
     return vim.tbl_count(
@@ -213,6 +213,10 @@ local function lsp_status()
     return '%#StatusLineLspMessages#' .. lsp_message .. '%*'
 end
 
+local function filename()
+    return ' ' .. vim.fn.expand '%:.'
+end
+
 local function git_diff(type)
     local gsd = vim.b.gitsigns_status_dict
 
@@ -258,26 +262,27 @@ local function git_branch()
         return ''
     end
 
-    return ' %#StatusLineGitBranchIcon#󰘬%* ' .. vim.b.gitsigns_head
+    -- return ' %#StatusLineGitBranchIcon#󰘬%*' .. vim.b.gitsigns_head
+    return ' %#StatusLineGitBranchIcon#*%*' .. vim.b.gitsigns_head
 end
 
-local function file_percentage()
-    local current_line = vim.api.nvim_win_get_cursor(0)[1]
-    local lines = vim.api.nvim_buf_line_count(0)
+-- local function file_percentage()
+--     local current_line = vim.api.nvim_win_get_cursor(0)[1]
+--     local lines = vim.api.nvim_buf_line_count(0)
 
-    return string.format(' %d%%%%', math.ceil(current_line / lines * 100))
-end
+--     return string.format(' %d%%%%', math.ceil(current_line / lines * 100))
+-- end
 
-local function total_lines()
-    local lines = vim.fn.line '$'
-    local visible_lines = vim.fn.line 'w$'
+-- local function total_lines()
+--     local lines = vim.fn.line '$'
+--     local visible_lines = vim.fn.line 'w$'
 
-    if lines <= visible_lines then
-        return ''
-    end
+--     if lines <= visible_lines then
+--         return ''
+--     end
 
-    return string.format('  %s', lines)
-end
+--     return string.format('  %s', lines)
+-- end
 
 local function formatted_filetype()
     local filetype = vim.bo.filetype or vim.fn.expand('%:e', false)
@@ -322,20 +327,21 @@ StatusLine.active = function()
         '%#Statusline#',
         mode(),
         python_env(),
-        lsp_clients(),
+        filename(),
+        git_branch(),
+        git_diff_added(),
+        git_diff_changed(),
+        git_diff_removed(),
+        '%=',
+        '%=',
+        -- file_percentage(),
+        -- total_lines(),
+        lsp_status(),
         diagnostics_error(),
         diagnostics_warns(),
         diagnostics_hint(),
         diagnostics_info(),
-        lsp_status(),
-        '%=',
-        '%=',
-        git_diff_added(),
-        git_diff_changed(),
-        git_diff_removed(),
-        git_branch(),
-        file_percentage(),
-        total_lines(),
+        -- lsp_clients(),
         formatted_filetype(),
     }
 end
@@ -363,11 +369,13 @@ vim.api.nvim_create_autocmd({ 'WinEnter', 'BufEnter' }, {
 
 local inactive_filetypes = {
     'NvimTree_1',
+    'NvimTree',
     'qf',
     'TelescopePrompt',
     'fzf',
     'lspinfo',
     'lazy',
+    'netrw',
 }
 
 vim.api.nvim_create_autocmd({ 'WinEnter', 'BufEnter', 'FileType' }, {

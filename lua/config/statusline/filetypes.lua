@@ -78,6 +78,7 @@ return {
     ['mason'] = 'Mason',
     ['meson'] = 'Meson',
     ['neotest-summary'] = 'Neotest Summary',
+    ['netrw'] = 'Netrw',
     ['nim'] = 'Nim',
     ['nix'] = 'Nix',
     ['noice'] = 'Noice',
