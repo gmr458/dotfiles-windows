@@ -92,9 +92,9 @@ function M.on_attach(client, bufnr)
     keymap('gr', function()
         require('fzf-lua').lsp_references { prompt = '   LSP References ❯ ' }
     end)
-    -- keymap('<space>f', function()
-    --     vim.lsp.buf.format { async = true }
-    -- end)
+    keymap('<space>fo', function()
+        vim.lsp.buf.format { async = true }
+    end)
     keymap('<leader>ds', function()
         require('fzf-lua').lsp_document_symbols {
             prompt = '   LSP Documents Symbols ❯ ',

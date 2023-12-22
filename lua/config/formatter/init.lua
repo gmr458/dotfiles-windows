@@ -10,6 +10,7 @@ local web = require 'config.formatter.customs.web'
 formatter.setup {
     logging = false,
     filetype = {
+        cs = { require('formatter.filetypes.cs').csharpier },
         css = { prettier },
         go = { require('formatter.filetypes.go').gofumpt },
         html = { prettier },
