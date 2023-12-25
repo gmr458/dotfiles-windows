@@ -74,6 +74,7 @@ lazy.setup({
             'glimmer',
             'handlebars',
             'hbs',
+            'php',
         },
     },
     {
@@ -87,19 +88,19 @@ lazy.setup({
     {
         'gmr458/vscode_modern_theme.nvim',
         lazy = false,
-        -- priority = 1000,
+        priority = 1000,
         config = function()
             require 'config.colorschemes.vscode_modern_theme'
-            -- vim.cmd.colorscheme 'vscode_modern'
+            vim.cmd.colorscheme 'vscode_modern'
         end,
     },
     {
         'rebelot/kanagawa.nvim',
         lazy = false,
-        priority = 1000,
+        -- priority = 1000,
         config = function()
             require 'config.colorschemes.kanagawa'
-            vim.cmd.colorscheme 'kanagawa'
+            -- vim.cmd.colorscheme 'kanagawa'
         end,
     },
     -- Telescope

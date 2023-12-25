@@ -29,7 +29,6 @@ vim.diagnostic.config {
         end,
     },
     signs = false,
-    -- float = { source = 'always', border = chars.border },
     float = { source = 'always', border = 'single' },
     update_in_insert = false,
     severity_sort = true,
@@ -149,6 +148,10 @@ function M.on_attach(client, bufnr)
 
     require('config.lsp.navic').attach(client, bufnr)
 end
+
+local configs = require 'lspconfig.configs'
+
+configs['pylance'] = require 'config.lsp.settings.pylance'
 
 local servers = require('config.lsp.servers').to_setup
 

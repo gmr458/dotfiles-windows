@@ -22,6 +22,7 @@ M.to_setup = {
     'ocamllsp',
     'omnisharp',
     'pyright',
+    -- 'pylance',
     'rust_analyzer',
     -- "solargraph",
     'svelte',

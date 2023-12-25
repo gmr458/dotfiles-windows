@@ -1,4 +1,8 @@
 local fonts = {
+    blex_mono = {
+        name = 'BlexMono Nerd Font Mono',
+        height = '12',
+    },
     caskaydia_cove = {
         name = 'CaskaydiaCove Nerd Font Mono',
         height = '11',
@@ -25,6 +29,6 @@ local fonts = {
     },
 }
 
-local font = fonts.iosevka_custom
+local font = fonts.blex_mono
 
-return font.name .. ':' .. 'h' .. font.height .. ':' .. '#h-slight'
+return font.name .. ':' .. 'h' .. font.height

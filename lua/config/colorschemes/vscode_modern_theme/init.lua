@@ -10,4 +10,5 @@ vscode_modern.setup {
     nvim_tree_darker = true,
     italic_keyword = true,
     custom_dark_background = '#111111',
+    custom_statusline_dark_background = '#080808',
 }

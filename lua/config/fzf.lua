@@ -55,6 +55,7 @@ fzf.setup {
         ['--color'] = 'bg+:-1',
         ['--info'] = 'inline-right',
         ['--pointer'] = '❯',
+        ['--no-bold'] = '',
     },
     autocmds = {
         prompt = '   AutoCmds ❯ ',
@@ -64,6 +65,7 @@ fzf.setup {
         git_icons = false,
         cwd_prompt = false,
         fzf_opts = { ['--info'] = 'inline-right' },
+        ['--no-bold'] = '',
     },
     git = {
         files = {
@@ -96,14 +98,20 @@ fzf.setup {
         prompt = '   Grep ❯ ',
         input_prompt = '   Grep for ❯ ',
         git_icons = false,
-        fzf_opts = { ['--info'] = 'inline-right' },
+        fzf_opts = {
+            ['--info'] = 'inline-right',
+            ['--no-bold'] = '',
+        },
     },
     args = {
         prompt = '   Args ❯ ',
     },
     help_tags = {
         prompt = '   Help ❯ ',
-        fzf_opts = { ['--info'] = 'inline-right' },
+        fzf_opts = {
+            ['--info'] = 'inline-right',
+            ['--no-bold'] = '',
+        },
     },
     oldfiles = {
         prompt = '   Recent Files ❯ ',
@@ -143,7 +151,10 @@ fzf.setup {
     lsp = {
         prompt_postfix = ' ❯ ',
         symbols = {
-            fzf_opts = { ['--info'] = 'inline-right' },
+            fzf_opts = {
+                ['--info'] = 'inline-right',
+                ['--no-bold'] = '',
+            },
         },
         code_actions = {
             prompt = '   LSP Code Actions ❯ ',

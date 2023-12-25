@@ -20,7 +20,7 @@ local function python_env()
     end
 
     for _, client in pairs(buf_clients) do
-        if client.name == 'pyright' then
+        if client.name == 'pyright' or client.name == 'pylance' then
             local virtual_env = os.getenv 'VIRTUAL_ENV_PROMPT'
             if virtual_env == nil then
                 return ''
@@ -34,48 +34,48 @@ local function python_env()
     return ''
 end
 
--- local function lsp_clients()
---     if not rawget(vim, 'lsp') then
---         return ''
---     end
+local function lsp_clients()
+    if not rawget(vim, 'lsp') then
+        return ''
+    end
 
---     local current_buf = vim.api.nvim_get_current_buf()
---     local clients = vim.lsp.get_clients { bufnr = current_buf }
---     if next(clients) == nil then
---         return ''
---     end
+    local current_buf = vim.api.nvim_get_current_buf()
+    local clients = vim.lsp.get_clients { bufnr = current_buf }
+    if next(clients) == nil then
+        return ''
+    end
 
---     local null_ls_running = false
+    local null_ls_running = false
 
---     local client_names = {}
---     for _, client in pairs(clients) do
---         if client.name ~= 'null-ls' then
---             table.insert(client_names, client.name)
---         else
---             null_ls_running = true
---         end
---     end
+    local client_names = {}
+    for _, client in pairs(clients) do
+        if client.name ~= 'null-ls' then
+            table.insert(client_names, client.name)
+        else
+            null_ls_running = true
+        end
+    end
 
---     if null_ls_running then
---         local ok, sources = pcall(require, 'null-ls.sources')
---         if not ok then
---             return ''
---         end
+    if null_ls_running then
+        local ok, sources = pcall(require, 'null-ls.sources')
+        if not ok then
+            return ''
+        end
 
---         local available_sources = sources.get_available(vim.bo.filetype)
+        local available_sources = sources.get_available(vim.bo.filetype)
 
---         for _, source in ipairs(available_sources) do
---             table.insert(client_names, source.name)
---         end
---     end
+        for _, source in ipairs(available_sources) do
+            table.insert(client_names, source.name)
+        end
+    end
 
---     local unique_client_names = vim.fn.uniq(client_names)
---     if type(unique_client_names) == 'table' then
---         return string.format(' %s ', table.concat(unique_client_names, ' '))
---     end
+    local unique_client_names = vim.fn.uniq(client_names)
+    if type(unique_client_names) == 'table' then
+        return string.format(' %s ', table.concat(unique_client_names, ' '))
+    end
 
---     return ''
--- end
+    return ''
+end
 
 local function get_diagnostics_count(severity)
     return vim.tbl_count(
@@ -217,6 +217,22 @@ local function filename()
     return ' ' .. vim.fn.expand '%:.'
 end
 
+local function unsaved()
+    if vim.api.nvim_get_option_value('mod', { buf = 0 }) then
+        return '%#StatusLineUnsavedFileIcon#*%*'
+    end
+
+    return ''
+end
+
+local function readonly()
+    if vim.bo.readonly then
+        return ' '
+    end
+
+    return ''
+end
+
 local function git_diff(type)
     local gsd = vim.b.gitsigns_status_dict
 
@@ -262,8 +278,7 @@ local function git_branch()
         return ''
     end
 
-    -- return ' %#StatusLineGitBranchIcon#󰘬%*' .. vim.b.gitsigns_head
-    return ' %#StatusLineGitBranchIcon#*%*' .. vim.b.gitsigns_head
+    return ' %#StatusLineGitBranchIcon#󰘬 %*' .. vim.b.gitsigns_head
 end
 
 -- local function file_percentage()
@@ -325,9 +340,11 @@ StatusLine.active = function()
 
     return table.concat {
         '%#Statusline#',
-        mode(),
+        -- mode(),
         python_env(),
         filename(),
+        unsaved(),
+        readonly(),
         git_branch(),
         git_diff_added(),
         git_diff_changed(),
@@ -341,8 +358,8 @@ StatusLine.active = function()
         diagnostics_warns(),
         diagnostics_hint(),
         diagnostics_info(),
-        -- lsp_clients(),
-        formatted_filetype(),
+        lsp_clients(),
+        -- formatted_filetype(),
     }
 end
 
