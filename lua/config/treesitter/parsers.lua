@@ -4,7 +4,7 @@ function M.install_automatically()
     local utils = require 'config.utils'
 
     if
-        vim.uv.os_uname().sysname == 'Windows'
+        vim.uv.os_uname().sysname == 'Windows_NT'
         or utils.running_wsl()
         or utils.running_android()
     then
