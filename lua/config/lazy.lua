@@ -253,14 +253,14 @@ lazy.setup({
     },
     {
         'lewis6991/gitsigns.nvim',
-        event = 'BufReadPost',
+        cond = vim.uv.fs_stat '.git' ~= nil,
         config = function()
             require 'config.gitsigns'
         end,
     },
     {
         'petertriho/nvim-scrollbar',
-        cmd = 'ScrollbarToggle',
+        cmd = 'ScrollbarShow',
         config = function()
             require 'config.scrollbar'
         end,

@@ -36,6 +36,7 @@ return {
     'svelte-language-server',
     'tailwindcss-language-server',
     'taplo',
+    'templ',
     'typescript-language-server',
     'vetur-vls',
     'yaml-language-server',

@@ -8,14 +8,3 @@ gitsigns.setup {
     attach_to_untracked = false,
     trouble = false,
 }
-
-vim.api.nvim_create_user_command('ScrollbarEnable', function()
-    local ok_scrollbar, scrollbar_gitsigns =
-        pcall(require, 'scrollbar.handlers.gitsigns')
-    if not ok_scrollbar then
-        vim.notify 'scrollbar.handlers.gitsigns could not be loaded'
-        return
-    end
-
-    scrollbar_gitsigns.setup()
-end, {})

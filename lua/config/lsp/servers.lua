@@ -24,6 +24,7 @@ M.to_setup = {
     'pyright',
     -- 'pylance',
     'rust_analyzer',
+    'templ',
     -- "solargraph",
     'svelte',
     'lua_ls',

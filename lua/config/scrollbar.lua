@@ -121,7 +121,7 @@ scrollbar.setup {
     handlers = {
         cursor = true,
         diagnostic = false,
-        gitsigns = true, -- Requires gitsigns
+        gitsigns = vim.uv.fs_stat '.git' ~= nil,
         handle = true,
         search = false, -- Requires hlslens
     },

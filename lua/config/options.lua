@@ -72,3 +72,9 @@ opt.updatetime = 200
 opt.virtualedit = 'block'
 -- opt.wildoptions = ''
 opt.wrap = false
+
+vim.filetype.add {
+    extension = {
+        templ = 'templ',
+    },
+}
