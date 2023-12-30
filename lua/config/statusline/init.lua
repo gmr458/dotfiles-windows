@@ -4,8 +4,11 @@ local statusline_augroup =
 local function mode()
     local current_mode = vim.api.nvim_get_mode().mode
     local modes = require 'config.statusline.modes'
-    local mode_str = string.format(' %s', modes[current_mode]):upper()
-    return mode_str
+
+    return string.format(
+        ' %%#StatusLineNeovimLogo#%%* %s',
+        modes[current_mode]:upper()
+    )
 end
 
 local function python_env()
@@ -213,8 +216,23 @@ local function lsp_status()
     return '%#StatusLineLspMessages#' .. lsp_message .. '%*'
 end
 
-local function filename()
-    return ' ' .. vim.fn.expand '%:.'
+local nvim_web_devicons = require 'nvim-web-devicons'
+
+local function relative_path()
+    local filename = vim.fn.expand '%:t'
+    local extension = vim.fn.expand '%:e'
+    local icon, color = nvim_web_devicons.get_icon_color(
+        filename,
+        extension,
+        { default = true, strict = true }
+    )
+    local path = vim.fn.expand '%:.'
+
+    local bg = vim.api.nvim_get_hl(0, { name = 'StatusLine' }).bg
+    local hl_group = string.format('FileIconColor%s', extension)
+    vim.api.nvim_set_hl(0, hl_group, { fg = color, bg = bg })
+
+    return string.format(' %%#%s#%s%%* %s', hl_group, icon, path)
 end
 
 local function unsaved()
@@ -340,9 +358,9 @@ StatusLine.active = function()
 
     return table.concat {
         '%#Statusline#',
-        -- mode(),
+        mode(),
         python_env(),
-        filename(),
+        relative_path(),
         unsaved(),
         readonly(),
         git_branch(),

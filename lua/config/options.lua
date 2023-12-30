@@ -41,7 +41,7 @@ opt.list = false
 --     tab = '│ ',
 --     trail = ' ',
 -- }
-opt.mouse = ''
+opt.mouse = 'a'
 opt.number = true
 opt.numberwidth = 1
 opt.pumheight = 10
