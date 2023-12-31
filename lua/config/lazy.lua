@@ -94,38 +94,38 @@ lazy.setup({
             vim.cmd.colorscheme 'vscode_modern'
         end,
     },
-    {
-        'rebelot/kanagawa.nvim',
-        lazy = false,
-        -- priority = 1000,
-        config = function()
-            require 'config.colorschemes.kanagawa'
-            -- vim.cmd.colorscheme 'kanagawa'
-        end,
-    },
-    -- Telescope
     -- {
-    --     'nvim-telescope/telescope.nvim',
-    --     version = '0.1.5',
-    --     dependencies = {
-    --         { 'nvim-lua/plenary.nvim' },
-    --         {
-    --             'nvim-telescope/telescope-fzf-native.nvim',
-    --             build = 'make',
-    --         },
-    --     },
-    --     cmd = 'Telescope',
+    --     'rebelot/kanagawa.nvim',
+    --     lazy = false,
+    --     -- priority = 1000,
     --     config = function()
-    --         require 'config.telescope'
+    --         require 'config.colorschemes.kanagawa'
+    --         -- vim.cmd.colorscheme 'kanagawa'
     --     end,
     -- },
+    -- Telescope
     {
-        'ibhagwan/fzf-lua',
-        cmd = 'FzfLua',
+        'nvim-telescope/telescope.nvim',
+        version = '0.1.5',
+        dependencies = {
+            { 'nvim-lua/plenary.nvim' },
+            {
+                'nvim-telescope/telescope-fzf-native.nvim',
+                build = 'make',
+            },
+        },
+        cmd = 'Telescope',
         config = function()
-            require 'config.fzf'
+            require 'config.telescope'
         end,
     },
+    -- {
+    --     'ibhagwan/fzf-lua',
+    --     cmd = 'FzfLua',
+    --     config = function()
+    --         require 'config.fzf'
+    --     end,
+    -- },
     -- LSP
     {
         'neovim/nvim-lspconfig',
@@ -253,7 +253,7 @@ lazy.setup({
     },
     {
         'lewis6991/gitsigns.nvim',
-        cond = vim.uv.fs_stat '.git' ~= nil,
+        event = 'BufReadPost',
         config = function()
             require 'config.gitsigns'
         end,

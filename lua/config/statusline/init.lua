@@ -216,9 +216,9 @@ local function lsp_status()
     return '%#StatusLineLspMessages#' .. lsp_message .. '%*'
 end
 
-local nvim_web_devicons = require 'nvim-web-devicons'
-
 local function relative_path()
+    local nvim_web_devicons = require 'nvim-web-devicons'
+
     local filename = vim.fn.expand '%:t'
     local extension = vim.fn.expand '%:e'
     local icon, color = nvim_web_devicons.get_icon_color(
