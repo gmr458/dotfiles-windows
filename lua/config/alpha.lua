@@ -44,26 +44,6 @@ dashboard.section.buttons.val = {
         '?  Help',
         '<cmd>lua require(\'fzf-lua\').help_tags { winopts = { preview = { layout = \'horizontal\' } }, prompt = \'   Help ❯ \' }<cr>'
     ),
-    -- dashboard.button(
-    --     'Space ff',
-    --     '  Find file',
-    --     '<CMD>silent Telescope find_files no_ignore=false<CR>'
-    -- ),
-    -- dashboard.button(
-    --     'Space lg',
-    --     '󰈞  Live grep',
-    --     '<CMD>silent Telescope live_grep preview=true<CR>'
-    -- ),
-    -- dashboard.button(
-    --     'Space of',
-    --     '󰈙  Recent File',
-    --     '<CMD>silent Telescope oldfiles preview=false<CR>'
-    -- ),
-    -- dashboard.button(
-    --     'Space ht',
-    --     '?  Help',
-    --     '<CMD>silent Telescope help_tags preview=true<CR>'
-    -- ),
     dashboard.button('q', '  Quit NVIM', ':qa<CR>'),
 }
 
