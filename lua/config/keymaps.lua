@@ -28,58 +28,58 @@ vim.keymap.set('n', '<C-Right>', ':vertical resize +2<cr>', { silent = true })
 vim.keymap.set('n', '<leader>bd', ':bd!<cr>', { silent = true })
 
 -- telescope
-vim.keymap.set(
-    'n',
-    '<leader>ff',
-    ':Telescope find_files no_ignore=false<cr>',
-    { silent = true }
-)
-vim.keymap.set(
-    'n',
-    '<leader>gs',
-    ':Telescope git_status preview=true<cr>',
-    { silent = true }
-)
-vim.keymap.set(
-    'n',
-    '<leader>lg',
-    ':Telescope live_grep preview=true<cr>',
-    { silent = true }
-)
-vim.keymap.set(
-    'n',
-    '<leader>ht',
-    ':Telescope help_tags preview=true<cr>',
-    { silent = true }
-)
-vim.keymap.set(
-    'n',
-    '<leader>of',
-    ':Telescope oldfiles preview=false<cr>',
-    { silent = true }
-)
-vim.keymap.set('n', '<leader>bf', ':Telescope buffers<cr>', { silent = true })
+-- vim.keymap.set(
+--     'n',
+--     '<leader>ff',
+--     ':Telescope find_files no_ignore=false<cr>',
+--     { silent = true }
+-- )
+-- vim.keymap.set(
+--     'n',
+--     '<leader>gs',
+--     ':Telescope git_status preview=true<cr>',
+--     { silent = true }
+-- )
+-- vim.keymap.set(
+--     'n',
+--     '<leader>lg',
+--     ':Telescope live_grep preview=true<cr>',
+--     { silent = true }
+-- )
+-- vim.keymap.set(
+--     'n',
+--     '<leader>ht',
+--     ':Telescope help_tags preview=true<cr>',
+--     { silent = true }
+-- )
+-- vim.keymap.set(
+--     'n',
+--     '<leader>of',
+--     ':Telescope oldfiles preview=false<cr>',
+--     { silent = true }
+-- )
+-- vim.keymap.set('n', '<leader>bf', ':Telescope buffers<cr>', { silent = true })
 
 -- fzf-lua
--- vim.keymap.set('n', '<leader>ff', function()
---     require('fzf-lua').files { winopts = { preview = { hidden = 'hidden' } } }
--- end, { silent = true })
--- vim.keymap.set('n', '<leader>gs', ':FzfLua git_status<cr>', { silent = true })
--- vim.keymap.set('n', '<leader>lg', ':FzfLua live_grep<cr>', { silent = true })
--- vim.keymap.set('n', '<leader>hh', function()
---     require('fzf-lua').help_tags {
---         winopts = {
---             preview = { layout = 'horizontal' },
---         },
---         prompt = '   Help ❯ ',
---     }
--- end, { silent = true })
--- vim.keymap.set('n', '<leader>of', function()
---     require('fzf-lua').oldfiles { winopts = { preview = { hidden = 'hidden' } } }
--- end, { silent = true })
--- vim.keymap.set('n', '<leader>bf', function()
---     require('fzf-lua').buffers { winopts = { preview = { hidden = 'hidden' } } }
--- end, { silent = true })
+vim.keymap.set('n', '<leader>ff', function()
+    require('fzf-lua').files { winopts = { preview = { hidden = 'hidden' } } }
+end, { silent = true })
+vim.keymap.set('n', '<leader>gs', ':FzfLua git_status<cr>', { silent = true })
+vim.keymap.set('n', '<leader>lg', ':FzfLua live_grep<cr>', { silent = true })
+vim.keymap.set('n', '<leader>hh', function()
+    require('fzf-lua').help_tags {
+        winopts = {
+            preview = { layout = 'horizontal' },
+        },
+        prompt = '   Help ❯ ',
+    }
+end, { silent = true })
+vim.keymap.set('n', '<leader>of', function()
+    require('fzf-lua').oldfiles { winopts = { preview = { hidden = 'hidden' } } }
+end, { silent = true })
+vim.keymap.set('n', '<leader>bf', function()
+    require('fzf-lua').buffers { winopts = { preview = { hidden = 'hidden' } } }
+end, { silent = true })
 
 -- nvim tree
 vim.keymap.set('n', '<C-n>', ':NvimTreeFindFileToggle<cr>', { silent = true })

@@ -28,27 +28,28 @@ lazy.setup({
         config = function()
             require 'config.treesitter'
         end,
-        dependencies = {
-            {
-                'nvim-treesitter/nvim-treesitter-context',
-                config = function()
-                    require 'config.treesitter.context'
-                end,
-            },
-            -- {
-            --   "kevinhwang91/nvim-ufo",
-            --   dependencies = { "kevinhwang91/promise-async" },
-            --   config = function()
-            --     require("config.ufo")
-            --   end,
-            --   init = function()
-            --     vim.o.foldcolumn = "0"
-            --     vim.o.foldlevel = 99
-            --     vim.o.foldlevelstart = 99
-            --     vim.o.foldenable = true
-            --   end,
-            -- },
-        },
+        -- dependencies = {
+        --     -- {
+        --     --   "kevinhwang91/nvim-ufo",
+        --     --   dependencies = { "kevinhwang91/promise-async" },
+        --     --   config = function()
+        --     --     require("config.ufo")
+        --     --   end,
+        --     --   init = function()
+        --     --     vim.o.foldcolumn = "0"
+        --     --     vim.o.foldlevel = 99
+        --     --     vim.o.foldlevelstart = 99
+        --     --     vim.o.foldenable = true
+        --     --   end,
+        --     -- },
+        -- },
+    },
+    {
+        'nvim-treesitter/nvim-treesitter-context',
+        cmd = { 'TSContextEnable', 'TSContexDisable' },
+        config = function()
+            require 'config.treesitter.context'
+        end,
     },
     {
         'nvim-treesitter/playground',
@@ -104,28 +105,28 @@ lazy.setup({
     --     end,
     -- },
     -- Telescope
-    {
-        'nvim-telescope/telescope.nvim',
-        version = '0.1.5',
-        dependencies = {
-            { 'nvim-lua/plenary.nvim' },
-            {
-                'nvim-telescope/telescope-fzf-native.nvim',
-                build = 'make',
-            },
-        },
-        cmd = 'Telescope',
-        config = function()
-            require 'config.telescope'
-        end,
-    },
     -- {
-    --     'ibhagwan/fzf-lua',
-    --     cmd = 'FzfLua',
+    --     'nvim-telescope/telescope.nvim',
+    --     version = '0.1.5',
+    --     dependencies = {
+    --         { 'nvim-lua/plenary.nvim' },
+    --         {
+    --             'nvim-telescope/telescope-fzf-native.nvim',
+    --             build = 'make',
+    --         },
+    --     },
+    --     cmd = 'telescope',
     --     config = function()
-    --         require 'config.fzf'
+    --         require 'config.telescope'
     --     end,
     -- },
+    {
+        'ibhagwan/fzf-lua',
+        cmd = 'FzfLua',
+        config = function()
+            require 'config.fzf'
+        end,
+    },
     -- LSP
     {
         'neovim/nvim-lspconfig',
@@ -147,12 +148,12 @@ lazy.setup({
                     require('neodev').setup()
                 end,
             },
-            {
-                'SmiteshP/nvim-navic',
-                config = function()
-                    require 'config.navic'
-                end,
-            },
+            -- {
+            --     'SmiteshP/nvim-navic',
+            --     config = function()
+            --         require 'config.navic'
+            --     end,
+            -- },
             {
                 'folke/trouble.nvim',
                 config = function()

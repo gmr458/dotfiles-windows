@@ -56,6 +56,7 @@ fzf.setup {
         ['--info'] = 'inline-right',
         ['--pointer'] = '❯',
         ['--no-bold'] = '',
+        ['--scrollbar'] = '█',
     },
     autocmds = {
         prompt = '   AutoCmds ❯ ',
@@ -64,8 +65,9 @@ fzf.setup {
         prompt = '   Files ❯ ',
         git_icons = false,
         cwd_prompt = false,
-        fzf_opts = { ['--info'] = 'inline-right' },
-        ['--no-bold'] = '',
+        fzf_opts = {
+            ['--info'] = 'inline-right',
+        },
     },
     git = {
         files = {
@@ -100,7 +102,6 @@ fzf.setup {
         git_icons = false,
         fzf_opts = {
             ['--info'] = 'inline-right',
-            ['--no-bold'] = '',
         },
     },
     args = {
@@ -110,7 +111,6 @@ fzf.setup {
         prompt = '   Help ❯ ',
         fzf_opts = {
             ['--info'] = 'inline-right',
-            ['--no-bold'] = '',
         },
     },
     oldfiles = {
@@ -153,7 +153,6 @@ fzf.setup {
         symbols = {
             fzf_opts = {
                 ['--info'] = 'inline-right',
-                ['--no-bold'] = '',
             },
         },
         code_actions = {

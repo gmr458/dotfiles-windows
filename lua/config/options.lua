@@ -1,8 +1,8 @@
 vim.g.loaded_gzip = 1
-vim.g.loaded_tar = 1
 vim.g.loaded_tarPlugin = 1
-vim.g.loaded_zip = 1
+vim.g.loaded_tar = 1
 vim.g.loaded_zipPlugin = 1
+vim.g.loaded_zip = 1
 vim.g.loaded_getscript = 1
 vim.g.loaded_getscriptPlugin = 1
 vim.g.loaded_vimball = 1
@@ -20,6 +20,8 @@ vim.g.loaded_python3_provider = 0
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
+vim.g.loaded_typecorr = 1
+vim.g.loaded_spellfile_plugin = 1
 
 local opt = vim.opt
 
@@ -41,7 +43,7 @@ opt.list = false
 --     tab = '│ ',
 --     trail = ' ',
 -- }
-opt.mouse = 'a'
+opt.mouse = ''
 opt.number = true
 opt.numberwidth = 1
 opt.pumheight = 10

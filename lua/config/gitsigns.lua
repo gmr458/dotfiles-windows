@@ -5,6 +5,14 @@ if not ok then
 end
 
 gitsigns.setup {
+    signs = {
+        add = { text = '│' },
+        change = { text = '│' },
+        delete = { text = '_' },
+        topdelete = { text = '‾' },
+        changedelete = { text = '~' },
+        untracked = { text = '┆' },
+    },
     attach_to_untracked = false,
     trouble = false,
 }

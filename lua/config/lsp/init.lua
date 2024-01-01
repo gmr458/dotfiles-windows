@@ -84,7 +84,6 @@ function M.on_attach(client, bufnr)
     end)
     keymap('<space>D', vim.lsp.buf.type_definition)
     keymap('<space>rn', vim.lsp.buf.rename)
-    -- keymap('<space>ca', vim.lsp.buf.code_action)
     keymap('<space>ca', function()
         require('fzf-lua').lsp_code_actions()
     end)
@@ -145,8 +144,6 @@ function M.on_attach(client, bufnr)
     --     -- end, {})
 
     -- end
-
-    require('config.lsp.navic').attach(client, bufnr)
 end
 
 local configs = require 'lspconfig.configs'
