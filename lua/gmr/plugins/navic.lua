@@ -1,8 +1,6 @@
 local M = {
     'SmiteshP/nvim-navic',
     config = function()
-        local navic = require 'nvim-navic'
-
         local icons = {
             disable = {
                 File = 'file ',
@@ -62,7 +60,7 @@ local M = {
             },
         }
 
-        navic.setup {
+        require('nvim-navic').setup {
             icons = icons.enable,
             highlight = true,
             separator = '  ',

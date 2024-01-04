@@ -1,7 +1,6 @@
 return {
     'goolord/alpha-nvim',
     config = function()
-        local alpha = require 'alpha'
         local dashboard = require 'alpha.themes.dashboard'
 
         -- require 'alpha.term'
@@ -39,6 +38,6 @@ return {
         --     dashboard.section.buttons,
         -- }
 
-        alpha.setup(dashboard.config)
+        require('alpha').setup(dashboard.config)
     end,
 }

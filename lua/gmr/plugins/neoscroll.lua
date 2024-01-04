@@ -2,9 +2,7 @@ return {
     'karb94/neoscroll.nvim',
     keys = { '<C-u>', '<C-d>' },
     config = function()
-        local neoscroll = require 'neoscroll'
-
-        neoscroll.setup {
+        require('neoscroll').setup {
             mappings = {
                 '<C-u>',
                 '<C-d>',
@@ -23,8 +21,6 @@ return {
         t['<C-u>'] = { 'scroll', { '-vim.wo.scroll', 'true', '300' } }
         t['<C-d>'] = { 'scroll', { 'vim.wo.scroll', 'true', '300' } }
 
-        local config = require 'neoscroll.config'
-
-        config.set_mappings(t)
+        require('neoscroll.config').set_mappings(t)
     end,
 }

@@ -3,9 +3,7 @@ return {
     main = 'ibl',
     event = 'BufReadPost',
     config = function()
-        local ibl = require 'ibl'
-
-        ibl.setup {
+        require('ibl').setup {
             indent = { char = '│' },
             scope = { enabled = false },
         }

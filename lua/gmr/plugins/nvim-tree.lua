@@ -2,9 +2,7 @@ return {
     'nvim-tree/nvim-tree.lua',
     cmd = 'NvimTreeFindFileToggle',
     config = function()
-        local nvim_tree = require 'nvim-tree'
-
-        nvim_tree.setup {
+        require('nvim-tree').setup {
             hijack_cursor = true,
             disable_netrw = true,
             view = {

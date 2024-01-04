@@ -10,19 +10,8 @@ return {
     },
     cmd = 'telescope',
     config = function()
-        local ok, telescope, actions_layout
-
-        local telescope = pcall(require, 'telescope')
-        if not ok then
-            vim.notify 'telescope could not be loaded'
-            return
-        end
-
-        ok, actions_layout = pcall(require, 'telescope.actions.layout')
-        if not ok then
-            vim.notify 'telescope could not be loaded'
-            return
-        end
+        local telescope = require 'telescope'
+        local actions_layout = require 'telescope.actions.layout'
 
         telescope.setup {
             defaults = {
@@ -169,7 +158,7 @@ return {
             },
         }
 
-        if not require('config.utils').running_android() then
+        if not require('gmr.core.utils').running_android() then
             telescope.load_extension 'fzf'
         end
     end,

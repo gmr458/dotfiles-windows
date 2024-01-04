@@ -13,9 +13,7 @@ return {
         'Issafalcon/neotest-dotnet',
     },
     config = function()
-        local neotest = require 'neotest'
-
-        neotest.setup {
+        require('neotest').setup {
             adapters = {
                 require 'neotest-python',
                 require 'neotest-go',

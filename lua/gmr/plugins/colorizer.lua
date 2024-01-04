@@ -2,9 +2,7 @@ return {
     'NvChad/nvim-colorizer.lua',
     cmd = 'ColorizerToggle',
     config = function()
-        local colorizer = require 'colorizer'
-
-        colorizer.setup {
+        require('colorizer').setup {
             filetypes = {
                 'conf',
                 'css',

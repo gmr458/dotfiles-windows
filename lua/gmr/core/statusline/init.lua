@@ -93,8 +93,7 @@ local function diagnostics_error()
 
     local count = get_diagnostics_count(vim.diagnostic.severity.ERROR)
     if count > 0 then
-        local errors_count = string.format('  %s', tostring(count))
-        return '%#StatusLineLspError#' .. errors_count .. '%*'
+        return string.format(' %%#StatusLineLspError# %s%%*', count)
     end
 
     return ''
@@ -107,8 +106,7 @@ local function diagnostics_warns()
 
     local count = get_diagnostics_count(vim.diagnostic.severity.WARN)
     if count > 0 then
-        local warns_count = string.format('  %s', tostring(count))
-        return '%#StatusLineLspWarn#' .. warns_count .. '%*'
+        return string.format(' %%#StatusLineLspWarn# %s%%*', count)
     end
 
     return ''
@@ -121,8 +119,7 @@ local function diagnostics_hint()
 
     local count = get_diagnostics_count(vim.diagnostic.severity.HINT)
     if count > 0 then
-        local hints_count = string.format('  %s', tostring(count))
-        return '%#StatusLineLspHint#' .. hints_count .. '%*'
+        return string.format(' %%#StatusLineLspHint# %s%%*', count)
     end
 
     return ''
@@ -135,8 +132,7 @@ local function diagnostics_info()
 
     local count = get_diagnostics_count(vim.diagnostic.severity.INFO)
     if count > 0 then
-        local infos_count = string.format('  %s', tostring(count))
-        return '%#StatusLineLspInfo#' .. infos_count .. '%*'
+        return string.format(' %%#StatusLineLspInfo# %s%%*', count)
     end
 
     return ''
@@ -213,18 +209,17 @@ local function lsp_status()
         lsp_message = string.format('%s %s', lsp_message, percentage)
     end
 
-    return '%#StatusLineLspMessages#' .. lsp_message .. '%*'
+    return string.format('%%#StatusLineLspMessages#%s%%*', lsp_message)
 end
 
 local function relative_path()
-    local filename = vim.fn.expand '%:t'
-    local extension = vim.fn.expand '%:e'
     local path = vim.fn.expand '%:.'
+    local extension = vim.fn.expand '%:e'
 
     local ok, nvim_web_devicons = pcall(require, 'nvim-web-devicons')
     if ok then
         local icon, color = nvim_web_devicons.get_icon_color(
-            filename,
+            path,
             extension,
             { default = true, strict = true }
         )
@@ -257,50 +252,48 @@ end
 
 local function git_diff(type)
     local gsd = vim.b.gitsigns_status_dict
-
-    if gsd and gsd[type] and gsd[type] > 0 then
-        return tostring(gsd[type])
+    if gsd and gsd[type] > 0 then
+        return gsd[type]
     end
 
     return ''
 end
 
 local function git_diff_added()
-    local diff = git_diff 'added'
-    if diff == '' then
-        return ''
+    local added = git_diff 'added'
+    if added ~= '' then
+        return string.format(' %%#StatusLineGitDiffAdded#+%s%%*', added)
     end
 
-    local added = string.format(' +%s', diff)
-    return '%#StatusLineGitDiffAdded#' .. added .. '%*'
+    return ''
 end
 
 local function git_diff_changed()
-    local diff = git_diff 'changed'
-    if diff == '' then
-        return ''
+    local changed = git_diff 'changed'
+    if changed ~= '' then
+        return string.format(' %%#StatusLineGitDiffChanged#~%s%%*', changed)
     end
 
-    local changed = string.format(' ~%s', diff)
-    return '%#StatusLineGitDiffChanged#' .. changed .. '%*'
+    return ''
 end
 
 local function git_diff_removed()
-    local diff = git_diff 'removed'
-    if diff == '' then
-        return ''
+    local removed = git_diff 'removed'
+    if removed ~= '' then
+        return string.format(' %%#StatusLineGitDiffRemoved#-%s%%*', removed)
     end
 
-    local removed = string.format(' -%s', diff)
-    return '%#StatusLineGitDiffRemoved#' .. removed .. '%*'
+    return ''
 end
 
 local function git_branch()
-    if vim.b.gitsigns_head == '' or vim.b.gitsigns_head == nil then
+    local branch = vim.b.gitsigns_head
+
+    if branch == '' or branch == nil then
         return ''
     end
 
-    return ' %#StatusLineGitBranchIcon#󰘬 %*' .. vim.b.gitsigns_head
+    return string.format(' (%%#StatusLineGitBranchIcon#%%* %s)', branch)
 end
 
 -- local function file_percentage()
@@ -362,7 +355,7 @@ StatusLine.active = function()
 
     return table.concat {
         '%#Statusline#',
-        mode(),
+        -- mode(),
         python_env(),
         relative_path(),
         unsaved(),

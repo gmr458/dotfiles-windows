@@ -2,15 +2,14 @@ return {
     'ibhagwan/fzf-lua',
     cmd = 'FzfLua',
     config = function()
-        local fzf = require 'fzf-lua'
-        local actions = require 'fzf-lua.actions'
-
         local preview_pager = string.format(
             'delta --%s --line-numbers --side-by-side --width=$FZF_PREVIEW_COLUMNS --hunk-header-style=\'omit\' --file-style=\'omit\'',
             vim.o.background
         )
 
-        fzf.setup {
+        local actions = require 'fzf-lua.actions'
+
+        require('fzf-lua').setup {
             winopts = {
                 border = 'single',
                 row = 0.40,

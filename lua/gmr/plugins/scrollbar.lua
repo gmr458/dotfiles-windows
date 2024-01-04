@@ -2,9 +2,7 @@ return {
     'petertriho/nvim-scrollbar',
     cmd = 'ScrollbarShow',
     config = function()
-        local scrollbar = require 'scrollbar'
-
-        scrollbar.setup {
+        require('scrollbar').setup {
             marks = {
                 Cursor = { text = '-' },
                 GitAdd = { text = '│' },

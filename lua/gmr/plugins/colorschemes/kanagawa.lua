@@ -3,11 +3,9 @@ return {
     lazy = false,
     priority = 1000,
     config = function()
-        local kanagawa = require 'kanagawa'
-
         local transparent = false
 
-        kanagawa.setup {
+        require('kanagawa').setup {
             compile = true,
             undercurl = true,
             commentStyle = { bold = false, italic = false },
@@ -91,6 +89,10 @@ return {
                     StatusLineGitBranchIcon = {
                         bg = theme.ui.bg_m3,
                         fg = colors.palette.surimiOrange,
+                    },
+                    StatusLineUnsavedFileIcon = {
+                        bg = theme.ui.bg_m3,
+                        fg = theme.diag.warning,
                     },
 
                     -- telescope

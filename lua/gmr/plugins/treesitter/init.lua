@@ -3,9 +3,7 @@ return {
     event = { 'BufReadPost', 'BufNewFile' },
     build = ':TSUpdate',
     config = function()
-        local configs = require 'nvim-treesitter.configs'
-
-        configs.setup {
+        require('nvim-treesitter.configs').setup {
             ensure_installed = require('gmr.configs.treesitter.parsers').install_automatically(),
             sync_install = false,
             auto_install = false,

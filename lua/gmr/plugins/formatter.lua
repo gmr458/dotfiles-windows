@@ -2,12 +2,10 @@ return {
     'mhartington/formatter.nvim',
     cmd = 'Format',
     config = function()
-        local formatter = require 'formatter'
-
         local prettier = require 'gmr.configs.formatter.prettier'
         local web = require 'gmr.configs.formatter.web'
 
-        formatter.setup {
+        require('formatter').setup {
             logging = false,
             filetype = {
                 cs = { require('formatter.filetypes.cs').csharpier },
