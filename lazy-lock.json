@@ -2,6 +2,7 @@
   "LuaSnip": { "branch": "master", "commit": "8ae1dedd988eb56441b7858bd1e8554dfadaa46d" },
   "SchemaStore.nvim": { "branch": "main", "commit": "bdf477a9d30e26881c971bf4b061f0f7b18ce67e" },
   "alpha-nvim": { "branch": "main", "commit": "29074eeb869a6cbac9ce1fbbd04f5f5940311b32" },
+  "cloak.nvim": { "branch": "main", "commit": "951b163e55ce7639eb320c450bde9283c4fe968b" },
   "cmp-async-path": { "branch": "main", "commit": "d8229a93d7b71f22c66ca35ac9e6c6cd850ec61d" },
   "cmp-nvim-lsp": { "branch": "main", "commit": "5af77f54de1b16c34b23cba810150689a3a90312" },
   "formatter.nvim": { "branch": "master", "commit": "cb4778b8432f1ae86dae4634c0b611cb269a4c2f" },

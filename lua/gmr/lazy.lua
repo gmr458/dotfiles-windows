@@ -1,6 +1,7 @@
 Add 'gmr.plugins.alpha'
 Add 'gmr.plugins.autopairs'
 Add 'gmr.plugins.autotag'
+Add 'gmr.plugins.cloak'
 Add 'gmr.plugins.cmp'
 Add 'gmr.plugins.colorizer'
 -- Add 'gmr.plugins.colorschemes.vscode_modern_theme'
