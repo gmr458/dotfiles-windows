@@ -25,7 +25,7 @@ M.winbar_filetype_exclude = {
 M.get_filename = function()
     local filename = vim.fn.expand '%:.'
     local extension = vim.fn.expand '%:e'
-    local utils = require 'user.core.utils'
+    local utils = require 'gmr.core.utils'
 
     if not utils.is_nil_or_empty_string(filename) then
         local ok, web_devicons = pcall(require, 'nvim-web-devicons')
@@ -75,9 +75,7 @@ local get_navic = function()
         return ''
     end
 
-    if
-        not require('user.core.utils').is_nil_or_empty_string(navic_location)
-    then
+    if not require('gmr.core.utils').is_nil_or_empty_string(navic_location) then
         return '' .. ' ' .. navic_location
     end
 
@@ -98,7 +96,7 @@ M.get_winbar = function()
         return
     end
 
-    local utils = require 'user.core.utils'
+    local utils = require 'gmr.core.utils'
     local value = M.get_filename()
     local navic_added = false
 
@@ -157,7 +155,7 @@ M.create_winbar = function()
             local status_ok, _ =
                 pcall(vim.api.nvim_buf_get_var, 0, 'lsp_floating_window')
             if not status_ok then
-                require('user.core.winbar').get_winbar()
+                require('gmr.core.winbar').get_winbar()
             end
         end,
     })

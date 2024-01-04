@@ -1,7 +1,7 @@
 local M = {}
 
 function M.install_automatically()
-    local utils = require 'user.core.utils'
+    local utils = require 'gmr.core.utils'
 
     if
         vim.uv.os_uname().sysname == 'Windows_NT'

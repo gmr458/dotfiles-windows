@@ -6,7 +6,7 @@ return {
         local configs = require 'nvim-treesitter.configs'
 
         configs.setup {
-            ensure_installed = require('user.configs.treesitter.parsers').install_automatically(),
+            ensure_installed = require('gmr.configs.treesitter.parsers').install_automatically(),
             sync_install = false,
             auto_install = false,
             ignore_install = {},

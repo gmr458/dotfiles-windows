@@ -4,8 +4,8 @@ return {
     config = function()
         local formatter = require 'formatter'
 
-        local prettier = require 'user.configs.formatter.prettier'
-        local web = require 'user.configs.formatter.web'
+        local prettier = require 'gmr.configs.formatter.prettier'
+        local web = require 'gmr.configs.formatter.web'
 
         formatter.setup {
             logging = false,

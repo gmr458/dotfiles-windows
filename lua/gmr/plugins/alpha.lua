@@ -13,7 +13,7 @@ return {
         -- dashboard.section.terminal.opts.redraw = true
 
         dashboard.section.header.val =
-            require('user.configs.alpha.headers').Bloody
+            require('gmr.configs.alpha.headers').Bloody
         dashboard.section.header.opts = {
             position = 'center',
             hl = 'AlphaHeader',

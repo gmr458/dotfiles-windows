@@ -2,10 +2,10 @@ local M = {
     'neovim/nvim-lspconfig',
     cmd = { 'LspStart' },
     dependencies = {
-        require 'user.plugins.null-ls',
-        -- require('user.plugins.navic'),
-        require 'user.plugins.trouble',
-        require 'user.plugins.noice',
+        require 'gmr.plugins.null-ls',
+        -- require('gmr.plugins.navic'),
+        require 'gmr.plugins.trouble',
+        require 'gmr.plugins.noice',
         { 'b0o/SchemaStore.nvim' },
     },
 }
@@ -103,10 +103,10 @@ function M.on_attach(client, bufnr)
 
     --     -- jdtls commands
     --     -- require("jdtls.setup").add_commands()
-    --     -- vim.api.nvim_create_user_command("JdtTestClass", function()
+    --     -- vim.api.nvim_create_gmr_command("JdtTestClass", function()
     --     --   require("jdtls").test_class()
     --     -- end, {})
-    --     -- vim.api.nvim_create_user_command("JdtTestNearestMethod", function()
+    --     -- vim.api.nvim_create_gmr_command("JdtTestNearestMethod", function()
     --     --   require("jdtls").test_nearest_method()
     --     -- end, {})
 
@@ -117,7 +117,7 @@ function M.config()
     local lspconfig = require 'lspconfig'
 
     local methods = vim.lsp.protocol.Methods
-    local handlers = require 'user.configs.lsp.handlers'
+    local handlers = require 'gmr.configs.lsp.handlers'
 
     local diagnostics_icons = {
         ERROR = '',
@@ -164,9 +164,9 @@ function M.config()
 
     local configs = require 'lspconfig.configs'
 
-    configs['pylance'] = require 'user.configs.lsp.settings.pylance'
+    configs['pylance'] = require 'gmr.configs.lsp.settings.pylance'
 
-    local servers = require('user.configs.lsp.servers').to_setup
+    local servers = require('gmr.configs.lsp.servers').to_setup
 
     for _, server in pairs(servers) do
         local server_opts = {
@@ -175,14 +175,14 @@ function M.config()
         }
 
         local has_custom_opts, server_custom_opts =
-            pcall(require, 'user.configs.lsp.settings.' .. server)
+            pcall(require, 'gmr.configs.lsp.settings.' .. server)
         if has_custom_opts then
             server_opts =
                 vim.tbl_deep_extend('force', server_opts, server_custom_opts)
         end
 
         local has_custom_commands, server_custom_commands =
-            pcall(require, 'user.configs.lsp.commands.' .. server)
+            pcall(require, 'gmr.configs.lsp.commands.' .. server)
         if has_custom_commands then
             server_opts.commands = server_custom_commands
         end

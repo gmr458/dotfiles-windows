@@ -3,7 +3,7 @@ local statusline_augroup =
 
 local function mode()
     local current_mode = vim.api.nvim_get_mode().mode
-    local modes = require 'user.core.statusline.modes'
+    local modes = require 'gmr.core.statusline.modes'
 
     return string.format(
         ' %%#StatusLineNeovimLogo#%%* %s',
@@ -333,7 +333,7 @@ local function formatted_filetype()
         end
     end
 
-    local filetypes = require 'user.core.statusline.filetypes'
+    local filetypes = require 'gmr.core.statusline.filetypes'
 
     if filetypes[filetype] == nil then
         return string.format(' %s ', filetypes[''])

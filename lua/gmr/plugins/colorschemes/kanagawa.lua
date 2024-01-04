@@ -149,6 +149,9 @@ return {
 
                     -- fzf
                     FzfLuaBorder = { fg = theme.ui.float.fg_border },
+
+                    -- semantic tokens
+                    ['@lsp.type.keyword'] = { link = 'Keyword' },
                 }
             end,
             theme = 'dragon',
