@@ -45,14 +45,20 @@ M.get_filename = function()
             file_icon_color = ''
         end
 
+        local readonly = ''
+        if vim.bo.readonly then
+            readonly = ' '
+        end
+
         return ' '
             .. '%#'
             .. hl_group
             .. '#'
             .. file_icon
             .. '%*'
+            .. readonly
             .. ' '
-            .. '%#Winbar#'
+            .. '%#WinBar#'
             .. filename
             .. '%*'
     end
