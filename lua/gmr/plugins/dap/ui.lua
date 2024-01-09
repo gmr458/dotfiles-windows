@@ -1,9 +1,8 @@
 return {
     'rcarriga/nvim-dap-ui',
-    cmd = { 'DapContinue', 'DapToggleBreakpoint' },
+    cmd = { 'DapLoadLaunchJSON', 'DapContinue', 'DapToggleBreakpoint' },
     dependencies = {
         { 'mfussenegger/nvim-dap' },
-        require 'config.dap.python',
     },
     config = function()
         local dap = require 'dap'
@@ -12,7 +11,7 @@ return {
         -- C#
         dap.adapters.coreclr = {
             type = 'executable',
-            command = home .. '/.local/share/nvim/mason/bin/netcoredbg',
+            command = vim.fn.stdpath 'data' .. '/mason/bin/netcoredbg',
             args = { '--interpreter=vscode' },
         }
         dap.configurations.cs = {
@@ -35,8 +34,8 @@ return {
             type = 'executable',
             command = 'node',
             args = {
-                home
-                    .. '/.local/share/nvim/mason/packages/go-debug-adapter/extension/dist/debugAdapter.js',
+                vim.fn.stdpath 'data'
+                    .. '/mason/packages/go-debug-adapter/extension/dist/debugAdapter.js',
             },
         }
         dap.configurations.go = {
@@ -61,20 +60,5 @@ return {
         vim.api.nvim_create_user_command('DapUiClose', function()
             require('dapui').close()
         end, {})
-
-        vim.fn.sign_define(
-            'DapBreakpoint',
-            { text = '', texthl = 'DapBreakpoint', linehl = '', numhl = '' }
-        )
-        vim.fn.sign_define(
-            'DapStopped',
-            { text = '', texthl = 'DapStopped', linehl = '', numhl = '' }
-        )
-        vim.fn.sign_define('DapBreakpointRejected', {
-            text = '',
-            texthl = 'DapBreakpointRejected',
-            linehl = '',
-            numhl = '',
-        })
     end,
 }

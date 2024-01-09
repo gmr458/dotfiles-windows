@@ -37,8 +37,7 @@ M.get_filename = function()
         local file_icon, file_icon_color =
             web_devicons.get_icon_color(filename, extension, { default = true })
 
-        local hl_group = 'FileIconColor' .. extension
-
+        local hl_group = 'WinBarFileIcon' .. extension
         vim.api.nvim_set_hl(0, hl_group, { fg = file_icon_color })
 
         if utils.is_nil_or_empty_string(file_icon) then
@@ -60,6 +59,10 @@ M.get_filename = function()
 end
 
 local get_navic = function()
+    if not rawget(vim, 'lsp') then
+        return ''
+    end
+
     local ok, navic = pcall(require, 'nvim-navic')
     if not ok then
         return ''
@@ -100,22 +103,17 @@ M.get_winbar = function()
     local value = M.get_filename()
     local navic_added = false
 
+    if not utils.is_nil_or_empty_string(value) and utils.is_unsaved() then
+        local mod = '%#WinBarUnsavedSymbol#*%*'
+        value = value .. mod
+    end
+
     if not utils.is_nil_or_empty_string(value) then
         local navic_value = get_navic()
         value = value .. ' ' .. navic_value
 
         if not utils.is_nil_or_empty_string(navic_value) then
             navic_added = true
-        end
-    end
-
-    if not utils.is_nil_or_empty_string(value) and utils.is_unsaved() then
-        local mod = '%#LspCodeLens#' .. '' .. '%*'
-
-        if navic_added then
-            value = value .. ' ' .. mod
-        else
-            value = value .. mod
         end
     end
 

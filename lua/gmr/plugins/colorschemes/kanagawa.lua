@@ -22,9 +22,9 @@ return {
                     wave = {},
                     lotus = {},
                     dragon = {
-                        ui = {
-                            bg = '#0a0a0a',
-                        },
+                        -- ui = {
+                        --     bg = '#0a0a0a',
+                        -- },
                     },
                     all = {
                         ui = {
@@ -47,27 +47,37 @@ return {
                     PmenuSel = { fg = 'NONE', bg = theme.ui.bg_p2 },
                     PmenuSbar = { bg = theme.ui.bg_m1 },
                     PmenuThumb = { bg = theme.ui.bg_p2 },
+                    WinBar = { fg = theme.ui.special },
+                    WinSeparator = { fg = theme.ui.bg_p2 },
 
                     -- my own statusline
+                    StatusLineLighter = {
+                        bg = theme.ui.bg_m1,
+                        fg = theme.ui.special,
+                    },
+                    StatusLineMedium = {
+                        bg = theme.ui.bg_m2,
+                        fg = theme.ui.special,
+                    },
                     StatusLineMode = { bg = theme.ui.bg_search },
                     StatusLineNeovimLogo = {
-                        bg = theme.ui.bg_m3,
+                        bg = theme.ui.bg_search,
                         fg = colors.palette.springGreen,
                     },
                     StatusLineLspError = {
-                        bg = theme.ui.bg_m3,
+                        bg = theme.ui.bg_m2,
                         fg = theme.diag.error,
                     },
                     StatusLineLspWarn = {
-                        bg = theme.ui.bg_m3,
+                        bg = theme.ui.bg_m2,
                         fg = theme.diag.warning,
                     },
                     StatusLineLspHint = {
-                        bg = theme.ui.bg_m3,
+                        bg = theme.ui.bg_m2,
                         fg = theme.diag.hint,
                     },
                     StatusLineLspInfo = {
-                        bg = theme.ui.bg_m3,
+                        bg = theme.ui.bg_m2,
                         fg = theme.diag.info,
                     },
                     StatusLineLspMessages = {
@@ -75,23 +85,37 @@ return {
                         fg = theme.diag.info,
                     },
                     StatusLineGitDiffAdded = {
-                        bg = theme.ui.bg_m3,
+                        bg = theme.ui.bg_m2,
                         fg = theme.vcs.added,
                     },
                     StatusLineGitDiffChanged = {
-                        bg = theme.ui.bg_m3,
+                        bg = theme.ui.bg_m2,
                         fg = theme.vcs.changed,
                     },
                     StatusLineGitDiffRemoved = {
-                        bg = theme.ui.bg_m3,
+                        bg = theme.ui.bg_m2,
                         fg = theme.vcs.removed,
                     },
                     StatusLineGitBranchIcon = {
-                        bg = theme.ui.bg_m3,
+                        bg = theme.ui.bg_m2,
                         fg = colors.palette.surimiOrange,
                     },
                     StatusLineUnsavedFileIcon = {
                         bg = theme.ui.bg_m3,
+                        fg = theme.diag.warning,
+                    },
+                    StatusLineLspActive = {
+                        bg = theme.ui.bg_m2,
+                        fg = theme.diag.ok,
+                    },
+                    StatusLineLspInactive = {
+                        bg = theme.ui.bg_m2,
+                        fg = theme.diag.error,
+                    },
+
+                    -- custom winbar
+                    WinBarUnsavedSymbol = {
+                        bg = theme.ui.bg,
                         fg = theme.diag.warning,
                     },
 

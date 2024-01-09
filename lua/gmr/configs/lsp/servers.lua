@@ -16,6 +16,7 @@ M.to_setup = {
     'gopls',
     'html',
     'intelephense',
+    'jdtls',
     'jsonls',
     -- "kotlin_language_server",
     'nim_langserver',
@@ -32,6 +33,7 @@ M.to_setup = {
     'taplo',
     'tsserver',
     'vimls',
+    'volar',
     'yamlls',
 }
 

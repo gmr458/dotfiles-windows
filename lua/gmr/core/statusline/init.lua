@@ -6,7 +6,7 @@ local function mode()
     local modes = require 'gmr.core.statusline.modes'
 
     return string.format(
-        ' %%#StatusLineNeovimLogo#%%* %s',
+        '%%#StatusLineMode# %%*%%#StatusLineNeovimLogo#%%*%%#StatusLineMode# %s %%*',
         modes[current_mode]:upper()
     )
 end
@@ -32,6 +32,25 @@ local function python_env()
             virtual_env = virtual_env:gsub('%s+', '')
             return string.format(' %s', virtual_env)
         end
+    end
+
+    return ''
+end
+
+local function lsp_active()
+    if not rawget(vim, 'lsp') then
+        return ''
+    end
+
+    local current_buf = vim.api.nvim_get_current_buf()
+    local clients = vim.lsp.get_clients { bufnr = current_buf }
+
+    local icon = '%#StatusLineLspActive#%*'
+    local space = '%#StatusLineMedium# %*'
+    local lsp_str = '%#StatusLineMedium#LSP%*'
+
+    if #clients > 0 then
+        return space .. icon .. space .. lsp_str
     end
 
     return ''
@@ -74,7 +93,7 @@ local function lsp_clients()
 
     local unique_client_names = vim.fn.uniq(client_names)
     if type(unique_client_names) == 'table' then
-        return string.format(' %s ', table.concat(unique_client_names, ' '))
+        return string.format(' 󰒋 %s', table.concat(unique_client_names, ' '))
     end
 
     return ''
@@ -93,7 +112,7 @@ local function diagnostics_error()
 
     local count = get_diagnostics_count(vim.diagnostic.severity.ERROR)
     if count > 0 then
-        return string.format(' %%#StatusLineLspError# %s%%*', count)
+        return string.format('%%#StatusLineLspError#  %s%%*', count)
     end
 
     return ''
@@ -106,7 +125,7 @@ local function diagnostics_warns()
 
     local count = get_diagnostics_count(vim.diagnostic.severity.WARN)
     if count > 0 then
-        return string.format(' %%#StatusLineLspWarn# %s%%*', count)
+        return string.format('%%#StatusLineLspWarn#  %s%%*', count)
     end
 
     return ''
@@ -119,7 +138,7 @@ local function diagnostics_hint()
 
     local count = get_diagnostics_count(vim.diagnostic.severity.HINT)
     if count > 0 then
-        return string.format(' %%#StatusLineLspHint# %s%%*', count)
+        return string.format('%%#StatusLineLspHint#  %s%%*', count)
     end
 
     return ''
@@ -132,7 +151,7 @@ local function diagnostics_info()
 
     local count = get_diagnostics_count(vim.diagnostic.severity.INFO)
     if count > 0 then
-        return string.format(' %%#StatusLineLspInfo# %s%%*', count)
+        return string.format('%%#StatusLineLspInfo#  %s%%*', count)
     end
 
     return ''
@@ -155,9 +174,9 @@ local lsp_progress = {
 vim.api.nvim_create_autocmd('LspProgress', {
     group = statusline_augroup,
     desc = 'Update LSP progress in statusline',
-    pattern = { 'begin', 'end' },
+    pattern = { 'begin', 'report', 'end' },
     callback = function(args)
-        if not args.data then
+        if not (args.data and args.data.client_id) then
             return
         end
 
@@ -209,7 +228,7 @@ local function lsp_status()
         lsp_message = string.format('%s %s', lsp_message, percentage)
     end
 
-    return string.format('%%#StatusLineLspMessages#%s%%*', lsp_message)
+    return string.format('%%#StatusLineLspMessages#%s %%*', lsp_message)
 end
 
 local function relative_path()
@@ -252,7 +271,7 @@ end
 
 local function git_diff(type)
     local gsd = vim.b.gitsigns_status_dict
-    if gsd and gsd[type] > 0 then
+    if gsd and gsd[type] and gsd[type] > 0 then
         return gsd[type]
     end
 
@@ -262,7 +281,7 @@ end
 local function git_diff_added()
     local added = git_diff 'added'
     if added ~= '' then
-        return string.format(' %%#StatusLineGitDiffAdded#+%s%%*', added)
+        return string.format('%%#StatusLineGitDiffAdded#+%s%%*', added)
     end
 
     return ''
@@ -271,7 +290,7 @@ end
 local function git_diff_changed()
     local changed = git_diff 'changed'
     if changed ~= '' then
-        return string.format(' %%#StatusLineGitDiffChanged#~%s%%*', changed)
+        return string.format('%%#StatusLineGitDiffChanged#~%s%%*', changed)
     end
 
     return ''
@@ -280,10 +299,14 @@ end
 local function git_diff_removed()
     local removed = git_diff 'removed'
     if removed ~= '' then
-        return string.format(' %%#StatusLineGitDiffRemoved#-%s%%*', removed)
+        return string.format('%%#StatusLineGitDiffRemoved#-%s%%*', removed)
     end
 
     return ''
+end
+
+local function git_branch_icon()
+    return '%#StatusLineGitBranchIcon#%*'
 end
 
 local function git_branch()
@@ -293,28 +316,78 @@ local function git_branch()
         return ''
     end
 
-    return string.format(' (%%#StatusLineGitBranchIcon#%%* %s)', branch)
+    return string.format('%%#StatusLineMedium#%s%%*', branch)
 end
 
--- local function file_percentage()
---     local current_line = vim.api.nvim_win_get_cursor(0)[1]
---     local lines = vim.api.nvim_buf_line_count(0)
+local function full_git()
+    local full = ''
+    local space = '%#StatusLineMedium# %*'
 
---     return string.format(' %d%%%%', math.ceil(current_line / lines * 100))
--- end
+    local branch = git_branch()
+    if branch ~= '' then
+        local icon = git_branch_icon()
+        full = full .. space .. icon .. space .. branch .. space
+    end
 
--- local function total_lines()
---     local lines = vim.fn.line '$'
---     local visible_lines = vim.fn.line 'w$'
+    local added = git_diff_added()
+    if added ~= '' then
+        full = full .. added .. space
+    end
 
---     if lines <= visible_lines then
---         return ''
---     end
+    local changed = git_diff_changed()
+    if changed ~= '' then
+        full = full .. changed .. space
+    end
 
---     return string.format('  %s', lines)
--- end
+    local removed = git_diff_removed()
+    if removed ~= '' then
+        full = full .. removed .. space
+    end
 
-local function formatted_filetype()
+    return full
+end
+
+local function file_percentage()
+    local current_line = vim.api.nvim_win_get_cursor(0)[1]
+    local lines = vim.api.nvim_buf_line_count(0)
+
+    return string.format('%d%%%%', math.ceil(current_line / lines * 100))
+end
+
+local function total_lines()
+    local lines = vim.fn.line '$'
+    local visible_lines = vim.fn.line 'w$'
+
+    if lines <= visible_lines then
+        return ''
+    end
+
+    return string.format('  %s', lines)
+end
+
+local function get_icon()
+    local ok, nvim_web_devicons = pcall(require, 'nvim-web-devicons')
+    if not ok then
+        return ''
+    end
+
+    local path = vim.api.nvim_buf_get_name(0)
+    local extension = vim.fn.expand '%:e'
+
+    local icon, color = nvim_web_devicons.get_icon_color(
+        path,
+        extension,
+        { default = true, strict = false }
+    )
+
+    local bg = vim.api.nvim_get_hl(0, { name = 'StatusLineMedium' }).bg
+    local hl_group = string.format('FileIconColor%s', extension)
+    vim.api.nvim_set_hl(0, hl_group, { fg = color, bg = bg })
+
+    return string.format('%%#%s#%s%%*', hl_group, icon)
+end
+
+local function formatted_filetype(with_icon)
     local filetype = vim.bo.filetype or vim.fn.expand('%:e', false)
 
     if filetype == '' then
@@ -322,16 +395,34 @@ local function formatted_filetype()
         local bufname = vim.api.nvim_buf_get_name(buf)
 
         if bufname == vim.uv.cwd() then
-            return ' Directory '
+            return '%#StatusLineMedium#  Directory %*'
         end
     end
 
     local filetypes = require 'gmr.core.statusline.filetypes'
 
-    if filetypes[filetype] == nil then
-        return string.format(' %s ', filetypes[''])
+    -- if filetypes[filetype] == nil then
+    --     print("a")
+    --     return string.format('%%#StatusLineMedium# %s %%*', filetypes[''])
+    -- end
+
+    if with_icon then
+        local space = '%#StatusLineMedium# %*'
+        local icon = get_icon()
+        local ft =
+            string.format('%%#StatusLineMedium#%s%%*', filetypes[filetype])
+
+        return space .. icon .. space .. ft .. space
+
+        -- return string.format(
+        --     ' %%#%s#%s%%* %s ',
+        --     hl_group,
+        --     icon,
+        --     filetypes[filetype]
+        -- )
     end
-    return string.format(' %s ', filetypes[filetype])
+
+    return string.format('%%#StatusLineMedium# %s %%*', filetypes[filetype])
 end
 
 StatusLine = {}
@@ -354,36 +445,34 @@ StatusLine.active = function()
     end
 
     return table.concat {
-        '%#Statusline#',
-        -- mode(),
-        python_env(),
-        relative_path(),
-        unsaved(),
-        readonly(),
-        git_branch(),
-        git_diff_added(),
-        git_diff_changed(),
-        git_diff_removed(),
+        -- '%#Statusline#',
+        mode(),
+        -- relative_path(),
+        -- unsaved(),
+        -- readonly(),
+        full_git(),
         '%=',
         '%=',
-        -- file_percentage(),
-        -- total_lines(),
         lsp_status(),
         diagnostics_error(),
         diagnostics_warns(),
         diagnostics_hint(),
         diagnostics_info(),
-        lsp_clients(),
-        -- formatted_filetype(),
+        -- lsp_clients(),
+        python_env(),
+        -- file_percentage(),
+        -- total_lines(),
+        lsp_active(),
+        formatted_filetype(true),
     }
 end
 
 StatusLine.inactive = function()
     return table.concat {
         '%#Statusline#',
-        -- '%#StatusLineMode#',
-        formatted_filetype():upper(),
-        -- '%*',
+        '%#StatusLineMode#',
+        formatted_filetype(false),
+        '%*',
     }
 end
 
@@ -408,6 +497,7 @@ local inactive_filetypes = {
     'lspinfo',
     'lazy',
     'netrw',
+    'mason',
 }
 
 vim.api.nvim_create_autocmd({ 'WinEnter', 'BufEnter', 'FileType' }, {

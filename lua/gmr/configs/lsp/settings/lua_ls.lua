@@ -5,6 +5,7 @@ local config = {
                 callSnippet = 'Replace',
                 keywordSnippet = 'Replace',
             },
+            hint = { enable = true },
             telemetry = { enable = false },
             workspace = { checkThirdParty = false },
         },

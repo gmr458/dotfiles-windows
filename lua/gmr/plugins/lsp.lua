@@ -3,7 +3,7 @@ local M = {
     cmd = { 'LspStart' },
     dependencies = {
         require 'gmr.plugins.null-ls',
-        -- require('gmr.plugins.navic'),
+        require 'gmr.plugins.navic',
         require 'gmr.plugins.trouble',
         require 'gmr.plugins.noice',
         { 'b0o/SchemaStore.nvim' },
@@ -96,6 +96,14 @@ function M.on_attach(client, bufnr)
         })
     end
 
+    if client.supports_method(methods.textDocument_inlayHint) then
+        vim.lsp.inlay_hint.enable(bufnr, false)
+
+        keymap('<leader>til', function()
+            vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled(0))
+        end)
+    end
+
     -- if client.name == 'jdtls' then
     --     -- jdtls dap
     --     -- require("jdtls").setup_dap({ hotcodereplace = "auto" })
@@ -109,16 +117,12 @@ function M.on_attach(client, bufnr)
     --     -- vim.api.nvim_create_gmr_command("JdtTestNearestMethod", function()
     --     --   require("jdtls").test_nearest_method()
     --     -- end, {})
-
     -- end
+
+    require('gmr.plugins.navic').attach(client, bufnr)
 end
 
-function M.config()
-    local lspconfig = require 'lspconfig'
-
-    local methods = vim.lsp.protocol.Methods
-    local handlers = require 'gmr.configs.lsp.handlers'
-
+function M.diagnostic_config()
     local diagnostics_icons = {
         ERROR = '',
         WARN = '',
@@ -149,6 +153,11 @@ function M.config()
         update_in_insert = false,
         severity_sort = true,
     }
+end
+
+function M.handlers()
+    local methods = vim.lsp.protocol.Methods
+    local handlers = require 'gmr.configs.lsp.handlers'
 
     vim.lsp.handlers[methods.textDocument_definition] =
         handlers.goto_definition()
@@ -159,6 +168,13 @@ function M.config()
 
     vim.lsp.handlers[methods.textDocument_signatureHelp] =
         vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'single' })
+end
+
+function M.config()
+    local lspconfig = require 'lspconfig'
+
+    M.diagnostic_config()
+    M.handlers()
 
     require('lspconfig.ui.windows').default_options.border = 'single'
 
