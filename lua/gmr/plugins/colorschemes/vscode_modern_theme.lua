@@ -14,6 +14,6 @@ return {
             custom_statusline_dark_background = '#080808',
         }
 
-        -- vim.cmd.colorscheme 'vscode_modern'
+        vim.cmd.colorscheme 'vscode_modern'
     end,
 }

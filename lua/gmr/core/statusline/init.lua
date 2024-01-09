@@ -381,6 +381,10 @@ local function get_icon()
     )
 
     local bg = vim.api.nvim_get_hl(0, { name = 'StatusLineMedium' }).bg
+    if bg == nil then
+        bg = vim.api.nvim_get_hl(0, { name = 'StatusLine' }).bg
+    end
+
     local hl_group = string.format('FileIconColor%s', extension)
     vim.api.nvim_set_hl(0, hl_group, { fg = color, bg = bg })
 
