@@ -143,7 +143,7 @@ M.get_winbar = function()
 end
 
 M.create_winbar = function()
-    vim.api.nvim_create_augroup('_winbar', {})
+    vim.api.nvim_create_augroup('gmr_winbar', {})
 
     vim.api.nvim_create_autocmd({
         'CursorMoved',
@@ -154,7 +154,7 @@ M.create_winbar = function()
         'BufWritePost',
         'TabClosed',
     }, {
-        group = '_winbar',
+        group = 'gmr_winbar',
         callback = function()
             local status_ok, _ =
                 pcall(vim.api.nvim_buf_get_var, 0, 'lsp_floating_window')

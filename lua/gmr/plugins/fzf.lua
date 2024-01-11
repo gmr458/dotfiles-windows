@@ -55,7 +55,7 @@ return {
                 },
             },
             fzf_opts = {
-                ['--color'] = 'bg+:-1',
+                ['--color'] = vim.o.background .. ',bg+:-1',
                 ['--scrollbar'] = '█',
                 ['--info'] = 'right',
                 ['--no-bold'] = '',

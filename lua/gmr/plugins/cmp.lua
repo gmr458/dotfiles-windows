@@ -60,8 +60,14 @@ return {
                 end,
             },
             window = {
-                completion = cmp.config.window.bordered { border = 'single' },
-                documentation = cmp.config.window.bordered { border = 'single' },
+                completion = cmp.config.window.bordered {
+                    border = 'single',
+                    winhighlight = 'Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:Visual,Search:None',
+                },
+                documentation = cmp.config.window.bordered {
+                    border = 'single',
+                    winhighlight = 'Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:Visual,Search:None',
+                },
             },
             mapping = cmp.mapping.preset.insert {
                 ['<C-b>'] = cmp.mapping.scroll_docs(-4),
@@ -113,5 +119,23 @@ return {
                 { name = 'async_path' },
             }, {}),
         }
+
+        vim.api.nvim_create_autocmd('CursorHold', {
+            group = vim.api.nvim_create_augroup(
+                'gmr_cancel_snippet',
+                { clear = true }
+            ),
+            desc = 'Cancel snippet and avoid cursor jumping to the first line of the file',
+            callback = function()
+                local ok, luasnip = pcall(require, 'luasnip')
+                if not ok then
+                    return
+                end
+
+                if luasnip.expand_or_jumpable() then
+                    vim.cmd 'silent! lua require("luasnip").unlink_current()'
+                end
+            end,
+        })
     end,
 }

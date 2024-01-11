@@ -58,16 +58,19 @@ vim.keymap.set(
     { silent = true, desc = 'Delete current buffer' }
 )
 
-local fzf_preview_hidden = {
-    winopts = {
-        preview = {
-            hidden = 'hidden',
+local function get_fzf_opts()
+    return {
+        winopts = {
+            preview = {
+                hidden = 'hidden',
+            },
         },
-    },
-}
+        fzf_opts = { ['--color'] = vim.o.background .. ',bg+:-1' },
+    }
+end
 
 vim.keymap.set('n', '<leader>ff', function()
-    require('fzf-lua').files(fzf_preview_hidden)
+    require('fzf-lua').files(get_fzf_opts())
 end, { silent = true })
 vim.keymap.set('n', '<leader>gs', ':FzfLua git_status<cr>', { silent = true })
 vim.keymap.set('n', '<leader>lg', ':FzfLua live_grep<cr>', { silent = true })
@@ -81,10 +84,10 @@ vim.keymap.set('n', '<leader>hh', function()
     }
 end, { silent = true })
 vim.keymap.set('n', '<leader>of', function()
-    require('fzf-lua').oldfiles(fzf_preview_hidden)
+    require('fzf-lua').oldfiles(get_fzf_opts())
 end, { silent = true })
 vim.keymap.set('n', '<leader>bf', function()
-    require('fzf-lua').buffers(fzf_preview_hidden)
+    require('fzf-lua').buffers(get_fzf_opts())
 end, { silent = true })
 
 vim.keymap.set('n', '<C-n>', ':NvimTreeFindFileToggle<cr>', { silent = true })
@@ -145,6 +148,7 @@ vim.keymap.set('n', '<leader>Y', [["+Y]], { desc = 'Yank to clipboard' })
 
 vim.keymap.set('n', '<leader>sb', function()
     vim.opt.background = vim.o.background == 'dark' and 'light' or 'dark'
+    vim.cmd 'source ~/.config/nvim/colors/custom.lua'
 end, { desc = 'Switch background' })
 
 vim.keymap.set('n', '<leader>ct', '<cmd>ColorizerToggle<cr>')
