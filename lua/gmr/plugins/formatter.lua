@@ -10,6 +10,7 @@ return {
             filetype = {
                 cs = { require('formatter.filetypes.cs').csharpier },
                 css = { prettier },
+                dart = { require('formatter.filetypes.dart').dartformat },
                 go = { require('formatter.filetypes.go').gofumpt },
                 html = { prettier },
                 htmldjango = {
@@ -28,8 +29,8 @@ return {
                 },
                 javascript = { web },
                 javascriptreact = { web },
-                json = { web },
-                jsonc = { web },
+                json = { prettier },
+                jsonc = { prettier },
                 lua = require('formatter.filetypes.lua').stylua,
                 ocaml = {
                     function()
@@ -50,6 +51,7 @@ return {
                 python = require('formatter.filetypes.python').ruff,
                 rust = require('formatter.filetypes.rust').rustfmt,
                 scss = { prettier },
+                svelte = { prettier },
                 toml = require('formatter.filetypes.toml').taplo,
                 typescript = { web },
                 typescriptreact = { web },

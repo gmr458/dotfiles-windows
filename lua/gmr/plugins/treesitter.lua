@@ -22,7 +22,7 @@ return {
             },
             indent = {
                 enable = true,
-                disable = { 'ocaml' },
+                disable = { 'ocaml', 'dart' },
             },
             playground = {
                 enable = true,

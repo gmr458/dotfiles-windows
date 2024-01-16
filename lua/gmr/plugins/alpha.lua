@@ -21,6 +21,7 @@ return {
         dashboard.section.buttons.val = {
             dashboard.button('Space ff', '  Find file', '<leader>ff'),
             dashboard.button('Space lg', '󰈞  Live grep', '<leader>lg'),
+            dashboard.button('Space gs', '󰈞  Git status', '<leader>gs'),
             dashboard.button('Space of', '󰈙  Recent File', '<leader>of'),
             dashboard.button('Space hh', '?  Help', '<leader>hh'),
             dashboard.button('q', '  Quit NVIM', ':qa<CR>'),

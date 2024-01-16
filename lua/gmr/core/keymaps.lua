@@ -72,7 +72,13 @@ end
 vim.keymap.set('n', '<leader>ff', function()
     require('fzf-lua').files(get_fzf_opts())
 end, { silent = true })
-vim.keymap.set('n', '<leader>gs', ':FzfLua git_status<cr>', { silent = true })
+vim.keymap.set('n', '<leader>gs', function()
+    require('fzf-lua').git_status {
+        winopts = {
+            fullscreen = true,
+        },
+    }
+end, { silent = true })
 vim.keymap.set('n', '<leader>lg', ':FzfLua live_grep<cr>', { silent = true })
 vim.keymap.set('n', '<leader>hh', function()
     require('fzf-lua').help_tags {
@@ -80,6 +86,7 @@ vim.keymap.set('n', '<leader>hh', function()
             preview = {
                 layout = 'horizontal',
             },
+            fullscreen = true,
         },
     }
 end, { silent = true })
@@ -148,7 +155,6 @@ vim.keymap.set('n', '<leader>Y', [["+Y]], { desc = 'Yank to clipboard' })
 
 vim.keymap.set('n', '<leader>sb', function()
     vim.opt.background = vim.o.background == 'dark' and 'light' or 'dark'
-    vim.cmd 'source ~/.config/nvim/colors/custom.lua'
 end, { desc = 'Switch background' })
 
 vim.keymap.set('n', '<leader>ct', '<cmd>ColorizerToggle<cr>')

@@ -1,6 +1,6 @@
 return {
     'nvim-treesitter/nvim-treesitter-context',
-    cmd = { 'TSContextEnable', 'TSContexDisable' },
+    event = { 'BufReadPost', 'BufNewFile' },
     config = function()
         pcall(vim.treesitter.query.set, 'tsx', 'context', '')
     end,

@@ -25,17 +25,15 @@ return {
                 },
                 hover = {
                     enabled = true,
+                    opts = {
+                        border = 'single',
+                    },
                 },
                 signature = {
                     enabled = false,
                 },
                 message = {
                     enabled = false,
-                },
-            },
-            views = {
-                hover = {
-                    size = { max_width = 75 },
                 },
             },
             presets = {

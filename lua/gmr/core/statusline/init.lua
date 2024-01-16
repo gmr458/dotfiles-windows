@@ -115,7 +115,7 @@ end
 local function diagnostics_warns()
     local count = lsp.get_diagnostics_count(vim.diagnostic.severity.WARN)
     if count > 0 then
-        return string.format('%%#StatusLineLspWarn#  %s%%*', count)
+        return string.format('%%#StatusLineLspWarn#  %s%%*', count)
     end
 
     return ''
@@ -210,7 +210,7 @@ local function lsp_status()
         lsp_message = string.format('%s %s', lsp_message, percentage)
     end
 
-    return string.format('%%#StatusLineLspMessages#%s%%*', lsp_message)
+    return string.format('%%#StatusLineLspMessages#%s%%* ', lsp_message)
 end
 
 local function relative_path()
@@ -460,6 +460,8 @@ local inactive_filetypes = {
     'lazy',
     'netrw',
     'mason',
+    'help',
+    'noice',
 }
 
 vim.api.nvim_create_autocmd({ 'WinEnter', 'BufEnter', 'FileType' }, {
