@@ -9,6 +9,7 @@ return {
             version = 'v2.*',
             build = 'make install_jsregexp',
         },
+        { 'saadparwaiz1/cmp_luasnip' },
     },
     config = function()
         local luasnip = require 'luasnip'
@@ -117,7 +118,12 @@ return {
             sources = cmp.config.sources({
                 { name = 'nvim_lsp' },
                 { name = 'async_path' },
+                { name = 'luasnip' },
             }, {}),
+        }
+
+        require('luasnip.loaders.from_vscode').lazy_load {
+            paths = { vim.fn.stdpath 'config' .. '/snippets' },
         }
 
         vim.api.nvim_create_autocmd('CursorHold', {

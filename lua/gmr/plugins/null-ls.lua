@@ -58,6 +58,9 @@ return {
                     end,
                 },
 
+                -- Kotlin
+                null_ls.builtins.diagnostics.ktlint,
+
                 -- Python
                 null_ls.builtins.diagnostics.ruff,
 

@@ -1,0 +1,147 @@
+{
+    "Checked block": {
+        "prefix": "checked",
+        "body": ["checked", "{", "    $0", "}"],
+        "description": "Checked block"
+    },
+    "Class": {
+        "prefix": "class",
+        "body": ["class ${1:Name}", "{", "    $0", "}"],
+        "description": "Class"
+    },
+    "Console.WriteLine": {
+        "prefix": "cw",
+        "body": ["Console.WriteLine($0);"],
+        "description": "Console.WriteLine"
+    },
+    "do...while loop": {
+        "prefix": "do",
+        "body": ["do", "{", "    $0", "} while (${1:true});"],
+        "description": "do...while loop"
+    },
+    "Else statement": {
+        "prefix": "else",
+        "body": ["else", "{", "    $0", "}"],
+        "description": "Else statement"
+    },
+    "Enum": {
+        "prefix": "enum",
+        "body": ["enum ${1:Name}", "{", "    $0", "}"],
+        "description": "Enum"
+    },
+    "Foreach statement": {
+        "prefix": "foreach",
+        "body": [
+            "foreach (${1:var} ${2:item} in ${3:collection})",
+            "{",
+            "    $0",
+            "}"
+        ],
+        "description": "Foreach statement"
+    },
+    "Reverse for loop": {
+        "prefix": "forr",
+        "body": [
+            "for (int ${1:i} = ${2:length} - 1; ${1:i} >= 0 ; ${1:i}--)",
+            "{",
+            "    $0",
+            "}"
+        ],
+        "description": "Reverse for loop"
+    },
+    "for loop": {
+        "prefix": "for",
+        "body": [
+            "for (int ${1:i} = 0; ${1:i} < ${2:length}; ${1:i}++)",
+            "{",
+            "    $0",
+            "}"
+        ],
+        "description": "for loop"
+    },
+    "if statement": {
+        "prefix": "if",
+        "body": ["if (${1:true})", "{", "    $0", "}"],
+        "description": "if statement"
+    },
+    "else-if statement": {
+        "prefix": "else if",
+        "body": ["else if (${1:true})", "{", "    $0", "}"],
+        "description": "else-if statement"
+    },
+    "Interface": {
+        "prefix": "interface",
+        "body": ["interface I${1:Name}", "{", "    $0", "}"],
+        "description": "Interface"
+    },
+    "Namespace": {
+        "prefix": "namespace",
+        "body": ["namespace ${1:Name}", "{", "    $0", "}"],
+        "description": "Namespace"
+    },
+    "Struct": {
+        "prefix": "struct",
+        "body": ["struct ${1:Name}", "{", "    $0", "}"],
+        "description": "Struct"
+    },
+    "svm": {
+        "prefix": "svm",
+        "body": ["static void Main(string[] args)", "{", "    $0", "}"],
+        "description": "void Main()"
+    },
+    "Switch statement": {
+        "prefix": "switch",
+        "body": ["switch (${1:switch_on})", "{", "    $0", "    default:", "}"],
+        "description": "Switch statement"
+    },
+    "Try finally": {
+        "prefix": "tryf",
+        "body": ["try", "{", "    $1", "}", "finally", "{", "    $0", "}"],
+        "description": "Try finally"
+    },
+    "Try catch": {
+        "prefix": "try",
+        "body": [
+            "try",
+            "{",
+            "    $1",
+            "}",
+            "catch (${2:System.Exception})",
+            "{",
+            "    $0",
+            "    throw;",
+            "}"
+        ],
+        "description": "Try catch"
+    },
+    "Unchecked block": {
+        "prefix": "unchecked",
+        "body": ["unchecked", "{", "    $0", "}"],
+        "description": "Unchecked block"
+    },
+    "Unsafe statement": {
+        "prefix": "unsafe",
+        "body": ["unsafe", "{", "    $0", "}"],
+        "description": "Unsafe statement"
+    },
+    "Using statement": {
+        "prefix": "using",
+        "body": ["using (${1:resource})", "{", "    $0", "}"],
+        "description": "Using statement"
+    },
+    "While loop": {
+        "prefix": "while",
+        "body": ["while (${1:true})", "{", "    $0", "}"],
+        "description": "While loop"
+    },
+    "Creates an Async Method structure": {
+        "prefix": "method_async",
+        "body": [
+            "${1:public} async ${2:Task}<${3:object}> ${4:MyMethodAsync}(${5:string} ${6:parameter})",
+            "{",
+            "\t$0",
+            "}"
+        ],
+        "description": "Creates an async Method structure"
+    }
+}

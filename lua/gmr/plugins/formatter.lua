@@ -31,6 +31,7 @@ return {
                 javascriptreact = { web },
                 json = { prettier },
                 jsonc = { prettier },
+                kotlin = { require('formatter.filetypes.kotlin').ktlint },
                 lua = require('formatter.filetypes.lua').stylua,
                 ocaml = {
                     function()

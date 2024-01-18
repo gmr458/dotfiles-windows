@@ -39,9 +39,7 @@ function M.on_attach(client, bufnr)
     keymap('gd', vim.lsp.buf.definition)
     keymap('J', vim.lsp.buf.hover)
     keymap('gi', function()
-        require('fzf-lua').lsp_implementations {
-            prompt = '   LSP Implementations ❯ ',
-        }
+        require('fzf-lua').lsp_implementations()
     end)
     keymap('K', vim.lsp.buf.signature_help)
     keymap('<space>wa', vim.lsp.buf.add_workspace_folder)
@@ -55,20 +53,16 @@ function M.on_attach(client, bufnr)
         require('fzf-lua').lsp_code_actions()
     end)
     keymap('gr', function()
-        require('fzf-lua').lsp_references { prompt = '   LSP References ❯ ' }
+        require('fzf-lua').lsp_references()
     end)
     keymap('<space>fo', function()
         vim.lsp.buf.format { async = true }
     end)
     keymap('<leader>ds', function()
-        require('fzf-lua').lsp_document_symbols {
-            prompt = '   LSP Documents Symbols ❯ ',
-        }
+        require('fzf-lua').lsp_document_symbols()
     end)
     keymap('<leader>ws', function()
-        require('fzf-lua').lsp_live_workspace_symbols {
-            prompt = '   LSP Live Workspace Symbols ❯ ',
-        }
+        require('fzf-lua').lsp_live_workspace_symbols()
     end)
 
     if client.supports_method(methods.textDocument_declaration) then

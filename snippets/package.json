@@ -1,0 +1,221 @@
+{
+    "name": "snippets",
+    "engines": {
+        "vscode": "^1.11.0"
+    },
+    "contributes": {
+        "snippets": [
+            {
+                "language": [
+                    "plaintext",
+                    "markdown",
+                    "tex",
+                    "html",
+                    "global",
+                    "all"
+                ],
+                "path": "./snippets/global.json"
+            },
+            {
+                "language": [
+                    "license"
+                ],
+                "path": "./snippets/license.json"
+            },
+            {
+                "language": "c",
+                "path": "./snippets/c/c.json"
+            },
+            {
+                "language": "cdoc",
+                "path": "./snippets/c/cdoc.json"
+            },
+            {
+                "language": "cpp",
+                "path": "./snippets/cpp/cpp.json"
+            },
+            {
+                "language": "cppdoc",
+                "path": "./snippets/cpp/cppdoc.json"
+            },
+            {
+                "language": [
+                    "csharp",
+                    "cs"
+                ],
+                "path": "./snippets/csharp/csharp.json"
+            },
+            {
+                "language": "csharpdoc",
+                "path": "./snippets/csharp/csharpdoc.json"
+            },
+            {
+                "language": [
+                    "gitcommit",
+                    "NeogitCommitMessage"
+                ],
+                "path": "./snippets/gitcommit.json"
+            },
+            {
+                "language": "elixir",
+                "path": "./snippets/elixir.json"
+            },
+            {
+                "language": [
+                    "eelixir",
+                    "heex"
+                ],
+                "path": "./snippets/eelixir.json"
+            },
+            {
+                "language": "lua",
+                "path": "./snippets/lua/lua.json"
+            },
+            {
+                "language": "luadoc",
+                "path": "./snippets/lua/luadoc.json"
+            },
+            {
+                "language": "go",
+                "path": "./snippets/go.json"
+            },
+            {
+                "language": "rust",
+                "path": "./snippets/rust/rust.json"
+            },
+            {
+                "language": "rustdoc",
+                "path": "./snippets/rust/rustdoc.json"
+            },
+            {
+                "language": "sql",
+                "path": "./snippets/sql.json"
+            },
+            {
+                "language": [
+                    "shellscript",
+                    "shell",
+                    "sh",
+                    "zsh"
+                ],
+                "path": "./snippets/shell/shell.json"
+            },
+            {
+                "language": "shelldoc",
+                "path": "./snippets/shell/shelldoc.json"
+            },
+            {
+                "language": [
+                    "markdown",
+                    "rmd"
+                ],
+                "path": "./snippets/markdown.json"
+            },
+            {
+                "language": "java",
+                "path": "./snippets/java/java.json"
+            },
+            {
+                "language": "javadoc",
+                "path": "./snippets/java/javadoc.json"
+            },
+            {
+                "language": [
+                    "html",
+                    "jade",
+                    "pug",
+                    "eruby",
+                    "javascriptreact",
+                    "htmldjango",
+                    "astro"
+                ],
+                "path": "./snippets/html.json"
+            },
+            {
+                "language": [
+                    "css",
+                    "scss",
+                    "sass",
+                    "less",
+                    "stylus"
+                ],
+                "path": "./snippets/css.json"
+            },
+            {
+                "language": [
+                    "javascript",
+                    "javascriptreact",
+                    "vue",
+                    "svelte"
+                ],
+                "path": "./snippets/javascript/javascript.json"
+            },
+            {
+                "language": "jsdoc",
+                "path": "./snippets/javascript/jsdoc.json"
+            },
+            {
+                "language": "tsdoc",
+                "path": "./snippets/javascript/tsdoc.json"
+            },
+            {
+                "language": [
+                    "typescript",
+                    "typescriptreact"
+                ],
+                "path": "./snippets/javascript/typescript.json"
+            },
+            {
+                "language": "svelte",
+                "path": "./snippets/svelte.json"
+            },
+            {
+                "language": "python",
+                "path": "./snippets/python/base.json"
+            },
+            {
+                "language": "python",
+                "path": "./snippets/python/python.json"
+            },
+            {
+                "language": "pydoc",
+                "path": "./snippets/python/pydoc.json"
+            },
+            {
+                "language": "kotlin",
+                "path": "./snippets/kotlin/kotlin.json"
+            },
+            {
+                "language": "kdoc",
+                "path": "./snippets/kotlin/kdoc.json"
+            },
+            {
+                "language": "make",
+                "path": "./snippets/make.json"
+            },
+            {
+                "language": "dart",
+                "path": "./snippets/dart.json"
+            },
+            {
+                "language": [
+                    "ocaml",
+                    "ocamlinterface"
+                ],
+                "path": "./snippets/ocaml/ocaml.json"
+            },
+            {
+                "language": "ocaml.ocamllex",
+                "path": "./snippets/ocaml/ocamllex.json"
+            },
+            {
+                "language": "dune-project",
+                "path": "./snippets/ocaml/dune-project.json"
+            },
+            {
+                "language": "dune",
+                "path": "./snippets/ocaml/dune.json"
+            }
+        ]
+    }
+}

@@ -1,0 +1,185 @@
+{
+    "main() template": {
+        "prefix": "main",
+        "body": [
+            "int main(int argc, char *argv[])",
+            "{$0",
+            "",
+            "\treturn EXIT_SUCCESS;",
+            "}"
+        ],
+        "description": "Standard main() snippet"
+    },
+    "main(void) template": {
+        "prefix": "mainv",
+        "body": ["int main(void)", "{$0", "", "\treturn EXIT_SUCCESS;", "}"],
+        "description": "No-args main() snippet"
+    },
+    "#include <...>": {
+        "prefix": "#inc",
+        "body": ["#include <$0>"],
+        "description": "#include <...> snippet"
+    },
+    "#define macro": {
+        "prefix": "#def",
+        "body": ["#define ${1:MACRO}"],
+        "description": "Textual macro snippet"
+    },
+    "#if": {
+        "prefix": "#if",
+        "body": ["#if ${1:0}", "$0", "#endif /* if $1 */"],
+        "description": "#if snippet"
+    },
+    "#ifdef": {
+        "prefix": "#ifdef",
+        "body": ["#ifdef ${1:MACRO}", "$0", "#endif /* ifdef $1 */"],
+        "description": "#ifdef snippet"
+    },
+    "#ifndef": {
+        "prefix": "#ifndef",
+        "body": ["#ifndef ${1:MACRO}", "$0", "#endif /* ifndef $1 */"],
+        "description": "#ifndef snippet"
+    },
+    "include once": {
+        "prefix": "#once",
+        "body": [
+            "#ifndef ${1:FILE}_H",
+            "#define $1_H",
+            "$0",
+            "",
+            "#endif /* end of include guard: $1_H */"
+        ],
+        "description": "Header include guard"
+    },
+    "if": {
+        "prefix": "if",
+        "body": ["if (${1:true}) {$0", "}"],
+        "description": "'if' snippet"
+    },
+    "if else": {
+        "prefix": "ifelse",
+        "body": ["if (${1:true}) {$2", "} else {$0", "}"],
+        "description": "'if' with 'else'"
+    },
+    "else": {
+        "prefix": "else",
+        "body": ["else {$0", "}"],
+        "description": "'else' snippet"
+    },
+    "else if": {
+        "prefix": "elseif",
+        "body": ["else if (${1:true}) {$0", "}"],
+        "description": "else-if snippet"
+    },
+    "if 1L": {
+        "prefix": "ifi",
+        "body": ["if (${1:true})$0"],
+        "description": "1-line-if"
+    },
+    "elif 1L": {
+        "prefix": "elseifi",
+        "body": ["else if (${1:true})$0"],
+        "description": "1-line-else-if"
+    },
+    "switch": {
+        "prefix": "switch",
+        "body": ["switch (${1:expression}) {$0", "}"],
+        "description": "'switch' snippet"
+    },
+    "case": {
+        "prefix": "case",
+        "body": ["case ${1:0}:$0"],
+        "description": "'case' branch"
+    },
+    "default": {
+        "prefix": "default",
+        "body": ["default:$0"],
+        "description": "'default' branch"
+    },
+    "while": {
+        "prefix": "while",
+        "body": ["while (${1:true}) {$0", "}"],
+        "description": "'while' loop snippet"
+    },
+    "do...while": {
+        "prefix": "do",
+        "body": ["do {$0", "} while (${1:false});"],
+        "description": "do...while loop snippet"
+    },
+    "for": {
+        "prefix": "for",
+        "body": ["for ($1;$2;$3) {$0", "}"],
+        "description": "Generic 'for' loop"
+    },
+    "for count": {
+        "prefix": "forc",
+        "body": [
+            "for (${1:size_t} ${2:i} = ${3:0}; $2 < ${4:count}; $2${5:++}) {$0",
+            "}"
+        ],
+        "description": "'for' loop focusing on iteration times"
+    },
+    "for range": {
+        "prefix": "forg",
+        "body": [
+            "for (${1:size_t} ${2:i} = ${3:1}; $2 <= ${4:last}; $2${5:++}) {$0",
+            "}"
+        ],
+        "description": "'for' loop focusing on inclusive range"
+    },
+    "Function definition": {
+        "prefix": "fun",
+        "body": ["${2:void} ${1:fun}(${3:void})", "{$0", "}"],
+        "description": "Define a function"
+    },
+    "typedef": {
+        "prefix": "typedef",
+        "body": ["typedef ${1:void} ${2:Emptiness};"],
+        "description": "'typedef' snippet"
+    },
+    "Complicated typedef": {
+        "prefix": "typedeff",
+        "body": ["typedef $0;"],
+        "description": "Declaration-like typedef for func-ptr,array,etc."
+    },
+    "typedef struct": {
+        "prefix": "typedefst",
+        "body": ["typedef struct $1 ${1:Box};"],
+        "description": "Implicit struct typedef"
+    },
+    "typedef union": {
+        "prefix": "typedefun",
+        "body": ["typedef union $1 ${1:Cell};"],
+        "description": "Implicit union typedef"
+    },
+    "struct": {
+        "prefix": "struct",
+        "body": ["struct ${1:MyStruct} {$0", "};"],
+        "description": "'struct' snippet"
+    },
+    "struct type": {
+        "prefix": "typestruct",
+        "body": ["typedef struct $1 ${1:Box};", "struct $1 {$0", "};"],
+        "description": "Define a type with struct"
+    },
+    "union": {
+        "prefix": "union",
+        "body": ["union ${1:MyUnion} {$0", "};"],
+        "description": "'union' snippet"
+    },
+    "union type": {
+        "prefix": "typeunion",
+        "body": ["typedef union $1 ${1:Cell};", "union $1 {$0", "};"],
+        "description": "Define a type with union"
+    },
+    "enum": {
+        "prefix": "enum",
+        "body": ["enum $1{ $0 };"],
+        "description": "Define an enumeration"
+    },
+    "Array length": {
+        "prefix": "arrlen",
+        "body": ["(sizeof ${1:arr} / sizeof $1[0])"],
+        "description": "Calculate number of elements in an array"
+    }
+}

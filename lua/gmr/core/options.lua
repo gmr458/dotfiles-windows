@@ -113,9 +113,9 @@ if vim.g.neovide then
     vim.g.neovide_cursor_animate_in_insert_mode = true
     vim.g.neovide_cursor_animate_command_line = true
 
-    vim.g.neovide_hide_mouse_when_typing = false
+    vim.g.neovide_hide_mouse_when_typing = true
 
-    vim.g.neovide_underline_stroke_scale = 1.0
+    vim.g.neovide_underline_stroke_scale = 0.5
 
     vim.g.neovide_unlink_border_highlights = true
 
