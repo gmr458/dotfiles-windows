@@ -2,7 +2,7 @@ local settings = {
     settings = {
         gopls = {
             gofumpt = true,
-            usePlaceholders = true,
+            usePlaceholders = false,
             semanticTokens = false,
         },
     },

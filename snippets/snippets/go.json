@@ -86,7 +86,7 @@
     },
     "if err != nil": {
         "prefix": "iferr",
-        "body": "if err != nil {\n\t${1:return ${2:nil, }${3:err}}\n}",
+        "body": "if err != nil {\n\t${0}\n}",
         "description": "Snippet for if err != nil"
     },
     "fmt.Println": {

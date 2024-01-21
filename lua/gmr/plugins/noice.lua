@@ -36,6 +36,11 @@ return {
                     enabled = false,
                 },
             },
+            views = {
+                hover = {
+                    size = { max_width = 75 },
+                },
+            },
             presets = {
                 bottom_search = false,
                 command_palette = false,

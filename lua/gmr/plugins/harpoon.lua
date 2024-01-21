@@ -5,21 +5,26 @@ return {
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
         local harpoon = require 'harpoon'
-        harpoon:setup()
+        harpoon:setup {
+            default = {
+                VimLeavePre = function(_, list)
+                    list:clear()
+                end,
+            },
+            settings = {
+                save_on_toggle = true,
+            },
+        }
 
-        vim.keymap.set('n', '<leader>mk', function()
+        vim.keymap.set('n', '<leader>m', function()
             harpoon:list():append()
         end)
         vim.keymap.set('n', '<leader>e', function()
             harpoon.ui:toggle_quick_menu(harpoon:list())
         end)
 
-        -- Toggle previous & next buffers stored within Harpoon list
-        vim.keymap.set('n', 'z', function()
-            harpoon:list():prev()
-        end)
-        vim.keymap.set('n', 'm', function()
-            harpoon:list():next()
+        vim.keymap.set('n', '<c-p>', function()
+            harpoon:list():next { ui_nav_wrap = true }
         end)
     end,
 }

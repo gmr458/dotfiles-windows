@@ -13,17 +13,17 @@ return {
                 -- null_ls.builtins.code_actions.impl,
 
                 -- JavaScript / TypeScript
-                null_ls.builtins.code_actions.eslint_d.with {
-                    condition = function(utils)
-                        return utils.root_has_file {
-                            '.eslintrc.js',
-                            '.eslintrc.cjs',
-                            '.eslintrc.yaml',
-                            '.eslintrc.yml',
-                            '.eslintrc.json',
-                        }
-                    end,
-                },
+                -- null_ls.builtins.code_actions.eslint_d.with {
+                --     condition = function(utils)
+                --         return utils.root_has_file {
+                --             '.eslintrc.js',
+                --             '.eslintrc.cjs',
+                --             '.eslintrc.yaml',
+                --             '.eslintrc.yml',
+                --             '.eslintrc.json',
+                --         }
+                --     end,
+                -- },
 
                 ---- Diagnostics --------------------------
 
@@ -38,17 +38,17 @@ return {
                 },
 
                 -- JavaScript / TypeScript
-                null_ls.builtins.diagnostics.eslint_d.with {
-                    condition = function(utils)
-                        return utils.root_has_file {
-                            '.eslintrc.js',
-                            '.eslintrc.cjs',
-                            '.eslintrc.yaml',
-                            '.eslintrc.yml',
-                            '.eslintrc.json',
-                        }
-                    end,
-                },
+                -- null_ls.builtins.diagnostics.eslint_d.with {
+                --     condition = function(utils)
+                --         return utils.root_has_file {
+                --             '.eslintrc.js',
+                --             '.eslintrc.cjs',
+                --             '.eslintrc.yaml',
+                --             '.eslintrc.yml',
+                --             '.eslintrc.json',
+                --         }
+                --     end,
+                -- },
                 null_ls.builtins.diagnostics.deno_lint.with {
                     condition = function(utils)
                         return utils.root_has_file {
@@ -59,7 +59,7 @@ return {
                 },
 
                 -- Kotlin
-                null_ls.builtins.diagnostics.ktlint,
+                -- null_ls.builtins.diagnostics.ktlint,
 
                 -- Python
                 null_ls.builtins.diagnostics.ruff,

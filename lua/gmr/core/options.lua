@@ -26,6 +26,7 @@ vim.g.loaded_spellfile_plugin = 1
 local opt = vim.opt
 
 opt.background = 'dark'
+opt.backup = false
 opt.cmdheight = 0
 opt.completeopt = { 'menu', 'menuone', 'noselect' }
 opt.conceallevel = 3
