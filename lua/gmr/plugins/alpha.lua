@@ -27,11 +27,6 @@ return {
             dashboard.button('q', '  Quit NVIM', ':qa<CR>'),
         }
 
-        for _, value in pairs(dashboard.section.buttons.val) do
-            value.opts.hl_shortcut = 'AlphaShorcut'
-            value.opts.hl = 'AlphaButton'
-        end
-
         -- dashboard.opts.layout = {
         --     { type = 'padding', val = 2 },
         --     vim.o.lines > 30 and dashboard.section.terminal or nil,

@@ -8,7 +8,7 @@ return {
             build = 'make',
         },
     },
-    cmd = 'telescope',
+    cmd = 'Telescope',
     config = function()
         local telescope = require 'telescope'
         local actions_layout = require 'telescope.actions.layout'

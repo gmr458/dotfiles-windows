@@ -58,44 +58,88 @@ vim.keymap.set(
     { silent = true, desc = 'Delete current buffer' }
 )
 
-local function get_fzf_opts()
-    return {
-        winopts = {
-            preview = {
-                hidden = 'hidden',
+if vim.uv.os_uname().sysname == 'Windows_NT' then
+    vim.keymap.set(
+        'n',
+        '<leader>ff',
+        ':Telescope find_files',
+        { silent = true }
+    )
+    vim.keymap.set(
+        'n',
+        '<leader>gs',
+        ':Telescope git_status',
+        { silent = true }
+    )
+    vim.keymap.set(
+        'n',
+        '<leader>lg',
+        ':Telescope live_grep<cr>',
+        { silent = true }
+    )
+    vim.keymap.set(
+        'n',
+        '<leader>hh',
+        ':Telescope help_tags<cr>',
+        { silent = true }
+    )
+    vim.keymap.set(
+        'n',
+        '<leader>of',
+        ':Telescope oldfiles<cr>',
+        { silent = true }
+    )
+    vim.keymap.set(
+        'n',
+        '<leader>bf',
+        ':Telescope buffers<cr>',
+        { silent = true }
+    )
+else
+    local function get_fzf_opts()
+        return {
+            winopts = {
+                preview = {
+                    hidden = 'hidden',
+                },
             },
-        },
-        fzf_opts = { ['--color'] = vim.o.background .. ',bg+:-1' },
-    }
-end
+            fzf_opts = { ['--color'] = vim.o.background .. ',bg+:-1' },
+        }
+    end
 
-vim.keymap.set('n', '<leader>ff', function()
-    require('fzf-lua').files(get_fzf_opts())
-end, { silent = true })
-vim.keymap.set('n', '<leader>gs', function()
-    require('fzf-lua').git_status {
-        winopts = {
-            fullscreen = true,
-        },
-    }
-end, { silent = true })
-vim.keymap.set('n', '<leader>lg', ':FzfLua live_grep<cr>', { silent = true })
-vim.keymap.set('n', '<leader>hh', function()
-    require('fzf-lua').help_tags {
-        winopts = {
-            preview = {
-                layout = 'horizontal',
+    vim.keymap.set('n', '<leader>ff', function()
+        require('fzf-lua').files(get_fzf_opts())
+    end, { silent = true })
+    vim.keymap.set('n', '<leader>gs', function()
+        require('fzf-lua').git_status {
+            winopts = {
+                fullscreen = true,
             },
-            fullscreen = true,
-        },
-    }
-end, { silent = true })
-vim.keymap.set('n', '<leader>of', function()
-    require('fzf-lua').oldfiles(get_fzf_opts())
-end, { silent = true })
-vim.keymap.set('n', '<leader>bf', function()
-    require('fzf-lua').buffers(get_fzf_opts())
-end, { silent = true })
+        }
+    end, { silent = true })
+    vim.keymap.set(
+        'n',
+        '<leader>lg',
+        ':FzfLua live_grep<cr>',
+        { silent = true }
+    )
+    vim.keymap.set('n', '<leader>hh', function()
+        require('fzf-lua').help_tags {
+            winopts = {
+                preview = {
+                    layout = 'horizontal',
+                },
+                fullscreen = true,
+            },
+        }
+    end, { silent = true })
+    vim.keymap.set('n', '<leader>of', function()
+        require('fzf-lua').oldfiles(get_fzf_opts())
+    end, { silent = true })
+    vim.keymap.set('n', '<leader>bf', function()
+        require('fzf-lua').buffers(get_fzf_opts())
+    end, { silent = true })
+end
 
 vim.keymap.set('n', '<C-n>', ':NvimTreeFindFileToggle<cr>', { silent = true })
 vim.keymap.set('n', '<leader>r', ':NvimTreeRefresh<cr>', { silent = true })
