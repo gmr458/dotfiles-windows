@@ -19,7 +19,7 @@ return {
         vim.keymap.set('n', '<leader>m', function()
             harpoon:list():append()
         end)
-        vim.keymap.set('n', '<leader>e', function()
+        vim.keymap.set('n', '<leader>i', function()
             harpoon.ui:toggle_quick_menu(harpoon:list())
         end)
 
