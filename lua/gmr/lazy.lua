@@ -11,7 +11,6 @@ Add 'gmr.plugins.comment'
 Add 'gmr.plugins.dap.python'
 Add 'gmr.plugins.dap.ui'
 Add 'gmr.plugins.formatter'
-Add 'gmr.plugins.fzf'
 Add 'gmr.plugins.gitsigns'
 Add 'gmr.plugins.guess-indent'
 Add 'gmr.plugins.harpoon'
@@ -26,13 +25,18 @@ Add 'gmr.plugins.neotab'
 Add 'gmr.plugins.nvim-tree'
 Add 'gmr.plugins.scriptease'
 Add 'gmr.plugins.scrollbar'
--- Add 'gmr.plugins.telescope'
 Add 'gmr.plugins.treesitter'
 Add 'gmr.plugins.treesitter-context'
 Add 'gmr.plugins.treesitter-playground'
 -- Add 'gmr.plugins.ufo'
 Add 'gmr.plugins.web-devicons'
 Add 'gmr.plugins.zen-mode'
+
+if vim.uv.os_uname().sysname == 'Windows_NT' then
+    Add 'gmr.plugins.telescope'
+else
+    Add 'gmr.plugins.fzf'
+end
 
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 

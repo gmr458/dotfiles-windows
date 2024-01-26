@@ -62,13 +62,13 @@ if vim.uv.os_uname().sysname == 'Windows_NT' then
     vim.keymap.set(
         'n',
         '<leader>ff',
-        ':Telescope find_files',
+        ':Telescope find_files<cr>',
         { silent = true }
     )
     vim.keymap.set(
         'n',
         '<leader>gs',
-        ':Telescope git_status',
+        ':Telescope git_status<cr>',
         { silent = true }
     )
     vim.keymap.set(
