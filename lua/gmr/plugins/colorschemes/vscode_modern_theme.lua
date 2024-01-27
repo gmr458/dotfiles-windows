@@ -1,5 +1,6 @@
 return {
     'gmr458/vscode_modern_theme.nvim',
+    branch = 'dev',
     lazy = false,
     priority = 1000,
     config = function()

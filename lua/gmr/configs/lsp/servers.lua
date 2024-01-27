@@ -16,7 +16,7 @@ M.to_setup = {
     'gopls',
     'html',
     'intelephense',
-    'jdtls',
+    -- 'jdtls',
     'jsonls',
     'kotlin_language_server',
     'nim_langserver',
