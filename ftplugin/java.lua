@@ -32,17 +32,15 @@ local config = {
 
         '-javaagent:' .. lombok_path,
 
-        -- 💀
         '-jar',
         equinox_launcher_path,
 
-        -- 💀
         '-configuration',
         config_path,
 
         '-data',
         vim.fn.stdpath 'cache'
-            .. '/jdtfeat. Ben Shapiro)ls/'
+            .. '/jdtls/'
             .. vim.fn.fnamemodify(vim.fn.getcwd(), ':t'),
     },
 
@@ -72,6 +70,7 @@ local config = {
         bundles = {},
     },
 }
+
 -- This starts a new client & server,
 -- or attaches to an existing client & server depending on the `root_dir`.
 require('jdtls').start_or_attach(config)
