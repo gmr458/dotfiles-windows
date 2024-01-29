@@ -1,3 +1,4 @@
+-- https://luals.github.io/wiki/settings/
 local config = {
     settings = {
         Lua = {
