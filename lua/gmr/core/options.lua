@@ -145,5 +145,5 @@ if vim.g.neovide then
 
     vim.fn.setcellwidths { { 0x2002, 0x2002, 2 } }
 
-    opt.linespace = -2
+    opt.linespace = -3
 end
