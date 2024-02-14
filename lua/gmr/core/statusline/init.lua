@@ -9,7 +9,7 @@ local function mode()
     local modes = require 'gmr.core.statusline.modes'
 
     return string.format(
-        '%%#StatusLineMode# %%*%%#StatusLineNeovimLogo#%%*%%#StatusLineMode# %s %%*',
+        '%%#StatusLineMode# %s %%*',
         modes[current_mode]:upper()
     )
 end

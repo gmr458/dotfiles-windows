@@ -70,15 +70,14 @@ function M.on_attach(client, bufnr)
     end
 
     if client.supports_method(methods.textDocument_documentHighlight) then
-        local augroup =
-            vim.api.nvim_create_augroup('gmr_lsp_document_highlight', {
-                clear = false,
-            })
+        local augroup = vim.api.nvim_create_augroup(
+            'gmr_lsp_document_highlight',
+            { clear = false }
+        )
 
         vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
             group = augroup,
             desc = 'Highlight references under the cursor',
-
             buffer = bufnr,
             callback = vim.lsp.buf.document_highlight,
         })
@@ -94,7 +93,7 @@ function M.on_attach(client, bufnr)
     if client.supports_method(methods.textDocument_inlayHint) then
         vim.lsp.inlay_hint.enable(bufnr, false)
 
-        keymap('<leader>til', function()
+        keymap('<leader>ih', function()
             vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled(0))
         end)
     end

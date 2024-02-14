@@ -3,7 +3,7 @@ return {
     event = 'InsertEnter',
     dependencies = {
         { 'hrsh7th/cmp-nvim-lsp' },
-        { 'FelipeLema/cmp-async-path' },
+        { 'hrsh7th/cmp-path' },
         {
             'L3MON4D3/LuaSnip',
             version = 'v2.*',
@@ -14,17 +14,6 @@ return {
     config = function()
         local luasnip = require 'luasnip'
         local cmp = require 'cmp'
-
-        -- local has_words_before = function()
-        --     unpack = unpack or table.unpack
-        --     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-        --     return col ~= 0
-        --         and vim.api
-        --                 .nvim_buf_get_lines(0, line - 1, line, true)[1]
-        --                 :sub(col, col)
-        --                 :match '%s'
-        --             == nil
-        -- end
 
         local cmp_kinds = {
             Text = ' ',
@@ -55,6 +44,10 @@ return {
         }
 
         cmp.setup {
+            preselect = cmp.PreselectMode.None,
+            completion = {
+                completeopt = 'menu,menuone,noinsert',
+            },
             snippet = {
                 expand = function(args)
                     luasnip.lsp_expand(args.body)
@@ -76,18 +69,6 @@ return {
                 ['<C-e>'] = cmp.mapping.abort(),
                 ['<CR>'] = cmp.mapping.confirm { select = true },
                 ['<C-Space>'] = cmp.mapping.complete(),
-                -- ['<Tab>'] = cmp.mapping(function(fallback)
-                --     if cmp.visible() then
-                --         cmp.select_next_item()
-                --     elseif luasnip.expand_or_jumpable() then
-                --         luasnip.expand_or_jump()
-                --     elseif has_words_before() then
-                --         cmp.complete()
-                --     else
-                --         -- fallback()
-                --         require('neotab').tabout()
-                --     end
-                -- end, { 'i', 's' }),
                 ['<Tab>'] = cmp.mapping(function()
                     if cmp.visible() then
                         cmp.select_next_item()
@@ -117,7 +98,7 @@ return {
             },
             sources = cmp.config.sources({
                 { name = 'nvim_lsp' },
-                { name = 'async_path' },
+                { name = 'path' },
                 { name = 'luasnip' },
             }, {}),
         }

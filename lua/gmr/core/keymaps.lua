@@ -120,7 +120,7 @@ else
     vim.keymap.set(
         'n',
         '<leader>lg',
-        ':FzfLua live_grep<cr>',
+        ':FzfLua live_grep resume=true<cr>',
         { silent = true }
     )
     vim.keymap.set('n', '<leader>hh', function()
@@ -131,6 +131,7 @@ else
                 },
                 fullscreen = true,
             },
+            resume = true,
         }
     end, { silent = true })
     vim.keymap.set('n', '<leader>of', function()

@@ -6,11 +6,11 @@ return {
     config = function()
         local harpoon = require 'harpoon'
         harpoon:setup {
-            default = {
-                VimLeavePre = function(_, list)
-                    list:clear()
-                end,
-            },
+            -- default = {
+            --     VimLeavePre = function(_, list)
+            --         list:clear()
+            --     end,
+            -- },
             settings = {
                 save_on_toggle = true,
             },
@@ -19,7 +19,7 @@ return {
         vim.keymap.set('n', '<leader>m', function()
             harpoon:list():append()
         end)
-        vim.keymap.set('n', '<leader>i', function()
+        vim.keymap.set('n', '<leader>hr', function()
             harpoon.ui:toggle_quick_menu(harpoon:list())
         end)
 

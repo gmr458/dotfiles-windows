@@ -107,20 +107,15 @@ M.get_winbar = function()
 
     local utils = require 'gmr.core.utils'
     local value = M.get_filename()
-    local navic_added = false
 
     if not utils.is_nil_or_empty_string(value) and utils.is_unsaved() then
-        local mod = '%#WinBarUnsavedSymbol#*%*'
+        local mod = '%#WarningMsg#*%*'
         value = value .. mod
     end
 
     if not utils.is_nil_or_empty_string(value) then
         local navic_value = get_navic()
         value = value .. ' ' .. navic_value
-
-        if not utils.is_nil_or_empty_string(navic_value) then
-            navic_added = true
-        end
     end
 
     local num_tabs = #vim.api.nvim_list_tabpages()
