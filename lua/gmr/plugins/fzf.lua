@@ -2,8 +2,14 @@ return {
     'ibhagwan/fzf-lua',
     cmd = 'FzfLua',
     config = function()
+        local delta_syntax_theme = {
+            ['dark'] = 'Dracula',
+            ['light'] = 'GitHub',
+        }
+
         local preview_pager = string.format(
-            'delta --%s --line-numbers --side-by-side --width=$FZF_PREVIEW_COLUMNS --hunk-header-style=\'omit\' --file-style=\'omit\'',
+            'delta --syntax-theme %s --%s --line-numbers --side-by-side --width=$FZF_PREVIEW_COLUMNS --hunk-header-style=\'omit\' --file-style=\'omit\'',
+            delta_syntax_theme[vim.o.background],
             vim.o.background
         )
 

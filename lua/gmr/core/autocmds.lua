@@ -1,3 +1,23 @@
+vim.api.nvim_create_autocmd('BufReadPost', {
+    group = vim.api.nvim_create_augroup(
+        'gmr_jump_to_the_last_known_cursor_position',
+        { clear = true }
+    ),
+    pattern = { '*' },
+    desc = 'when editing a file, always jump to the last known cursor position',
+    callback = function()
+        local line = vim.fn.line '\'"'
+        if
+            line >= 1
+            and line <= vim.fn.line '$'
+            and vim.bo.filetype ~= 'commit'
+            and vim.fn.index({ 'xxd', 'gitrebase' }, vim.bo.filetype) == -1
+        then
+            vim.cmd 'normal! g`"'
+        end
+    end,
+})
+
 vim.api.nvim_create_autocmd('VimLeave', {
     group = vim.api.nvim_create_augroup(
         'gmr_restore_cursor_shape_on_exit',
