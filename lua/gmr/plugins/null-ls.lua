@@ -49,20 +49,9 @@ return {
                 --         }
                 --     end,
                 -- },
-                null_ls.builtins.diagnostics.deno_lint.with {
-                    condition = function(utils)
-                        return utils.root_has_file {
-                            'deno.json',
-                            'deno.jsonc',
-                        }
-                    end,
-                },
 
                 -- Kotlin
                 -- null_ls.builtins.diagnostics.ktlint,
-
-                -- Python
-                null_ls.builtins.diagnostics.ruff,
 
                 -- Go
                 null_ls.builtins.diagnostics.golangci_lint,

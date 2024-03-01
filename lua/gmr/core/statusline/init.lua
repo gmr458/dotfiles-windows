@@ -395,7 +395,7 @@ end
 StatusLine = {}
 
 StatusLine.active = function()
-    if vim.o.filetype == 'alpha' then
+    if vim.o.filetype == '' then
         return table.concat {
             '%#Normal#',
         }

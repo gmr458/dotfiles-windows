@@ -69,13 +69,13 @@ return {
                 ['<C-e>'] = cmp.mapping.abort(),
                 ['<CR>'] = cmp.mapping.confirm { select = true },
                 ['<C-Space>'] = cmp.mapping.complete(),
-                ['<Tab>'] = cmp.mapping(function()
+                ['<Tab>'] = cmp.mapping(function(fallback)
                     if cmp.visible() then
                         cmp.select_next_item()
                     elseif luasnip.jumpable(1) then
                         luasnip.jump(1)
                     else
-                        require('neotab').tabout()
+                        fallback()
                     end
                 end),
                 ['<S-Tab>'] = cmp.mapping(function(fallback)
@@ -103,9 +103,9 @@ return {
             }, {}),
         }
 
-        require('luasnip.loaders.from_vscode').lazy_load {
-            paths = { vim.fn.stdpath 'config' .. '/snippets' },
-        }
+        -- require('luasnip.loaders.from_vscode').lazy_load {
+        --     paths = { vim.fn.stdpath 'config' .. '/snippets' },
+        -- }
 
         vim.api.nvim_create_autocmd('CursorHold', {
             group = vim.api.nvim_create_augroup(

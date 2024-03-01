@@ -31,12 +31,13 @@ opt.cmdheight = 0
 opt.completeopt = { 'menu', 'menuone', 'noselect' }
 opt.conceallevel = 3
 opt.confirm = true
-opt.cursorline = true
+opt.cursorline = false
 opt.expandtab = true
 opt.fillchars:append { eob = ' ' }
 opt.grepprg = 'rg --vimgrep'
 -- opt.guifont = 'BlexMono Nerd Font Mono:h13'
 opt.ignorecase = true
+-- opt.inccommand = 'split'
 opt.laststatus = 3
 opt.list = false
 -- opt.listchars:append {
@@ -82,6 +83,7 @@ vim.filetype.add {
     },
     pattern = {
         ['.env.*'] = 'sh',
+        ['.*/hypr/.*%.conf'] = 'hyprlang',
     },
 }
 
