@@ -71,7 +71,7 @@ local M = {
     end,
 }
 
---- @param client lsp.Client
+--- @param client vim.lsp.Client
 --- @param bufnr integer
 function M.attach(client, bufnr)
     local method = vim.lsp.protocol.Methods.textDocument_documentSymbol

@@ -1,4 +1,3 @@
-require 'gmr.launch'
 require 'gmr.core.options'
 require 'gmr.core.keymaps'
 require 'gmr.core.autocmds'

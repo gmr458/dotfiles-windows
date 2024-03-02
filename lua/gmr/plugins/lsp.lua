@@ -10,7 +10,7 @@ local M = {
     },
 }
 
---- @param client lsp.Client
+--- @param client vim.lsp.Client
 --- @param bufnr integer
 function M.on_attach(client, bufnr)
     local methods = vim.lsp.protocol.Methods

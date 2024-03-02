@@ -60,48 +60,48 @@ local function lsp_active()
     return ''
 end
 
-local function lsp_clients()
-    if not rawget(vim, 'lsp') then
-        return ''
-    end
-
-    local current_buf = vim.api.nvim_get_current_buf()
-    local clients = vim.lsp.get_clients { bufnr = current_buf }
-    if next(clients) == nil then
-        return ''
-    end
-
-    local null_ls_running = false
-
-    local client_names = {}
-    for _, client in pairs(clients) do
-        if client.name ~= 'null-ls' then
-            table.insert(client_names, client.name)
-        else
-            null_ls_running = true
-        end
-    end
-
-    if null_ls_running then
-        local ok, sources = pcall(require, 'null-ls.sources')
-        if not ok then
-            return ''
-        end
-
-        local available_sources = sources.get_available(vim.bo.filetype)
-
-        for _, source in ipairs(available_sources) do
-            table.insert(client_names, source.name)
-        end
-    end
-
-    local unique_client_names = vim.fn.uniq(client_names)
-    if type(unique_client_names) == 'table' then
-        return string.format(' 󰒋 %s', table.concat(unique_client_names, ' '))
-    end
-
-    return ''
-end
+-- local function lsp_clients()
+--     if not rawget(vim, 'lsp') then
+--         return ''
+--     end
+--
+--     local current_buf = vim.api.nvim_get_current_buf()
+--     local clients = vim.lsp.get_clients { bufnr = current_buf }
+--     if next(clients) == nil then
+--         return ''
+--     end
+--
+--     local null_ls_running = false
+--
+--     local client_names = {}
+--     for _, client in pairs(clients) do
+--         if client.name ~= 'null-ls' then
+--             table.insert(client_names, client.name)
+--         else
+--             null_ls_running = true
+--         end
+--     end
+--
+--     if null_ls_running then
+--         local ok, sources = pcall(require, 'null-ls.sources')
+--         if not ok then
+--             return ''
+--         end
+--
+--         local available_sources = sources.get_available(vim.bo.filetype)
+--
+--         for _, source in ipairs(available_sources) do
+--             table.insert(client_names, source.name)
+--         end
+--     end
+--
+--     local unique_client_names = vim.fn.uniq(client_names)
+--     if type(unique_client_names) == 'table' then
+--         return string.format(' 󰒋 %s', table.concat(unique_client_names, ' '))
+--     end
+--
+--     return ''
+-- end
 
 local function diagnostics_error()
     local count = lsp.get_diagnostics_count(vim.diagnostic.severity.ERROR)
@@ -140,7 +140,7 @@ local function diagnostics_info()
 end
 
 --- @class LspProgress
---- @field client lsp.Client?
+--- @field client vim.lsp.Client?
 --- @field kind string?
 --- @field title string?
 --- @field percentage integer?
@@ -213,43 +213,43 @@ local function lsp_status()
     return string.format('%%#StatusLineLspMessages#%s%%* ', lsp_message)
 end
 
-local function relative_path()
-    local path = vim.fn.expand '%:.'
-    local extension = vim.fn.expand '%:e'
+-- local function relative_path()
+--     local path = vim.fn.expand '%:.'
+--     local extension = vim.fn.expand '%:e'
+--
+--     local ok, nvim_web_devicons = pcall(require, 'nvim-web-devicons')
+--     if ok then
+--         local icon, color = nvim_web_devicons.get_icon_color(
+--             path,
+--             extension,
+--             { default = true, strict = true }
+--         )
+--
+--         local bg = vim.api.nvim_get_hl(0, { name = 'StatusLine' }).bg
+--         local hl_group = string.format('FileIconColor%s', extension)
+--         vim.api.nvim_set_hl(0, hl_group, { fg = color, bg = bg })
+--
+--         return string.format(' %%#%s#%s%%* %s', hl_group, icon, path)
+--     end
+--
+--     return string.format(' %s', path)
+-- end
 
-    local ok, nvim_web_devicons = pcall(require, 'nvim-web-devicons')
-    if ok then
-        local icon, color = nvim_web_devicons.get_icon_color(
-            path,
-            extension,
-            { default = true, strict = true }
-        )
+-- local function unsaved()
+--     if vim.api.nvim_get_option_value('mod', { buf = 0 }) then
+--         return '%#StatusLineUnsavedFileIcon#*%*'
+--     end
+--
+--     return ''
+-- end
 
-        local bg = vim.api.nvim_get_hl(0, { name = 'StatusLine' }).bg
-        local hl_group = string.format('FileIconColor%s', extension)
-        vim.api.nvim_set_hl(0, hl_group, { fg = color, bg = bg })
-
-        return string.format(' %%#%s#%s%%* %s', hl_group, icon, path)
-    end
-
-    return string.format(' %s', path)
-end
-
-local function unsaved()
-    if vim.api.nvim_get_option_value('mod', { buf = 0 }) then
-        return '%#StatusLineUnsavedFileIcon#*%*'
-    end
-
-    return ''
-end
-
-local function readonly()
-    if vim.bo.readonly then
-        return ' '
-    end
-
-    return ''
-end
+-- local function readonly()
+--     if vim.bo.readonly then
+--         return ' '
+--     end
+--
+--     return ''
+-- end
 
 local function git_diff_added()
     local added = git.diff 'added'
@@ -320,23 +320,23 @@ local function full_git()
     return full
 end
 
-local function file_percentage()
-    local current_line = vim.api.nvim_win_get_cursor(0)[1]
-    local lines = vim.api.nvim_buf_line_count(0)
+-- local function file_percentage()
+--     local current_line = vim.api.nvim_win_get_cursor(0)[1]
+--     local lines = vim.api.nvim_buf_line_count(0)
+--
+--     return string.format('%d%%%%', math.ceil(current_line / lines * 100))
+-- end
 
-    return string.format('%d%%%%', math.ceil(current_line / lines * 100))
-end
-
-local function total_lines()
-    local lines = vim.fn.line '$'
-    local visible_lines = vim.fn.line 'w$'
-
-    if lines <= visible_lines then
-        return ''
-    end
-
-    return string.format('  %s', lines)
-end
+-- local function total_lines()
+--     local lines = vim.fn.line '$'
+--     local visible_lines = vim.fn.line 'w$'
+--
+--     if lines <= visible_lines then
+--         return ''
+--     end
+--
+--     return string.format('  %s', lines)
+-- end
 
 local function get_icon()
     local ok, nvim_web_devicons = pcall(require, 'nvim-web-devicons')
