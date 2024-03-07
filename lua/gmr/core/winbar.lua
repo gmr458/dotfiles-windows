@@ -64,32 +64,32 @@ M.get_filename = function()
     end
 end
 
-local get_navic = function()
-    if not rawget(vim, 'lsp') then
-        return ''
-    end
-
-    local ok, navic = pcall(require, 'nvim-navic')
-    if not ok then
-        return ''
-    end
-
-    local navic_location_loaded, navic_location = pcall(navic.get_location, {})
-
-    if not navic_location_loaded then
-        return ''
-    end
-
-    if not navic.is_available() or navic_location == 'error' then
-        return ''
-    end
-
-    if not require('gmr.core.utils').is_nil_or_empty_string(navic_location) then
-        return '' .. ' ' .. navic_location
-    end
-
-    return ''
-end
+-- local get_navic = function()
+--     if not rawget(vim, 'lsp') then
+--         return ''
+--     end
+--
+--     local ok, navic = pcall(require, 'nvim-navic')
+--     if not ok then
+--         return ''
+--     end
+--
+--     local navic_location_loaded, navic_location = pcall(navic.get_location, {})
+--
+--     if not navic_location_loaded then
+--         return ''
+--     end
+--
+--     if not navic.is_available() or navic_location == 'error' then
+--         return ''
+--     end
+--
+--     if not require('gmr.core.utils').is_nil_or_empty_string(navic_location) then
+--         return '' .. ' ' .. navic_location
+--     end
+--
+--     return ''
+-- end
 
 local excludes = function()
     if vim.tbl_contains(M.winbar_filetype_exclude, vim.bo.filetype) then
@@ -113,10 +113,10 @@ M.get_winbar = function()
         value = value .. mod
     end
 
-    if not utils.is_nil_or_empty_string(value) then
-        local navic_value = get_navic()
-        value = value .. ' ' .. navic_value
-    end
+    -- if not utils.is_nil_or_empty_string(value) then
+    --     local navic_value = get_navic()
+    --     value = value .. ' ' .. navic_value
+    -- end
 
     local num_tabs = #vim.api.nvim_list_tabpages()
 

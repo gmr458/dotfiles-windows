@@ -1,3 +1,4 @@
+vim.g.editorconfig = false
 vim.g.loaded_gzip = 1
 vim.g.loaded_tarPlugin = 1
 vim.g.loaded_tar = 1
@@ -77,14 +78,14 @@ opt.virtualedit = 'block'
 -- opt.wildoptions = ''
 opt.wrap = false
 
-vim.filetype.add {
-    extension = {
-        templ = 'templ',
-    },
-    pattern = {
-        ['.env.*'] = 'sh',
-    },
-}
+-- vim.filetype.add {
+--     extension = {
+--         templ = 'templ',
+--     },
+--     pattern = {
+--         ['.env.*'] = 'sh',
+--     },
+-- }
 
 -- if vim.g.neovide then
 --     -- padding

@@ -2,10 +2,8 @@ local M = {
     'neovim/nvim-lspconfig',
     cmd = { 'LspStart' },
     dependencies = {
-        require 'gmr.plugins.null-ls',
-        require 'gmr.plugins.navic',
         require 'gmr.plugins.trouble',
-        require 'gmr.plugins.noice',
+        require 'gmr.plugins.neodev',
         { 'b0o/SchemaStore.nvim' },
     },
 }
@@ -97,23 +95,6 @@ function M.on_attach(client, bufnr)
             vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled(0))
         end)
     end
-
-    -- if client.name == 'jdtls' then
-    --     -- jdtls dap
-    --     -- require("jdtls").setup_dap({ hotcodereplace = "auto" })
-    --     -- require("jdtls.dap").setup_dap_main_class_configs()
-
-    --     -- jdtls commands
-    --     -- require("jdtls.setup").add_commands()
-    --     -- vim.api.nvim_create_gmr_command("JdtTestClass", function()
-    --     --   require("jdtls").test_class()
-    --     -- end, {})
-    --     -- vim.api.nvim_create_gmr_command("JdtTestNearestMethod", function()
-    --     --   require("jdtls").test_nearest_method()
-    --     -- end, {})
-    -- end
-
-    require('gmr.plugins.navic').attach(client, bufnr)
 end
 
 function M.diagnostic_config()
@@ -143,7 +124,7 @@ function M.diagnostic_config()
             end,
         },
         signs = false,
-        float = { source = 'always', border = 'single' },
+        float = { source = true, border = 'single' },
         update_in_insert = false,
         severity_sort = true,
     }
@@ -156,9 +137,10 @@ function M.handlers()
     vim.lsp.handlers[methods.textDocument_definition] =
         handlers.goto_definition()
 
-    -- comment this if using noice.nvim
-    -- vim.lsp.handlers[methods.textDocument_hover] =
-    --     vim.lsp.with(vim.lsp.handlers.hover, { border = chars.border })
+    vim.lsp.handlers[methods.textDocument_hover] = vim.lsp.with(
+        vim.lsp.handlers.hover,
+        { border = 'single', max_width = 90 }
+    )
 
     vim.lsp.handlers[methods.textDocument_signatureHelp] =
         vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'single' })
@@ -172,12 +154,7 @@ function M.config()
 
     require('lspconfig.ui.windows').default_options.border = 'single'
 
-    local configs = require 'lspconfig.configs'
-
-    configs['pylance'] = require 'gmr.configs.lsp.settings.pylance'
-
     local servers = require('gmr.configs.lsp.servers').to_setup
-
     for _, server in pairs(servers) do
         local server_opts = {
             on_attach = M.on_attach,
