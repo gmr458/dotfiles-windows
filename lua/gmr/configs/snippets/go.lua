@@ -6,7 +6,9 @@ local insert_node = luasnip.insert_node
 local fmta = require('luasnip.extras.fmt').fmta
 local rep = require('luasnip.extras').rep
 
-luasnip.add_snippets('go', {
+local filetype = 'go'
+
+luasnip.add_snippets(filetype, {
     snippet(
         'if',
         fmta(
@@ -24,7 +26,7 @@ if <condition> {
     ),
 })
 
-luasnip.add_snippets('go', {
+luasnip.add_snippets(filetype, {
     snippet(
         'elseif',
         fmta(
@@ -42,7 +44,7 @@ else if <condition> {
     ),
 })
 
-luasnip.add_snippets('go', {
+luasnip.add_snippets(filetype, {
     snippet(
         'else',
         fmta(
@@ -59,7 +61,7 @@ else {
     ),
 })
 
-luasnip.add_snippets('go', {
+luasnip.add_snippets(filetype, {
     snippet(
         'switch',
         fmta(
@@ -76,7 +78,7 @@ switch <expression> {
     ),
 })
 
-luasnip.add_snippets('go', {
+luasnip.add_snippets(filetype, {
     snippet(
         'switcht',
         fmta(
@@ -92,7 +94,7 @@ switch {
     ),
 })
 
-luasnip.add_snippets('go', {
+luasnip.add_snippets(filetype, {
     snippet(
         'select',
         fmta(
@@ -108,7 +110,7 @@ select {
     ),
 })
 
-luasnip.add_snippets('go', {
+luasnip.add_snippets(filetype, {
     snippet(
         'case',
         fmta(
@@ -124,7 +126,7 @@ case <case>:
     ),
 })
 
-luasnip.add_snippets('go', {
+luasnip.add_snippets(filetype, {
     snippet(
         'casei',
         fmta(
@@ -139,7 +141,7 @@ case <case>: <body_case>
     ),
 })
 
-luasnip.add_snippets('go', {
+luasnip.add_snippets(filetype, {
     snippet(
         'default',
         fmta(
@@ -154,7 +156,7 @@ default:
     ),
 })
 
-luasnip.add_snippets('go', {
+luasnip.add_snippets(filetype, {
     snippet(
         'defaulti',
         fmta(
@@ -168,7 +170,7 @@ default: <body_case>
     ),
 })
 
-luasnip.add_snippets('go', {
+luasnip.add_snippets(filetype, {
     snippet(
         'for',
         fmta(
@@ -185,7 +187,7 @@ for <condition> {
     ),
 })
 
-luasnip.add_snippets('go', {
+luasnip.add_snippets(filetype, {
     snippet(
         'fori',
         fmta(
@@ -204,7 +206,7 @@ for <init_stmt> := 0; <condition>; <post_stmt>++ {
     ),
 })
 
-luasnip.add_snippets('go', {
+luasnip.add_snippets(filetype, {
     snippet(
         'forr',
         fmta(
@@ -223,7 +225,7 @@ for <key>, <value> := range <range_expression> {
     ),
 })
 
-luasnip.add_snippets('go', {
+luasnip.add_snippets(filetype, {
     snippet(
         'tys',
         fmta(
@@ -240,7 +242,7 @@ type <identifier> struct {
     ),
 })
 
-luasnip.add_snippets('go', {
+luasnip.add_snippets(filetype, {
     snippet(
         'tyf',
         fmta(
@@ -256,7 +258,7 @@ type <identifier> func(<parameters>) <return_type>
     ),
 })
 
-luasnip.add_snippets('go', {
+luasnip.add_snippets(filetype, {
     snippet(
         'tyi',
         fmta(
@@ -273,7 +275,7 @@ type <identifier> interface {
     ),
 })
 
-luasnip.add_snippets('go', {
+luasnip.add_snippets(filetype, {
     snippet(
         'func',
         fmta(
@@ -292,7 +294,7 @@ func <func_name>(<parameters>) <return_type> {
     ),
 })
 
-luasnip.add_snippets('go', {
+luasnip.add_snippets(filetype, {
     snippet(
         'funcm',
         fmta(
@@ -313,7 +315,7 @@ func (<receiver_name> <receiver_type>) <func_name>(<parameters>) <return_type> {
     ),
 })
 
-luasnip.add_snippets('go', {
+luasnip.add_snippets(filetype, {
     snippet(
         'typeb',
         fmta(
@@ -329,7 +331,7 @@ type (
     ),
 })
 
-luasnip.add_snippets('go', {
+luasnip.add_snippets(filetype, {
     snippet(
         'varb',
         fmta(
@@ -345,7 +347,7 @@ var (
     ),
 })
 
-luasnip.add_snippets('go', {
+luasnip.add_snippets(filetype, {
     snippet(
         'constb',
         fmta(
@@ -361,7 +363,7 @@ const (
     ),
 })
 
-luasnip.add_snippets('go', {
+luasnip.add_snippets(filetype, {
     snippet(
         'importb',
         fmta(
