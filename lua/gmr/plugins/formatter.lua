@@ -27,6 +27,7 @@ return {
                         }
                     end,
                 },
+                java = require('formatter.filetypes.java').google_java_format,
                 javascript = { web },
                 javascriptreact = { web },
                 json = { prettier },

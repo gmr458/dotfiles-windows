@@ -49,7 +49,7 @@ local config = {
         'gradlew',
     },
 
-    on_attach = require('gmr.plugins.lsp').on_attach,
+    on_attach = require('gmr.configs.lsp').on_attach,
     capabilities = require('cmp_nvim_lsp').default_capabilities(),
 
     -- Here you can configure eclipse.jdt.ls specific settings
