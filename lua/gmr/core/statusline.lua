@@ -1,19 +1,41 @@
 local statusline_augroup =
     vim.api.nvim_create_augroup('gmr_statusline', { clear = true })
 
-local lsp = require 'gmr.core.statusline.lsp'
-local git = require 'gmr.core.statusline.git'
+--- @param severity integer
+--- @return integer
+local function get_lsp_diagnostics_count(severity)
+    if not rawget(vim, 'lsp') then
+        return 0
+    end
 
+    local count = vim.diagnostic.count(0, { serverity = severity })[severity]
+    if count == nil then
+        return 0
+    end
+
+    return count
+end
+
+--- @param type string
+--- @return integer
+local function get_git_diff(type)
+    local gsd = vim.b.gitsigns_status_dict
+    if gsd and gsd[type] then
+        return gsd[type]
+    end
+
+    return 0
+end
+
+--- @return string
 local function mode()
-    local current_mode = vim.api.nvim_get_mode().mode
-    local modes = require 'gmr.core.statusline.modes'
-
     return string.format(
         '%%#StatusLineMode# %s %%*',
-        modes[current_mode]:upper()
+        vim.api.nvim_get_mode().mode
     )
 end
 
+--- @return string
 local function python_env()
     if not rawget(vim, 'lsp') then
         return ''
@@ -33,13 +55,14 @@ local function python_env()
             end
 
             virtual_env = virtual_env:gsub('%s+', '')
-            return string.format(' %s', virtual_env)
+            return string.format('%%#StatusLineMedium# %s%%*', virtual_env)
         end
     end
 
     return ''
 end
 
+--- @return string
 local function lsp_active()
     if not rawget(vim, 'lsp') then
         return ''
@@ -60,51 +83,9 @@ local function lsp_active()
     return ''
 end
 
--- local function lsp_clients()
---     if not rawget(vim, 'lsp') then
---         return ''
---     end
---
---     local current_buf = vim.api.nvim_get_current_buf()
---     local clients = vim.lsp.get_clients { bufnr = current_buf }
---     if next(clients) == nil then
---         return ''
---     end
---
---     local null_ls_running = false
---
---     local client_names = {}
---     for _, client in pairs(clients) do
---         if client.name ~= 'null-ls' then
---             table.insert(client_names, client.name)
---         else
---             null_ls_running = true
---         end
---     end
---
---     if null_ls_running then
---         local ok, sources = pcall(require, 'null-ls.sources')
---         if not ok then
---             return ''
---         end
---
---         local available_sources = sources.get_available(vim.bo.filetype)
---
---         for _, source in ipairs(available_sources) do
---             table.insert(client_names, source.name)
---         end
---     end
---
---     local unique_client_names = vim.fn.uniq(client_names)
---     if type(unique_client_names) == 'table' then
---         return string.format(' 󰒋 %s', table.concat(unique_client_names, ' '))
---     end
---
---     return ''
--- end
-
+--- @return string
 local function diagnostics_error()
-    local count = lsp.get_diagnostics_count(vim.diagnostic.severity.ERROR)
+    local count = get_lsp_diagnostics_count(vim.diagnostic.severity.ERROR)
     if count > 0 then
         return string.format('%%#StatusLineLspError#  %s%%*', count)
     end
@@ -112,8 +93,9 @@ local function diagnostics_error()
     return ''
 end
 
+--- @return string
 local function diagnostics_warns()
-    local count = lsp.get_diagnostics_count(vim.diagnostic.severity.WARN)
+    local count = get_lsp_diagnostics_count(vim.diagnostic.severity.WARN)
     if count > 0 then
         return string.format('%%#StatusLineLspWarn#  %s%%*', count)
     end
@@ -121,8 +103,9 @@ local function diagnostics_warns()
     return ''
 end
 
+--- @return string
 local function diagnostics_hint()
-    local count = lsp.get_diagnostics_count(vim.diagnostic.severity.HINT)
+    local count = get_lsp_diagnostics_count(vim.diagnostic.severity.HINT)
     if count > 0 then
         return string.format('%%#StatusLineLspHint#  %s%%*', count)
     end
@@ -130,8 +113,9 @@ local function diagnostics_hint()
     return ''
 end
 
+--- @return string
 local function diagnostics_info()
-    local count = lsp.get_diagnostics_count(vim.diagnostic.severity.INFO)
+    local count = get_lsp_diagnostics_count(vim.diagnostic.severity.INFO)
     if count > 0 then
         return string.format('%%#StatusLineLspInfo#  %s%%*', count)
     end
@@ -181,6 +165,7 @@ vim.api.nvim_create_autocmd('LspProgress', {
     end,
 })
 
+--- @return string
 local function lsp_status()
     if not rawget(vim, 'lsp') then
         return ''
@@ -213,46 +198,9 @@ local function lsp_status()
     return string.format('%%#StatusLineLspMessages#%s%%* ', lsp_message)
 end
 
--- local function relative_path()
---     local path = vim.fn.expand '%:.'
---     local extension = vim.fn.expand '%:e'
---
---     local ok, nvim_web_devicons = pcall(require, 'nvim-web-devicons')
---     if ok then
---         local icon, color = nvim_web_devicons.get_icon_color(
---             path,
---             extension,
---             { default = true, strict = true }
---         )
---
---         local bg = vim.api.nvim_get_hl(0, { name = 'StatusLine' }).bg
---         local hl_group = string.format('FileIconColor%s', extension)
---         vim.api.nvim_set_hl(0, hl_group, { fg = color, bg = bg })
---
---         return string.format(' %%#%s#%s%%* %s', hl_group, icon, path)
---     end
---
---     return string.format(' %s', path)
--- end
-
--- local function unsaved()
---     if vim.api.nvim_get_option_value('mod', { buf = 0 }) then
---         return '%#StatusLineUnsavedFileIcon#*%*'
---     end
---
---     return ''
--- end
-
--- local function readonly()
---     if vim.bo.readonly then
---         return ' '
---     end
---
---     return ''
--- end
-
+--- @return string
 local function git_diff_added()
-    local added = git.diff 'added'
+    local added = get_git_diff 'added'
     if added > 0 then
         return string.format('%%#StatusLineGitDiffAdded#+%s%%*', added)
     end
@@ -260,8 +208,9 @@ local function git_diff_added()
     return ''
 end
 
+--- @return string
 local function git_diff_changed()
-    local changed = git.diff 'changed'
+    local changed = get_git_diff 'changed'
     if changed > 0 then
         return string.format('%%#StatusLineGitDiffChanged#~%s%%*', changed)
     end
@@ -269,8 +218,9 @@ local function git_diff_changed()
     return ''
 end
 
+--- @return string
 local function git_diff_removed()
-    local removed = git.diff 'removed'
+    local removed = get_git_diff 'removed'
     if removed > 0 then
         return string.format('%%#StatusLineGitDiffRemoved#-%s%%*', removed)
     end
@@ -278,10 +228,12 @@ local function git_diff_removed()
     return ''
 end
 
+--- @return string
 local function git_branch_icon()
     return '%#StatusLineGitBranchIcon#%*'
 end
 
+--- @return string
 local function git_branch()
     local branch = vim.b.gitsigns_head
 
@@ -292,6 +244,7 @@ local function git_branch()
     return string.format('%%#StatusLineMedium#%s%%*', branch)
 end
 
+--- @return string
 local function full_git()
     local full = ''
     local space = '%#StatusLineMedium# %*'
@@ -320,101 +273,67 @@ local function full_git()
     return full
 end
 
--- local function file_percentage()
---     local current_line = vim.api.nvim_win_get_cursor(0)[1]
---     local lines = vim.api.nvim_buf_line_count(0)
---
---     return string.format('%d%%%%', math.ceil(current_line / lines * 100))
--- end
+--- @return string
+local function file_percentage()
+    local current_line = vim.api.nvim_win_get_cursor(0)[1]
+    local lines = vim.api.nvim_buf_line_count(0)
 
--- local function total_lines()
---     local lines = vim.fn.line '$'
---     local visible_lines = vim.fn.line 'w$'
---
---     if lines <= visible_lines then
---         return ''
---     end
---
---     return string.format('  %s', lines)
--- end
-
-local function get_icon()
-    local ok, nvim_web_devicons = pcall(require, 'nvim-web-devicons')
-    if not ok then
-        return ''
-    end
-
-    local path = vim.api.nvim_buf_get_name(0)
-    local extension = vim.fn.expand '%:e'
-
-    local icon, color = nvim_web_devicons.get_icon_color(
-        path,
-        extension,
-        { default = true, strict = false }
+    return string.format(
+        '%%#StatusLineMedium#  %d%%%% %%*',
+        math.ceil(current_line / lines * 100)
     )
-
-    local bg = vim.api.nvim_get_hl(0, { name = 'StatusLineMedium' }).bg
-    if bg == nil then
-        bg = vim.api.nvim_get_hl(0, { name = 'StatusLine' }).bg
-    end
-
-    local hl_group = string.format('FileIconColor%s', extension)
-    vim.api.nvim_set_hl(0, hl_group, { fg = color, bg = bg })
-
-    return string.format('%%#%s#%s%%*', hl_group, icon)
 end
 
---- @param with_icon boolean
+--- @return string
+local function total_lines()
+    local lines = vim.fn.line '$'
+    return string.format('%%#StatusLineMedium#of %s %%*', lines)
+end
+
 --- @param hlgroup string
-local function formatted_filetype(with_icon, hlgroup)
+local function formatted_filetype(hlgroup)
     local filetype = vim.bo.filetype or vim.fn.expand('%:e', false)
-
-    if filetype == '' then
-        local buf = vim.api.nvim_get_current_buf()
-        local bufname = vim.api.nvim_buf_get_name(buf)
-
-        if bufname == vim.uv.cwd() then
-            return string.format('%%#%s#  Directory %%*', hlgroup)
-        end
-    end
-
-    local filetypes = require 'gmr.core.statusline.filetypes'
-
-    if with_icon then
-        local space = string.format('%%#%s# %%*', hlgroup)
-        local icon = get_icon()
-        local ft = string.format('%%#%s#%s%%*', hlgroup, filetypes[filetype])
-
-        return string.format('%s%s%s%s%s', space, icon, space, ft, space)
-    end
-
-    -- return string.format('%%#StatusLineMedium# %s %%*', filetypes[filetype])
-    return string.format('%%#%s# %s %%*', hlgroup, filetypes[filetype])
+    return string.format('%%#%s# %s %%*', hlgroup, filetype)
 end
 
 StatusLine = {}
 
-StatusLine.active = function()
-    if vim.o.filetype == '' then
-        return table.concat {
-            '%#Normal#',
-        }
-    end
+StatusLine.inactive = function()
+    return table.concat {
+        formatted_filetype 'StatusLineMode',
+    }
+end
 
-    local mode_str = vim.api.nvim_get_mode()['mode']
+local redeable_filetypes = {
+    ['qf'] = true,
+    ['help'] = true,
+    ['tsplayground'] = true,
+}
+
+StatusLine.active = function()
+    local mode_str = vim.api.nvim_get_mode().mode
     if mode_str == 't' or mode_str == 'nt' then
         return table.concat {
             mode(),
             '%=',
             '%=',
+            file_percentage(),
+            total_lines(),
         }
     end
 
-    return table.concat {
+    if redeable_filetypes[vim.bo.filetype] or vim.o.modifiable == false then
+        return table.concat {
+            formatted_filetype 'StatusLineMode',
+            '%=',
+            '%=',
+            file_percentage(),
+            total_lines(),
+        }
+    end
+
+    local statusline = {
         mode(),
-        -- relative_path(),
-        -- unsaved(),
-        -- readonly(),
         full_git(),
         '%=',
         '%=',
@@ -423,25 +342,13 @@ StatusLine.active = function()
         diagnostics_warns(),
         diagnostics_hint(),
         diagnostics_info(),
-        -- lsp_clients(),
-        python_env(),
-        -- file_percentage(),
-        -- total_lines(),
         lsp_active(),
-        formatted_filetype(true, 'StatusLineMedium'),
+        python_env(),
+        file_percentage(),
+        total_lines(),
     }
-end
 
-StatusLine.inactive = function()
-    return table.concat {
-        formatted_filetype(false, 'StatusLineMode'),
-    }
-end
-
-StatusLine.empty = function()
-    return table.concat {
-        '%#Normal#',
-    }
+    return table.concat(statusline)
 end
 
 vim.api.nvim_create_autocmd({ 'WinEnter', 'BufEnter' }, {
@@ -450,22 +357,18 @@ vim.api.nvim_create_autocmd({ 'WinEnter', 'BufEnter' }, {
     command = 'setlocal statusline=%!v:lua.StatusLine.active()',
 })
 
-local inactive_filetypes = {
-    'NvimTree_1',
-    'NvimTree',
-    'qf',
-    'TelescopePrompt',
-    'fzf',
-    'lspinfo',
-    'lazy',
-    'netrw',
-    'mason',
-    'help',
-    'noice',
-}
-
 vim.api.nvim_create_autocmd({ 'WinEnter', 'BufEnter', 'FileType' }, {
     group = statusline_augroup,
-    pattern = inactive_filetypes,
+    pattern = {
+        'NvimTree_1',
+        'NvimTree',
+        'TelescopePrompt',
+        'fzf',
+        'lspinfo',
+        'lazy',
+        'netrw',
+        'mason',
+        'noice',
+    },
     command = 'setlocal statusline=%!v:lua.StatusLine.inactive()',
 })

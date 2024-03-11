@@ -2,8 +2,9 @@ return {
     'neovim/nvim-lspconfig',
     cmd = { 'LspStart' },
     dependencies = {
-        require 'gmr.plugins.trouble',
         require 'gmr.plugins.neodev',
+        -- require 'gmr.plugins.null-ls',
+        require 'gmr.plugins.trouble',
         { 'b0o/SchemaStore.nvim' },
     },
     config = function()
