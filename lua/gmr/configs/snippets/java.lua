@@ -5,16 +5,16 @@ local insert_node = luasnip.insert_node
 
 local fmt = require('luasnip.extras.fmt').fmt
 local fmta = require('luasnip.extras.fmt').fmta
+local rep = require('luasnip.extras').rep
 
-local filetype = 'cs'
+local filetype = 'java'
 
 luasnip.add_snippets(filetype, {
     snippet(
         'if',
         fmta(
             [[
-if (<condition>)
-{
+if (<condition>) {
     <body>
 }<finish>
             ]],
@@ -47,8 +47,7 @@ luasnip.add_snippets(filetype, {
         'elseif',
         fmta(
             [[
-else if (<condition>)
-{
+else if (<condition>) {
     <body>
 }<finish>
             ]],
@@ -66,8 +65,7 @@ luasnip.add_snippets(filetype, {
         'else',
         fmta(
             [[
-else
-{
+else {
     <body>
 }<finish>
             ]],
@@ -84,8 +82,7 @@ luasnip.add_snippets(filetype, {
         'switch',
         fmta(
             [[
-switch (<expression>)
-{
+switch (<expression>) {
     <case>
 }<finish>
             ]],
@@ -103,8 +100,7 @@ luasnip.add_snippets(filetype, {
         'switcht',
         fmta(
             [[
-switch (true)
-{
+switch (true) {
     <case>
 }<finish>
             ]],
@@ -151,6 +147,21 @@ case <case>: <body_case>
 
 luasnip.add_snippets(filetype, {
     snippet(
+        'arrowcase',
+        fmt(
+            [[
+case {case} -> {body_case}
+            ]],
+            {
+                case = insert_node(1),
+                body_case = insert_node(0),
+            }
+        )
+    ),
+})
+
+luasnip.add_snippets(filetype, {
+    snippet(
         'default',
         fmta(
             [[
@@ -183,19 +194,17 @@ luasnip.add_snippets(filetype, {
         'trycatch',
         fmta(
             [[
-try
-{
+try {
     <try_statements>
-}
-catch (<type_exception> <var_exception>)
-{
-    Console.WriteLine($"{e.Message}");
+} catch (<type_exception> <var_exception>) {
+    System.err.println(<exception>.getMessage());
 }<finish>
             ]],
             {
                 try_statements = insert_node(3),
                 type_exception = insert_node(1),
                 var_exception = insert_node(2),
+                exception = rep(2),
                 finish = insert_node(0),
             }
         )
@@ -210,12 +219,13 @@ luasnip.add_snippets(filetype, {
 catch (<type_exception> <var_exception>)
 {
     <block>
-    Console.WriteLine($"{e.Message}");
+    System.err.println(<exception>.getMessage());
 }<finish>
             ]],
             {
                 type_exception = insert_node(1),
                 var_exception = insert_node(2),
+                exception = rep(2),
                 block = insert_node(3),
                 finish = insert_node(0),
             }
@@ -228,8 +238,7 @@ luasnip.add_snippets(filetype, {
         'finally',
         fmta(
             [[
-finally
-{
+finally {
     <block>
 }<finish>
             ]],
@@ -246,23 +255,19 @@ luasnip.add_snippets(filetype, {
         'trycatchfin',
         fmta(
             [[
-try
-{
+try {
     <try_statements>
-}
-catch (<type_exception> <var_exception>)
-{
+} catch (<type_exception> <var_exception>) {
     <catch_statements>
-    Console.WriteLine($"{e.Message}");
-}
-finally 
-{
+    System.err.println(<exception>.getMessage());
+} finally {
     <finally_statements>
 }<finish>
             ]],
             {
                 type_exception = insert_node(1),
                 var_exception = insert_node(2),
+                exception = rep(2),
                 try_statements = insert_node(3),
                 catch_statements = insert_node(4),
                 finally_statements = insert_node(5),
@@ -277,8 +282,7 @@ luasnip.add_snippets(filetype, {
         'function',
         fmta(
             [[
-<return_type> <method_name>(<parameter_list>)
-{
+<return_type> <method_name>(<parameter_list>) {
     <body>
 }<finish>
             ]],
@@ -298,8 +302,7 @@ luasnip.add_snippets(filetype, {
         'functiongn',
         fmt(
             [[
-{return_type} {method_name}<{generic_parameter_list}>({parameter_list})
-{{
+{return_type} {method_name}<{generic_parameter_list}>({parameter_list}) {{
     {body}
 }}{finish}
             ]],
@@ -527,79 +530,6 @@ while (<condition>)
             {
                 condition = insert_node(1),
                 statement = insert_node(2),
-                finish = insert_node(0),
-            }
-        )
-    ),
-})
-
-luasnip.add_snippets(filetype, {
-    snippet(
-        'namespace',
-        fmta(
-            [[
-namespace (<identifier>)
-{
-    <block>
-}<finish>
-        ]],
-            {
-                identifier = insert_node(1),
-                block = insert_node(2),
-                finish = insert_node(0),
-            }
-        )
-    ),
-})
-
-luasnip.add_snippets(filetype, {
-    snippet(
-        'checked',
-        fmta(
-            [[
-checked
-{
-    <block>
-}<finish>
-        ]],
-            {
-                block = insert_node(1),
-                finish = insert_node(0),
-            }
-        )
-    ),
-})
-
-luasnip.add_snippets(filetype, {
-    snippet(
-        'unchecked',
-        fmta(
-            [[
-unchecked
-{
-    <block>
-}<finish>
-        ]],
-            {
-                block = insert_node(1),
-                finish = insert_node(0),
-            }
-        )
-    ),
-})
-
-luasnip.add_snippets(filetype, {
-    snippet(
-        'unsafe',
-        fmta(
-            [[
-unsafe
-{
-    <block>
-}<finish>
-        ]],
-            {
-                block = insert_node(1),
                 finish = insert_node(0),
             }
         )
