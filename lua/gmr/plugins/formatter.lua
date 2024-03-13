@@ -11,6 +11,14 @@ return {
                 cs = { require('formatter.filetypes.cs').csharpier },
                 css = { prettier },
                 dart = { require('formatter.filetypes.dart').dartformat },
+                gleam = {
+                    function()
+                        return {
+                            exe = 'gleam',
+                            args = { 'format' },
+                        }
+                    end,
+                },
                 go = { require('formatter.filetypes.go').gofumpt },
                 html = { prettier },
                 htmldjango = {

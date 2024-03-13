@@ -13,6 +13,7 @@ M.to_setup = {
     'elixirls',
     'emmet_ls',
     'eslint',
+    'gleam',
     'gopls',
     'html',
     'intelephense',
