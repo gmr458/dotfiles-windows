@@ -2,6 +2,8 @@ return {
     'mhartington/formatter.nvim',
     cmd = 'Format',
     config = function()
+        local util = require 'formatter.util'
+
         local prettier = require 'gmr.configs.formatter.prettier'
         local web = require 'gmr.configs.formatter.web'
 
@@ -35,7 +37,22 @@ return {
                         }
                     end,
                 },
-                java = require('formatter.filetypes.java').google_java_format,
+                java = {
+                    function()
+                        return {
+                            exe = 'google-java-format',
+                            args = {
+                                '--aosp',
+                                util.escape_path(
+                                    util.get_current_buffer_file_path()
+                                ),
+                                '--replace',
+                                '--skip-removing-unused-imports',
+                            },
+                            stdin = true,
+                        }
+                    end,
+                },
                 javascript = { web },
                 javascriptreact = { web },
                 json = { prettier },
@@ -65,6 +82,7 @@ return {
                 toml = require('formatter.filetypes.toml').taplo,
                 typescript = { web },
                 typescriptreact = { web },
+                yaml = require('formatter.filetypes.yaml').yamlfmt,
             },
         }
     end,

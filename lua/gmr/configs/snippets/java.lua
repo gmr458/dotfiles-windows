@@ -216,8 +216,7 @@ luasnip.add_snippets(filetype, {
         'catch',
         fmta(
             [[
-catch (<type_exception> <var_exception>)
-{
+catch (<type_exception> <var_exception>) {
     <block>
     System.err.println(<exception>.getMessage());
 }<finish>
@@ -320,53 +319,10 @@ luasnip.add_snippets(filetype, {
 
 luasnip.add_snippets(filetype, {
     snippet(
-        'functiongnwh',
-        fmt(
-            [[
-{return_type} {method_name}<{generic_parameter_list}>({parameter_list}) where {where_clause}
-{{
-    {body}
-}}{finish}
-            ]],
-            {
-                return_type = insert_node(1),
-                method_name = insert_node(2),
-                generic_parameter_list = insert_node(3),
-                parameter_list = insert_node(4),
-                where_clause = insert_node(5),
-                body = insert_node(6),
-                finish = insert_node(0),
-            }
-        )
-    ),
-})
-
-luasnip.add_snippets(filetype, {
-    snippet(
-        'struct',
-        fmta(
-            [[
-struct <identifier>
-{
-    <field>
-}<finish>
-            ]],
-            {
-                identifier = insert_node(1),
-                field = insert_node(2),
-                finish = insert_node(0),
-            }
-        )
-    ),
-})
-
-luasnip.add_snippets(filetype, {
-    snippet(
         'class',
         fmta(
             [[
-class <identifier>
-{
+class <identifier> {
     <field>
 }<finish>
             ]],
@@ -384,8 +340,7 @@ luasnip.add_snippets(filetype, {
         'classgn',
         fmt(
             [[
-class {identifier}<{generic_parameters}>
-{{
+class {identifier}<{generic_parameters}> {{
     {field}
 }}{finish}
             ]],
@@ -401,31 +356,10 @@ class {identifier}<{generic_parameters}>
 
 luasnip.add_snippets(filetype, {
     snippet(
-        'classei',
-        fmta(
-            [[
-class <identifier> : <class>
-{
-    <field>
-}<finish>
-            ]],
-            {
-                identifier = insert_node(1),
-                class = insert_node(2),
-                field = insert_node(3),
-                finish = insert_node(0),
-            }
-        )
-    ),
-})
-
-luasnip.add_snippets(filetype, {
-    snippet(
         'interface',
         fmta(
             [[
-interface <identifier>
-{
+interface <identifier> {
     <field>
 }<finish>
             ]],
@@ -443,8 +377,7 @@ luasnip.add_snippets(filetype, {
         'enum',
         fmta(
             [[
-enum <identifier>
-{
+enum <identifier> {
     <field>
 }<finish>
             ]],
@@ -462,11 +395,9 @@ luasnip.add_snippets(filetype, {
         'dowhile',
         fmta(
             [[
-do
-{
+do {
     <block>
-}
-while (<statement>);
+} while (<statement>);
             ]],
             {
                 statement = insert_node(1),
@@ -481,8 +412,7 @@ luasnip.add_snippets(filetype, {
         'for',
         fmta(
             [[
-for (<initialization>; <condition>; <afterthought>)
-{
+for (<initialization>; <condition>; <afterthought>) {
     <statement>
 }<finish>
         ]],
@@ -502,13 +432,13 @@ luasnip.add_snippets(filetype, {
         'foreach',
         fmta(
             [[
-foreach (<type> <property> in <collection>) {
+for (<type> <item> : <collection>) {
     <statement>
 }<finish>
         ]],
             {
                 type = insert_node(1),
-                property = insert_node(2),
+                item = insert_node(2),
                 collection = insert_node(3),
                 statement = insert_node(4),
                 finish = insert_node(0),
@@ -522,8 +452,7 @@ luasnip.add_snippets(filetype, {
         'while',
         fmta(
             [[
-while (<condition>)
-{
+while (<condition>) {
     <statement>
 }<finish>
         ]],

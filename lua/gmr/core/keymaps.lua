@@ -207,24 +207,6 @@ vim.keymap.set('n', '<leader>Y', [["+Y]], { desc = 'Yank to clipboard' })
 
 vim.keymap.set('n', '<leader>sb', function()
     vim.opt.background = vim.o.background == 'dark' and 'light' or 'dark'
-
-    -- if vim.o.background == 'dark' then
-    --     vim.opt.background = 'light'
-    --     vim.fn.system {
-    --         'sed',
-    --         '-i',
-    --         's/dark/light/g',
-    --         '/home/gdmr/.config/alacritty/alacritty.toml',
-    --     }
-    -- else
-    --     vim.opt.background = 'dark'
-    --     vim.fn.system {
-    --         'sed',
-    --         '-i',
-    --         's/light/dark/g',
-    --         '/home/gdmr/.config/alacritty/alacritty.toml',
-    --     }
-    -- end
 end, { desc = 'Switch background' })
 
 vim.keymap.set('n', '<leader>ct', '<cmd>ColorizerToggle<cr>')

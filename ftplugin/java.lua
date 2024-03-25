@@ -14,9 +14,14 @@ local config_path = vim.fn.glob(jdtls_path .. '/config_' .. system)
 
 local lombok_path = jdtls_path .. '/lombok.jar'
 
+local jdtls = require 'jdtls'
+
+local extendedClientCapabilities = jdtls.extendedClientCapabilities
+extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
+
 local config = {
     cmd = {
-        'java', -- or '/path/to/java17_or_newer/bin/java'
+        vim.fn.expand '~/.sdkman/candidates/java/21.0.2-tem/bin/java', -- or '/path/to/java17_or_newer/bin/java'
 
         '-Declipse.application=org.eclipse.jdt.ls.core.id1',
         '-Dosgi.bundles.defaultStartLevel=4',
@@ -56,7 +61,62 @@ local config = {
     -- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
     -- for a list of options
     settings = {
-        java = {},
+        java = {
+            server = { launchMode = 'Hybrid' },
+            eclipse = {
+                downloadSources = true,
+            },
+            maven = {
+                downloadSources = true,
+            },
+            configuration = {
+                runtimes = {
+                    {
+                        name = 'JavaSE-1.8',
+                        path = '~/.sdkman/candidates/java/8.0.402-tem',
+                    },
+                    {
+                        name = 'JavaSE-11',
+                        path = '~/.sdkman/candidates/java/11.0.22-tem',
+                    },
+                    {
+                        name = 'JavaSE-17',
+                        path = '~/.sdkman/candidates/java/17.0.10-tem',
+                    },
+                    {
+                        name = 'JavaSE-21',
+                        path = '~/.sdkman/candidates/java/21.0.2-tem',
+                    },
+                },
+            },
+            references = {
+                includeDecompiledSources = true,
+            },
+            implementationsCodeLens = {
+                enabled = false,
+            },
+            referenceCodeLens = {
+                enabled = false,
+            },
+            inlayHints = {
+                parameterNames = {
+                    enabled = 'none',
+                },
+            },
+            signatureHelp = {
+                enabled = true,
+                description = {
+                    enabled = true,
+                },
+            },
+            sources = {
+                organizeImports = {
+                    starThreshold = 9999,
+                    staticStarThreshold = 9999,
+                },
+            },
+        },
+        redhat = { telemetry = { enabled = false } },
     },
 
     -- Language server `initializationOptions`
@@ -68,9 +128,10 @@ local config = {
     -- If you don't plan on using the debugger or other eclipse.jdt.ls plugins you can remove this
     init_options = {
         bundles = {},
+        extendedClientCapabilities = extendedClientCapabilities,
     },
 }
 
 -- This starts a new client & server,
 -- or attaches to an existing client & server depending on the `root_dir`.
-require('jdtls').start_or_attach(config)
+jdtls.start_or_attach(config)

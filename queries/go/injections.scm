@@ -9,3 +9,13 @@
     (#offset! @injection.content 0 1 0 -1)
     (#set! injection.language "sql")
 )
+
+(
+    [
+        (raw_string_literal)
+        (interpreted_string_literal)
+    ] @injection.content
+    (#match? @injection.content "(CREATE|create|ALTER|alter|DROP|drop|TRUNCATE|truncate).+(TABLE|table)?")
+    (#offset! @injection.content 0 1 0 -1)
+    (#set! injection.language "sql")
+)

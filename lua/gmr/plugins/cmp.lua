@@ -105,6 +105,9 @@ return {
 
         require 'gmr.configs.snippets'
 
+        luasnip.filetype_extend('javascriptreact', { 'javascript' })
+        luasnip.filetype_extend('typescriptreact', { 'typescript' })
+
         vim.api.nvim_create_autocmd('CursorHold', {
             group = vim.api.nvim_create_augroup(
                 'gmr_cancel_snippet',
