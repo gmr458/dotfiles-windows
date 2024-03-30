@@ -22,6 +22,12 @@ function M.on_attach(client, bufnr)
         )
     end
 
+    local fzf_opts = {
+        winopts = {
+            fullscreen = true,
+        },
+    }
+
     keymap('<space>e', vim.diagnostic.open_float)
     keymap('[d', vim.diagnostic.goto_prev)
     keymap(']d', vim.diagnostic.goto_next)
@@ -29,7 +35,7 @@ function M.on_attach(client, bufnr)
     keymap('gd', vim.lsp.buf.definition)
     keymap('J', vim.lsp.buf.hover)
     keymap('gi', function()
-        require('fzf-lua').lsp_implementations()
+        require('fzf-lua').lsp_implementations(fzf_opts)
     end)
     keymap('K', vim.lsp.buf.signature_help)
     keymap('<space>wa', vim.lsp.buf.add_workspace_folder)
@@ -40,19 +46,19 @@ function M.on_attach(client, bufnr)
     keymap('<space>D', vim.lsp.buf.type_definition)
     keymap('<space>rn', vim.lsp.buf.rename)
     keymap('<space>ca', function()
-        require('fzf-lua').lsp_code_actions()
+        require('fzf-lua').lsp_code_actions(fzf_opts)
     end)
     keymap('gr', function()
-        require('fzf-lua').lsp_references()
+        require('fzf-lua').lsp_references(fzf_opts)
     end)
     keymap('<space>fo', function()
         vim.lsp.buf.format { async = true }
     end)
     keymap('<leader>ds', function()
-        require('fzf-lua').lsp_document_symbols()
+        require('fzf-lua').lsp_document_symbols(fzf_opts)
     end)
     keymap('<leader>ws', function()
-        require('fzf-lua').lsp_live_workspace_symbols()
+        require('fzf-lua').lsp_live_workspace_symbols(fzf_opts)
     end)
 
     if client.supports_method(methods.textDocument_declaration) then

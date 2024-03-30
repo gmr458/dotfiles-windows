@@ -1,6 +1,4 @@
-local M = {}
-
-M.winbar_filetype_exclude = {
+local winbar_filetype_exclude = {
     'help',
     'startify',
     'dashboard',
@@ -22,7 +20,7 @@ M.winbar_filetype_exclude = {
     '',
 }
 
-M.get_filename = function()
+local function get_filename()
     local filename = vim.fn.expand '%:.'
     local extension = vim.fn.expand '%:e'
     local utils = require 'gmr.core.utils'
@@ -91,8 +89,8 @@ end
 --     return ''
 -- end
 
-local excludes = function()
-    if vim.tbl_contains(M.winbar_filetype_exclude, vim.bo.filetype) then
+local function excludes()
+    if vim.tbl_contains(winbar_filetype_exclude, vim.bo.filetype) then
         vim.opt_local.winbar = nil
         return true
     end
@@ -100,13 +98,13 @@ local excludes = function()
     return false
 end
 
-M.get_winbar = function()
+local function get_winbar()
     if excludes() then
         return
     end
 
     local utils = require 'gmr.core.utils'
-    local value = M.get_filename()
+    local value = get_filename()
 
     if not utils.is_nil_or_empty_string(value) and utils.is_unsaved() then
         local mod = '%#WarningMsg#*%*'
@@ -137,29 +135,21 @@ M.get_winbar = function()
     end
 end
 
-M.create_winbar = function()
-    vim.api.nvim_create_augroup('gmr_winbar', {})
-
-    vim.api.nvim_create_autocmd({
-        'CursorMoved',
-        'CursorHold',
-        'BufWinEnter',
-        'BufFilePost',
-        'InsertEnter',
-        'BufWritePost',
-        'TabClosed',
-    }, {
-        group = 'gmr_winbar',
-        callback = function()
-            local status_ok, _ =
-                pcall(vim.api.nvim_buf_get_var, 0, 'lsp_floating_window')
-            if not status_ok then
-                require('gmr.core.winbar').get_winbar()
-            end
-        end,
-    })
-end
-
-M.create_winbar()
-
-return M
+vim.api.nvim_create_autocmd({
+    'CursorMoved',
+    'CursorHold',
+    'BufWinEnter',
+    'BufFilePost',
+    'InsertEnter',
+    'BufWritePost',
+    'TabClosed',
+}, {
+    group = vim.api.nvim_create_augroup('gmr_winbar', { clear = true }),
+    callback = function()
+        local status_ok, _ =
+            pcall(vim.api.nvim_buf_get_var, 0, 'lsp_floating_window')
+        if not status_ok then
+            get_winbar()
+        end
+    end,
+})

@@ -378,3 +378,17 @@ import (
         )
     ),
 })
+
+luasnip.add_snippets(filetype, {
+    snippet(
+        'json',
+        fmta(
+            [[
+`json:"<finish>"`
+            ]],
+            {
+                finish = insert_node(0),
+            }
+        )
+    ),
+})

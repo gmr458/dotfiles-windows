@@ -11,7 +11,8 @@ M.to_setup = {
     'denols',
     'dockerls',
     'elixirls',
-    'emmet_ls',
+    -- 'emmet_ls',
+    'emmet_language_server',
     'eslint',
     'gleam',
     'gopls',
@@ -37,6 +38,7 @@ M.to_setup = {
     'vimls',
     'volar',
     'yamlls',
+    -- 'zls',
 }
 
 return M

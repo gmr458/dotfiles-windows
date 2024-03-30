@@ -231,14 +231,14 @@ end, { silent = true, desc = 'Switch cmdheight between 1 and 0' })
 vim.keymap.set(
     { 'n', 'o', 'x' },
     '<s-h>',
-    '^',
-    { desc = 'Move cursor to the first character of the current line' }
+    '<cmd>bprevious<cr>',
+    { desc = 'Previous buffer' }
 )
 vim.keymap.set(
     { 'n', 'o', 'x' },
     '<s-l>',
-    'g_',
-    { desc = 'Move cursor to the last character of the current line' }
+    '<cmd>bnext<cr>',
+    { desc = 'Next buffer' }
 )
 
 -- insert
