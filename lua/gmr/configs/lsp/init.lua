@@ -1,5 +1,8 @@
 local M = {}
 
+local fzf_lua = require 'fzf-lua'
+local navic_attach = require('gmr.configs.lsp.navic').attach
+
 --- @param client vim.lsp.Client
 --- @param bufnr integer
 function M.on_attach(client, bufnr)
@@ -35,7 +38,7 @@ function M.on_attach(client, bufnr)
     keymap('gd', vim.lsp.buf.definition)
     keymap('J', vim.lsp.buf.hover)
     keymap('gi', function()
-        require('fzf-lua').lsp_implementations(fzf_opts)
+        fzf_lua.lsp_implementations(fzf_opts)
     end)
     keymap('K', vim.lsp.buf.signature_help)
     keymap('<space>wa', vim.lsp.buf.add_workspace_folder)
@@ -46,19 +49,19 @@ function M.on_attach(client, bufnr)
     keymap('<space>D', vim.lsp.buf.type_definition)
     keymap('<space>rn', vim.lsp.buf.rename)
     keymap('<space>ca', function()
-        require('fzf-lua').lsp_code_actions(fzf_opts)
+        fzf_lua.lsp_code_actions(fzf_opts)
     end)
     keymap('gr', function()
-        require('fzf-lua').lsp_references(fzf_opts)
+        fzf_lua.lsp_references(fzf_opts)
     end)
     keymap('<space>fo', function()
         vim.lsp.buf.format { async = true }
     end)
     keymap('<leader>ds', function()
-        require('fzf-lua').lsp_document_symbols(fzf_opts)
+        fzf_lua.lsp_document_symbols(fzf_opts)
     end)
     keymap('<leader>ws', function()
-        require('fzf-lua').lsp_live_workspace_symbols(fzf_opts)
+        fzf_lua.lsp_live_workspace_symbols(fzf_opts)
     end)
 
     if client.supports_method(methods.textDocument_declaration) then
@@ -93,6 +96,8 @@ function M.on_attach(client, bufnr)
             vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled(0))
         end)
     end
+
+    navic_attach(client, bufnr)
 end
 
 function M.diagnostic_config()

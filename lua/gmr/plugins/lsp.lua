@@ -5,6 +5,7 @@ return {
         require 'gmr.plugins.neodev',
         -- require 'gmr.plugins.null-ls',
         require 'gmr.plugins.trouble',
+        require 'gmr.plugins.navic',
         { 'b0o/SchemaStore.nvim' },
     },
     config = function()
