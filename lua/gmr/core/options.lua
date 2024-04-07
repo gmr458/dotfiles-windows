@@ -28,7 +28,7 @@ local opt = vim.opt
 
 opt.background = 'dark'
 opt.backup = false
-opt.cmdheight = 0
+opt.cmdheight = 1
 opt.completeopt = { 'menu', 'menuone', 'noselect' }
 opt.conceallevel = 3
 opt.confirm = true

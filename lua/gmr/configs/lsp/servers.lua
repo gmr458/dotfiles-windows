@@ -32,7 +32,7 @@ M.to_setup = {
     -- "solargraph",
     'svelte',
     'lua_ls',
-    -- "tailwindcss",
+    "tailwindcss",
     'taplo',
     'tsserver',
     'vimls',

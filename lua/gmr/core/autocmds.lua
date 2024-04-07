@@ -138,23 +138,23 @@ vim.api.nvim_create_autocmd('FileType', {
     end,
 })
 
-vim.api.nvim_create_autocmd('CmdlineEnter', {
-    group = vim.api.nvim_create_augroup(
-        'gmr_cmdheight_1_on_cmdlineenter',
-        { clear = true }
-    ),
-    desc = 'Don\'t hide the status line when typing a command',
-    command = ':set cmdheight=1',
-})
-
-vim.api.nvim_create_autocmd('CmdlineLeave', {
-    group = vim.api.nvim_create_augroup(
-        'gmr_cmdheight_0_on_cmdlineleave',
-        { clear = true }
-    ),
-    desc = 'Hide cmdline when not typing a command',
-    command = ':set cmdheight=0',
-})
+-- vim.api.nvim_create_autocmd('CmdlineEnter', {
+--     group = vim.api.nvim_create_augroup(
+--         'gmr_cmdheight_1_on_cmdlineenter',
+--         { clear = true }
+--     ),
+--     desc = 'Don\'t hide the status line when typing a command',
+--     command = ':set cmdheight=1',
+-- })
+--
+-- vim.api.nvim_create_autocmd('CmdlineLeave', {
+--     group = vim.api.nvim_create_augroup(
+--         'gmr_cmdheight_0_on_cmdlineleave',
+--         { clear = true }
+--     ),
+--     desc = 'Hide cmdline when not typing a command',
+--     command = ':set cmdheight=0',
+-- })
 
 vim.api.nvim_create_autocmd('BufWritePost', {
     group = vim.api.nvim_create_augroup(
