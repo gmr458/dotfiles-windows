@@ -12,8 +12,8 @@ return {
         local lspconfig = require 'lspconfig'
 
         local lspconfiguser = require 'gmr.configs.lsp'
-        lspconfiguser.diagnostic_config()
-        lspconfiguser.handlers()
+        lspconfiguser.setup_diagnostic_config()
+        lspconfiguser.setup_handlers()
 
         local capabilities = require('cmp_nvim_lsp').default_capabilities()
 

@@ -4,7 +4,7 @@ vim.api.nvim_create_autocmd('BufReadPost', {
         { clear = true }
     ),
     pattern = { '*' },
-    desc = 'when editing a file, always jump to the last known cursor position',
+    desc = 'When editing a file, always jump to the last known cursor position',
     callback = function()
         local line = vim.fn.line '\'"'
         if
@@ -156,12 +156,12 @@ vim.api.nvim_create_autocmd('FileType', {
 --     command = ':set cmdheight=0',
 -- })
 
-vim.api.nvim_create_autocmd('BufWritePost', {
-    group = vim.api.nvim_create_augroup(
-        'gmr_hide_message_after_write',
-        { clear = true }
-    ),
-    desc = 'Get rid of message after writing a file',
-    pattern = { '*' },
-    command = 'redrawstatus',
-})
+-- vim.api.nvim_create_autocmd('BufWritePost', {
+--     group = vim.api.nvim_create_augroup(
+--         'gmr_hide_message_after_write',
+--         { clear = true }
+--     ),
+--     desc = 'Get rid of message after writing a file',
+--     pattern = { '*' },
+--     command = 'redrawstatus',
+-- })

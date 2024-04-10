@@ -7,7 +7,6 @@ return {
     },
     config = function()
         local dap = require 'dap'
-        local home = os.getenv 'HOME'
 
         -- C#
         dap.adapters.coreclr = {

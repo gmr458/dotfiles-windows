@@ -50,11 +50,17 @@ local function get_filename()
             readonly = ' '
         end
 
+        local tagged = ''
+        if require('grapple').exists() then
+            tagged = ' 󰓹'
+        end
+
         return string.format(
-            ' %%#%s#%s%%*%s %%#WinBar#%s%%*',
+            ' %%#%s#%s%%*%s%s %%#WinBar#%s%%*',
             hl_group,
             file_icon,
             readonly,
+            tagged,
             filename
         )
     end

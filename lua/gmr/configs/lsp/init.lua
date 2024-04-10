@@ -100,7 +100,7 @@ function M.on_attach(client, bufnr)
     navic_attach(client, bufnr)
 end
 
-function M.diagnostic_config()
+function M.setup_diagnostic_config()
     local diagnostics_icons = {
         ERROR = '',
         WARN = '',
@@ -133,7 +133,7 @@ function M.diagnostic_config()
     }
 end
 
-function M.handlers()
+function M.setup_handlers()
     local methods = vim.lsp.protocol.Methods
     local handlers = require 'gmr.configs.lsp.handlers'
 
