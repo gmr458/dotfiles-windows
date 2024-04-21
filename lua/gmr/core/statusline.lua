@@ -338,6 +338,7 @@ StatusLine.active = function()
         '%=',
         '%=',
         lsp_status(),
+        '%S ',
         diagnostics_error(),
         diagnostics_warns(),
         diagnostics_hint(),
