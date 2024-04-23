@@ -40,11 +40,6 @@ local function get_filename()
         local hl_group = 'WinBarFileIcon' .. extension
         vim.api.nvim_set_hl(0, hl_group, { fg = file_icon_color })
 
-        if utils.is_nil_or_empty_string(file_icon) then
-            file_icon = ''
-            file_icon_color = ''
-        end
-
         local readonly = ''
         if vim.bo.readonly then
             readonly = ' '
@@ -56,7 +51,7 @@ local function get_filename()
         end
 
         return string.format(
-            ' %%#%s#%s%%*%s%s %%#WinBar#%s%%*',
+            ' %%#%s#%s%%*%%#WarningMsg#%s%s%%* %%#WinBar#%s%%*',
             hl_group,
             file_icon,
             readonly,

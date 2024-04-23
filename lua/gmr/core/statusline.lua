@@ -185,7 +185,7 @@ local function lsp_status()
     ) or ''
     local message = lsp_progress.message or ''
 
-    local lsp_message = string.format(' %s', title)
+    local lsp_message = string.format('%s', title)
 
     if message ~= '' then
         lsp_message = string.format('%s %s', lsp_message, message)
@@ -337,8 +337,8 @@ StatusLine.active = function()
         full_git(),
         '%=',
         '%=',
-        lsp_status(),
         '%S ',
+        lsp_status(),
         diagnostics_error(),
         diagnostics_warns(),
         diagnostics_hint(),

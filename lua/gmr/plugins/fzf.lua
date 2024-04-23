@@ -7,11 +7,16 @@ return {
             ['light'] = 'GitHub',
         }
 
-        local preview_pager = string.format(
-            'delta --syntax-theme %s --%s --line-numbers --side-by-side --width=$FZF_PREVIEW_COLUMNS --hunk-header-style=\'omit\' --file-style=\'omit\'',
+        local preview_pager = table.concat({
+            'delta',
+            '--syntax-theme',
             delta_syntax_theme[vim.o.background],
-            vim.o.background
-        )
+            vim.o.background,
+            '--line-numbers',
+            -- '--side-by-side',
+            '--hunk-header-style=\'omit\'',
+            '--file-style=\'omit\'',
+        }, ' ')
 
         local actions = require 'fzf-lua.actions'
 
@@ -21,7 +26,7 @@ return {
                 row = 0.40,
                 col = 0.49,
                 preview = {
-                    vertical = 'down:65%',
+                    vertical = 'down:75%',
                     horizontal = 'right:60%',
                     layout = 'vertical',
                 },

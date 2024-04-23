@@ -39,6 +39,18 @@ local config = {
             },
         },
     },
+    handlers = {
+        ['workspace/executeCommand'] = function(_, result, ctx, _)
+            if
+                ctx.params.command == '_typescript.goToSourceDefinition'
+                and result ~= nil
+                and #result > 0
+            then
+                vim.cmd 'vsplit'
+                vim.lsp.util.jump_to_location(result[1], 'utf-8')
+            end
+        end,
+    },
 }
 
 return config
