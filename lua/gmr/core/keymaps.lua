@@ -103,6 +103,19 @@ vim.keymap.set('n', '<leader>bf', function()
     require('fzf-lua').buffers(get_fzf_opts())
 end, { silent = true })
 
+vim.keymap.set('n', '<leader>m', '<cmd>Grapple toggle<cr>')
+vim.keymap.set('n', '<leader>gr', '<cmd>Grapple open_tags<cr>')
+
+local indexes = { 1, 2, 3, 4, 5, 6, 7, 8, 9 }
+
+for _, idx in pairs(indexes) do
+    vim.keymap.set(
+        'n',
+        string.format('<leader>%s', idx),
+        string.format('<cmd>Grapple select index=%s<cr>', idx)
+    )
+end
+
 vim.keymap.set(
     'n',
     '<leader>gp',

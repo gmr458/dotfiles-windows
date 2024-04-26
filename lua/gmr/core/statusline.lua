@@ -352,11 +352,7 @@ StatusLine.active = function()
     return table.concat(statusline)
 end
 
-vim.api.nvim_create_autocmd({ 'WinEnter', 'BufEnter' }, {
-    group = statusline_augroup,
-    pattern = { '*' },
-    command = 'setlocal statusline=%!v:lua.StatusLine.active()',
-})
+vim.opt.statusline = '%!v:lua.StatusLine.active()'
 
 vim.api.nvim_create_autocmd({ 'WinEnter', 'BufEnter', 'FileType' }, {
     group = statusline_augroup,
@@ -371,5 +367,7 @@ vim.api.nvim_create_autocmd({ 'WinEnter', 'BufEnter', 'FileType' }, {
         'mason',
         'noice',
     },
-    command = 'setlocal statusline=%!v:lua.StatusLine.inactive()',
+    callback = function()
+        vim.opt_local.statusline = '%!v:lua.StatusLine.inactive()'
+    end,
 })
