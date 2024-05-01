@@ -28,6 +28,7 @@ M.to_setup = {
     -- 'pylyzer',
     -- 'phpactor',
     'pyright',
+    'ruff_lsp',
     'rust_analyzer',
     'templ',
     -- "solargraph",

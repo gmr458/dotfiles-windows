@@ -366,6 +366,7 @@ vim.api.nvim_create_autocmd({ 'WinEnter', 'BufEnter', 'FileType' }, {
         'netrw',
         'mason',
         'noice',
+        'qf',
     },
     callback = function()
         vim.opt_local.statusline = '%!v:lua.StatusLine.inactive()'
