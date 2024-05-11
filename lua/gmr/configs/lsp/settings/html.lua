@@ -8,6 +8,7 @@ local config = {
         'htmldjango',
         'pug',
         'templ',
+        'template',
     },
 }
 

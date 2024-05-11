@@ -80,6 +80,21 @@ return {
                 rust = require('formatter.filetypes.rust').rustfmt,
                 scss = { prettier },
                 svelte = { prettier },
+                template = {
+                    function()
+                        return {
+                            exe = 'djlint',
+                            args = {
+                                '--reformat',
+                                '--quiet',
+                                vim.fn.shellescape(
+                                    vim.api.nvim_buf_get_name(0)
+                                ),
+                            },
+                            stdin = false,
+                        }
+                    end,
+                },
                 toml = require('formatter.filetypes.toml').taplo,
                 typescript = { web },
                 typescriptreact = { web },

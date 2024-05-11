@@ -66,34 +66,35 @@ return {
                 },
             },
             fzf_opts = {
-                ['--color'] = vim.o.background .. ',bg+:-1',
+                ['--pointer'] = '▌',
+                ['--highlight-line'] = true,
+                ['--color'] = 'gutter:-1',
                 ['--scrollbar'] = '█',
-                ['--info'] = 'right',
+                ['--info'] = 'hidden',
                 ['--no-bold'] = '',
             },
             files = {
                 git_icons = false,
                 cwd_prompt = false,
-                fzf_opts = {
-                    ['--info'] = 'right',
-                },
+                formatter = 'path.filename_first',
+                no_header = true,
+            },
+            buffers = {
+                no_header = true,
             },
             git = {
                 status = {
                     preview_pager = preview_pager,
+                    no_header = true,
                 },
             },
             grep = {
+                no_header = true,
                 git_icons = false,
-                fzf_opts = {
-                    ['--info'] = 'right',
-                },
             },
             lsp = {
+                no_header = true,
                 symbols = {
-                    fzf_opts = {
-                        ['--info'] = 'right',
-                    },
                     symbol_icons = {
                         File = ' ',
                         Module = ' ',

@@ -58,19 +58,33 @@ vim.keymap.set(
     { silent = true, desc = 'Delete current buffer' }
 )
 
-local function get_fzf_opts()
+--- @param height number|nil
+--- @param width number|nil
+local function get_fzf_opts(height, width)
+    if height == nil then
+        height = 0.85
+    end
+
+    if width == nil then
+        width = 0.80
+    end
+
     return {
         winopts = {
+            height = height,
+            width = width,
             preview = {
                 hidden = 'hidden',
             },
         },
-        fzf_opts = { ['--color'] = vim.o.background .. ',bg+:-1' },
+        fzf_opts = {
+            ['--highlight-line'] = true,
+        },
     }
 end
 
 vim.keymap.set('n', '<leader>ff', function()
-    require('fzf-lua').files(get_fzf_opts())
+    require('fzf-lua').files(get_fzf_opts(0.7, 0.5))
 end, { silent = true })
 vim.keymap.set('n', '<leader>gs', function()
     require('fzf-lua').git_status {
@@ -79,12 +93,13 @@ vim.keymap.set('n', '<leader>gs', function()
         },
     }
 end, { silent = true })
-vim.keymap.set(
-    'n',
-    '<leader>lg',
-    ':FzfLua live_grep resume=true<cr>',
-    { silent = true }
-)
+vim.keymap.set('n', '<leader>lg', function()
+    require('fzf-lua').live_grep {
+        winopts = {
+            fullscreen = true,
+        },
+    }
+end, { silent = true })
 vim.keymap.set('n', '<leader>hh', function()
     require('fzf-lua').help_tags {
         winopts = {
@@ -100,7 +115,7 @@ vim.keymap.set('n', '<leader>of', function()
     require('fzf-lua').oldfiles(get_fzf_opts())
 end, { silent = true })
 vim.keymap.set('n', '<leader>bf', function()
-    require('fzf-lua').buffers(get_fzf_opts())
+    require('fzf-lua').buffers(get_fzf_opts(0.7, 0.5))
 end, { silent = true })
 
 vim.keymap.set('n', '<leader>m', '<cmd>Grapple toggle<cr>')
@@ -182,6 +197,14 @@ vim.keymap.set('n', '<leader>Y', [["+Y]], { desc = 'Yank to clipboard' })
 vim.keymap.set('n', '<leader>sb', function()
     vim.opt.background = vim.o.background == 'dark' and 'light' or 'dark'
 end, { desc = 'Switch background' })
+
+vim.keymap.set('n', '<leader>sw', function()
+    if vim.o.wrap then
+        vim.cmd 'set nowrap'
+    else
+        vim.cmd 'set wrap'
+    end
+end, { desc = 'Switch wrap' })
 
 vim.keymap.set('n', '<leader>ct', '<cmd>ColorizerToggle<cr>')
 
