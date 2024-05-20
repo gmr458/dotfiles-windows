@@ -10,6 +10,7 @@ return {
         require('formatter').setup {
             logging = false,
             filetype = {
+                astro = { prettier },
                 cs = { require('formatter.filetypes.cs').csharpier },
                 css = { prettier },
                 dart = { require('formatter.filetypes.dart').dartformat },

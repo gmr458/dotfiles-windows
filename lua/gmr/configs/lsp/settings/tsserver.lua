@@ -7,7 +7,7 @@ end
 -- https://github.com/typescript-language-server/typescript-language-server/blob/master/docs/configuration.md
 local config = {
     root_dir = util.root_pattern 'package.json',
-    single_file_support = false,
+    single_file_support = true,
     settings = {
         diagnostics = {
             ignoredCodes = { 80001 },

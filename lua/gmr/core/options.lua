@@ -78,17 +78,8 @@ opt.virtualedit = 'block'
 -- opt.wildoptions = ''
 opt.wrap = false
 
--- vim.filetype.add {
---     extension = {
---         templ = 'templ',
---     },
---     pattern = {
---         ['.env.*'] = 'sh',
---     },
--- }
-
 if vim.g.neovide then
-    opt.linespace = 0
+    opt.linespace = -1
 
     -- emulate alacritty font rendering
     vim.g.neovide_text_gamma = 0.8
@@ -96,6 +87,7 @@ if vim.g.neovide then
 
     -- padding
     vim.g.neovide_padding_top = 5
+    vim.g.neovide_padding_left = 2
 
     -- disable blur
     vim.g.neovide_window_blurred = false
@@ -107,7 +99,7 @@ if vim.g.neovide then
     vim.g.neovide_light_radius = 0
 
     -- other options
-    vim.g.neovide_transparency = 1.0
+    vim.g.neovide_transparency = 0.9
     vim.g.neovide_hide_mouse_when_typing = true
     vim.g.neovide_underline_stroke_scale = 0.5
     vim.g.neovide_refresh_rate = 60
