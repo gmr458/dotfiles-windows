@@ -1,5 +1,8 @@
 local mason = require 'mason-registry'
 local jdtls_path = mason.get_package('jdtls'):get_install_path()
+local java_debug_path =
+    mason.get_package('java-debug-adapter'):get_install_path()
+local java_test_path = mason.get_package('java-test'):get_install_path()
 
 local equinox_launcher_path =
     vim.fn.glob(jdtls_path .. '/plugins/org.eclipse.equinox.launcher_*.jar')
@@ -16,12 +19,9 @@ local lombok_path = jdtls_path .. '/lombok.jar'
 
 local jdtls = require 'jdtls'
 
-local extendedClientCapabilities = jdtls.extendedClientCapabilities
-extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
-
 local config = {
     cmd = {
-        vim.fn.expand '~/.sdkman/candidates/java/21.0.2-tem/bin/java', -- or '/path/to/java17_or_newer/bin/java'
+        vim.fn.expand '~/.sdkman/candidates/java/21.0.3-tem/bin/java', -- or '/path/to/java17_or_newer/bin/java'
 
         '-Declipse.application=org.eclipse.jdt.ls.core.id1',
         '-Dosgi.bundles.defaultStartLevel=4',
@@ -49,10 +49,7 @@ local config = {
             .. vim.fn.fnamemodify(vim.fn.getcwd(), ':t'),
     },
 
-    root_dir = require('jdtls.setup').find_root {
-        'mvnw',
-        'gradlew',
-    },
+    root_dir = vim.fs.root(0, { 'mvnw', 'gradlew' }),
 
     on_attach = require('gmr.configs.lsp').on_attach,
     capabilities = require('cmp_nvim_lsp').default_capabilities(),
@@ -85,7 +82,7 @@ local config = {
                     },
                     {
                         name = 'JavaSE-21',
-                        path = '~/.sdkman/candidates/java/21.0.2-tem',
+                        path = '~/.sdkman/candidates/java/21.0.3-tem',
                     },
                 },
             },
@@ -118,20 +115,22 @@ local config = {
         },
         redhat = { telemetry = { enabled = false } },
     },
-
-    -- Language server `initializationOptions`
-    -- You need to extend the `bundles` with paths to jar files
-    -- if you want to use additional eclipse.jdt.ls plugins.
-    --
-    -- See https://github.com/mfussenegger/nvim-jdtls#java-debug-installation
-    --
-    -- If you don't plan on using the debugger or other eclipse.jdt.ls plugins you can remove this
-    init_options = {
-        bundles = {},
-        extendedClientCapabilities = extendedClientCapabilities,
-    },
 }
 
--- This starts a new client & server,
--- or attaches to an existing client & server depending on the `root_dir`.
+local bundles = {
+    vim.fn.glob(
+        java_debug_path
+            .. '/extension/server/com.microsoft.java.debug.plugin-*.jar'
+    ),
+}
+
+vim.list_extend(
+    bundles,
+    vim.split(vim.fn.glob(java_test_path .. '/extension/server/*.jar'), '\n')
+)
+
+config['init_options'] = {
+    bundles = bundles,
+}
+
 jdtls.start_or_attach(config)

@@ -94,10 +94,15 @@ function M.on_attach(client, bufnr)
 
         keymap('<leader>ih', function()
             vim.lsp.inlay_hint.enable(
-                not vim.lsp.inlay_hint.is_enabled(0),
+                not vim.lsp.inlay_hint.is_enabled { bufnr = 0 },
                 { bufnr = 0 }
             )
         end)
+    end
+
+    if client.name == 'jdtls' then
+        require('jdtls').setup_dap { hotcodereplace = 'auto' }
+        require('jdtls.dap').setup_dap_main_class_configs()
     end
 
     navic_attach(client, bufnr)

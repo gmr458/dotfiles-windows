@@ -1,6 +1,5 @@
 return {
     'rcarriga/nvim-dap-ui',
-    cmd = { 'DapLoadLaunchJSON', 'DapContinue', 'DapToggleBreakpoint' },
     dependencies = {
         { 'mfussenegger/nvim-dap' },
         { 'nvim-neotest/nvim-nio' },
@@ -29,36 +28,26 @@ return {
             },
         }
 
-        -- Go
-        dap.adapters.go = {
-            type = 'executable',
-            command = 'node',
-            args = {
-                vim.fn.stdpath 'data'
-                    .. '/mason/packages/go-debug-adapter/extension/dist/debugAdapter.js',
-            },
-        }
-        dap.configurations.go = {
-            {
-                type = 'go',
-                name = 'Debug',
-                request = 'launch',
-                showLog = false,
-                program = '${file}',
-                dlvToolPath = vim.fn.exepath 'dlv',
-            },
-        }
-
         local dapui = require 'dapui'
 
         dapui.setup()
 
-        dap.listeners.after.event_initialized['dapui_config'] = function()
-            dapui.open()
+        dap.listeners.after.launch.dapui_config = function()
+            require('dapui').open()
         end
 
-        vim.api.nvim_create_user_command('DapUiClose', function()
+        vim.keymap.set('n', '<leader>do', function()
+            require('dapui').open()
+        end)
+
+        vim.keymap.set('n', '<leader>dc', function()
+            require('dapui').open()
             require('dapui').close()
-        end, {})
+        end)
+
+        vim.fn.sign_define(
+            'DapBreakpoint',
+            { text = '', texthl = 'ErrorMsg', linehl = '', numhl = '' }
+        )
     end,
 }

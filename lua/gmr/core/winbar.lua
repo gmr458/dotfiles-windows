@@ -19,6 +19,8 @@ local winbar_filetype_exclude = {
     'lab',
     'Markdown',
     'fzf',
+    'dap-float',
+    'dap-repl',
     '',
 }
 

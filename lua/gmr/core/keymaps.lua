@@ -141,6 +141,13 @@ vim.keymap.set(
 vim.keymap.set('n', '<C-n>', ':NvimTreeFindFileToggle<cr>', { silent = true })
 vim.keymap.set('n', '<leader>r', ':NvimTreeRefresh<cr>', { silent = true })
 
+vim.keymap.set('n', '<leader>ts', ':Neotest summary<cr>', { silent = true })
+vim.keymap.set('n', '<leader>tn', ':NeotestNearest<cr>', { silent = true })
+vim.keymap.set('n', '<leader>tc', ':NeotestCurrentFile<cr>', { silent = true })
+vim.keymap.set('n', '<leader>ta', ':NeotestAll<cr>', { silent = true })
+
+vim.keymap.set('n', '<leader>bk', ':DapToggleBreakpoint<cr>', { silent = true })
+
 vim.keymap.set('n', '<leader>nh', ':nohlsearch<cr>', { silent = true })
 
 vim.keymap.set(
