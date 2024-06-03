@@ -4,9 +4,7 @@ return {
     priority = 1000,
     build = ':ColdCompile',
     config = function()
-        require('cold').setup {
-            transparent_background = false,
-        }
+        require('cold').setup {}
 
         vim.cmd.colorscheme 'cold'
     end,

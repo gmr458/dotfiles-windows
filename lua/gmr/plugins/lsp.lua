@@ -2,9 +2,6 @@ return {
     'neovim/nvim-lspconfig',
     cmd = { 'LspStart' },
     dependencies = {
-        require 'gmr.plugins.neodev',
-        -- require 'gmr.plugins.null-ls',
-        require 'gmr.plugins.trouble',
         require 'gmr.plugins.navic',
         { 'b0o/SchemaStore.nvim' },
     },
@@ -40,10 +37,6 @@ return {
                 pcall(require, 'gmr.configs.lsp.commands.' .. server)
             if has_custom_commands then
                 server_opts.commands = server_custom_commands
-            end
-
-            if server == 'lua_ls' then
-                require('neodev').setup {}
             end
 
             lspconfig[server].setup(server_opts)

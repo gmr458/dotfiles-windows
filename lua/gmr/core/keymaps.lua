@@ -148,6 +148,13 @@ vim.keymap.set('n', '<leader>ta', ':NeotestAll<cr>', { silent = true })
 
 vim.keymap.set('n', '<leader>bk', ':DapToggleBreakpoint<cr>', { silent = true })
 
+vim.keymap.set('n', '<leader>dd', function()
+    vim.diagnostic.setloclist()
+end)
+vim.keymap.set('n', '<leader>wd', function()
+    vim.diagnostic.setqflist()
+end)
+
 vim.keymap.set('n', '<leader>nh', ':nohlsearch<cr>', { silent = true })
 
 vim.keymap.set(

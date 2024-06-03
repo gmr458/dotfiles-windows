@@ -64,7 +64,7 @@ function M.goto_definition()
             end
         end
 
-        if vim.tbl_islist(result) then
+        if vim._islist(result) then
             util.jump_to_location(result[1], 'utf-8')
 
             if #result > 1 then

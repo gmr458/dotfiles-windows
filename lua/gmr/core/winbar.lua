@@ -8,6 +8,7 @@ local winbar_filetype_exclude = {
     'neogitstatus',
     'NvimTree',
     'Trouble',
+    'trouble',
     'alpha',
     'lir',
     'Outline',
