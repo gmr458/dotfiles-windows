@@ -167,7 +167,7 @@ try {
     <try_statements>
 } catch (err) {
     if (err instanceof Error) {
-        console.error(e.message);
+        console.error(err.message);
     }
 }<finish>
             ]],
@@ -188,7 +188,7 @@ try {
     <try_statements>
 } catch (err) {
     if (err instanceof Error) {
-        console.error(e.message);
+        console.error(err.message);
     }
 } finally {
     <finally_statements>
