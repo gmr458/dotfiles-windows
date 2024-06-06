@@ -1,7 +1,9 @@
-local plugin_specs = {}
+local plugin_specs = {} --- @type LazySpecImport[]
 
+--- @param plugin string
 local function add(plugin)
-    table.insert(plugin_specs, { import = plugin })
+    local spec = { import = plugin } --- @type LazySpecImport
+    table.insert(plugin_specs, spec)
 end
 
 add 'gmr.plugins.autopairs'
@@ -21,7 +23,6 @@ add 'gmr.plugins.gitsigns'
 add 'gmr.plugins.guess-indent'
 add 'gmr.plugins.jdtls'
 add 'gmr.plugins.lsp'
-add 'gmr.plugins.luvit-meta'
 add 'gmr.plugins.mason'
 add 'gmr.plugins.mini-comment'
 -- add 'gmr.plugins.neotest'

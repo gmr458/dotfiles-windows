@@ -3,6 +3,9 @@ return {
     cmd = 'Grapple',
     config = function()
         require('grapple').setup {
+            tag_title = function(scope)
+                return vim.fn.fnamemodify(scope.id, ':t')
+            end,
             styles = {
                 custom = function(entity, _)
                     local Path = require 'grapple.path'
@@ -17,7 +20,6 @@ return {
                         virt_text_pos = 'eol',
                     }
 
-                    ---@type grapple.stylized
                     local line = {
                         display = Path.base(entity.tag.path),
                         marks = { parent_mark },

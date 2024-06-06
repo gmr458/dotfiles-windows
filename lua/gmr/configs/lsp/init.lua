@@ -100,10 +100,11 @@ function M.on_attach(client, bufnr)
         end)
     end
 
-    if client.name == 'jdtls' then
-        require('jdtls').setup_dap { hotcodereplace = 'auto' }
-        require('jdtls.dap').setup_dap_main_class_configs()
-    end
+    -- uncomment this if using dap
+    -- if client.name == 'jdtls' then
+    --     require('jdtls').setup_dap { hotcodereplace = 'auto' }
+    --     require('jdtls.dap').setup_dap_main_class_configs()
+    -- end
 
     navic_attach(client, bufnr)
 end

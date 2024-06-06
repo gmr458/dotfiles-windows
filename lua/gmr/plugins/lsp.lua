@@ -2,6 +2,8 @@ return {
     'neovim/nvim-lspconfig',
     cmd = { 'LspStart' },
     dependencies = {
+        require 'gmr.plugins.lazydev',
+        require 'gmr.plugins.luvit-meta',
         require 'gmr.plugins.navic',
         { 'b0o/SchemaStore.nvim' },
     },
