@@ -392,3 +392,17 @@ luasnip.add_snippets(filetype, {
         )
     ),
 })
+
+luasnip.add_snippets(filetype, {
+    snippet(
+        'form',
+        fmta(
+            [[
+`form:"<finish>"`
+            ]],
+            {
+                finish = insert_node(0),
+            }
+        )
+    ),
+})

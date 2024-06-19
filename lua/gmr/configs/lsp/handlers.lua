@@ -12,22 +12,15 @@ function M.goto_definition()
             vim.uv.os_uname().sysname == 'Linux'
             and os.getenv 'DESKTOP_SESSION' == 'hyprland'
         then
-            local output_hyprctl = vim.fn.system {
-                'hyprctl',
-                '-j',
-                'activewindow',
-            }
-            if output_hyprctl then
-                --- @class HyprlandWindow
-                --- @field size table
-                local json = vim.json.decode(output_hyprctl)
+            local output_hyprctl = vim.fn.system 'hyprctl -j activewindow'
+            --- @class HyprlandWindow
+            --- @field size number[]
+            local json = vim.json.decode(output_hyprctl)
 
-                local size_x = json.size[1] --- @type number
-                local size_y = json.size[2] --- @type number
+            local size_x, size_y = json.size[1], json.size[2]
 
-                if size_y > size_x then
-                    split_cmd = 'split'
-                end
+            if size_y > size_x then
+                split_cmd = 'split'
             end
         end
 

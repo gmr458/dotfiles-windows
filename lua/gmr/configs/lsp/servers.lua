@@ -36,9 +36,10 @@ M.to_setup = {
     'lua_ls',
     'tailwindcss',
     'taplo',
-    'tsserver',
+    -- 'tsserver',
     'vimls',
     'volar',
+    -- 'vtsls',
     'yamlls',
     -- 'zls',
 }

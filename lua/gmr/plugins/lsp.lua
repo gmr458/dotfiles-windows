@@ -3,6 +3,7 @@ return {
     cmd = { 'LspStart' },
     dependencies = {
         require 'gmr.plugins.lazydev',
+        require 'gmr.plugins.typescript-tools',
         require 'gmr.plugins.luvit-meta',
         require 'gmr.plugins.navic',
         { 'b0o/SchemaStore.nvim' },
