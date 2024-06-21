@@ -5,7 +5,7 @@ return {
     build = ':BlackWhiteCompile',
     config = function()
         require('black_white').setup {
-            transparent_background = true,
+            transparent_background = false,
         }
         vim.cmd.colorscheme 'black_white'
     end,

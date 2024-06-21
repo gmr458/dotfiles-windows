@@ -127,6 +127,10 @@ vim.keymap.set('n', '<leader>Y', [["+Y]], { desc = 'Yank to clipboard' })
 -- switch
 vim.keymap.set('n', '<leader>sb', function()
     vim.opt.background = vim.o.background == 'dark' and 'light' or 'dark'
+    if running_kitty then
+        local cmd = 'kitten themes ' .. vim.o.background
+        vim.fn.system(cmd)
+    end
 end, { desc = 'Switch background' })
 
 vim.keymap.set('n', '<leader>sw', function()
