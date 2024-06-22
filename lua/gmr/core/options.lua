@@ -40,9 +40,9 @@ opt.grepprg = 'rg --vimgrep'
 opt.ignorecase = true
 -- opt.inccommand = 'split'
 opt.laststatus = 3
-opt.list = false
+-- opt.list = true
 -- opt.listchars:append {
---     eol = '↲',
+--     eol = ' ',
 --     tab = '│ ',
 --     trail = ' ',
 -- }
