@@ -126,17 +126,17 @@ vim.api.nvim_create_autocmd('VimResized', {
     command = 'tabdo wincmd =',
 })
 
-vim.api.nvim_create_autocmd('FileType', {
-    group = vim.api.nvim_create_augroup(
-        'gmr_wrap_spell_for_writing',
-        { clear = true }
-    ),
-    pattern = { 'gitcommit', 'markdown' },
-    desc = 'Enable wrap and spell on Git Commits and Markdown',
-    callback = function()
-        vim.opt_local.wrap = true
-    end,
-})
+-- vim.api.nvim_create_autocmd('FileType', {
+--     group = vim.api.nvim_create_augroup(
+--         'gmr_wrap_spell_for_writing',
+--         { clear = true }
+--     ),
+--     pattern = { 'gitcommit', 'markdown' },
+--     desc = 'Enable wrap and spell on Git Commits and Markdown',
+--     callback = function()
+--         vim.opt_local.wrap = true
+--     end,
+-- })
 
 vim.api.nvim_create_autocmd('CmdlineEnter', {
     group = vim.api.nvim_create_augroup(
@@ -164,4 +164,26 @@ vim.api.nvim_create_autocmd('BufWritePost', {
     desc = 'Get rid of message after writing a file',
     pattern = { '*' },
     command = 'redrawstatus',
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+    group = vim.api.nvim_create_augroup(
+        'gmr_disable_indentscope_filetypes',
+        { clear = true }
+    ),
+    desc = 'Disable mini.indentscope in specific filetypes',
+    pattern = {
+        'lspinfo',
+        'lazy',
+        'checkhealth',
+        'help',
+        'man',
+        'gitcommit',
+        'NvimTree',
+        'fzf',
+        '',
+    },
+    callback = function()
+        vim.b.miniindentscope_disable = true
+    end,
 })

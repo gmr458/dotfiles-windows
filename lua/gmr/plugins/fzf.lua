@@ -11,7 +11,6 @@ return {
             'delta',
             '--syntax-theme',
             delta_syntax_theme[vim.o.background],
-            vim.o.background,
             '--line-numbers',
             -- '--side-by-side',
             '--hunk-header-style=\'omit\'',

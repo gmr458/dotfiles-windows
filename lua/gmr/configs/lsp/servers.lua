@@ -20,7 +20,7 @@ M.to_setup = {
     'intelephense',
     -- 'jdtls',
     'jsonls',
-    'kotlin_language_server',
+    -- 'kotlin_language_server',
     'nim_langserver',
     'ocamllsp',
     'omnisharp',
