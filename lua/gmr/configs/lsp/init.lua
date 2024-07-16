@@ -90,13 +90,8 @@ function M.on_attach(client, bufnr)
     end
 
     if client.supports_method(methods.textDocument_inlayHint) then
-        vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
-
         keymap('<leader>ih', function()
-            vim.lsp.inlay_hint.enable(
-                not vim.lsp.inlay_hint.is_enabled { bufnr = 0 },
-                { bufnr = 0 }
-            )
+            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
         end)
     end
 

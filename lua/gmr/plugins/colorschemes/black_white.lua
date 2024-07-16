@@ -6,6 +6,8 @@ return {
     config = function()
         require('black_white').setup {
             transparent_background = false,
+            cursorline = false,
+            treesitter_context_underline = true,
         }
         vim.cmd.colorscheme 'black_white'
     end,

@@ -6,6 +6,7 @@ return {
         require 'gmr.plugins.typescript-tools',
         require 'gmr.plugins.luvit-meta',
         require 'gmr.plugins.navic',
+        require 'gmr.plugins.null-ls',
         { 'b0o/SchemaStore.nvim' },
     },
     config = function()
@@ -15,7 +16,7 @@ return {
         lspconfiguser.setup_diagnostic_config()
         lspconfiguser.setup_handlers()
 
-        -- local capabilities = require('cmp_nvim_lsp').default_capabilities()
+        local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
         require('lspconfig.ui.windows').default_options.border = 'single'
 
@@ -23,7 +24,7 @@ return {
         for _, server in pairs(servers) do
             local server_opts = {
                 on_attach = lspconfiguser.on_attach,
-                -- capabilities = capabilities,
+                capabilities = capabilities,
             }
 
             local has_custom_opts, server_custom_opts =

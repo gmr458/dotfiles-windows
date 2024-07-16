@@ -5,6 +5,15 @@ local settings = {
             gofumpt = true,
             usePlaceholders = false,
             semanticTokens = false,
+            ['ui.inlayhint.hints'] = {
+                assignVariableTypes = true,
+                compositeLiteralFields = true,
+                compositeLiteralTypes = false,
+                constantValues = true,
+                functionTypeParameters = true,
+                parameterNames = true,
+                rangeVariableTypes = true,
+            },
         },
     },
 }
