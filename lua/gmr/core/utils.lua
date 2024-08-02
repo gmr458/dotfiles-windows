@@ -44,4 +44,9 @@ function M.trim(str)
     return str
 end
 
+--- @return boolean
+function M.pumvisible()
+    return tonumber(vim.fn.pumvisible()) ~= 0
+end
+
 return M

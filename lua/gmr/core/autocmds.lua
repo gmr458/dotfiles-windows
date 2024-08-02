@@ -181,6 +181,7 @@ vim.api.nvim_create_autocmd('FileType', {
         'gitcommit',
         'NvimTree',
         'fzf',
+        'mason',
         '',
     },
     callback = function()

@@ -6,6 +6,7 @@ return {
     config = function()
         require('cold').setup {
             transparent_background = false,
+            cursorline = false,
         }
         vim.cmd.colorscheme 'cold'
     end,
