@@ -24,6 +24,7 @@ return {
                 border = 'single',
                 row = 0.40,
                 col = 0.49,
+                backdrop = 100,
                 preview = {
                     vertical = 'down:75%',
                     horizontal = 'right:60%',
