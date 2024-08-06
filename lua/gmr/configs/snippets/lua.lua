@@ -1,14 +1,9 @@
 local luasnip = require 'luasnip'
-
-local snippet = luasnip.snippet
-local insert_node = luasnip.insert_node
-
 local fmta = require('luasnip.extras.fmt').fmta
-
 local filetype = 'lua'
 
 luasnip.add_snippets(filetype, {
-    snippet(
+    luasnip.snippet(
         'if',
         fmta(
             [[
@@ -17,16 +12,16 @@ if <exp> then
 end<finish>
             ]],
             {
-                exp = insert_node(1),
-                block = insert_node(2),
-                finish = insert_node(0),
+                exp = luasnip.insert_node(1),
+                block = luasnip.insert_node(2),
+                finish = luasnip.insert_node(0),
             }
         )
     ),
 })
 
 luasnip.add_snippets(filetype, {
-    snippet(
+    luasnip.snippet(
         'elseif',
         fmta(
             [[
@@ -34,15 +29,15 @@ elseif <exp> then
     <block>
             ]],
             {
-                exp = insert_node(1),
-                block = insert_node(0),
+                exp = luasnip.insert_node(1),
+                block = luasnip.insert_node(0),
             }
         )
     ),
 })
 
 luasnip.add_snippets(filetype, {
-    snippet(
+    luasnip.snippet(
         'else',
         fmta(
             [[
@@ -50,14 +45,14 @@ else
     <block>
             ]],
             {
-                block = insert_node(0),
+                block = luasnip.insert_node(0),
             }
         )
     ),
 })
 
 luasnip.add_snippets(filetype, {
-    snippet(
+    luasnip.snippet(
         'repeat',
         fmta(
             [[
@@ -66,15 +61,15 @@ repeat
 until <exp>
             ]],
             {
-                block = insert_node(0),
-                exp = insert_node(1),
+                block = luasnip.insert_node(0),
+                exp = luasnip.insert_node(1),
             }
         )
     ),
 })
 
 luasnip.add_snippets(filetype, {
-    snippet(
+    luasnip.snippet(
         'while',
         fmta(
             [[
@@ -83,16 +78,16 @@ while <exp> do
 end<finish>
             ]],
             {
-                exp = insert_node(1),
-                block = insert_node(2),
-                finish = insert_node(0),
+                exp = luasnip.insert_node(1),
+                block = luasnip.insert_node(2),
+                finish = luasnip.insert_node(0),
             }
         )
     ),
 })
 
 luasnip.add_snippets(filetype, {
-    snippet(
+    luasnip.snippet(
         'forr',
         fmta(
             [[
@@ -101,18 +96,18 @@ for <var> = <val>, <limit> do
 end<finish>
             ]],
             {
-                var = insert_node(1),
-                val = insert_node(2),
-                limit = insert_node(3),
-                block = insert_node(4),
-                finish = insert_node(0),
+                var = luasnip.insert_node(1),
+                val = luasnip.insert_node(2),
+                limit = luasnip.insert_node(3),
+                block = luasnip.insert_node(4),
+                finish = luasnip.insert_node(0),
             }
         )
     ),
 })
 
 luasnip.add_snippets(filetype, {
-    snippet(
+    luasnip.snippet(
         'forrinc',
         fmta(
             [[
@@ -121,19 +116,19 @@ for <var> = <val>, <limit>, <step> do
 end<finish>
             ]],
             {
-                var = insert_node(1),
-                val = insert_node(2),
-                limit = insert_node(3),
-                step = insert_node(4),
-                block = insert_node(5),
-                finish = insert_node(0),
+                var = luasnip.insert_node(1),
+                val = luasnip.insert_node(2),
+                limit = luasnip.insert_node(3),
+                step = luasnip.insert_node(4),
+                block = luasnip.insert_node(5),
+                finish = luasnip.insert_node(0),
             }
         )
     ),
 })
 
 luasnip.add_snippets(filetype, {
-    snippet(
+    luasnip.snippet(
         'forpairs',
         fmta(
             [[
@@ -142,18 +137,18 @@ for <key>, <value> in pairs(<table>) do
 end<finish>
             ]],
             {
-                key = insert_node(1),
-                value = insert_node(2),
-                table = insert_node(3),
-                block = insert_node(4),
-                finish = insert_node(0),
+                key = luasnip.insert_node(1),
+                value = luasnip.insert_node(2),
+                table = luasnip.insert_node(3),
+                block = luasnip.insert_node(4),
+                finish = luasnip.insert_node(0),
             }
         )
     ),
 })
 
 luasnip.add_snippets(filetype, {
-    snippet(
+    luasnip.snippet(
         'foripairs',
         fmta(
             [[
@@ -162,18 +157,18 @@ for <index>, <value> in ipairs(<table>) do
 end<finish>
             ]],
             {
-                index = insert_node(1),
-                value = insert_node(2),
-                table = insert_node(3),
-                block = insert_node(4),
-                finish = insert_node(0),
+                index = luasnip.insert_node(1),
+                value = luasnip.insert_node(2),
+                table = luasnip.insert_node(3),
+                block = luasnip.insert_node(4),
+                finish = luasnip.insert_node(0),
             }
         )
     ),
 })
 
 luasnip.add_snippets(filetype, {
-    snippet(
+    luasnip.snippet(
         'function',
         fmta(
             [[
@@ -182,40 +177,40 @@ function <func_name>(<parameters>)
 end<finish>
             ]],
             {
-                func_name = insert_node(1),
-                parameters = insert_node(2),
-                body = insert_node(3),
-                finish = insert_node(0),
+                func_name = luasnip.insert_node(1),
+                parameters = luasnip.insert_node(2),
+                body = luasnip.insert_node(3),
+                finish = luasnip.insert_node(0),
             }
         )
     ),
 })
 
 luasnip.add_snippets(filetype, {
-    snippet(
+    luasnip.snippet(
         'require',
         fmta(
             [[
 require("<module>")<finish>
             ]],
             {
-                module = insert_node(1),
-                finish = insert_node(0),
+                module = luasnip.insert_node(1),
+                finish = luasnip.insert_node(0),
             }
         )
     ),
 })
 
 luasnip.add_snippets(filetype, {
-    snippet(
+    luasnip.snippet(
         'print',
         fmta(
             [[
 print("<str>")<finish>
             ]],
             {
-                str = insert_node(1),
-                finish = insert_node(0),
+                str = luasnip.insert_node(1),
+                finish = luasnip.insert_node(0),
             }
         )
     ),
