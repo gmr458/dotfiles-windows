@@ -37,29 +37,13 @@ end
 
 --- @return string
 local function python_env()
-    if not rawget(vim, 'lsp') then
+    local virtual_env = os.getenv 'VIRTUAL_ENV_PROMPT'
+    if virtual_env == nil then
         return ''
     end
 
-    local buf = vim.api.nvim_get_current_buf()
-    local buf_clients = vim.lsp.get_clients { bufnr = buf }
-    if next(buf_clients) == nil then
-        return ''
-    end
-
-    for _, client in pairs(buf_clients) do
-        if client.name == 'pyright' or client.name == 'pylance' then
-            local virtual_env = os.getenv 'VIRTUAL_ENV_PROMPT'
-            if virtual_env == nil then
-                return ''
-            end
-
-            virtual_env = virtual_env:gsub('%s+', '')
-            return string.format('%%#StatusLineMedium# %s%%*', virtual_env)
-        end
-    end
-
-    return ''
+    virtual_env = virtual_env:gsub('%s+', '') -- delete spaces
+    return string.format('%%#StatusLineMedium# %s%%*', virtual_env)
 end
 
 --- @return string
@@ -74,10 +58,7 @@ local function lsp_active()
     local space = '%#StatusLineMedium# %*'
 
     if #clients > 0 then
-        return space
-            .. '%#StatusLineLspActive#%*'
-            .. space
-            .. '%#StatusLineMedium#LSP%*'
+        return space .. '%#StatusLineMedium#LSP%*'
     end
 
     return ''
@@ -87,7 +68,7 @@ end
 local function diagnostics_error()
     local count = get_lsp_diagnostics_count(vim.diagnostic.severity.ERROR)
     if count > 0 then
-        return string.format('%%#StatusLineLspError#  %s%%*', count)
+        return string.format('%%#StatusLineLspError# %se%%*', count)
     end
 
     return ''
@@ -97,7 +78,7 @@ end
 local function diagnostics_warns()
     local count = get_lsp_diagnostics_count(vim.diagnostic.severity.WARN)
     if count > 0 then
-        return string.format('%%#StatusLineLspWarn#  %s%%*', count)
+        return string.format('%%#StatusLineLspWarn# %sw%%*', count)
     end
 
     return ''
@@ -107,7 +88,7 @@ end
 local function diagnostics_hint()
     local count = get_lsp_diagnostics_count(vim.diagnostic.severity.HINT)
     if count > 0 then
-        return string.format('%%#StatusLineLspHint#  %s%%*', count)
+        return string.format('%%#StatusLineLspHint# %sh%%*', count)
     end
 
     return ''
@@ -117,7 +98,7 @@ end
 local function diagnostics_info()
     local count = get_lsp_diagnostics_count(vim.diagnostic.severity.INFO)
     if count > 0 then
-        return string.format('%%#StatusLineLspInfo#  %s%%*', count)
+        return string.format('%%#StatusLineLspInfo# %si%%*', count)
     end
 
     return ''

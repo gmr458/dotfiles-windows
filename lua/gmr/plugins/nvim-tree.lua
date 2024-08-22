@@ -8,6 +8,16 @@ return {
             view = {
                 cursorline = true,
                 width = {},
+                float = {
+                    enable = true,
+                    open_win_config = {
+                        border = 'single',
+                        width = 30,
+                        height = 31,
+                        row = 2,
+                        col = 1,
+                    },
+                },
             },
             renderer = {
                 root_folder_label = function(path)

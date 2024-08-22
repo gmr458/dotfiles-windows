@@ -6,10 +6,10 @@ local function add(plugin)
     table.insert(plugin_specs, spec)
 end
 
-add 'gmr.plugins.autopairs'
-add 'gmr.plugins.autotag'
+-- add 'gmr.plugins.autopairs'
+-- add 'gmr.plugins.autotag'
 add 'gmr.plugins.cloak'
-add 'gmr.plugins.cmp'
+-- add 'gmr.plugins.cmp'
 add 'gmr.plugins.colorizer'
 add 'gmr.plugins.colorschemes.cold'
 -- add 'gmr.plugins.comment'

@@ -128,7 +128,9 @@ vim.keymap.set('n', '<leader>Y', [["+Y]], { desc = 'Yank to clipboard' })
 vim.keymap.set('n', '<leader>sb', function()
     vim.opt.background = vim.o.background == 'dark' and 'light' or 'dark'
     if running_kitty then
-        local cmd = 'kitten themes --cache-age=-1 ' .. vim.o.background
+        local cmd = 'kitten themes --cache-age=-1 '
+            .. 'cold_'
+            .. vim.o.background
         vim.fn.system(cmd)
     end
 end, { desc = 'Switch background' })
