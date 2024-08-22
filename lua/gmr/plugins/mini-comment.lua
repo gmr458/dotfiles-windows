@@ -1,7 +1,7 @@
 return {
     'echasnovski/mini.comment',
     version = false,
-    event = 'VeryLazy',
+    keys = 'gcc',
     config = function()
         require('mini.comment').setup {
             options = {
