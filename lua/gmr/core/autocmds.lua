@@ -126,17 +126,17 @@ vim.api.nvim_create_autocmd('VimResized', {
     command = 'tabdo wincmd =',
 })
 
--- vim.api.nvim_create_autocmd('FileType', {
---     group = vim.api.nvim_create_augroup(
---         'gmr_wrap_spell_for_writing',
---         { clear = true }
---     ),
---     pattern = { 'gitcommit', 'markdown' },
---     desc = 'Enable wrap and spell on Git Commits and Markdown',
---     callback = function()
---         vim.opt_local.wrap = true
---     end,
--- })
+vim.api.nvim_create_autocmd('FileType', {
+    group = vim.api.nvim_create_augroup(
+        'gmr_config_for_markdown',
+        { clear = true }
+    ),
+    pattern = { 'markdown' },
+    desc = 'Config for Git Markdown ',
+    callback = function()
+        vim.opt_local.conceallevel = 0
+    end,
+})
 
 vim.api.nvim_create_autocmd('CmdlineEnter', {
     group = vim.api.nvim_create_augroup(

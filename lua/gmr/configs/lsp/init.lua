@@ -25,14 +25,14 @@ function M.on_attach(client, bufnr)
         )
     end
 
-    -- --- @param keys string
-    -- local function feedkeys(keys)
-    --     vim.api.nvim_feedkeys(
-    --         vim.api.nvim_replace_termcodes(keys, true, false, true),
-    --         'n',
-    --         true
-    --     )
-    -- end
+    --- @param keys string
+    local function feedkeys(keys)
+        vim.api.nvim_feedkeys(
+            vim.api.nvim_replace_termcodes(keys, true, false, true),
+            'n',
+            true
+        )
+    end
 
     local fzf_opts = {
         winopts = {
@@ -77,36 +77,40 @@ function M.on_attach(client, bufnr)
         fzf_lua.lsp_live_workspace_symbols(fzf_opts)
     end)
 
-    -- if client.supports_method(methods.textDocument_completion) then
-    --     local pumvisible = require('gmr.core.utils').pumvisible
-    --
-    --     vim.lsp.completion.enable(
-    --         true,
-    --         client.id,
-    --         bufnr,
-    --         { autotrigger = true }
-    --     )
-    --
-    --     vim.keymap.set('i', '<C-m>', function()
-    --         return pumvisible() and '<C-e>' or '<C-m>'
-    --     end, { expr = true })
-    --
-    --     vim.keymap.set('i', '<C-n>', function()
-    --         if pumvisible() then
-    --             feedkeys '<C-n>'
-    --         else
-    --             if next(vim.lsp.get_clients { bufnr = 0 }) then
-    --                 vim.lsp.completion.trigger()
-    --             else
-    --                 if vim.bo.omnifunc == '' then
-    --                     feedkeys '<C-x><C-n'
-    --                 else
-    --                     feedkeys '<C-x><C-o'
-    --                 end
-    --             end
-    --         end
-    --     end)
-    -- end
+    if client.supports_method(methods.textDocument_completion) then
+        local pumvisible = require('gmr.core.utils').pumvisible
+
+        vim.lsp.completion.enable(
+            true,
+            client.id,
+            bufnr,
+            { autotrigger = false }
+        )
+
+        vim.keymap.set('i', '<cr>', function()
+            return pumvisible() and '<C-y>' or '<cr>'
+        end, { expr = true })
+
+        vim.keymap.set('i', '<C-m>', function()
+            return pumvisible() and '<C-e>' or '<C-m>'
+        end, { expr = true })
+
+        vim.keymap.set('i', '<C-Space>', function()
+            if pumvisible() then
+                feedkeys '<C-Space>'
+            else
+                if next(vim.lsp.get_clients { bufnr = 0 }) then
+                    vim.lsp.completion.trigger()
+                else
+                    if vim.bo.omnifunc == '' then
+                        feedkeys '<C-x><C-n'
+                    else
+                        feedkeys '<C-x><C-o'
+                    end
+                end
+            end
+        end)
+    end
 
     if client.supports_method(methods.textDocument_declaration) then
         keymap('gD', vim.lsp.buf.declaration)
@@ -149,11 +153,11 @@ function M.on_attach(client, bufnr)
 end
 
 function M.setup_diagnostic_config()
-    local diagnostics_icons = {
-        ERROR = '',
-        WARN = '',
-        HINT = '',
-        INFO = '',
+    local severity_strings = {
+        [1] = 'error',
+        [2] = 'warn',
+        [3] = 'info',
+        [4] = 'hint',
     }
 
     vim.diagnostic.config {
@@ -161,14 +165,11 @@ function M.setup_diagnostic_config()
         virtual_text = {
             source = false,
             spacing = 1,
-            prefix = '',
             suffix = '',
             format = function(diagnostic)
-                local severity = vim.diagnostic.severity[diagnostic.severity]
-                local icon = diagnostics_icons[severity]
                 return string.format(
-                    '%s %s: %s ',
-                    icon,
+                    '%s: %s: %s ',
+                    severity_strings[diagnostic.severity],
                     diagnostic.source,
                     diagnostic.message
                 )

@@ -7,16 +7,24 @@ return {
             disable_netrw = true,
             view = {
                 cursorline = true,
-                width = {},
+                width = function()
+                    return math.floor(vim.opt.columns:get() / 3)
+                end,
                 float = {
                     enable = true,
-                    open_win_config = {
-                        border = 'single',
-                        width = 30,
-                        height = 31,
-                        row = 2,
-                        col = 1,
-                    },
+                    open_win_config = function()
+                        local lines = vim.o.lines - vim.o.cmdheight
+                        local columns = vim.o.columns
+
+                        return {
+                            border = 'single',
+                            relative = 'editor',
+                            row = math.floor(lines * 0.08),
+                            col = math.floor((columns / 2) / 2) - 1,
+                            width = math.floor(columns * 0.5),
+                            height = math.floor(lines * 0.8),
+                        }
+                    end,
                 },
             },
             renderer = {

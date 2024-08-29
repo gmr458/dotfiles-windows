@@ -106,6 +106,8 @@ if vim.g.neovide then
     vim.g.neovide_fullscreen = false
     vim.g.neovide_remember_window_size = false
 
+    vim.g.neovide_cursor_trail_size = 0.1
+
     vim.cmd [[
         " system clipboard
         nmap <c-c> "+y

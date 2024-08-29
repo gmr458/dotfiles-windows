@@ -6,7 +6,7 @@ local function add(plugin)
     table.insert(plugin_specs, spec)
 end
 
--- add 'gmr.plugins.autopairs'
+add 'gmr.plugins.autopairs'
 -- add 'gmr.plugins.autotag'
 -- add 'gmr.plugins.cloak'
 -- add 'gmr.plugins.cmp'
