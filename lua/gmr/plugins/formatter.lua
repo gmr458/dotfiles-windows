@@ -77,6 +77,7 @@ return {
                     end,
                 },
                 php = require('formatter.filetypes.php').pint,
+                proto = require('formatter.filetypes.proto').buf_format,
                 python = require('formatter.filetypes.python').ruff,
                 rust = require('formatter.filetypes.rust').rustfmt,
                 scss = { prettier },
