@@ -21,7 +21,7 @@ local jdtls = require 'jdtls'
 
 local config = {
     cmd = {
-        vim.fn.expand '~/.sdkman/candidates/java/21.0.3-tem/bin/java', -- or '/path/to/java17_or_newer/bin/java'
+        vim.fn.expand '~/.sdkman/candidates/java/21.*-tem/bin/java', -- or '/path/to/java17_or_newer/bin/java'
 
         '-Declipse.application=org.eclipse.jdt.ls.core.id1',
         '-Dosgi.bundles.defaultStartLevel=4',
@@ -70,19 +70,19 @@ local config = {
                 runtimes = {
                     {
                         name = 'JavaSE-1.8',
-                        path = '~/.sdkman/candidates/java/8.0.402-tem',
+                        path = vim.fn.expand '~/.sdkman/candidates/java/8.*-tem',
                     },
                     {
                         name = 'JavaSE-11',
-                        path = '~/.sdkman/candidates/java/11.0.22-tem',
+                        path = vim.fn.expand '~/.sdkman/candidates/java/11.*-tem',
                     },
                     {
                         name = 'JavaSE-17',
-                        path = '~/.sdkman/candidates/java/17.0.10-tem',
+                        path = vim.fn.expand '~/.sdkman/candidates/java/17.*-tem',
                     },
                     {
                         name = 'JavaSE-21',
-                        path = '~/.sdkman/candidates/java/21.0.3-tem',
+                        path = vim.fn.expand '~/.sdkman/candidates/java/21.*-tem',
                     },
                 },
             },

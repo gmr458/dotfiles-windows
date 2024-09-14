@@ -89,11 +89,11 @@ function M.on_attach(client, bufnr)
 
         vim.keymap.set('i', '<cr>', function()
             return pumvisible() and '<C-y>' or '<cr>'
-        end, { expr = true })
+        end, { expr = true, buffer = bufnr })
 
         vim.keymap.set('i', '<C-m>', function()
             return pumvisible() and '<C-e>' or '<C-m>'
-        end, { expr = true })
+        end, { expr = true, buffer = bufnr })
 
         vim.keymap.set('i', '<C-Space>', function()
             if pumvisible() then

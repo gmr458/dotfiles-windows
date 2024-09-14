@@ -5,7 +5,7 @@ return {
     build = ':ColdCompile',
     config = function()
         require('cold').setup {
-            transparent_background = false,
+            transparent_background = true,
             cursorline = false,
         }
         vim.cmd.colorscheme 'cold'
