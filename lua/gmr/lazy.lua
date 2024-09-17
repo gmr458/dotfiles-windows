@@ -17,7 +17,6 @@ add 'gmr.plugins.colorschemes.cold'
 -- add 'gmr.plugins.dap.go'
 -- add 'gmr.plugins.dap.ui'
 add 'gmr.plugins.formatter'
-add 'gmr.plugins.fzf'
 add 'gmr.plugins.grapple'
 add 'gmr.plugins.gitsigns'
 add 'gmr.plugins.guess-indent'
@@ -36,6 +35,12 @@ add 'gmr.plugins.ts-comments'
 add 'gmr.plugins.twilight'
 add 'gmr.plugins.web-devicons'
 add 'gmr.plugins.zen-mode'
+
+if vim.fn.has 'win32' == 1 then
+    add 'gmr.plugins.telescope'
+else
+    add 'gmr.plugins.fzf'
+end
 
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 

@@ -1,7 +1,8 @@
 local M = {}
 
-local fzf_lua = require 'fzf-lua'
 local navic_attach = require('gmr.configs.lsp.navic').attach
+
+local running_windows = vim.fn.has 'win32' == 1
 
 --- @param client vim.lsp.Client
 --- @param bufnr integer
@@ -50,9 +51,13 @@ function M.on_attach(client, bufnr)
     keymap('<space>q', vim.diagnostic.setloclist)
     keymap('gd', vim.lsp.buf.definition)
     keymap('J', vim.lsp.buf.hover)
-    keymap('gi', function()
-        fzf_lua.lsp_implementations(fzf_opts)
-    end)
+    keymap(
+        'gi',
+        running_windows and ':Telescope lsp_implementations<cr>'
+            or function()
+                require('fzf-lua').lsp_implementations(fzf_opts)
+            end
+    )
     keymap('K', vim.lsp.buf.signature_help)
     keymap('<space>wa', vim.lsp.buf.add_workspace_folder)
     keymap('<space>wr', vim.lsp.buf.remove_workspace_folder)
@@ -61,21 +66,37 @@ function M.on_attach(client, bufnr)
     end)
     keymap('<space>D', vim.lsp.buf.type_definition)
     keymap('<space>rn', vim.lsp.buf.rename)
-    keymap('<space>ca', function()
-        fzf_lua.lsp_code_actions(fzf_opts)
-    end)
-    keymap('gr', function()
-        fzf_lua.lsp_references(fzf_opts)
-    end)
+    keymap(
+        '<space>ca',
+        running_windows and vim.lsp.buf.code_action
+            or function()
+                require('fzf-lua').lsp_code_actions(fzf_opts)
+            end
+    )
+    keymap(
+        'gr',
+        running_windows and ':Telescope lsp_references<cr>'
+            or function()
+                require('fzf-lua').lsp_references(fzf_opts)
+            end
+    )
     keymap('<space>fo', function()
         vim.lsp.buf.format { async = true }
     end)
-    keymap('<leader>ds', function()
-        fzf_lua.lsp_document_symbols(fzf_opts)
-    end)
-    keymap('<leader>ws', function()
-        fzf_lua.lsp_live_workspace_symbols(fzf_opts)
-    end)
+    keymap(
+        '<leader>ds',
+        running_windows and ':Telescope lsp_document_symbols<cr>'
+            or function()
+                require('fzf-lua').lsp_document_symbols(fzf_opts)
+            end
+    )
+    keymap(
+        '<leader>ws',
+        running_windows and ':Telescope lsp_dynamic_workspace_symbols<cr>'
+            or function()
+                require('fzf-lua').lsp_live_workspace_symbols(fzf_opts)
+            end
+    )
 
     if client.supports_method(methods.textDocument_completion) then
         local pumvisible = require('gmr.core.utils').pumvisible

@@ -1,6 +1,16 @@
+local fullscreen = {
+    layout_strategy = 'vertical',
+    layout_config = {
+        prompt_position = 'top',
+        width = { padding = 0 },
+        height = { padding = 0 },
+        preview_cutoff = 1,
+        mirror = true,
+    },
+}
+
 return {
     'nvim-telescope/telescope.nvim',
-    version = '0.1.5',
     dependencies = {
         { 'nvim-lua/plenary.nvim' },
         {
@@ -15,6 +25,7 @@ return {
 
         telescope.setup {
             defaults = {
+                path_display = { 'filename_first' },
                 mappings = {
                     n = {
                         ['<C-y>'] = actions_layout.toggle_preview,
@@ -79,80 +90,33 @@ return {
                     previewer = false,
                     layout_strategy = 'vertical',
                     layout_config = {
-                        width = 0.9,
-                        height = 0.9,
+                        prompt_position = 'top',
+                        width = 0.5,
+                        height = 0.7,
                         preview_cutoff = 1,
                         mirror = false,
                     },
                 },
-                git_status = {
-                    layout_strategy = 'vertical',
-                    layout_config = {
-                        width = 0.9,
-                        height = 0.9,
-                        preview_cutoff = 1,
-                        mirror = false,
-                    },
-                },
+                git_status = fullscreen,
                 help_tags = {
                     layout_config = {
                         prompt_position = 'top',
                         scroll_speed = 4,
-                        height = 0.9,
-                        width = 0.9,
-                        preview_width = 0.55,
+                        width = { padding = 0 },
+                        height = { padding = 0 },
+                        preview_width = 0.6,
                     },
                 },
-                live_grep = {
-                    layout_strategy = 'vertical',
-                    layout_config = {
-                        width = 0.9,
-                        height = 0.9,
-                        preview_cutoff = 1,
-                        mirror = false,
-                    },
-                },
-                lsp_document_symbols = {
-                    layout_strategy = 'vertical',
-                    layout_config = {
-                        width = 0.9,
-                        height = 0.9,
-                        preview_cutoff = 1,
-                        mirror = false,
-                    },
-                },
-                lsp_dynamic_workspace_symbols = {
-                    layout_strategy = 'vertical',
-                    layout_config = {
-                        width = 0.9,
-                        height = 0.9,
-                        preview_cutoff = 1,
-                        mirror = false,
-                    },
-                },
-                lsp_implementations = {
-                    layout_strategy = 'vertical',
-                    layout_config = {
-                        width = 0.9,
-                        height = 0.9,
-                        preview_cutoff = 1,
-                        mirror = false,
-                    },
-                },
-                lsp_references = {
-                    layout_strategy = 'vertical',
-                    layout_config = {
-                        width = 0.9,
-                        height = 0.9,
-                        preview_cutoff = 1,
-                        mirror = false,
-                    },
-                },
+                live_grep = fullscreen,
+                lsp_document_symbols = fullscreen,
+                lsp_dynamic_workspace_symbols = fullscreen,
+                lsp_implementations = fullscreen,
+                lsp_references = fullscreen,
                 oldfiles = {
                     previewer = false,
                     layout_config = {
-                        width = 0.9,
                         prompt_position = 'top',
+                        width = 0.9,
                     },
                 },
             },
