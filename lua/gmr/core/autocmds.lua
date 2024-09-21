@@ -182,6 +182,7 @@ vim.api.nvim_create_autocmd('FileType', {
         'NvimTree',
         'fzf',
         'mason',
+        'undotree',
         '',
     },
     callback = function()

@@ -33,6 +33,7 @@ add 'gmr.plugins.treesitter-context'
 -- add 'gmr.plugins.ts-context-commentstring'
 add 'gmr.plugins.ts-comments'
 add 'gmr.plugins.twilight'
+add 'gmr.plugins.undotree'
 add 'gmr.plugins.web-devicons'
 add 'gmr.plugins.zen-mode'
 
