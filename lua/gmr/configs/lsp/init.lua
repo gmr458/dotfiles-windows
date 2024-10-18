@@ -1,6 +1,6 @@
 local M = {}
 
-local navic_attach = require('gmr.configs.lsp.navic').attach
+-- local navic_attach = require('gmr.configs.lsp.navic').attach
 
 local running_windows = vim.fn.has 'win32' == 1
 
@@ -26,14 +26,14 @@ function M.on_attach(client, bufnr)
         )
     end
 
-    --- @param keys string
-    local function feedkeys(keys)
-        vim.api.nvim_feedkeys(
-            vim.api.nvim_replace_termcodes(keys, true, false, true),
-            'n',
-            true
-        )
-    end
+    --- --- @param keys string
+    --- local function feedkeys(keys)
+    ---     vim.api.nvim_feedkeys(
+    ---         vim.api.nvim_replace_termcodes(keys, true, false, true),
+    ---         'n',
+    ---         true
+    ---     )
+    --- end
 
     local fzf_opts = {
         winopts = {
@@ -99,7 +99,7 @@ function M.on_attach(client, bufnr)
     )
 
     if client.supports_method(methods.textDocument_completion) then
-        local pumvisible = require('gmr.core.utils').pumvisible
+        -- local pumvisible = require('gmr.core.utils').pumvisible
 
         vim.lsp.completion.enable(
             true,
@@ -108,29 +108,29 @@ function M.on_attach(client, bufnr)
             { autotrigger = false }
         )
 
-        vim.keymap.set('i', '<cr>', function()
-            return pumvisible() and '<C-y>' or '<cr>'
-        end, { expr = true, buffer = bufnr })
+        -- vim.keymap.set('i', '<cr>', function()
+        --     return pumvisible() and '<C-y>' or '<cr>'
+        -- end, { expr = true, buffer = bufnr })
 
-        vim.keymap.set('i', '<C-m>', function()
-            return pumvisible() and '<C-e>' or '<C-m>'
-        end, { expr = true, buffer = bufnr })
-
-        vim.keymap.set('i', '<C-Space>', function()
-            if pumvisible() then
-                feedkeys '<C-Space>'
-            else
-                if next(vim.lsp.get_clients { bufnr = 0 }) then
-                    vim.lsp.completion.trigger()
-                else
-                    if vim.bo.omnifunc == '' then
-                        feedkeys '<C-x><C-n'
-                    else
-                        feedkeys '<C-x><C-o'
-                    end
-                end
-            end
-        end)
+        -- vim.keymap.set('i', '<C-m>', function()
+        --     return pumvisible() and '<C-e>' or '<C-m>'
+        -- end, { expr = true, buffer = bufnr })
+        --
+        -- vim.keymap.set('i', '<C-Space>', function()
+        --     if pumvisible() then
+        --         feedkeys '<C-Space>'
+        --     else
+        --         if next(vim.lsp.get_clients { bufnr = 0 }) then
+        --             vim.lsp.completion.trigger()
+        --         else
+        --             if vim.bo.omnifunc == '' then
+        --                 feedkeys '<C-x><C-n'
+        --             else
+        --                 feedkeys '<C-x><C-o'
+        --             end
+        --         end
+        --     end
+        -- end)
     end
 
     if client.supports_method(methods.textDocument_declaration) then
@@ -170,7 +170,7 @@ function M.on_attach(client, bufnr)
     --     require('jdtls.dap').setup_dap_main_class_configs()
     -- end
 
-    navic_attach(client, bufnr)
+    -- navic_attach(client, bufnr)
 end
 
 function M.setup_diagnostic_config()

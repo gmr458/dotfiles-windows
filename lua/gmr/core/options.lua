@@ -29,6 +29,7 @@ local opt = vim.opt
 -- opt.background = 'dark'
 opt.backup = false
 opt.cmdheight = 0
+opt.completeitemalign = 'abbr,menu,kind'
 opt.completeopt = { 'menu', 'menuone', 'noselect' }
 opt.conceallevel = 3
 opt.confirm = true
@@ -91,20 +92,11 @@ if vim.g.neovide then
 
     -- disable blur
     vim.g.neovide_window_blurred = false
-    vim.g.neovide_floating_blur_amount_x = 0.0
-    vim.g.neovide_floating_blur_amount_y = 0.0
     vim.g.neovide_floating_shadow = false
-    vim.g.neovide_floating_z_height = 0
-    vim.g.neovide_light_angle_degrees = 0
-    vim.g.neovide_light_radius = 0
 
     -- other options
     vim.g.neovide_transparency = 1.0
     vim.g.neovide_hide_mouse_when_typing = true
-    vim.g.neovide_underline_stroke_scale = 0.5
-    vim.g.neovide_refresh_rate = 60
-    vim.g.neovide_fullscreen = false
-    vim.g.neovide_remember_window_size = false
 
     vim.g.neovide_cursor_trail_size = 0.1
 
@@ -120,5 +112,5 @@ if vim.g.neovide then
     ]]
 
     -- fzf looks weird without this
-    vim.fn.setcellwidths { { 0x2002, 0x2002, 2 } }
+    -- vim.fn.setcellwidths { { 0x2002, 0x2002, 2 } }
 end

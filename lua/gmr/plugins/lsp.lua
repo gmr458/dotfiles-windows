@@ -4,7 +4,6 @@ return {
     dependencies = {
         require 'gmr.plugins.lazydev',
         require 'gmr.plugins.luvit-meta',
-        require 'gmr.plugins.navic',
         require 'gmr.plugins.null-ls',
         { 'b0o/SchemaStore.nvim' },
     },

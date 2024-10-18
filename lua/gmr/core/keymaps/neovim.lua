@@ -49,18 +49,6 @@ vim.keymap.set(
     ':bd!<cr>',
     { silent = true, desc = 'Delete current buffer' }
 )
-vim.keymap.set(
-    { 'n', 'o', 'x' },
-    '<s-h>',
-    '<cmd>bprevious<cr>',
-    { desc = 'Previous buffer' }
-)
-vim.keymap.set(
-    { 'n', 'o', 'x' },
-    '<s-l>',
-    '<cmd>bnext<cr>',
-    { desc = 'Next buffer' }
-)
 
 -- diagnostics
 vim.keymap.set('n', '<leader>dd', function()
@@ -219,3 +207,10 @@ end
 vim.keymap.set({ 'n', 't' }, '<A-d>', toggle_terminal, {
     desc = 'toggle terminal',
 })
+
+vim.keymap.set('n', 'dd', function()
+    if vim.fn.getline('.'):match '^%s*$' then
+        return '"_dd'
+    end
+    return 'dd'
+end, { expr = true, desc = 'Yank the line on `dd` only if it is non-empty' })

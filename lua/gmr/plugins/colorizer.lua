@@ -24,6 +24,7 @@ return {
                 css = true,
                 css_fn = true,
                 mode = 'virtualtext',
+                tailwind = true,
                 virtualtext = ' ■',
             },
         }
