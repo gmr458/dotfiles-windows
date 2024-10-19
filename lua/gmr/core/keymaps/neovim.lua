@@ -103,6 +103,28 @@ vim.keymap.set('v', '<leader>dq', 'xi"<esc>pA"<esc>', {
     desc = 'Insert double quotes in visual mode',
 })
 
+-- simulate ci{ ci( ci' ci" with _ - and .
+vim.keymap.set(
+    'n',
+    'ci_',
+    'F_lvf_hc',
+    { silent = true, noremap = true, desc = 'Delete word between underscores' }
+)
+
+vim.keymap.set(
+    'n',
+    'ci-',
+    'F-lvf-hc',
+    { silent = true, noremap = true, desc = 'Delete word between hyphens' }
+)
+
+vim.keymap.set(
+    'n',
+    'ci.',
+    'F.lvf.hc',
+    { silent = true, noremap = true, desc = 'Delete word between dots' }
+)
+
 -- clipboard
 vim.keymap.set(
     { 'n', 'v' },
