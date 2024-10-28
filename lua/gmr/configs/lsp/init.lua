@@ -205,10 +205,6 @@ end
 
 function M.setup_handlers()
     local methods = vim.lsp.protocol.Methods
-    local handlers = require 'gmr.configs.lsp.handlers'
-
-    vim.lsp.handlers[methods.textDocument_definition] =
-        handlers.goto_definition()
 
     vim.lsp.handlers[methods.textDocument_hover] = vim.lsp.with(
         vim.lsp.handlers.hover,

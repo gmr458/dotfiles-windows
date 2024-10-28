@@ -125,6 +125,13 @@ vim.keymap.set(
     { silent = true, noremap = true, desc = 'Delete word between dots' }
 )
 
+vim.keymap.set(
+    'n',
+    'ci<',
+    'F>lvf<hc',
+    { silent = true, noremap = true, desc = 'Delete word between tags' }
+)
+
 -- clipboard
 vim.keymap.set(
     { 'n', 'v' },

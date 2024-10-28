@@ -58,7 +58,20 @@ return {
                 javascriptreact = { web },
                 json = { web },
                 jsonc = { web },
-                kotlin = { require('formatter.filetypes.kotlin').ktlint },
+                kotlin = {
+                    function()
+                        return {
+                            exe = 'ktfmt',
+                            args = {
+                                '--kotlinlang-style',
+                                vim.fn.shellescape(
+                                    vim.api.nvim_buf_get_name(0)
+                                ),
+                            },
+                            stdin = true,
+                        }
+                    end,
+                },
                 lua = require('formatter.filetypes.lua').stylua,
                 ocaml = {
                     function()

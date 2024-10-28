@@ -77,7 +77,7 @@ return {
         }
 
         vim.api.nvim_create_user_command('Format', function()
-            require('conform').format()
+            require('conform').format { timeout_ms = 10000 }
         end, {})
     end,
 }
