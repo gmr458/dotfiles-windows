@@ -8,6 +8,20 @@ local running_windows = vim.fn.has 'win32' == 1
 --- @param bufnr integer
 function M.on_attach(client, bufnr)
     local methods = vim.lsp.protocol.Methods
+    local req = client.request
+
+    client.request = function(method, params, handler, bufnr_req)
+        if method == methods.textDocument_definition then
+            return req(
+                method,
+                params,
+                require('gmr.configs.lsp.handlers').go_to_definition,
+                bufnr_req
+            )
+        else
+            return req(method, params, handler, bufnr_req)
+        end
+    end
 
     vim.api.nvim_set_option_value(
         'omnifunc',
@@ -201,18 +215,6 @@ function M.setup_diagnostic_config()
         update_in_insert = false,
         severity_sort = true,
     }
-end
-
-function M.setup_handlers()
-    local methods = vim.lsp.protocol.Methods
-
-    vim.lsp.handlers[methods.textDocument_hover] = vim.lsp.with(
-        vim.lsp.handlers.hover,
-        { border = 'single', max_width = 90 }
-    )
-
-    vim.lsp.handlers[methods.textDocument_signatureHelp] =
-        vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'single' })
 end
 
 return M

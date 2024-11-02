@@ -8,6 +8,7 @@ return {
             transparent_background = false,
             cursorline = false,
             treesitter_context_bg = false,
+            float_borderless = true,
         }
         vim.cmd.colorscheme 'cold'
     end,
