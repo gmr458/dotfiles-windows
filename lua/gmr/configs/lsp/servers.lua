@@ -5,7 +5,7 @@ M.to_setup = {
     'astro',
     'bashls',
     'biome',
-    'bufls',
+    'buf_ls',
     'clangd',
     'cssls',
     'denols',
