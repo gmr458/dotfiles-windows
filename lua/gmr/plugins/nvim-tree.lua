@@ -5,28 +5,29 @@ return {
         require('nvim-tree').setup {
             hijack_cursor = true,
             disable_netrw = true,
-            view = {
-                cursorline = true,
-                width = function()
-                    return math.floor(vim.opt.columns:get() / 3)
-                end,
-                float = {
-                    enable = true,
-                    open_win_config = function()
-                        local lines = vim.o.lines - vim.o.cmdheight
-                        local columns = vim.o.columns
-
-                        return {
-                            border = 'single',
-                            relative = 'editor',
-                            row = math.floor(lines * 0.08),
-                            col = math.floor((columns / 2) / 2) - 1,
-                            width = math.floor(columns * 0.5),
-                            height = math.floor(lines * 0.8),
-                        }
-                    end,
-                },
-            },
+            view = { width = {} },
+            -- view = {
+            --     cursorline = true,
+            --     width = function()
+            --         return math.floor(vim.opt.columns:get() / 3)
+            --     end,
+            --     float = {
+            --         enable = true,
+            --         open_win_config = function()
+            --             local lines = vim.o.lines - vim.o.cmdheight
+            --             local columns = vim.o.columns
+            --
+            --             return {
+            --                 border = 'single',
+            --                 relative = 'editor',
+            --                 row = math.floor(lines * 0.08),
+            --                 col = math.floor((columns / 2) / 2) - 1,
+            --                 width = math.floor(columns * 0.5),
+            --                 height = math.floor(lines * 0.8),
+            --             }
+            --         end,
+            --     },
+            -- },
             renderer = {
                 root_folder_label = function(path)
                     return vim.fn.fnamemodify(path, ':t')
