@@ -35,7 +35,20 @@ opt.conceallevel = 3
 opt.confirm = true
 opt.cursorline = true
 opt.expandtab = true
-opt.fillchars:append { eob = ' ' }
+opt.fillchars:append {
+    eob = ' ',
+    fold = ' ',
+    foldopen = '',
+    foldsep = ' ',
+    foldclose = '',
+}
+opt.foldcolumn = '0'
+opt.foldenable = true
+opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+opt.foldlevel = 99
+opt.foldlevelstart = 99
+opt.foldmethod = 'expr'
+opt.foldtext = ''
 opt.grepprg = 'rg --vimgrep'
 -- opt.guifont = 'BlexMono Nerd Font Mono:h13'
 opt.ignorecase = true

@@ -80,33 +80,33 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     ),
     desc = 'Highlight on yank',
     callback = function()
-        vim.highlight.on_yank { higroup = 'Visual' }
+        vim.highlight.on_yank { higroup = 'Search' }
     end,
 })
 
-vim.api.nvim_create_autocmd('LspAttach', {
-    group = vim.api.nvim_create_augroup(
-        'gmr_lsp_attach_conflicts',
-        { clear = true }
-    ),
-    desc = 'Prevent tsserver and volar conflict',
-    callback = function(args)
-        if not (args.data and args.data.client_id) then
-            return
-        end
-
-        local active_clients = vim.lsp.get_clients()
-        local client = vim.lsp.get_client_by_id(args.data.client_id)
-
-        if client ~= nil and client.name == 'volar' then
-            for _, c in ipairs(active_clients) do
-                if c.name == 'tsserver' then
-                    c.stop()
-                end
-            end
-        end
-    end,
-})
+-- vim.api.nvim_create_autocmd('LspAttach', {
+--     group = vim.api.nvim_create_augroup(
+--         'gmr_lsp_attach_conflicts',
+--         { clear = true }
+--     ),
+--     desc = 'Prevent tsserver and volar conflict',
+--     callback = function(args)
+--         if not (args.data and args.data.client_id) then
+--             return
+--         end
+--
+--         local active_clients = vim.lsp.get_clients()
+--         local client = vim.lsp.get_client_by_id(args.data.client_id)
+--
+--         if client ~= nil and client.name == 'volar' then
+--             for _, c in ipairs(active_clients) do
+--                 if c.name == 'tsserver' then
+--                     c.stop()
+--                 end
+--             end
+--         end
+--     end,
+-- })
 
 vim.api.nvim_create_autocmd('BufWinEnter', {
     group = vim.api.nvim_create_augroup(
