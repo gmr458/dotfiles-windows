@@ -28,5 +28,7 @@ return {
                 enable = true,
             },
         }
+
+        vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
     end,
 }

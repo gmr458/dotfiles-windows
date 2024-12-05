@@ -10,16 +10,17 @@ function M.on_attach(client, bufnr)
     local methods = vim.lsp.protocol.Methods
     local req = client.request
 
-    client.request = function(method, params, handler, bufnr_req)
+    client.request = function(self, method, params, handler, bufnr_req)
         if method == methods.textDocument_definition then
             return req(
+                self,
                 method,
                 params,
                 require('gmr.configs.lsp.handlers').go_to_definition,
                 bufnr_req
             )
         else
-            return req(method, params, handler, bufnr_req)
+            return req(self, method, params, handler, bufnr_req)
         end
     end
 
