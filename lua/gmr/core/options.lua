@@ -92,6 +92,8 @@ opt.virtualedit = 'block'
 -- opt.wildoptions = ''
 opt.wrap = false
 
+vim.g.base46_cache = vim.fn.stdpath 'data' .. '/base46_cache/'
+
 if vim.g.neovide then
     opt.linespace = -1
 
