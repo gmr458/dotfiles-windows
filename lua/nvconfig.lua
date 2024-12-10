@@ -1,6 +1,6 @@
 local options = {
     base46 = {
-        theme = 'radium',
+        theme = 'yoru',
         hl_add = {
             StatusLine = { bg = 'statusline_bg', fg = 'base07' },
             StatusLineMode = { bg = 'green', fg = 'darker_black' },
@@ -64,6 +64,7 @@ local options = {
             order = nil,
             modules = nil,
         },
+    },
     cheatsheet = {
         theme = 'grid', -- simple/grid
         excluded_groups = { 'terminal (t)', 'autopairs', 'Nvim', 'Opens' }, -- can add group name or with mode

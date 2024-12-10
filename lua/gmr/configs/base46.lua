@@ -8,3 +8,7 @@ dofile(vim.g.base46_cache .. 'nvimtree')
 dofile(vim.g.base46_cache .. 'syntax')
 dofile(vim.g.base46_cache .. 'telescope')
 dofile(vim.g.base46_cache .. 'treesitter')
+
+vim.api.nvim_create_user_command('Base46', function()
+    require('base46').load_all_highlights()
+end, {})
