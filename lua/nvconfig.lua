@@ -1,6 +1,6 @@
 local options = {
     base46 = {
-        theme = 'yoru',
+        theme = 'radium',
         hl_add = {
             StatusLine = { bg = 'statusline_bg', fg = 'base07' },
             StatusLineMode = { bg = 'green', fg = 'darker_black' },
@@ -36,6 +36,8 @@ local options = {
             GitSignsAddInline = { bg = '#4C5B2B' },
             GitSignsChange = { fg = '#f7ca88' },
             GitSignsAdd = { fg = '#9EBC9F' },
+            FzfLuaNormal = { link = 'NormalFloat' },
+            FzfLuaBorder = { link = 'FloatBorder' },
         },
         hl_override = {
             FloatBorder = { bg = 'darker_black', fg = 'darker_black' },

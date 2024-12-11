@@ -1,5 +1,5 @@
 return {
-    'NvChad/nvim-colorizer.lua',
+    'catgoose/nvim-colorizer.lua',
     cmd = 'ColorizerToggle',
     config = function()
         require('colorizer').setup {
@@ -25,7 +25,7 @@ return {
                 css_fn = true,
                 mode = 'virtualtext',
                 tailwind = true,
-                virtualtext = ' ■',
+                virtualtext = ' ',
             },
         }
     end,
