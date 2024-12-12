@@ -114,38 +114,12 @@ function M.on_attach(client, bufnr)
     )
 
     if client.supports_method(methods.textDocument_completion) then
-        -- local pumvisible = require('gmr.core.utils').pumvisible
-
         vim.lsp.completion.enable(
             true,
             client.id,
             bufnr,
             { autotrigger = false }
         )
-
-        -- vim.keymap.set('i', '<cr>', function()
-        --     return pumvisible() and '<C-y>' or '<cr>'
-        -- end, { expr = true, buffer = bufnr })
-
-        -- vim.keymap.set('i', '<C-m>', function()
-        --     return pumvisible() and '<C-e>' or '<C-m>'
-        -- end, { expr = true, buffer = bufnr })
-        --
-        -- vim.keymap.set('i', '<C-Space>', function()
-        --     if pumvisible() then
-        --         feedkeys '<C-Space>'
-        --     else
-        --         if next(vim.lsp.get_clients { bufnr = 0 }) then
-        --             vim.lsp.completion.trigger()
-        --         else
-        --             if vim.bo.omnifunc == '' then
-        --                 feedkeys '<C-x><C-n'
-        --             else
-        --                 feedkeys '<C-x><C-o'
-        --             end
-        --         end
-        --     end
-        -- end)
     end
 
     if client.supports_method(methods.textDocument_declaration) then
