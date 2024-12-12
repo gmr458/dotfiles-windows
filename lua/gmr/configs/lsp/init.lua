@@ -113,14 +113,14 @@ function M.on_attach(client, bufnr)
             end
     )
 
-    if client.supports_method(methods.textDocument_completion) then
-        vim.lsp.completion.enable(
-            true,
-            client.id,
-            bufnr,
-            { autotrigger = false }
-        )
-    end
+    -- if client.supports_method(methods.textDocument_completion) then
+    --     vim.lsp.completion.enable(
+    --         true,
+    --         client.id,
+    --         bufnr,
+    --         { autotrigger = false }
+    --     )
+    -- end
 
     if client.supports_method(methods.textDocument_declaration) then
         keymap('gD', vim.lsp.buf.declaration)

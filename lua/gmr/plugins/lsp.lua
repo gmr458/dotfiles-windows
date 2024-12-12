@@ -13,7 +13,7 @@ return {
         local lspconfiguser = require 'gmr.configs.lsp'
         lspconfiguser.setup_diagnostic_config()
 
-        -- local capabilities = require('cmp_nvim_lsp').default_capabilities()
+        local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
         require('lspconfig.ui.windows').default_options.border = 'single'
 
@@ -21,7 +21,7 @@ return {
         for _, server in pairs(servers) do
             local server_opts = {
                 on_attach = lspconfiguser.on_attach,
-                -- capabilities = capabilities,
+                capabilities = capabilities,
             }
 
             local has_custom_opts, server_custom_opts =
