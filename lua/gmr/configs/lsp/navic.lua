@@ -5,7 +5,7 @@ local M = {}
 function M.attach(client, bufnr)
     local method = vim.lsp.protocol.Methods.textDocument_documentSymbol
 
-    if client.supports_method(method) then
+    if client:supports_method(method) then
         local filetype = vim.bo.filetype
 
         if

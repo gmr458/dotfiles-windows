@@ -38,6 +38,8 @@ local options = {
             GitSignsAdd = { fg = '#9EBC9F' },
             FzfLuaNormal = { link = 'NormalFloat' },
             FzfLuaBorder = { link = 'FloatBorder' },
+            TelescopePreviewNormal = { link = 'Normal' },
+            TelescopePreviewBorder = { bg = 'black', fg = 'black' },
         },
         hl_override = {
             FloatBorder = { bg = 'darker_black', fg = 'darker_black' },

@@ -40,14 +40,18 @@ local config = {
         },
     },
     handlers = {
-        ['workspace/executeCommand'] = function(_, result, ctx, _)
-            if
-                ctx.params.command == '_typescript.goToSourceDefinition'
-                and result ~= nil
-                and #result > 0
-            then
-                vim.cmd 'vsplit'
-                vim.lsp.util.jump_to_location(result[1], 'utf-8')
+        --- @param err? lsp.ResponseError
+        --- @param result? lsp.Location[]|lsp.LocationLink[]
+        --- @param context lsp.HandlerContext
+        --- @param config? table
+        ['workspace/executeCommand'] = function(err, result, context, config)
+            if context.params.command == '_typescript.goToSourceDefinition' then
+                require('gmr.configs.lsp.handlers').go_to_definition(
+                    err,
+                    result,
+                    context,
+                    config
+                )
             end
         end,
     },

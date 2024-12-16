@@ -2,7 +2,7 @@ local M = {}
 
 -- local navic_attach = require('gmr.configs.lsp.navic').attach
 
-local running_windows = vim.fn.has 'win32' == 1
+-- local running_windows = vim.fn.has 'win32' == 1
 
 --- @param client vim.lsp.Client
 --- @param bufnr integer
@@ -32,35 +32,28 @@ function M.on_attach(client, bufnr)
 
     --- @param lhs string
     --- @param rhs string|function
-    local function keymap(lhs, rhs)
+    --- @param mode? string|string[]
+    local function keymap(lhs, rhs, mode)
+        mode = mode or 'n'
         vim.keymap.set(
-            'n',
+            mode,
             lhs,
             rhs,
             { noremap = true, silent = true, buffer = bufnr }
         )
     end
 
-    --- --- @param keys string
-    --- local function feedkeys(keys)
-    ---     vim.api.nvim_feedkeys(
-    ---         vim.api.nvim_replace_termcodes(keys, true, false, true),
-    ---         'n',
-    ---         true
-    ---     )
-    --- end
-
-    local fzf_opts = {
-        winopts = {
-            fullscreen = true,
-        },
-    }
+    -- local fzf_opts = {
+    --     winopts = {
+    --         fullscreen = true,
+    --     },
+    -- }
 
     keymap('<space>e', vim.diagnostic.open_float)
     keymap('[d', function()
         vim.diagnostic.jump { count = -1, float = true }
     end)
-    keymap('[d', function()
+    keymap(']d', function()
         vim.diagnostic.jump { count = 1, float = true }
     end)
     keymap('<space>q', vim.diagnostic.setloclist)
@@ -68,10 +61,11 @@ function M.on_attach(client, bufnr)
     keymap('J', vim.lsp.buf.hover)
     keymap(
         'gi',
-        running_windows and ':Telescope lsp_implementations<cr>'
-            or function()
-                require('fzf-lua').lsp_implementations(fzf_opts)
-            end
+        ':Telescope lsp_implementations<cr>'
+        -- running_windows and ':Telescope lsp_implementations<cr>'
+        --     or function()
+        --         require('fzf-lua').lsp_implementations(fzf_opts)
+        --     end
     )
     keymap('K', vim.lsp.buf.signature_help)
     keymap('<space>wa', vim.lsp.buf.add_workspace_folder)
@@ -82,51 +76,65 @@ function M.on_attach(client, bufnr)
     keymap('<space>D', vim.lsp.buf.type_definition)
     keymap('<space>rn', vim.lsp.buf.rename)
     keymap(
-        '<space>ca',
-        running_windows and vim.lsp.buf.code_action
-            or function()
-                require('fzf-lua').lsp_code_actions(fzf_opts)
-            end
-    )
-    keymap(
         'gr',
-        running_windows and ':Telescope lsp_references<cr>'
-            or function()
-                require('fzf-lua').lsp_references(fzf_opts)
-            end
+        ':Telescope lsp_references<cr>'
+        -- running_windows and ':Telescope lsp_references<cr>'
+        --     or function()
+        --         require('fzf-lua').lsp_references(fzf_opts)
+        --     end
     )
-    keymap('<space>fo', function()
-        vim.lsp.buf.format { async = true }
-    end)
     keymap(
         '<leader>ds',
-        running_windows and ':Telescope lsp_document_symbols<cr>'
-            or function()
-                require('fzf-lua').lsp_document_symbols(fzf_opts)
-            end
+        ':Telescope lsp_document_symbols<cr>'
+        -- running_windows and ':Telescope lsp_document_symbols<cr>'
+        --     or function()
+        --         require('fzf-lua').lsp_document_symbols(fzf_opts)
+        --     end
     )
     keymap(
         '<leader>ws',
-        running_windows and ':Telescope lsp_dynamic_workspace_symbols<cr>'
-            or function()
-                require('fzf-lua').lsp_live_workspace_symbols(fzf_opts)
-            end
+        ':Telescope lsp_dynamic_workspace_symbols<cr>'
+        -- running_windows and ':Telescope lsp_dynamic_workspace_symbols<cr>'
+        --     or function()
+        --         require('fzf-lua').lsp_live_workspace_symbols(fzf_opts)
+        --     end
     )
 
-    -- if client.supports_method(methods.textDocument_completion) then
-    --     vim.lsp.completion.enable(
-    --         true,
-    --         client.id,
-    --         bufnr,
-    --         { autotrigger = false }
-    --     )
-    -- end
+    if client:supports_method(methods.textDocument_codeAction) then
+        keymap(
+            '<space>ca',
+            vim.lsp.buf.code_action
+            -- running_windows and vim.lsp.buf.code_action
+            --     or function()
+            --         require('fzf-lua').lsp_code_actions(fzf_opts)
+            --     end
+        )
 
-    if client.supports_method(methods.textDocument_declaration) then
+        keymap('<space>oi', function()
+            vim.lsp.buf.code_action {
+                apply = true,
+                context = {
+                    only = { 'source.organizeImports' },
+                    diagnostics = {},
+                },
+            }
+        end)
+    end
+
+    if client:supports_method(methods.textDocument_completion) then
+        vim.lsp.completion.enable(
+            true,
+            client.id,
+            bufnr,
+            { autotrigger = true }
+        )
+    end
+
+    if client:supports_method(methods.textDocument_declaration) then
         keymap('gD', vim.lsp.buf.declaration)
     end
 
-    if client.supports_method(methods.textDocument_documentHighlight) then
+    if client:supports_method(methods.textDocument_documentHighlight) then
         local augroup = vim.api.nvim_create_augroup(
             'gmr_lsp_document_highlight',
             { clear = false }
@@ -147,7 +155,18 @@ function M.on_attach(client, bufnr)
         })
     end
 
-    if client.supports_method(methods.textDocument_inlayHint) then
+    if client:supports_method(methods.textDocument_formatting) then
+        keymap('<space>fo', function()
+            vim.lsp.buf.format {
+                async = true,
+                filter = function(c)
+                    return c.name ~= 'eslint'
+                end,
+            }
+        end, { 'n', 'v' })
+    end
+
+    if client:supports_method(methods.textDocument_inlayHint) then
         keymap('<leader>ih', function()
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
         end)

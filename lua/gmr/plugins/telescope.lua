@@ -1,14 +1,3 @@
-local fullscreen = {
-    layout_strategy = 'vertical',
-    layout_config = {
-        prompt_position = 'top',
-        width = { padding = 0 },
-        height = { padding = 0 },
-        preview_cutoff = 1,
-        mirror = true,
-    },
-}
-
 return {
     'nvim-telescope/telescope.nvim',
     dependencies = {
@@ -21,7 +10,20 @@ return {
     cmd = 'Telescope',
     config = function()
         local telescope = require 'telescope'
+        local actions = require 'telescope.actions'
         local actions_layout = require 'telescope.actions.layout'
+        local previewers = require 'telescope.previewers'
+
+        local layout_fullscreen = {
+            layout_strategy = 'vertical',
+            layout_config = {
+                prompt_position = 'top',
+                width = { padding = 0 },
+                height = { padding = 0 },
+                preview_cutoff = 1,
+                mirror = true,
+            },
+        }
 
         telescope.setup {
             defaults = {
@@ -31,6 +33,8 @@ return {
                         ['<C-y>'] = actions_layout.toggle_preview,
                     },
                     i = {
+                        ['<Tab>'] = actions.move_selection_worse,
+                        ['<S-Tab>'] = actions.move_selection_better,
                         ['<C-y>'] = actions_layout.toggle_preview,
                     },
                 },
@@ -51,7 +55,11 @@ return {
                     '└',
                 },
                 color_devicons = true,
-                set_env = { ['COLORTERM'] = 'truecolor' },
+                set_env = {
+                    ['COLORTERM'] = 'truecolor',
+                    LESS = '',
+                    DELTA_PAGER = 'less',
+                },
                 extensions = {
                     fzf = {
                         fuzzy = true,
@@ -97,7 +105,40 @@ return {
                         mirror = false,
                     },
                 },
-                git_status = fullscreen,
+                git_status = vim.tbl_deep_extend('force', {
+                    mappings = {
+                        i = {
+                            ['<Tab>'] = actions.move_selection_worse,
+                            ['<S-Tab>'] = actions.move_selection_better,
+                        },
+                    },
+                    previewer = previewers.new_termopen_previewer {
+                        get_command = function(entry, _)
+                            local cmd = {
+                                'git',
+                                '-c',
+                                'core.pager=delta',
+                                '-c',
+                                'delta.side-by-side=false',
+                                '-c',
+                                'delta.line-numbers=true',
+                                '-c',
+                                'delta.hunk-header-style=omit',
+                                '-c',
+                                'delta.file-style=omit',
+                                'diff',
+                            }
+
+                            if entry.status == 'A ' then
+                                table.insert(cmd, '--cached')
+                            end
+
+                            table.insert(cmd, entry.value)
+
+                            return cmd
+                        end,
+                    },
+                }, layout_fullscreen),
                 help_tags = {
                     layout_config = {
                         prompt_position = 'top',
@@ -107,11 +148,11 @@ return {
                         preview_width = 0.6,
                     },
                 },
-                live_grep = fullscreen,
-                lsp_document_symbols = fullscreen,
-                lsp_dynamic_workspace_symbols = fullscreen,
-                lsp_implementations = fullscreen,
-                lsp_references = fullscreen,
+                live_grep = layout_fullscreen,
+                lsp_document_symbols = layout_fullscreen,
+                lsp_dynamic_workspace_symbols = layout_fullscreen,
+                lsp_implementations = layout_fullscreen,
+                lsp_references = layout_fullscreen,
                 oldfiles = {
                     previewer = false,
                     layout_config = {

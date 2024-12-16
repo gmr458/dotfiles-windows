@@ -1,7 +1,7 @@
 local M = {}
 
 --- @param err? lsp.ResponseError
---- @param result any
+--- @param result any|lsp.Location[]|lsp.LocationLink[]
 --- @param context lsp.HandlerContext
 --- @param config? table
 function M.go_to_definition(err, result, context, config)
@@ -24,8 +24,7 @@ function M.go_to_definition(err, result, context, config)
     end
 
     if result == nil or vim.tbl_isempty(result) then
-        local _ = vim.lsp.log.info()
-            and vim.lsp.log.info(context.method, 'No location found')
+        vim.lsp.log.info(context.method, 'No location found')
         return nil
     end
 

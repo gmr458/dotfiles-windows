@@ -10,7 +10,7 @@ add 'gmr.plugins.autopairs'
 add 'gmr.plugins.autotag'
 add 'gmr.plugins.base46'
 -- add 'gmr.plugins.cloak'
-add 'gmr.plugins.cmp'
+-- add 'gmr.plugins.cmp'
 add 'gmr.plugins.colorizer'
 -- add 'gmr.plugins.colorschemes.cold'
 -- add 'gmr.plugins.comment'
@@ -40,11 +40,11 @@ add 'gmr.plugins.vim-surround'
 add 'gmr.plugins.web-devicons'
 add 'gmr.plugins.zen-mode'
 
-if vim.fn.has 'win32' == 1 then
-    add 'gmr.plugins.telescope'
-else
-    add 'gmr.plugins.fzf'
-end
+-- if vim.fn.has 'win32' == 1 then
+add 'gmr.plugins.telescope'
+-- else
+--     add 'gmr.plugins.fzf'
+-- end
 
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 
