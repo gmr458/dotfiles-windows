@@ -8,11 +8,11 @@ end
 
 add 'gmr.plugins.autopairs'
 add 'gmr.plugins.autotag'
-add 'gmr.plugins.base46'
+-- add 'gmr.plugins.base46'
 -- add 'gmr.plugins.cloak'
 -- add 'gmr.plugins.cmp'
 add 'gmr.plugins.colorizer'
--- add 'gmr.plugins.colorschemes.cold'
+add 'gmr.plugins.colorschemes.rose-pine'
 -- add 'gmr.plugins.comment'
 -- add 'gmr.plugins.conform'
 -- add 'gmr.plugins.dap.python'
