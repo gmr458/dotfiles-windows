@@ -146,7 +146,7 @@ vim.keymap.set('n', '<leader>sb', function()
     vim.opt.background = vim.o.background == 'dark' and 'light' or 'dark'
     if running_kitty and vim.g.neovide == nil then
         local cmd = 'kitten themes --cache-age=-1 '
-            -- .. 'cold_'
+            .. 'cold_'
             .. vim.o.background
         vim.fn.system(cmd)
     end

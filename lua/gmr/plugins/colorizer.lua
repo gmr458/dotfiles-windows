@@ -25,7 +25,7 @@ return {
                 css_fn = true,
                 mode = 'virtualtext',
                 tailwind = true,
-                virtualtext = ' ',
+                virtualtext = ' ██',
             },
         }
     end,

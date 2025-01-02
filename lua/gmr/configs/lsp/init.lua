@@ -2,7 +2,7 @@ local M = {}
 
 -- local navic_attach = require('gmr.configs.lsp.navic').attach
 
--- local running_windows = vim.fn.has 'win32' == 1
+local running_windows = vim.fn.has 'win32' == 1
 
 --- @param client vim.lsp.Client
 --- @param bufnr integer
@@ -43,11 +43,11 @@ function M.on_attach(client, bufnr)
         )
     end
 
-    -- local fzf_opts = {
-    --     winopts = {
-    --         fullscreen = true,
-    --     },
-    -- }
+    local fzf_opts = {
+        winopts = {
+            fullscreen = true,
+        },
+    }
 
     keymap('<space>e', vim.diagnostic.open_float)
     keymap('[d', function()
@@ -58,14 +58,15 @@ function M.on_attach(client, bufnr)
     end)
     keymap('<space>q', vim.diagnostic.setloclist)
     keymap('gd', vim.lsp.buf.definition)
-    keymap('J', vim.lsp.buf.hover)
+    keymap('J', function()
+        vim.lsp.buf.hover { border = 'single' }
+    end)
     keymap(
         'gi',
-        ':Telescope lsp_implementations<cr>'
-        -- running_windows and ':Telescope lsp_implementations<cr>'
-        --     or function()
-        --         require('fzf-lua').lsp_implementations(fzf_opts)
-        --     end
+        running_windows and ':Telescope lsp_implementations<cr>'
+            or function()
+                require('fzf-lua').lsp_implementations(fzf_opts)
+            end
     )
     keymap('K', vim.lsp.buf.signature_help)
     keymap('<space>wa', vim.lsp.buf.add_workspace_folder)
@@ -77,37 +78,33 @@ function M.on_attach(client, bufnr)
     keymap('<space>rn', vim.lsp.buf.rename)
     keymap(
         'gr',
-        ':Telescope lsp_references<cr>'
-        -- running_windows and ':Telescope lsp_references<cr>'
-        --     or function()
-        --         require('fzf-lua').lsp_references(fzf_opts)
-        --     end
+        running_windows and ':Telescope lsp_references<cr>'
+            or function()
+                require('fzf-lua').lsp_references(fzf_opts)
+            end
     )
     keymap(
         '<leader>ds',
-        ':Telescope lsp_document_symbols<cr>'
-        -- running_windows and ':Telescope lsp_document_symbols<cr>'
-        --     or function()
-        --         require('fzf-lua').lsp_document_symbols(fzf_opts)
-        --     end
+        running_windows and ':Telescope lsp_document_symbols<cr>'
+            or function()
+                require('fzf-lua').lsp_document_symbols(fzf_opts)
+            end
     )
     keymap(
         '<leader>ws',
-        ':Telescope lsp_dynamic_workspace_symbols<cr>'
-        -- running_windows and ':Telescope lsp_dynamic_workspace_symbols<cr>'
-        --     or function()
-        --         require('fzf-lua').lsp_live_workspace_symbols(fzf_opts)
-        --     end
+        running_windows and ':Telescope lsp_dynamic_workspace_symbols<cr>'
+            or function()
+                require('fzf-lua').lsp_live_workspace_symbols(fzf_opts)
+            end
     )
 
     if client:supports_method(methods.textDocument_codeAction) then
         keymap(
             '<space>ca',
-            vim.lsp.buf.code_action
-            -- running_windows and vim.lsp.buf.code_action
-            --     or function()
-            --         require('fzf-lua').lsp_code_actions(fzf_opts)
-            --     end
+            running_windows and vim.lsp.buf.code_action
+                or function()
+                    require('fzf-lua').lsp_code_actions(fzf_opts)
+                end
         )
 
         keymap('<space>oi', function()
@@ -121,14 +118,14 @@ function M.on_attach(client, bufnr)
         end)
     end
 
-    if client:supports_method(methods.textDocument_completion) then
-        vim.lsp.completion.enable(
-            true,
-            client.id,
-            bufnr,
-            { autotrigger = true }
-        )
-    end
+    -- if client:supports_method(methods.textDocument_completion) then
+    --     vim.lsp.completion.enable(
+    --         true,
+    --         client.id,
+    --         bufnr,
+    --         { autotrigger = false }
+    --     )
+    -- end
 
     if client:supports_method(methods.textDocument_declaration) then
         keymap('gD', vim.lsp.buf.declaration)
@@ -171,12 +168,6 @@ function M.on_attach(client, bufnr)
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
         end)
     end
-
-    -- uncomment this if using dap
-    -- if client.name == 'jdtls' then
-    --     require('jdtls').setup_dap { hotcodereplace = 'auto' }
-    --     require('jdtls.dap').setup_dap_main_class_configs()
-    -- end
 
     -- navic_attach(client, bufnr)
 end

@@ -36,13 +36,40 @@ local options = {
             GitSignsAddInline = { bg = '#4C5B2B' },
             GitSignsChange = { fg = '#f7ca88' },
             GitSignsAdd = { fg = '#9EBC9F' },
-            FzfLuaNormal = { link = 'NormalFloat' },
-            FzfLuaBorder = { link = 'FloatBorder' },
+            FzfLuaNormal = { bg = 'darker_black' },
+            FzfLuaBorder = {
+                bg = 'darker_black',
+                fg = 'darker_black',
+            },
             TelescopePreviewNormal = { link = 'Normal' },
             TelescopePreviewBorder = { bg = 'black', fg = 'black' },
+            BlinkCmpMenu = { bg = 'black' },
+            BlinkCmpMenuBorder = {
+                bg = 'black',
+                fg = 'grey',
+            },
+            BlinkCmpDoc = { bg = 'black' },
+            BlinkCmpDocSeparator = {
+                bg = 'black',
+                fg = 'grey',
+            },
+            BlinkCmpDocBorder = {
+                bg = 'black',
+                fg = 'grey',
+            },
+            TreesitterContextLineNumber = {
+                bg = 'darker_black',
+                fg = 'grey',
+            },
+            CursorLineNr = { bg = 'black2', fg = 'white' },
+            WinBar = { fg = 'light_grey' },
         },
         hl_override = {
-            FloatBorder = { bg = 'darker_black', fg = 'darker_black' },
+            NormalFloat = { bg = 'black' },
+            FloatBorder = {
+                bg = 'black',
+                fg = 'grey',
+            },
             DiffDelete = { bg = '#4C1919' },
             DiffAdd = { bg = '#383E2A' },
             DiffChange = { bg = '#7e4e08' },
