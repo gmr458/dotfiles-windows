@@ -13,15 +13,12 @@ return {
         local lspconfiguser = require 'gmr.configs.lsp'
         lspconfiguser.setup_diagnostic_config()
 
-        local capabilities = require('blink.cmp').get_lsp_capabilities()
-
         require('lspconfig.ui.windows').default_options.border = 'single'
 
         local servers = require('gmr.configs.lsp.servers').to_setup
         for _, server in pairs(servers) do
             local server_opts = {
                 on_attach = lspconfiguser.on_attach,
-                capabilities = capabilities,
             }
 
             local has_custom_opts, server_custom_opts =

@@ -1,3 +1,7 @@
+if vim.fn.isdirectory(vim.g.base46_cache) == 0 then
+    require('base46').load_all_highlights()
+end
+
 dofile(vim.g.base46_cache .. 'colors')
 dofile(vim.g.base46_cache .. 'defaults')
 dofile(vim.g.base46_cache .. 'devicons')

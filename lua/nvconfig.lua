@@ -41,6 +41,9 @@ local options = {
                 bg = 'darker_black',
                 fg = 'darker_black',
             },
+            FzfLuaTitle = { bg = 'green', fg = 'darker_black' },
+            FzfLuaPreviewBorder = { bg = 'black', fg = 'black' },
+            FzfLuaPreviewNormal = { bg = 'black' },
             TelescopePreviewNormal = { link = 'Normal' },
             TelescopePreviewBorder = { bg = 'black', fg = 'black' },
             BlinkCmpMenu = { bg = 'black' },
@@ -56,6 +59,9 @@ local options = {
             BlinkCmpDocBorder = {
                 bg = 'black',
                 fg = 'grey',
+            },
+            TreesitterContext = {
+                bg = 'darker_black',
             },
             TreesitterContextLineNumber = {
                 bg = 'darker_black',

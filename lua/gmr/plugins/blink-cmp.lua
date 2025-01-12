@@ -1,5 +1,5 @@
 return {
-    'saghen/blink.cmp',
+    'Saghen/blink.cmp',
     event = 'InsertEnter',
     version = '*',
     config = function()
@@ -18,13 +18,14 @@ return {
             },
             completion = {
                 list = {
-                    selection = 'auto_insert',
+                    selection = {
+                        auto_insert = true,
+                    },
                 },
                 menu = {
                     border = 'single',
                     auto_show = false,
                     draw = {
-                        treesitter = { 'lsp' },
                         columns = {
                             {
                                 'label',
