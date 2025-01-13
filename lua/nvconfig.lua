@@ -1,5 +1,6 @@
 local options = {
     base46 = {
+        --- @type 'aquarium' | 'ashes' | 'ayu_dark' | 'ayu_light' | 'bearded-arc' | 'blossom_light' | 'catppuccin' | 'chadracula-evondev' | 'chadracula' | 'chadtain' | 'chocolate' | 'dark_horizon' | 'decay' | 'doomchad' | 'everblush' | 'everforest' |'everforest_light' | 'falcon' | 'flex-light' | 'flexoki-light' | 'flexoki' | 'gatekeeper' | 'github_dark' | 'github_light' | 'gruvbox' | 'gruvbox_light' | 'gruvchad' | 'jabuti' | 'jellybeans' | 'kanagawa' | 'material-darker' | 'material-lighter' | 'melange' | 'mito-laser' | 'monekai' | 'monochrome' | 'mountain' | 'nano-light' | 'nightfox' | 'nightlamp' | 'nightowl' | 'nord' | 'oceanic-light' | 'oceanic-next' | 'one_light' | 'onedark' | 'onenord' | 'onenord_light' | 'oxocarbon' | 'palenight' | 'pastelDark' | 'pastelbeans' | 'penumbra_dark' | 'penumbra_light' | 'poimandres' | 'radium' | 'rosepine-dawn' | 'rosepine' | 'rxyhn' | 'solarized_dark' | 'solarized_osaka' | 'sweetpastel' | 'tokyodark'| 'tokyonight' | 'tomorrow_night' | 'tundra' | 'vscode_dark' | 'wombat' | 'yoru'
         theme = 'radium',
         hl_add = {
             StatusLine = { bg = 'statusline_bg', fg = 'base07' },
