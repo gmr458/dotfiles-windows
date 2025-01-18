@@ -114,6 +114,7 @@ return {
                 typescript = { web },
                 typescriptreact = { web },
                 yaml = require('formatter.filetypes.yaml').yamlfmt,
+                zig = require('formatter.filetypes.zig').zigfmt,
             },
         }
     end,

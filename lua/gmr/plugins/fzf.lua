@@ -56,11 +56,13 @@ return {
                     ['shift-tab'] = 'toggle-up',
                     ['ctrl-d'] = 'preview-page-down',
                     ['ctrl-u'] = 'preview-page-up',
+                    ['ctrl-q'] = 'select-all+accept',
                 },
             },
             actions = {
                 files = {
-                    ['default'] = actions.file_edit,
+                    ['enter'] = actions.file_edit_or_qf,
+                    ['alt-q'] = actions.file_sel_to_qf,
                     ['ctrl-x'] = actions.file_split,
                     ['ctrl-v'] = actions.file_vsplit,
                 },
