@@ -4,12 +4,13 @@ require 'gmr.core.keymaps.colorizer'
 require 'gmr.core.keymaps.editor'
 require 'gmr.core.keymaps.grapple'
 require 'gmr.core.keymaps.nvim-tree'
+require 'gmr.core.keymaps.snacks'
 
-if vim.fn.has 'win32' == 1 then
-    require 'gmr.core.keymaps.telescope'
-else
-    require 'gmr.core.keymaps.fzf'
-end
+-- if vim.fn.has 'win32' == 1 then
+--     require 'gmr.core.keymaps.telescope'
+-- else
+--     require 'gmr.core.keymaps.fzf'
+-- end
 
 -- neovim 0.11 use <Tab> and <S-Tab> for snippets, i don't use snippets
 if vim.fn.has 'nvim-0.11' == 1 then

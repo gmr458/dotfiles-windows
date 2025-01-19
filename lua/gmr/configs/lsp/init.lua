@@ -43,11 +43,11 @@ function M.on_attach(client, bufnr)
         )
     end
 
-    local fzf_opts = {
-        winopts = {
-            fullscreen = true,
-        },
-    }
+    -- local fzf_opts = {
+    --     winopts = {
+    --         fullscreen = true,
+    --     },
+    -- }
 
     keymap('<space>e', vim.diagnostic.open_float)
     keymap('[d', function()
@@ -63,12 +63,15 @@ function M.on_attach(client, bufnr)
     end)
     keymap(
         'gi',
-        running_windows and ':Telescope lsp_implementations<cr>'
-            or function()
-                require('fzf-lua').lsp_implementations(fzf_opts)
-            end
+        ':SnacksPickerLspImplementations<cr>'
+        -- running_windows and ':Telescope lsp_implementations<cr>'
+        --     or function()
+        --         require('fzf-lua').lsp_implementations(fzf_opts)
+        --     end
     )
-    keymap('K', vim.lsp.buf.signature_help)
+    keymap('K', function()
+        vim.lsp.buf.signature_help { border = 'single' }
+    end)
     keymap('<space>wa', vim.lsp.buf.add_workspace_folder)
     keymap('<space>wr', vim.lsp.buf.remove_workspace_folder)
     keymap('<space>wl', function()
@@ -78,35 +81,38 @@ function M.on_attach(client, bufnr)
     keymap('<space>rn', vim.lsp.buf.rename)
     keymap(
         'gr',
-        running_windows and ':Telescope lsp_references<cr>'
-            or function()
-                require('fzf-lua').lsp_references(fzf_opts)
-            end
+        ':SnacksPickerLspReferences<cr>'
+        -- running_windows and ':Telescope lsp_references<cr>'
+        --     or function()
+        --         require('fzf-lua').lsp_references(fzf_opts)
+        --     end
     )
     keymap(
-        '<leader>ds',
-        running_windows and ':Telescope lsp_document_symbols<cr>'
-            or function()
-                require('fzf-lua').lsp_document_symbols(fzf_opts)
-            end
+        '<leader>sds',
+        ':SnacksPickerLspDocumentSymbols<cr>'
+        -- running_windows and ':Telescope lsp_document_symbols<cr>'
+        --     or function()
+        --         require('fzf-lua').lsp_document_symbols(fzf_opts)
+        --     end
     )
     keymap(
-        '<leader>ws',
-        running_windows and ':Telescope lsp_dynamic_workspace_symbols<cr>'
-            or function()
-                require('fzf-lua').lsp_live_workspace_symbols(fzf_opts)
-            end
+        '<leader>sws',
+        ':SnacksPickerLspWorkspaceSymbols<cr>'
+        -- running_windows and ':Telescope lsp_dynamic_workspace_symbols<cr>'
+        --     or function()
+        --         require('fzf-lua').lsp_live_workspace_symbols(fzf_opts)
+        --     end
     )
 
     if client:supports_method(methods.textDocument_codeAction) then
         keymap(
             '<space>ca',
-            running_windows and vim.lsp.buf.code_action
-                or function()
-                    require('fzf-lua').lsp_code_actions(fzf_opts)
-                end
+            vim.lsp.buf.code_action
+            -- running_windows and vim.lsp.buf.code_action
+            --     or function()
+            --         require('fzf-lua').lsp_code_actions(fzf_opts)
+            --     end
         )
-
         keymap('<space>oi', function()
             vim.lsp.buf.code_action {
                 apply = true,

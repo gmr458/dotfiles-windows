@@ -70,6 +70,12 @@ local options = {
             },
             CursorLineNr = { bg = 'black2', fg = 'white' },
             WinBar = { fg = 'light_grey' },
+            SnacksPickerInput = { bg = 'darker_black' },
+            SnacksPickerInputBorder = { bg = 'darker_black' },
+            SnacksPickerList = { bg = 'black2' },
+            SnacksPickerListBorder = { bg = 'black2' },
+            SnacksPickerDir = { link = 'Comment' },
+            SnacksPickerRow = { link = 'Comment' },
         },
         hl_override = {
             NormalFloat = { bg = 'black' },

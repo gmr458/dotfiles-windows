@@ -1,0 +1,207 @@
+return {
+    'folke/snacks.nvim',
+    cmd = {
+        'SnacksPickerFiles',
+        'SnacksPickerGitStatus',
+        'SnacksPickerGrep',
+        'SnacksPickerHelp',
+        'SnacksPickerBuffers',
+        'SnacksPickerLspReferences',
+        'SnacksPickerLspImplementations',
+        'SnacksPickerLspDocumentSymbols',
+        'SnacksPickerLspWorkspaceSymbols',
+    },
+    config = function()
+        require('snacks').setup {
+            bigfile = { enabled = false },
+            dashboard = { enabled = false },
+            indent = { enabled = false },
+            input = { enabled = false },
+            notifier = { enabled = false },
+            picker = {
+                prompt = ' ',
+                formatters = {
+                    file = {
+                        filename_first = true,
+                    },
+                },
+                previewers = {
+                    git = {
+                        native = true,
+                    },
+                },
+                win = {
+                    input = {
+                        keys = {
+                            ['<Tab>'] = { 'list_down', mode = { 'i', 'n' } },
+                            ['<S-Tab>'] = { 'list_up', mode = { 'i', 'n' } },
+                        },
+                    },
+                },
+                icons = {
+                    kinds = {
+                        Array = 'Array',
+                        Boolean = 'Boolean',
+                        Class = 'Class',
+                        Color = 'Color',
+                        Control = 'Control',
+                        Collapsed = 'Collapsed',
+                        Constant = 'Constant',
+                        Constructor = 'Constructor',
+                        Copilot = 'Copilot',
+                        Enum = 'Enum',
+                        EnumMember = 'EnumMember',
+                        Event = 'Event',
+                        Field = 'Field',
+                        File = 'File',
+                        Folder = 'Folder',
+                        Function = 'Function',
+                        Interface = 'Interface',
+                        Key = 'Key',
+                        Keyword = 'Keyword',
+                        Method = 'Method',
+                        Module = 'Module',
+                        Namespace = 'Namespace',
+                        Null = 'Null',
+                        Number = 'Number',
+                        Object = 'Object',
+                        Operator = 'Operator',
+                        Package = 'Package',
+                        Property = 'Property',
+                        Reference = 'Reference',
+                        Snippet = 'Snippet',
+                        String = 'String',
+                        Struct = 'Struct',
+                        Text = 'Text',
+                        TypeParameter = 'TypeParameter',
+                        Unit = 'Unit',
+                        Unknown = 'Unknown',
+                        Value = 'Value',
+                        Variable = 'Variable',
+                    },
+                },
+            },
+            scope = { enabled = false },
+            scroll = { enabled = false },
+            statuscolumn = { enabled = false },
+            win = {
+                backdrop = false,
+            },
+            words = { enabled = false },
+        }
+
+        local layout_normal = {
+            layout = {
+                preview = false,
+                layout = {
+                    max_width = 70,
+                    height = 0.8,
+                    box = 'vertical',
+                    {
+                        win = 'input',
+                        height = 1,
+                        border = 'solid',
+                    },
+                    {
+                        win = 'list',
+                        border = 'solid',
+                    },
+                },
+            },
+        }
+
+        local layout_fullscreen_horizontal = {
+            layout = {
+                fullscreen = true,
+                layout = {
+                    box = 'vertical',
+                    {
+                        win = 'input',
+                        height = 1,
+                        border = 'solid',
+                    },
+                    { win = 'list', border = 'solid' },
+                    {
+                        win = 'preview',
+                        height = 0.6,
+                        border = 'vpad',
+                    },
+                },
+            },
+        }
+
+        local layout_fullscreen_vertical = {
+            layout = {
+                fullscreen = true,
+                layout = {
+                    box = 'horizontal',
+                    {
+                        box = 'vertical',
+                        {
+                            win = 'input',
+                            height = 1,
+                            border = 'solid',
+                        },
+                        {
+                            win = 'list',
+                            border = 'solid',
+                        },
+                    },
+                    {
+                        win = 'preview',
+                        width = 0.6,
+                        border = 'solid',
+                    },
+                },
+            },
+        }
+
+        vim.api.nvim_create_user_command('SnacksPickerFiles', function()
+            Snacks.picker.files(layout_normal)
+        end, {})
+
+        vim.api.nvim_create_user_command('SnacksPickerGitStatus', function()
+            Snacks.picker.git_status(layout_fullscreen_horizontal)
+        end, {})
+
+        vim.api.nvim_create_user_command('SnacksPickerGrep', function()
+            Snacks.picker.grep(layout_fullscreen_horizontal)
+        end, {})
+
+        vim.api.nvim_create_user_command('SnacksPickerHelp', function()
+            Snacks.picker.help(layout_fullscreen_vertical)
+        end, {})
+
+        vim.api.nvim_create_user_command('SnacksPickerBuffers', function()
+            Snacks.picker.buffers(layout_normal)
+        end, {})
+
+        vim.api.nvim_create_user_command('SnacksPickerLspReferences', function()
+            Snacks.picker.lsp_references(layout_fullscreen_horizontal)
+        end, {})
+
+        vim.api.nvim_create_user_command(
+            'SnacksPickerLspImplementations',
+            function()
+                Snacks.picker.lsp_implementations(layout_fullscreen_horizontal)
+            end,
+            {}
+        )
+
+        vim.api.nvim_create_user_command(
+            'SnacksPickerLspDocumentSymbols',
+            function()
+                Snacks.picker.lsp_symbols(layout_fullscreen_vertical)
+            end,
+            {}
+        )
+
+        vim.api.nvim_create_user_command(
+            'SnacksPickerLspWorkspaceSymbols',
+            function()
+                Snacks.picker.lsp_workspace_symbols(layout_fullscreen_vertical)
+            end,
+            {}
+        )
+    end,
+}

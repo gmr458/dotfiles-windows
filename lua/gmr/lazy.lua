@@ -23,6 +23,7 @@ add 'gmr.plugins.lsp'
 add 'gmr.plugins.mason'
 add 'gmr.plugins.nvim-tree'
 add 'gmr.plugins.scriptease'
+add 'gmr.plugins.snacks'
 add 'gmr.plugins.treesitter'
 add 'gmr.plugins.treesitter-context'
 add 'gmr.plugins.ts-comments'
@@ -32,11 +33,11 @@ add 'gmr.plugins.vim-surround'
 add 'gmr.plugins.web-devicons'
 add 'gmr.plugins.zen-mode'
 
-if vim.fn.has 'win32' == 1 then
-    add 'gmr.plugins.telescope'
-else
-    add 'gmr.plugins.fzf'
-end
+-- if vim.fn.has 'win32' == 1 then
+--     add 'gmr.plugins.telescope'
+-- else
+--     add 'gmr.plugins.fzf'
+-- end
 
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 
