@@ -35,6 +35,7 @@ return {
                         keys = {
                             ['<Tab>'] = { 'list_down', mode = { 'i', 'n' } },
                             ['<S-Tab>'] = { 'list_up', mode = { 'i', 'n' } },
+                            ['<c-x>'] = { 'edit_split', mode = { 'i', 'n' } },
                         },
                     },
                 },
@@ -160,8 +161,43 @@ return {
             Snacks.picker.files(layout_normal)
         end, {})
 
+        vim.api.nvim_create_user_command('SnacksPickerGitBranches', function()
+            Snacks.picker.git_branches(layout_fullscreen_vertical)
+        end, {})
+
+        vim.api.nvim_create_user_command('SnacksPickerGitDiff', function()
+            Snacks.picker.git_diff(layout_fullscreen_vertical)
+        end, {})
+
+        vim.api.nvim_create_user_command('SnacksPickerGitFiles', function()
+            Snacks.picker.git_diff(layout_fullscreen_vertical)
+        end, {})
+
+        vim.api.nvim_create_user_command('SnacksPickerGitLog', function()
+            Snacks.picker.git_log(layout_fullscreen_vertical)
+        end, {})
+
+        vim.api.nvim_create_user_command('SnacksPickerGitLogFile', function()
+            Snacks.picker.git_log_file(layout_fullscreen_vertical)
+        end, {})
+
+        vim.api.nvim_create_user_command('SnacksPickerGitLogLine', function()
+            Snacks.picker.git_log_line(layout_fullscreen_vertical)
+        end, {})
+
         vim.api.nvim_create_user_command('SnacksPickerGitStatus', function()
-            Snacks.picker.git_status(layout_fullscreen_horizontal)
+            local config =
+                vim.tbl_deep_extend('force', layout_fullscreen_horizontal, {
+                    win = {
+                        input = {
+                            keys = {
+                                ['<Tab>'] = { 'list_down', mode = { 'i', 'n' } },
+                                ['<S-Tab>'] = { 'list_up', mode = { 'i', 'n' } },
+                            },
+                        },
+                    },
+                })
+            Snacks.picker.git_status(config)
         end, {})
 
         vim.api.nvim_create_user_command('SnacksPickerGrep', function()
