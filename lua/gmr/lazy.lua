@@ -8,11 +8,11 @@ end
 
 add 'gmr.plugins.autopairs'
 add 'gmr.plugins.autotag'
-add 'gmr.plugins.base46'
+-- add 'gmr.plugins.base46'
 add 'gmr.plugins.blink-cmp'
 -- add 'gmr.plugins.cloak'
 add 'gmr.plugins.colorizer'
--- add 'gmr.plugins.colorschemes.cold'
+add 'gmr.plugins.colorschemes.cold'
 add 'gmr.plugins.formatter'
 add 'gmr.plugins.grapple'
 add 'gmr.plugins.gitsigns'
