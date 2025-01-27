@@ -12,32 +12,32 @@ local config = {
         diagnostics = {
             ignoredCodes = { 80001 },
         },
-        javascript = {
-            inlayHints = {
-                includeInlayEnumMemberValueHints = true,
-                includeInlayFunctionLikeReturnTypeHints = true,
-                includeInlayFunctionParameterTypeHints = true,
-                --- @type 'none' | 'literals' | 'all'
-                includeInlayParameterNameHints = 'all',
-                includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-                includeInlayPropertyDeclarationTypeHints = true,
-                includeInlayVariableTypeHints = true,
-                includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-            },
-        },
-        typescript = {
-            inlayHints = {
-                includeInlayEnumMemberValueHints = true,
-                includeInlayFunctionLikeReturnTypeHints = true,
-                includeInlayFunctionParameterTypeHints = true,
-                --- @type 'none' | 'literals' | 'all'
-                includeInlayParameterNameHints = 'all',
-                includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-                includeInlayPropertyDeclarationTypeHints = true,
-                includeInlayVariableTypeHints = true,
-                includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-            },
-        },
+        -- javascript = {
+        --     inlayHints = {
+        --         includeInlayEnumMemberValueHints = true,
+        --         includeInlayFunctionLikeReturnTypeHints = true,
+        --         includeInlayFunctionParameterTypeHints = true,
+        --         --- @type 'none' | 'literals' | 'all'
+        --         includeInlayParameterNameHints = 'all',
+        --         includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+        --         includeInlayPropertyDeclarationTypeHints = true,
+        --         includeInlayVariableTypeHints = true,
+        --         includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+        --     },
+        -- },
+        -- typescript = {
+        --     inlayHints = {
+        --         includeInlayEnumMemberValueHints = true,
+        --         includeInlayFunctionLikeReturnTypeHints = true,
+        --         includeInlayFunctionParameterTypeHints = true,
+        --         --- @type 'none' | 'literals' | 'all'
+        --         includeInlayParameterNameHints = 'all',
+        --         includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+        --         includeInlayPropertyDeclarationTypeHints = true,
+        --         includeInlayVariableTypeHints = true,
+        --         includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+        --     },
+        -- },
     },
     handlers = {
         --- @param err? lsp.ResponseError

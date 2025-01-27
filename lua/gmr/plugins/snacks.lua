@@ -1,3 +1,97 @@
+local layout_normal = {
+    layout = {
+        preview = false,
+        layout = {
+            max_width = 70,
+            height = 0.8,
+            box = 'vertical',
+            {
+                win = 'input',
+                height = 1,
+                border = 'solid',
+            },
+            {
+                win = 'list',
+                border = 'solid',
+            },
+        },
+    },
+}
+
+local function get_layout_fullscreen_vertical(width_preview)
+    return {
+        layout = {
+            fullscreen = true,
+            layout = {
+                box = 'horizontal',
+                {
+                    box = 'vertical',
+                    {
+                        win = 'input',
+                        height = 1,
+                        border = 'solid',
+                    },
+                    {
+                        win = 'list',
+                        border = 'solid',
+                    },
+                },
+                {
+                    win = 'preview',
+                    width = width_preview,
+                    border = 'solid',
+                },
+            },
+        },
+    }
+end
+
+local layout_fullscreen_horizontal = {
+    layout = {
+        fullscreen = true,
+        layout = {
+            box = 'vertical',
+            {
+                win = 'input',
+                height = 1,
+                border = 'solid',
+            },
+            { win = 'list', border = 'solid' },
+            {
+                win = 'preview',
+                height = 0.6,
+                border = 'vpad',
+            },
+        },
+    },
+}
+
+local layout_fullscreen_vertical = {
+    layout = {
+        fullscreen = true,
+        layout = {
+            box = 'horizontal',
+            {
+                box = 'vertical',
+                {
+                    win = 'input',
+                    height = 1,
+                    border = 'solid',
+                },
+                {
+                    win = 'list',
+                    border = 'solid',
+                },
+            },
+            {
+                win = 'preview',
+                width = 0.6,
+                border = 'solid',
+            },
+        },
+    },
+}
+
 return {
     'folke/snacks.nvim',
     cmd = {
@@ -36,6 +130,14 @@ return {
                             ['<Tab>'] = { 'list_down', mode = { 'i', 'n' } },
                             ['<S-Tab>'] = { 'list_up', mode = { 'i', 'n' } },
                             ['<c-x>'] = { 'edit_split', mode = { 'i', 'n' } },
+                            ['<c-u>'] = {
+                                'preview_scroll_up',
+                                mode = { 'i', 'n' },
+                            },
+                            ['<c-d>'] = {
+                                'preview_scroll_down',
+                                mode = { 'i', 'n' },
+                            },
                         },
                     },
                 },
@@ -91,72 +193,6 @@ return {
             words = { enabled = false },
         }
 
-        local layout_normal = {
-            layout = {
-                preview = false,
-                layout = {
-                    max_width = 70,
-                    height = 0.8,
-                    box = 'vertical',
-                    {
-                        win = 'input',
-                        height = 1,
-                        border = 'solid',
-                    },
-                    {
-                        win = 'list',
-                        border = 'solid',
-                    },
-                },
-            },
-        }
-
-        local layout_fullscreen_horizontal = {
-            layout = {
-                fullscreen = true,
-                layout = {
-                    box = 'vertical',
-                    {
-                        win = 'input',
-                        height = 1,
-                        border = 'solid',
-                    },
-                    { win = 'list', border = 'solid' },
-                    {
-                        win = 'preview',
-                        height = 0.6,
-                        border = 'vpad',
-                    },
-                },
-            },
-        }
-
-        local layout_fullscreen_vertical = {
-            layout = {
-                fullscreen = true,
-                layout = {
-                    box = 'horizontal',
-                    {
-                        box = 'vertical',
-                        {
-                            win = 'input',
-                            height = 1,
-                            border = 'solid',
-                        },
-                        {
-                            win = 'list',
-                            border = 'solid',
-                        },
-                    },
-                    {
-                        win = 'preview',
-                        width = 0.6,
-                        border = 'solid',
-                    },
-                },
-            },
-        }
-
         vim.api.nvim_create_user_command('SnacksPickerFiles', function()
             Snacks.picker.files(layout_normal)
         end, {})
@@ -186,17 +222,17 @@ return {
         end, {})
 
         vim.api.nvim_create_user_command('SnacksPickerGitStatus', function()
-            local config =
-                vim.tbl_deep_extend('force', layout_fullscreen_horizontal, {
-                    win = {
-                        input = {
-                            keys = {
-                                ['<Tab>'] = { 'list_down', mode = { 'i', 'n' } },
-                                ['<S-Tab>'] = { 'list_up', mode = { 'i', 'n' } },
-                            },
+            local layout = get_layout_fullscreen_vertical(0.8)
+            local config = vim.tbl_deep_extend('force', layout, {
+                win = {
+                    input = {
+                        keys = {
+                            ['<Tab>'] = { 'list_down', mode = { 'i', 'n' } },
+                            ['<S-Tab>'] = { 'list_up', mode = { 'i', 'n' } },
                         },
                     },
-                })
+                },
+            })
             Snacks.picker.git_status(config)
         end, {})
 
