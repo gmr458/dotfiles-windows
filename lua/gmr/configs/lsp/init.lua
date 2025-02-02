@@ -2,7 +2,7 @@ local M = {}
 
 -- local navic_attach = require('gmr.configs.lsp.navic').attach
 
-local running_windows = vim.fn.has 'win32' == 1
+-- local running_windows = vim.fn.has 'win32' == 1
 
 --- @param client vim.lsp.Client
 --- @param bufnr integer

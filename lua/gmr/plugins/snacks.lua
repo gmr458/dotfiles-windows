@@ -4,6 +4,7 @@ local layout_normal = {
         layout = {
             max_width = 70,
             height = 0.8,
+            backdrop = false,
             box = 'vertical',
             {
                 win = 'input',
@@ -23,6 +24,7 @@ local function get_layout_fullscreen_vertical(width_preview)
         layout = {
             fullscreen = true,
             layout = {
+                backdrop = false,
                 box = 'horizontal',
                 {
                     box = 'vertical',
@@ -50,6 +52,7 @@ local layout_fullscreen_horizontal = {
     layout = {
         fullscreen = true,
         layout = {
+            backdrop = false,
             box = 'vertical',
             {
                 win = 'input',
@@ -70,6 +73,7 @@ local layout_fullscreen_vertical = {
     layout = {
         fullscreen = true,
         layout = {
+            backdrop = false,
             box = 'horizontal',
             {
                 box = 'vertical',
@@ -187,9 +191,6 @@ return {
             scope = { enabled = false },
             scroll = { enabled = false },
             statuscolumn = { enabled = false },
-            win = {
-                backdrop = false,
-            },
             words = { enabled = false },
         }
 
