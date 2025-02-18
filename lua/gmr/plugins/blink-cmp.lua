@@ -45,8 +45,8 @@ return {
             },
             sources = {
                 default = { 'lsp', 'path', 'buffer' },
-                cmdline = {},
             },
+            cmdline = { enabled = false, sources = {} },
         }
     end,
 }
